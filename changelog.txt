@@ -1,0 +1,2 @@
+*** pos.host for WooCommerce Changelog ***
+2020-12-17 init.
