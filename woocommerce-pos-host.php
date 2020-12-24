@@ -21,6 +21,7 @@
  * WC tested up to: 4.7.0
  */
 
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'POS_HOST_PLUGIN_FILE' ) ) {
@@ -35,7 +36,7 @@ if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 		'admin_notices',
 		function() {
 			/* translators: 1. URL link. */
-			echo '<div class="error"><p><strong>' . sprintf( esc_html__( 'Point of Sale for WooCommerce requires WooCommerce to be installed and active. You can download %s here.', 'woocommerce-point-of-sale' ), '<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>' ) . '</strong></p></div>';
+			echo '<div class="error"><p><strong>' . sprintf( esc_html__( 'POS HOST for WooCommerce requires WooCommerce to be installed and active. You can download %s here.', 'woocommerce-point-of-sale' ), '<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>' ) . '</strong></p></div>';
 		}
 	);
 
@@ -54,7 +55,7 @@ if ( ! class_exists( 'POS_HOST', false ) ) {
 /**
  * Returns the main instance of POS_HOST.
  *
- * @since 3.0.5
+ * @since 0.0.1
  * @return POS_HOST
  */
 function POS_HOST() {

@@ -134,7 +134,7 @@ class POS_HOST_Admin_Notices {
 		$screen          = get_current_screen();
 		$screen_id       = $screen ? $screen->id : '';
 		$show_on_screens = array_merge(
-			wc_pos_get_screen_ids(),
+			pos_host_get_screen_ids(),
 			array(
 				'dashboard',
 				'plugins',

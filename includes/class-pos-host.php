@@ -40,28 +40,28 @@ class POS_HOST {
 	 *
 	 * @var string
 	 */
-	public $menu_slug = 'pos';
+	public $menu_slug = 'pos-host';
 
 	/**
 	 * Barcode page slug.
 	 *
 	 * @var string
 	 */
-	public $barcodes_page_slug = 'barcode';
+	public $barcodes_page_slug = 'pos-host-barcode';
 
 	/**
 	 * Stock Controller page slug.
 	 *
 	 * @var string
 	 */
-	public $stock_controller_page_slug = 'stock';
+	public $stock_controller_page_slug = 'pos-host-stock';
 
 	/**
 	 * Settings page slug.
 	 *
 	 * @var string
 	 */
-	public $settings_page_slug = 'settings';
+	public $settings_page_slug = 'pos-host-settings';
 
 	/**
 	 * The main POS_HOST instance.
@@ -102,8 +102,10 @@ class POS_HOST {
 	 */
 	public function activate( $network_wide ) {
                 include_once 'class-pos-host-install.php';
-		include_once 'admin/class-pos-host-admin-notices.php';
-
+		/* No need 
+                    include_once 'admin/class-pos-host-admin-notices.php';
+                */
+                
                 global $wpdb;
 
 		// If the plugin is being activated network wide, then run the activation code for each site.
@@ -195,7 +197,7 @@ class POS_HOST {
 	 * @return string
 	 */
 	public function plugin_screen_id() {
-		return sanitize_title( __( 'POS', 'woocommerce-pos-host' ) );
+		return sanitize_title( __( 'pos-host', 'woocommerce-pos-host' ) );
 	}
 
 	/**
@@ -236,7 +238,7 @@ class POS_HOST {
 			return $response;
 		}
 
-		$is_lock = wc_pos_is_register_locked( (int) $data['pos_register_id'] );
+		$is_lock = pos_host_is_register_locked( (int) $data['pos_register_id'] );
 		if ( ! $is_lock ) {
 			return $response;
 		}
@@ -257,7 +259,6 @@ class POS_HOST {
 	 */
 	private function define_constants() {
 		$this->define( 'POS_HOST_ABSPATH', dirname( POS_HOST_PLUGIN_FILE ) );
-		$this->define( 'POS_HOST_PLUGIN_BASENAME', plugin_basename( POS_HOST_PLUGIN_FILE ) );
 		$this->define( 'POS_HOST_PLUGIN_BASENAME', plugin_basename( POS_HOST_PLUGIN_FILE ) );
 		$this->define( 'POS_HOST_VERSION', $this->version );
 		$this->define( 'POS_HOST_TOKEN', 'pos_host' );
@@ -301,32 +302,33 @@ class POS_HOST {
 		/*
 		 * Global includes.
 		 */
+                
+                /* No need 
+                 * 
+                include_once 'class-pos-host-install.php';
+                *  
 
-            
-/* @todo: debug
- * 
- */
-return; 
-		include_once 'class-pos-host-install.php';
-		include_once 'pos-host-core-functions.php';
+                * end of No need           */
+		
+                include_once 'pos-host-core-functions.php';
                 include_once 'pos-host-register-functions.php';
+		include_once 'pos-host-receipt-functions.php';
 		include_once 'pos-host-outlet-functions.php';
 		include_once 'pos-host-grid-functions.php';
-		include_once 'pos-host-receipt-functions.php';
 		include_once 'pos-host-session-functions.php';
-		include_once 'class-pos-host-autoloader.php';
 		include_once 'class-pos-host-post-types.php';
 		include_once 'class-pos-host-emails.php';
+		include_once 'class-pos-host-autoloader.php';
 		include_once 'admin/class-pos-host-admin-post-types.php';
 		include_once 'admin/class-pos-host-admin.php';
 		include_once 'admin/class-pos-host-admin-assets.php';
-
+            
 		// On the front-end.
 		if ( ! is_admin() ) {
 			include_once 'class-pos-host-sell.php';
 			include_once 'class-pos-host-assets.php';
 
-			if ( 'yes' === get_option( 'wc_pos_enable_frontend_access', 'no' ) ) {
+			if ( 'yes' === get_option( 'pos_host_enable_frontend_access', 'no' ) ) {
 				include_once 'class-pos-host-my-account.php';
 			}
 		}
@@ -342,65 +344,67 @@ return;
 	 */
 	public function init_hooks() {
 		// Activation/deactivation.
+                /* no need
+                	add_action( 'upgrader_process_complete', array( $this, 'update' ), 10, 2 );
+                        add_action( 'plugins_loaded', array( $this, 'init_payment_gateways' ) );
+        		add_filter( 'woocommerce_order_number', array( $this, 'add_prefix_suffix_order_number' ), 99, 2 );
+                        add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
+                        add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+                */
+            
 		register_activation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'activate' ) );
 		register_deactivation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'deactivate' ) );
-/* @todo: debug
- * 
- */
-return; 
-
 		add_action( 'init', array( $this, 'visibility' ) );
+		add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
 		add_action( 'admin_init', array( $this, 'force_country_display' ) );
 		add_action( 'admin_init', array( $this, 'print_report' ), 100 );
-		add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
-		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		add_action( 'upgrader_process_complete', array( $this, 'update' ), 10, 2 );
-		add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 0 );
 		add_action( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ), 150, 1 );
 		add_filter( 'woocommerce_get_checkout_order_received_url', array( $this, 'order_received_url' ) );
 		add_filter( 'woocommerce_email_actions', array( $this, 'woocommerce_email_actions' ), 150, 1 );
 		add_filter( 'woocommerce_admin_order_actions', array( $this, 'order_actions_reprint_receipts' ), 2, 20 );
-		add_filter( 'woocommerce_order_number', array( $this, 'add_prefix_suffix_order_number' ), 99, 2 );
 		add_action( 'woocommerce_loaded', array( $this, 'woocommerce_delete_shop_order_transients' ) );
 		add_filter( 'woocommerce_screen_ids', array( $this, 'screen_ids' ), 10, 1 );
-		add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
-		add_filter( 'woocommerce_payment_gateways', array( $this, 'add_payment_gateways' ), 100 );
-		add_action( 'plugins_loaded', array( $this, 'init_payment_gateways' ) );
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 0 );
 		add_action( 'pre_get_posts', array( $this, 'hide_pos_custom_product' ), 99, 1 );
-		add_filter( 'heartbeat_received', array( $this, 'pos_register_status' ), 10, 2 );
 		add_filter( 'request', array( $this, 'orders_by_order_type' ) );
-		add_filter( 'wc_pos_discount_presets', array( $this, 'add_custom_discounts' ) );
-		add_filter( 'woocommerce_data_stores', array( $this, 'register_data_stores' ), 10, 1 );
-		add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-		add_action( 'woocommerce_loaded', array( $this, 'manage_floatval_quantity' ) );
+		add_filter( 'pos_host_discount_presets', array( $this, 'add_custom_discounts' ) );
+                add_filter( 'woocommerce_data_stores', array( $this, 'register_data_stores' ), 10, 1 );
 
-		// Change the minimum value for per_page.
+                add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
+		add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
 		add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
 		add_filter( 'rest_shop_order_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
 		add_filter( 'rest_shop_coupon_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-
+		add_action( 'woocommerce_loaded', array( $this, 'manage_floatval_quantity' ) );
 		// For compatibility with WooCommerce Subscriptions.
 		if ( in_array( 'woocommerce-subscriptions/woocommerce-subscriptions.php', get_option( 'active_plugins' ), true ) ) {
 			add_filter( 'woocommerce_subscription_payment_method_to_display', array( $this, 'get_subscription_payment_method' ), 10, 2 );
 		}
-
 		// If product visiblity is enabled.
-		if ( 'yes' === get_option( 'wc_pos_visibility', 'no' ) ) {
+		if ( 'yes' === get_option( 'pos_host_visibility', 'no' ) ) {
 			add_action( 'quick_edit_custom_box', array( $this, 'quick_edit' ), 10, 2 );
 			add_action( 'woocommerce_product_bulk_edit_end', array( $this, 'bulk_edit' ), 10, 0 );
 			add_action( 'woocommerce_product_bulk_edit_save', array( $this, 'save_bulk_visibility' ), 15, 1 );
 			add_action( 'woocommerce_process_product_meta', array( $this, 'save_visibility' ), 10, 2 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation_visibility' ), 10, 2 );
 		}
+
+ /* @todo: debug
+ * 
+ */
+return; 
+             
+		add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
+		add_filter( 'woocommerce_payment_gateways', array( $this, 'add_payment_gateways' ), 100 );
+
 	}
 
 	/**
 	 * Change the default minimum value of 1 for the REST per_page param.
 	 *
-	 * This allows us to retireve all items in one request by passing per_page=-1.
+	 * This allows us to retrieve all items in one request by passing per_page=-1.
 	 *
-	 * @since 5.2.9
+	 * @since 0.0.1
 	 *
 	 * @param array        $query_params JSON Schema-formatted collection parameters.
 	 * @param WP_Post_Type $post_type    Post type object.
@@ -421,7 +425,7 @@ return;
 	/**
 	 * Sanitize the per_page param.
 	 *
-	 * @since 5.2.9
+	 * @since 0.0.1
 	 */
 	public function sanitize_per_page( $value, $request, $param ) {
 		return intval( $value, 10 );
@@ -434,15 +438,16 @@ return;
 	 * @return array
 	 */
 	public function screen_ids( $ids ) {
-		$ids[] = 'point-of-sales';
+		$ids[] = 'pos-host';
 		return $ids;
 	}
 
 	/**
 	 * Manage product visibility.
+         * @todo need check
 	 */
 	public function visibility() {
-		if ( 'yes' === get_option( 'wc_pos_visibility', 'no' ) ) {
+		if ( 'yes' === get_option( 'pos_host_visibility', 'no' ) ) {
 			add_action( 'pre_get_posts', array( $this, 'query_visibility_filter' ), 15, 1 );
 			add_filter( 'views_edit-product', array( $this, 'add_visibility_views' ) );
 		}
@@ -452,6 +457,8 @@ return;
 	 * Check if the WC REST API is blocked (i.e. status code != 200).
 	 */
 	public function check_wc_rest_api() {
+                include_once 'admin/class-pos-host-admin-notices.php';
+            
 		try {
 			$request     = new WP_REST_Request( 'GET', '/wc/v3' );
 			$response    = rest_do_request( $request );
@@ -471,7 +478,7 @@ return;
 	}
 
 	/**
-	 * Filter the WP_Query based on the value of wc_pos_visibility.
+	 * Filter the WP_Query based on the value of pos_host_visibility.
 	 *
 	 * @todo Explain the different cases.
 	 *
@@ -488,8 +495,8 @@ return;
 			( is_product_category() && ! isset( $query->query_vars['post_type'] ) ) ||
 			( is_product_tag() && ! isset( $query->query_vars['post_type'] ) )
 		) {
-			$query->query_vars['meta_query']['pos_visibility'] = array(
-				'key'     => '_pos_visibility',
+			$query->query_vars['meta_query']['pos_host_visibility'] = array(
+				'key'     => '_pos_host_visibility',
 				'value'   => 'pos',
 				'compare' => '!=',
 			);
@@ -503,8 +510,8 @@ return;
 			'product' === $query->query_vars['post_type'] &&
 			isset( $_GET['pos_only'] )
 		) {
-			$query->query_vars['meta_query']['pos_visibility'] = array(
-				'key'     => '_pos_visibility',
+			$query->query_vars['meta_query']['pos_host_visibility'] = array(
+				'key'     => '_pos_host_visibility',
 				'value'   => 'pos',
 				'compare' => '=',
 			);
@@ -518,8 +525,8 @@ return;
 			'product' === $query->query_vars['post_type'] &&
 			isset( $_GET['online_only'] )
 		) {
-			$query->query_vars['meta_query']['pos_visibility'] = array(
-				'key'     => '_pos_visibility',
+			$query->query_vars['meta_query']['pos_host_visibility'] = array(
+				'key'     => '_pos_host_visibility',
 				'value'   => 'online',
 				'compare' => '=',
 
@@ -534,8 +541,8 @@ return;
 			isset( $query->query_vars['s'] ) &&
 			! empty( $query->query_vars['s'] )
 		) {
-			$query->query_vars['meta_query']['pos_visibility'] = array(
-				'key'     => '_pos_visibility',
+			$query->query_vars['meta_query']['pos_host_visibility'] = array(
+				'key'     => '_pos_host_visibility',
 				'value'   => 'pos',
 				'compare' => '!=',
 			);
@@ -559,7 +566,7 @@ return;
 		$post_type = $post_type_object->name;
 
 		// POS Only count.
-		$count = $wpdb->get_var( "SELECT COUNT(post_id) FROM $wpdb->postmeta WHERE meta_key = '_pos_visibility' AND meta_value = 'pos'" );
+		$count = $wpdb->get_var( "SELECT COUNT(post_id) FROM $wpdb->postmeta WHERE meta_key = '_pos_host_visibility' AND meta_value = 'pos'" );
 		$count = $count ? $count : 0;
 
 		if ( $count ) {
@@ -568,7 +575,7 @@ return;
 		}
 
 		// Online Only count.
-		$count = $wpdb->get_var( "SELECT COUNT(post_id) FROM $wpdb->postmeta WHERE meta_key = '_pos_visibility' AND meta_value = 'online'" );
+		$count = $wpdb->get_var( "SELECT COUNT(post_id) FROM $wpdb->postmeta WHERE meta_key = '_pos_host_visibility' AND meta_value = 'online'" );
 		$count = $count ? $count : 0;
 		if ( $count ) {
 			$class                = ( isset( $_GET['online_only'] ) ) ? 'current' : '';
@@ -590,7 +597,7 @@ return;
 		global $post;
 
 		if ( 'thumb' === $column_name && 'product' === $post_type ) {
-			include_once $this->plugin_path() . '/includes/admin/views/html-quick-edit-product.php';
+			include_once $this->plugin_path() . '/includes/views/html-quick-edit-product.php';
 		}
 	}
 
@@ -606,10 +613,10 @@ return;
 			<label class="alignleft">
 				<span class="title"><?php esc_html_e( 'POS Status', 'woocommerce-pos-host' ); ?></span>
 				<span class="input-text-wrap">
-					<select class="pos_visibility" name="_pos_bulk_visibility">
+					<select class="pos_host_visibility" name="_pos_bulk_visibility">
 					<?php
 					$visibility_options = apply_filters(
-						'wc_pos_visibility_options',
+						'pos_host_visibility_options',
 						array(
 							''           => __( '— No Change —', 'woocommerce-pos-host' ),
 							'pos_online' => __( 'POS & Online', 'woocommerce-pos-host' ),
@@ -641,7 +648,7 @@ return;
 			return;
 		}
 
-		update_post_meta( $product_id, '_pos_visibility', wc_clean( $_REQUEST['_pos_bulk_visibility'] ) );
+		update_post_meta( $product_id, '_pos_host_visibility', wc_clean( $_REQUEST['_pos_bulk_visibility'] ) );
 	}
 
 	/**
@@ -656,18 +663,18 @@ return;
 			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-pos-host' ) );
 		}
 
-		$visibility = isset( $_POST['_pos_visibility'] ) ? wc_clean( wp_unslash( $_POST['_pos_visibility'] ) ) : 'pos_online';
+		$visibility = isset( $_POST['_pos_host_visibility'] ) ? wc_clean( wp_unslash( $_POST['_pos_host_visibility'] ) ) : 'pos_online';
 		$product    = wc_get_product();
 
 		if ( 'variable' === $product->get_type() ) {
 			$variations = $product->get_available_variations();
 
 			foreach ( $variations as $variation ) {
-				update_post_meta( $variation['variation_id'], '_pos_visibility', $visibility );
+				update_post_meta( $variation['variation_id'], '_pos_host_visibility', $visibility );
 			}
 		}
 
-		update_post_meta( $post_id, '_pos_visibility', $visibility );
+		update_post_meta( $post_id, '_pos_host_visibility', $visibility );
 	}
 
 	/**
@@ -679,9 +686,9 @@ return;
 	public function save_variation_visibility( $variation_id, $i ) {
 		$variation  = new WC_Product_Variation( $variation_id );
 		$parent_id  = $variation->get_parent_id();
-		$visibility = get_post_meta( $parent_id, '_pos_visibility', true );
+		$visibility = get_post_meta( $parent_id, '_pos_host_visibility', true );
 
-		update_post_meta( $variation_id, '_pos_visibility', $visibility );
+		update_post_meta( $variation_id, '_pos_host_visibility', $visibility );
 	}
 
 	/**
@@ -695,14 +702,14 @@ return;
 		if ( 'product' !== $query->get( 'post_type' ) ) {
 			return;
 		}
-
+                
 		$post__not_in = $query->get( 'post__not_in', array() );
 
 		if ( ! is_array( $post__not_in ) ) {
 			$post__not_in = array( $post__not_in );
 		}
 
-		$post__not_in[] = (int) get_option( 'wc_pos_custom_product_id' );
+		$post__not_in[] = (int) get_option( 'pos_host_custom_product_id' );
 		$query->set( 'post__not_in', $post__not_in );
 	}
 
@@ -734,7 +741,7 @@ return;
 			$register = wc_clean( $_GET['register'] );
 			$outlet   = wc_clean( $_GET['outlet'] );
 
-			$register_url = get_home_url() . "/point-of-sale/$outlet/$register";
+			$register_url = get_home_url() . "/p/$outlet/$register";
 
 			return $register_url;
 		} else {
@@ -745,35 +752,35 @@ return;
 	public function orders_by_order_type( $vars ) {
 		global $typenow, $wp_query;
 		if ( 'shop_order' === $typenow ) {
+                        
+			if ( isset( $_GET['shop_order_pos_host_order_type'] ) && '' !== $_GET['shop_order_pos_host_order_type'] ) {
 
-			if ( isset( $_GET['shop_order_wc_pos_order_type'] ) && '' !== $_GET['shop_order_wc_pos_order_type'] ) {
-
-				if ( 'POS' === $_GET['shop_order_wc_pos_order_type'] ) {
+				if ( 'POS' === $_GET['shop_order_pos_host_order_type'] ) {
 					$vars['meta_query'][] = array(
-						'key'     => 'wc_pos_order_type',
+						'key'     => 'pos_host_order_type',
 						'value'   => 'POS',
 						'compare' => '=',
 					);
-				} elseif ( 'online' === $_GET['shop_order_wc_pos_order_type'] ) {
+				} elseif ( 'online' === $_GET['shop_order_pos_host_order_type'] ) {
 					$vars['meta_query'][] = array(
-						'key'     => 'wc_pos_order_type',
+						'key'     => 'pos_host_order_type',
 						'compare' => 'NOT EXISTS',
 					);
 				}
 			}
 
-			if ( isset( $_GET['shop_order_wc_pos_filter_register'] ) && '' !== $_GET['shop_order_wc_pos_filter_register'] ) {
+			if ( isset( $_GET['shop_order_pos_host_filter_register'] ) && '' !== $_GET['shop_order_pos_host_filter_register'] ) {
 				$vars['meta_query'][] = array(
-					'key'     => 'wc_pos_register_id',
-					'value'   => wc_clean( wp_unslash( $_GET['shop_order_wc_pos_filter_register'] ) ),
+					'key'     => 'pos_host_register_id',
+					'value'   => wc_clean( wp_unslash( $_GET['shop_order_pos_host_filter_register'] ) ),
 					'compare' => '=',
 				);
 
 			}
-			if ( isset( $_GET['shop_order_wc_pos_filter_outlet'] ) && '' !== $_GET['shop_order_wc_pos_filter_outlet'] ) {
-				$registers            = wc_pos_get_registers_by_outlet( wc_clean( wp_unslash( $_GET['shop_order_wc_pos_filter_outlet'] ) ) );
+			if ( isset( $_GET['shop_order_pos_host_filter_outlet'] ) && '' !== $_GET['shop_order_pos_host_filter_outlet'] ) {
+				$registers            = pos_host_get_registers_by_outlet( wc_clean( wp_unslash( $_GET['shop_order_pos_host_filter_outlet'] ) ) );
 				$vars['meta_query'][] = array(
-					'key'     => 'wc_pos_register_id',
+					'key'     => 'pos_host_register_id',
 					'value'   => $registers,
 					'compare' => 'IN',
 				);
@@ -785,9 +792,9 @@ return;
 	}
 
 	public function order_actions_reprint_receipts( $actions, $the_order ) {
-		$amount_change = get_post_meta( $the_order->get_id(), 'wc_pos_order_type', true );
-		$register_id   = get_post_meta( $the_order->get_id(), 'wc_pos_register_id', true );
-		$register      = wc_pos_get_register( absint( $register_id ) );
+		$amount_change = get_post_meta( $the_order->get_id(), 'pos_host_order_type', true );
+		$register_id   = get_post_meta( $the_order->get_id(), 'pos_host_register_id', true );
+		$register      = pos_host_get_register( absint( $register_id ) );
 
 		if ( $amount_change && $register ) {
 			$actions['reprint_receipts'] = array(
@@ -820,13 +827,13 @@ return;
 
 		global $wpdb;
 
-		$register_id = absint( get_post_meta( $order->get_id(), 'wc_pos_register_id', true ) );
+		$register_id = absint( get_post_meta( $order->get_id(), 'pos_host_register_id', true ) );
 
 		if ( $register_id ) {
-			$_order_id = get_post_meta( $order->get_id(), 'wc_pos_prefix_suffix_order_number', true );
+			$_order_id = get_post_meta( $order->get_id(), 'pos_host_prefix_suffix_order_number', true );
 
 			if ( empty( $_order_id ) ) {
-				$register = wc_pos_get_register( $register_id );
+				$register = pos_host_get_register( $register_id );
 
 				if ( $register ) {
 					$order_number = $order->get_id();
@@ -847,7 +854,7 @@ return;
 					}
 
 					$_order_id = $register->get_prefix() . $order_number . $register->get_suffix();
-					update_post_meta( $order->get_id(), 'wc_pos_prefix_suffix_order_number', $_order_id, true );
+					update_post_meta( $order->get_id(), 'pos_host_prefix_suffix_order_number', $_order_id, true );
 				}
 			}
 
@@ -891,15 +898,15 @@ return;
 			wp_die( esc_html__( 'You are not allowed to view this page.', 'woocommerce-pos-host' ) );
 		}
 
-		$register_id = get_post_meta( $order_id, 'wc_pos_register_id', true );
+		$register_id = get_post_meta( $order_id, 'pos_host_register_id', true );
 
-		$register = wc_pos_get_register( absint( $register_id ) );
+		$register = pos_host_get_register( absint( $register_id ) );
 		if ( ! $register ) {
-			$register = wc_pos_get_register( absint( get_option( 'wc_pos_default_register' ) ) );
+			$register = pos_host_get_register( absint( get_option( 'pos_host_default_register' ) ) );
 		}
 
-		$receipt = wc_pos_get_receipt( $register->get_receipt() );
-		$outlet  = wc_pos_get_outlet( $register->get_outlet() );
+		$receipt = pos_host_get_receipt( $register->get_receipt() );
+		$outlet  = pos_host_get_outlet( $register->get_outlet() );
 
 		remove_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
 
@@ -928,9 +935,9 @@ return;
 
 	public function woocommerce_delete_shop_order_transients() {
 		$transients_to_clear = array(
-			'wc_pos_report_sales_by_register',
-			'wc_pos_report_sales_by_outlet',
-			'wc_pos_report_sales_by_cashier',
+			'pos_host_report_sales_by_register',
+			'pos_host_report_sales_by_outlet',
+			'pos_host_report_sales_by_cashier',
 		);
 
 		// Clear transients where we have names.
@@ -940,7 +947,7 @@ return;
 	}
 
 	public function hidden_order_itemmeta( $meta_keys = array() ) {
-		$meta_keys[] = '_pos_custom_product';
+		$meta_keys[] = '_pos_host_custom_product';
 		$meta_keys[] = '_price';
 		return $meta_keys;
 	}
@@ -976,7 +983,7 @@ return;
 	}
 
 	public function get_subscription_payment_method( $payment_method, $subscription ) {
-		if ( 'POS' === get_post_meta( $subscription->get_order_number(), 'wc_pos_order_type', true ) ) {
+		if ( 'POS' === get_post_meta( $subscription->get_order_number(), 'pos_host_order_type', true ) ) {
 			$payment_method = get_post_meta( $subscription->get_order_number(), '_payment_method_title', true );
 		}
 
@@ -984,7 +991,7 @@ return;
 	}
 
 	public function add_custom_discounts( $default ) {
-		$discounts = get_option( 'wc_pos_discount_presets', array() );
+		$discounts = get_option( 'pos_host_discount_presets', array() );
 		$discounts = empty( $discounts ) ? array() : $discounts;
 
 		foreach ( $discounts as $key => $value ) {
@@ -1001,16 +1008,18 @@ return;
 	/**
 	 * Init payment gateways.
 	 *
-	 * @since 5.0.0
+	 * @since 0.0.1
 	 */
 	public function init_payment_gateways() {
+        
+                include_once 'gateways/class-pos-host-gateway-cash.php';
+		
         /*@todo Debug *
          * 
          */
 	return;
                 include_once 'gateways/class-pos-host-gateway-bacs.php';
 		include_once 'gateways/class-pos-host-gateway-cheque.php';
-		include_once 'gateways/class-pos-host-gateway-cash.php';
 		include_once 'gateways/class-pos-host-gateway-chip-and-pin.php';
 		include_once 'gateways/stripe/class-pos-host-stripe.php';
 		include_once 'gateways/paymentsense/class-pos-host-paymentsense.php';
@@ -1019,7 +1028,7 @@ return;
 	/**
 	 * Add payment gateways.
 	 *
-	 * @since 5.0.0
+	 * @since 0.0.1
 	 *
 	 * @param array $methods Payment methods.
 	 * @return array
@@ -1032,7 +1041,7 @@ return;
 		// $methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
 		// $methods[] = 'POS_HOST_Gateway_Paymentsense';
 
-		$chip_and_pin = empty( get_option( 'wc_pos_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'wc_pos_number_chip_and_pin_gateways', 1 );
+		$chip_and_pin = empty( get_option( 'pos_host_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_chip_and_pin_gateways', 1 );
 
 		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
 			$methods[] = 'POS_HOST_Gateway_Chip_And_PIN';
@@ -1045,10 +1054,10 @@ return;
 		global $current_screen;
 
 		$screen       = $current_screen ? $current_screen->id : null;
-		$gateways     = wc_pos_get_available_payment_gateways();
+		$gateways     = pos_host_get_available_payment_gateways();
 		$pos_gateways = array( 'pos_chip_and_pin' );
 
-		$chip_and_pin = empty( get_option( 'wc_pos_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'wc_pos_number_chip_and_pin_gateways', 1 );
+		$chip_and_pin = empty( get_option( 'pos_host_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_chip_and_pin_gateways', 1 );
 		for ( $n = 2; $n <= (int) $chip_and_pin; $n++ ) {
 			$pos_gateways[] = 'pos_chip_and_pin_' . $n;
 		}
@@ -1097,21 +1106,17 @@ return;
 	 * @return array
 	 */
 	public function register_data_stores( $stores ) {
-        /*@todo Debug *
-         * 
-         */
-	return;
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-data-store-wp.php';
 		include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-register-data-store-cpt.php';
-		include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-outlet-data-store-cpt.php';
-		include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-grid-data-store-cpt.php';
-		include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-receipt-data-store-cpt.php';
-		include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-session-data-store-cpt.php';
+                include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-outlet-data-store-cpt.php';
+                include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-receipt-data-store-cpt.php';
+                include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-grid-data-store-cpt.php';
+                include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-session-data-store-cpt.php';
 
-		$stores['pos_register'] = 'POS_HOST_Register_Data_Store_CPT';
-		$stores['pos_outlet']   = 'POS_HOST_Outlet_Data_Store_CPT';
+		$stores['pos_register'] = 'POS_HOST_Register_Data_Store_CPT';	
+                $stores['pos_outlet']   = 'POS_HOST_Outlet_Data_Store_CPT';
+		$stores['pos_receipt']  = 'POS_HOST_Receipt_Data_Store_CPT';               
 		$stores['pos_grid']     = 'POS_HOST_Grid_Data_Store_CPT';
-		$stores['pos_receipt']  = 'POS_HOST_Receipt_Data_Store_CPT';
 		$stores['pos_session']  = 'POS_HOST_Session_Data_Store_CPT';
 
 		return $stores;

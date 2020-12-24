@@ -4,10 +4,7 @@
  *
  * General core functions available on both the front-end and admin.
  *
- * @todo All functions here must have the wc_pos prefix. We may also need to group related functions
- *  in one single wc-pos-[group]-functions.php file.
- *
- * @package WooCommerce_Point_Of_Sale/Functions
+ * @package WooCommerce_pos_host/Functions
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,26 +12,25 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Returns the order statuses with the wc- prefix stripped off.
  *
- * @since 5.0.0
+ * @since 0.0.1
  * @return array
  */
-function wc_pos_get_order_statuses_no_prefix() {
+function pos_host_get_order_statuses_no_prefix() {
 	foreach ( wc_get_order_statuses() as $key => $value ) {
 		$statuses[ substr( $key, 3 ) ] = $value;
 	}
-
 	return $statuses;
 }
 
 /**
- * Returns the payment gateway IDes.
+ * Returns the payment gateway IDs.
  *
- * @since 5.0.0
+ * @since 0.0.1
  *
  * @param boolean $available Only return the available (enabled) gateways.
  * @return array List of payment gateways IDs.
  */
-function wc_pos_get_payment_gateways_ids( $available = false ) {
+function pos_host_get_payment_gateways_ids( $available = false ) {
 	$gateways = WC()->payment_gateways()->payment_gateways();
 	$results  = array();
 
@@ -52,17 +48,18 @@ function wc_pos_get_payment_gateways_ids( $available = false ) {
 /**
  * Get all the screen ids that are created/modified by the plugin.
  *
- * @since 5.0.0
+ * @since 0.0.1
  * @return array
  */
-function wc_pos_get_screen_ids() {
-	$wc_pos_screen_id = WC_POS()->plugin_screen_id();
+function pos_host_get_screen_ids() {
+
+    $pos_host_screen_id = POS_HOST()->plugin_screen_id();
 
 	$screen_ids = array(
-		'toplevel_page_' . $wc_pos_screen_id,
-		$wc_pos_screen_id . '_page_wc-pos-barcodes',
-		$wc_pos_screen_id . '_page_wc-pos-stock-controller',
-		$wc_pos_screen_id . '_page_wc-pos-settings',
+		'toplevel_page_' . $pos_host_screen_id,
+		$pos_host_screen_id . '_page_pos-host-barcodes',
+		$pos_host_screen_id . '_page_pos-host-stock-controller',
+		$pos_host_screen_id . '_page_pos-host-settings',
 		'edit-shop_order',
 		'edit-product',
 		'edit-pos_register',
@@ -81,7 +78,7 @@ function wc_pos_get_screen_ids() {
 		'user-edit',
 	);
 
-	return apply_filters( 'wc_pos_screen_ids', $screen_ids );
+	return apply_filters( 'pos_host_screen_ids', $screen_ids );
 }
 
 /**
@@ -92,20 +89,20 @@ function wc_pos_get_screen_ids() {
  *
  * @return bool
  */
-function wc_pos_is_default_post( $post_id, $post_type ) {
+function pos_host_is_default_post( $post_id, $post_type ) {
 	if ( ! in_array( $post_type, array( 'pos_register', 'pos_outlet', 'pos_receipt' ) ) ) {
 		return false;
 	}
 
-	return (int) get_option( 'wc_pos_default_' . str_replace( 'pos_', '', $post_type ), 0 ) === (int) $post_id ? true : false;
+	return (int) get_option( 'pos_host_default_' . str_replace( 'pos_', '', $post_type ), 0 ) === (int) $post_id ? true : false;
 }
 
-function wc_pos_sent_email_receipt( $order_id ) {
+function pos_host_sent_email_receipt( $order_id ) {
 	$order_email_receipt = get_post_meta( $order_id, 'pos_payment_email_receipt', true );
 	$order               = wc_get_order( $order_id );
 
 	$mail = WC()->mailer();
-	$mail->emails['WC_POS_Email_New_Order']->trigger( $order_id );
+	$mail->emails['POS_HOST_Email_New_Order']->trigger( $order_id );
 
 	if ( ! empty( $order_email_receipt ) ) {
 
@@ -148,23 +145,23 @@ function wc_pos_sent_email_receipt( $order_id ) {
 
 }
 
-function wc_pos_get_outlet_location( $id_register = 0 ) {
+function pos_host_get_outlet_location( $id_register = 0 ) {
 	$location = array();
 	if ( ! $id_register && ! isset( $_GET['register'] ) ) {
 		return $location;
 	}
 
 	$register_id = $id_register > 0 ? $id_register : wc_clean( $_GET['register'] );
-	$register    = wc_pos_get_register( $register_id );
+	$register    = pos_host_get_register( $register_id );
 
 	if ( $register ) {
-		$location = WC_POS_Sell::instance()->get_outlet( $register->get_outlet() );
+		$location = POS_HOST_Sell::instance()->get_outlet( $register->get_outlet() );
 	}
 
 	return $location;
 }
 
-function wc_pos_get_shop_location() {
+function pos_host_get_shop_location() {
 	return array(
 		'country'  => WC()->countries->get_base_country(),
 		'state'    => WC()->countries->get_base_state(),
@@ -179,7 +176,7 @@ function wc_pos_get_shop_location() {
  * @todo Refactor this to perform less number of database queries.
  * @return Array of rates.
  */
-function wc_pos_get_all_tax_rates() {
+function pos_host_get_all_tax_rates() {
 	global $wpdb;
 
 	$tax_class   = '';
@@ -227,7 +224,7 @@ function wc_pos_get_all_tax_rates() {
 	return $rates;
 }
 
-function wc_pos_get_non_cat_products() {
+function pos_host_get_non_cat_products() {
 	global $wpdb;
 	$products = array();
 
@@ -270,7 +267,7 @@ function wc_pos_get_non_cat_products() {
  * @param $outlet_id Outlet ID.
  * @return array List of register IDs.
  */
-function wc_pos_get_registers_by_outlet( $outlet_id = 0 ) {
+function pos_host_get_registers_by_outlet( $outlet_id = 0 ) {
 	$registers = array();
 
 	$get_posts = get_posts(
@@ -289,7 +286,7 @@ function wc_pos_get_registers_by_outlet( $outlet_id = 0 ) {
 	return $registers;
 }
 
-function wc_pos_enable_generate_password( $value ) {
+function pos_host_enable_generate_password( $value ) {
 	return 'yes';
 }
 
@@ -300,7 +297,7 @@ function is_pos() {
 		if ( isset( $wp->query_vars ) ) {
 			$q = $wp->query_vars;
 
-			if ( isset( $q['page'] ) && 'wc-pos-registers' === $q['page'] && isset( $q['action'] ) && 'view' === $q['action'] ) {
+			if ( isset( $q['page'] ) && 'pos-host-registers' === $q['page'] && isset( $q['action'] ) && 'view' === $q['action'] ) {
 				return true;
 			}
 		}
@@ -310,7 +307,7 @@ function is_pos() {
 
 }
 
-function wc_pos_get_available_payment_gateways() {
+function pos_host_get_available_payment_gateways() {
 	$available_gateways = array();
 	foreach ( WC()->payment_gateways()->get_available_payment_gateways() as $gateway ) {
 		array_push(
@@ -330,8 +327,8 @@ function wc_pos_get_available_payment_gateways() {
  *
  * @return bool
  */
-function wc_pos_tax_enabled() {
-	if ( 'enabled' === get_option( 'wc_pos_tax_calculation', 'enabled' ) && wc_tax_enabled() ) {
+function pos_host_tax_enabled() {
+	if ( 'enabled' === get_option( 'pos_host_tax_calculation', 'enabled' ) && wc_tax_enabled() ) {
 		return true;
 	}
 
@@ -340,7 +337,7 @@ function wc_pos_tax_enabled() {
 
 function is_pos_referer() {
 	$referer = wp_get_referer();
-	$pos_url = get_home_url() . '/point-of-sale/';
+	$pos_url = get_home_url() . '/p/';
 
 	if ( strpos( $referer, $pos_url ) !== false ) {
 		return true;
@@ -348,7 +345,7 @@ function is_pos_referer() {
 	return false;
 }
 
-function wc_pos_get_custom_order_fields() {
+function pos_host_get_custom_order_fields() {
 	$custom_fields = array();
 	if ( function_exists( 'wc_admin_custom_order_fields' ) ) {
 		foreach ( wc_admin_custom_order_fields()->get_order_fields() as $field_id => $field ) {
@@ -359,8 +356,8 @@ function wc_pos_get_custom_order_fields() {
 	return $custom_fields;
 }
 
-function wc_pos_close_register( $register_id = 0, $data = array(), $force = false ) {
-	$register = wc_pos_get_register( $register_id );
+function pos_host_close_register( $register_id = 0, $data = array(), $force = false ) {
+	$register = pos_host_get_register( $register_id );
 
 	if ( ! $register ) {
 		return false;
@@ -383,7 +380,7 @@ function wc_pos_close_register( $register_id = 0, $data = array(), $force = fals
 	$closed = $register->save();
 
 	if ( $closed ) {
-		$session = wc_pos_get_session( $register->get_current_session() );
+		$session = pos_host_get_session( $register->get_current_session() );
 
 		if ( ! $session ) {
 			return $closed;
@@ -401,21 +398,21 @@ function wc_pos_close_register( $register_id = 0, $data = array(), $force = fals
 		$session_id = $session->save();
 
 		/**
-		 * The wc_pos_end_of_day_report action.
+		 * The pos_host_end_of_day_report action.
 		 *
 		 * Triggers the end of day email notification.
 		 *
 		 * @param int            $session_id Session ID.
-		 * @param WC_POS_Session $session    Session object.
+		 * @param POS_HOST_Session $session    Session object.
 		 */
-		do_action( 'wc_pos_end_of_day_report', $session_id, $session );
+		do_action( 'pos_host_end_of_day_report', $session_id, $session );
 	}
 
 	return $closed;
 }
 
-function wc_pos_switch_user( $register_id, $user_id = 0 ) {
-	$register = wc_pos_get_register( $register_id );
+function pos_host_switch_user( $register_id, $user_id = 0 ) {
+	$register = pos_host_get_register( $register_id );
 
 	if ( ! $register ) {
 		return false;
@@ -430,8 +427,8 @@ function wc_pos_switch_user( $register_id, $user_id = 0 ) {
 	return false;
 }
 
-function wc_pos_is_dev() {
-	$headers = wc_pos_getallheaders();
+function pos_host_is_dev() {
+	$headers = pos_host_getallheaders();
 
 	if ( isset( $headers['Env'] ) && 'dev' === $headers['Env'] ) {
 		return true;
@@ -446,18 +443,22 @@ function wc_pos_is_dev() {
  * @param WC_Payment_Gateway $gateway
  * @return bool
  */
-function wc_pos_is_pos_supported_gateway( $gateway ) {
-	return $gateway->supports( 'woocommerce-point-of-sale' );
+function pos_host_is_pos_supported_gateway( $gateway ) {
+	return $gateway->supports( 'woocommerce-pos-host' );
 }
 
 /**
  * Returns all the sent HTTP hearders.
  *
- * @since 5.1.1
+ * @since 0.0.1
  * @return array Array of headers.
  */
-function wc_pos_getallheaders() {
-	$headers = array();
+function pos_host_getallheaders() {
+
+/* do no support */
+    return false;
+    
+        $headers = array();
 
 	foreach ( $_SERVER as $name => $value ) {
 		if ( substr( $name, 0, 5 ) == 'HTTP_' ) {

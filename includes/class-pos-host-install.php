@@ -16,7 +16,7 @@ class POS_HOST_Install {
 	 * Init.
 	 */
 	public static function init() {
-		add_action( 'admin_init', array( __CLASS__, 'check_version' ), 5 );
+ 		add_action( 'admin_init', array( __CLASS__, 'check_version' ), 5 );
 		add_action( 'admin_init', array( __CLASS__, 'install' ), 6 );
                 
 		if ( ! defined( 'IFRAME_REQUEST' ) && POS_HOST_VERSION !== get_option( 'pos_host_db_version' ) ) {
