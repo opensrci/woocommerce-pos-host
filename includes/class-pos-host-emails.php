@@ -56,9 +56,9 @@ class POS_HOST_Emails {
 	 * @return array The updated email classes array.
 	 */
 	public function email_classes( $emails ) {
-		$emails['POS_HOST_Email_New_Order']            = include 'emails/class-wc-pos-email-new-order.php';
-		$emails['POS_HOST_Email_Customer_New_Account'] = include 'emails/class-wc-pos-email-customer-new-account.php';
-		$emails['POS_HOST_Email_End_Of_Day_Report']    = include 'emails/class-wc-pos-email-end-of-day-report.php';
+		$emails['POS_HOST_Email_New_Order']            = include 'emails/class-pos-host-email-new-order.php';
+		$emails['POS_HOST_Email_Customer_New_Account'] = include 'emails/class-pos-host-email-customer-new-account.php';
+		$emails['POS_HOST_Email_End_Of_Day_Report']    = include 'emails/class-pos-host-email-end-of-day-report.php';
 
 		return $emails;
 	}

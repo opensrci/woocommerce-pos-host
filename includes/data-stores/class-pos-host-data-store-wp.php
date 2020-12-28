@@ -1,6 +1,6 @@
 <?php
 /**
- * WC_POS_Data_Store_WP
+ * POS_HOST_Data_Store_WP
  *
  * @since 0.0.1
  *

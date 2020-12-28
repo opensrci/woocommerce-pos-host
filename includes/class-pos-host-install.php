@@ -60,7 +60,6 @@ class POS_HOST_Install {
 
 		// No versions? Then this is a new install.
 		if ( is_null( $current_version ) && apply_filters( 'pos_host_enable_setup_wizard', true ) ) {
-			POS_HOST_Admin_Notices::add_notice( 'install' );
 			set_transient( '_pos_host_activation_redirect', 1, 30 );
 			delete_transient( '_pos_host_activation_redirect' );
 
@@ -75,8 +74,7 @@ class POS_HOST_Install {
 
 		if ( ! is_null( $current_version ) && version_compare( $current_version, POS_HOST_VERSION , '<' ) ) {
 			set_transient( '_pos_host_activation_redirect', 1, 30 );
-			POS_HOST_Admin_Notices::add_notice( 'update' );
-                        //@todo: shoul it continue?
+			//@todo: shoul it continue?
 		} else {
 			self::update_pos_version( get_option( 'pos_host_db_version', POS_HOST_VERSION ) );
 		}
@@ -133,7 +131,7 @@ class POS_HOST_Install {
 		if ( ! get_option( 'pos_host_default_receipt', false ) ) {
 			$post_id = wp_insert_post(
 				array(
-					'post_type'   => 'pos_host_register',
+					'post_type'   => 'pos_host_receipt',
 					'post_status' => 'publish',
 					'post_title'  => __( 'My Receipt', 'woocommerce-pos-host' ),
 					'meta_input'  => array(
@@ -192,7 +190,7 @@ class POS_HOST_Install {
 				array(
 					'post_type'   => 'pos_host_register',
 					'post_status' => 'publish',
-					'post_title'  => __( 'Default Register', 'woocommerce-pos-host' ),
+					'post_title'  => __( 'My Register', 'woocommerce-pos-host' ),
 					'meta_input'  => array(
 						'receipt' => (int) get_option( 'pos_host_default_receipt' ),
 						'outlet'  => (int) get_option( 'pos_host_default_outlet' ),
@@ -273,7 +271,7 @@ class POS_HOST_Install {
 		);
 
 		$outlet_manager_caps = array(
-			'manage_woocommerce_point_of_sale' => true,
+			'manage_WooCommerce_pos_host' => true,
 			'force_logout_register'            => true,
 			'refund_orders'                    => true,
 		);
@@ -383,7 +381,7 @@ class POS_HOST_Install {
 
 		$capabilities = array(
 			'view_register',
-			'manage_woocommerce_point_of_sale',
+			'manage_WooCommerce_pos_host',
 			'refund_orders',
 		);
 

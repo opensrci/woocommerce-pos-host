@@ -38,8 +38,8 @@ $wpdb->query( "DELETE FROM {$wpdb->posts} WHERE post_type IN ( 'pos_host_registe
 $wpdb->query( "DELETE meta FROM {$wpdb->postmeta} meta LEFT JOIN {$wpdb->posts} posts ON posts.ID = meta.post_id WHERE posts.ID IS NULL;" );
 
 // Remove user roles.
-require_once 'includes/class-wc-pos-install.php';
-WC_POS_Install::remove_roles();
+require_once 'includes/class-pos-host-install.php';
+POS_HOST_Install::remove_roles();
 
 // Clear any cached data that has been removed.
 wp_cache_flush();

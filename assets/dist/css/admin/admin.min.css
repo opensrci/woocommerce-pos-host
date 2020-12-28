@@ -407,13 +407,13 @@
 .pos-host-register-denomination-options .wp-picker-holder{
     position:absolute!important
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta a,.post-type-pos_receipt table.wp-list-table tbody td .meta a,.post-type-pos_host_register table.wp-list-table tbody td .meta a{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta a,.post-type-pos_host_receipt table.wp-list-table tbody td .meta a,.post-type-pos_host_register table.wp-list-table tbody td .meta a{
     color:#999
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta a:hover,.post-type-pos_receipt table.wp-list-table tbody td .meta a:hover,.post-type-pos_host_register table.wp-list-table tbody td .meta a:hover{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta a:hover,.post-type-pos_host_receipt table.wp-list-table tbody td .meta a:hover,.post-type-pos_host_register table.wp-list-table tbody td .meta a:hover{
     color:#777
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta:before,.post-type-pos_receipt table.wp-list-table tbody td .meta:before,.post-type-pos_host_register table.wp-list-table tbody td .meta:before{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta:before,.post-type-pos_host_receipt table.wp-list-table tbody td .meta:before,.post-type-pos_host_register table.wp-list-table tbody td .meta:before{
     margin-right:8px;
     font-size:14px;
     vertical-align:middle;
@@ -421,7 +421,7 @@
     height:17px;
     display:inline-block
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.grid:before,.post-type-pos_receipt table.wp-list-table tbody td .meta.grid:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.grid:before{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.grid:before,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.grid:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.grid:before{
     font-family:Dashicons;
     speak:none;
     font-weight:400;
@@ -432,11 +432,11 @@
     content:"";
     text-decoration:none
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.receipt:before,.post-type-pos_receipt table.wp-list-table tbody td .meta.receipt:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.receipt:before{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.receipt:before,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.receipt:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.receipt:before{
     font-family:aepos;
     content:"\e900"
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.email:before,.post-type-pos_receipt table.wp-list-table tbody td .meta.email:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.email:before{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.email:before,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.email:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.email:before{
     font-family:Dashicons;
     speak:none;
     font-weight:400;
@@ -447,7 +447,7 @@
     content:"";
     text-decoration:none
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.phone:before,.post-type-pos_receipt table.wp-list-table tbody td .meta.phone:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.phone:before{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.phone:before,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.phone:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.phone:before{
     font-family:Dashicons;
     speak:none;
     font-weight:400;
@@ -458,7 +458,7 @@
     content:"";
     text-decoration:none
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.website:before,.post-type-pos_receipt table.wp-list-table tbody td .meta.website:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.website:before{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.website:before,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.website:before,.post-type-pos_host_register table.wp-list-table tbody td .meta.website:before{
     font-family:Dashicons;
     speak:none;
     font-weight:400;
@@ -469,14 +469,14 @@
     content:"";
     text-decoration:none
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.address a,.post-type-pos_receipt table.wp-list-table tbody td .meta.address a,.post-type-pos_host_register table.wp-list-table tbody td .meta.address a{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.address a,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.address a,.post-type-pos_host_register table.wp-list-table tbody td .meta.address a{
     color:#999;
     line-height:1
 }
-.post-type-pos_host_outlet table.wp-list-table tbody td .meta.address a:hover,.post-type-pos_receipt table.wp-list-table tbody td .meta.address a:hover,.post-type-pos_host_register table.wp-list-table tbody td .meta.address a:hover{
+.post-type-pos_host_outlet table.wp-list-table tbody td .meta.address a:hover,.post-type-pos_host_receipt table.wp-list-table tbody td .meta.address a:hover,.post-type-pos_host_register table.wp-list-table tbody td .meta.address a:hover{
     color:#666
 }
-.post-type-pos_host_outlet table.wp-list-table tbody .check-column .woocommerce-help-tip,.post-type-pos_receipt table.wp-list-table tbody .check-column .woocommerce-help-tip,.post-type-pos_host_register table.wp-list-table tbody .check-column .woocommerce-help-tip{
+.post-type-pos_host_outlet table.wp-list-table tbody .check-column .woocommerce-help-tip,.post-type-pos_host_receipt table.wp-list-table tbody .check-column .woocommerce-help-tip,.post-type-pos_host_register table.wp-list-table tbody .check-column .woocommerce-help-tip{
     font-size:1.5em;
     margin:-3px 0 0 5px;
     display:block;

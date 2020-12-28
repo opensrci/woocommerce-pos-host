@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #. translators: 1. URL link.
-#: woocommerce-point-of-sale.php:38
+#: woocommerce-pos-host.php:38
 #, fuzzy
 msgid ""
 "Point of Sale for WooCommerce requires WooCommerce to be installed and "
@@ -31,7 +31,7 @@ msgstr ""
 "Σημείο πώλησης για WooCommerce απαιτεί WooCommerce να εγκατασταθεί και να "
 "δραστηριοποιούνται. Μπορείτε να κάνετε λήψη του %s εδώ."
 
-#: woocommerce-point-of-sale.php:49
+#: woocommerce-pos-host.php:49
 #, fuzzy
 msgid ""
 "Point of Sale for WooCommerce requires the “WooCommerce POS” plugin to be "
@@ -245,7 +245,7 @@ msgstr "Συνδέθηκες επιτυχώς."
 msgid "In Stock"
 msgstr "Διαθέσιμο"
 
-#: i18n/app.php:57, includes/admin/settings/wc-pos-settings-tiles.php:79
+#: i18n/app.php:57, includes/admin/settings/pos-host-settings-tiles.php:79
 msgid "Out of Stock"
 msgstr "Εξαντλήθηκε"
 
@@ -316,7 +316,7 @@ msgstr "Διαθέσιμο"
 msgid "Minimum title length 3 symbols"
 msgstr "Ελάχιστο μήκος τίτλου 3 σύμβολα"
 
-#: i18n/app.php:72, includes/admin/class-wc-pos-admin.php:319,
+#: i18n/app.php:72, includes/admin/class-pos-host-admin.php:319,
 #: includes/views/html-print-receipt.php:229
 msgid "Discount"
 msgstr "Έκπτωση"
@@ -375,9 +375,9 @@ msgstr "Πλήρης Οθόνη"
 msgid "Lock Register"
 msgstr "Κλείδωμα μητρώου"
 
-#: i18n/app.php:84, includes/admin/class-wc-pos-admin-menus.php:72,
-#: includes/admin/class-wc-pos-admin-menus.php:73,
-#: includes/admin/class-wc-pos-admin.php:359,
+#: i18n/app.php:84, includes/admin/class-pos-host-admin-menus.php:72,
+#: includes/admin/class-pos-host-admin-menus.php:73,
+#: includes/admin/class-pos-host-admin.php:359,
 #: includes/admin/views/html-notice-install.php:16
 msgid "Settings"
 msgstr "Ρυθμίσεις"
@@ -443,12 +443,12 @@ msgstr "Η καταχώρηση έκλεισε"
 msgid "Sorry, we could not locate this order number."
 msgstr "Λυπούμαστε, δεν μπορέσαμε να εντοπίσουμε αυτόν τον αριθμό παραγγελίας."
 
-#: i18n/app.php:98, includes/class-wc-pos-post-types.php:44,
+#: i18n/app.php:98, includes/class-pos-host-post-types.php:44,
 #: includes/views/html-my-account-tab.php:15,
 #: includes/views/html-my-account-tab.php:37,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:94,
-#: includes/admin/settings/wc-pos-settings-register.php:25,
-#: includes/admin/settings/wc-pos-settings-register.php:40
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:94,
+#: includes/admin/settings/pos-host-settings-register.php:25,
+#: includes/admin/settings/pos-host-settings-register.php:40
 msgid "Register"
 msgstr "Εγγραφή"
 
@@ -467,18 +467,18 @@ msgstr "Βοήθεια & Ανατροφοδότηση"
 msgid "Close Register"
 msgstr "Κλείσιμο καταχώρησης"
 
-#: i18n/app.php:102, includes/class-wc-pos-post-types.php:91,
+#: i18n/app.php:102, includes/class-pos-host-post-types.php:91,
 #: includes/views/html-my-account-tab.php:16,
 #: includes/views/html-my-account-tab.php:48,
 #: includes/views/html-my-account-tab.php:51,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-outlets.php:96,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:93,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-outlets.php:96,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:93,
 #: includes/admin/meta-boxes/views/html-register-options-general.php:21
 msgid "Outlet"
 msgstr "Κατάστημα"
 
 #: i18n/app.php:103, includes/views/html-print-receipt.php:243,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:98
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:98
 msgid "Sales"
 msgstr "Προσφορές"
 
@@ -529,7 +529,7 @@ msgstr "Σύνολο"
 msgid "Shipping"
 msgstr "Αποστολή"
 
-#: i18n/app.php:114, includes/admin/settings/wc-pos-settings-general.php:108
+#: i18n/app.php:114, includes/admin/settings/pos-host-settings-general.php:108
 #, fuzzy
 msgid "Dining"
 msgstr "Φαγητό"
@@ -538,7 +538,7 @@ msgstr "Φαγητό"
 msgid "Login"
 msgstr "Σύνδεση"
 
-#: i18n/app.php:116, includes/admin/class-wc-pos-admin-assets.php:195,
+#: i18n/app.php:116, includes/admin/class-pos-host-admin-assets.php:195,
 #: includes/admin/settings/views/html-admin-page-register-denominations.php:36
 msgid "Note"
 msgstr "Σημείωση"
@@ -547,15 +547,15 @@ msgstr "Σημείωση"
 msgid "Fee"
 msgstr "Χρεώση"
 
-#: i18n/app.php:118, includes/admin/settings/wc-pos-settings-customer.php:91
+#: i18n/app.php:118, includes/admin/settings/pos-host-settings-customer.php:91
 msgid "Hold"
 msgstr "Σε αναμονή"
 
 #: i18n/app.php:119,
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:645,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:619,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:616,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:616
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:645,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:619,
+#: includes/reports/class-pos-host-report-sales-by-register.php:616,
+#: includes/reports/class-pos-host-report-sales-by-session.php:616
 msgid "Reset"
 msgstr "Επαναφορά"
 
@@ -567,7 +567,7 @@ msgstr "Καθαρισμός"
 msgid "Print"
 msgstr "Εκτύπωση"
 
-#: i18n/app.php:122, includes/admin/settings/wc-pos-settings-customer.php:90
+#: i18n/app.php:122, includes/admin/settings/pos-host-settings-customer.php:90
 msgid "Pay"
 msgstr "Πληρωμή"
 
@@ -587,11 +587,11 @@ msgstr "Προσθέστε αντικείμενα στο καλάθι."
 msgid "Please select a customer"
 msgstr "Επιλέξτε έναν πελάτη"
 
-#: i18n/app.php:127, includes/admin/class-wc-pos-admin-orders-page.php:229
+#: i18n/app.php:127, includes/admin/class-pos-host-admin-orders-page.php:229
 msgid "Signature"
 msgstr "Υπογραφή"
 
-#: i18n/app.php:128, includes/admin/class-wc-pos-admin.php:119,
+#: i18n/app.php:128, includes/admin/class-pos-host-admin.php:119,
 #: includes/views/html-admin-barcode-options.php:55
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -676,8 +676,8 @@ msgstr "Διεθνής Παράδοση"
 msgid "Categories"
 msgstr "Κατηγορίες"
 
-#: i18n/app.php:147, includes/class-wc-pos-post-types.php:141,
-#: includes/class-wc-pos-post-types.php:143
+#: i18n/app.php:147, includes/class-pos-host-post-types.php:141,
+#: includes/class-pos-host-post-types.php:143
 #, fuzzy
 msgid "Grids"
 msgstr "Πλέγματα"
@@ -724,8 +724,8 @@ msgid "Tender"
 msgstr "Προσφορά"
 
 #: i18n/app.php:158,
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-register-options.php:51,
-#: includes/admin/settings/wc-pos-settings-customer.php:38
+#: includes/admin/meta-boxes/class-pos-host-meta-box-register-options.php:51,
+#: includes/admin/settings/pos-host-settings-customer.php:38
 #, fuzzy
 msgid "End of Sale"
 msgstr "Τέλος πώλησης"
@@ -811,7 +811,7 @@ msgid "Phone"
 msgstr "Τηλέφωνο"
 
 #: i18n/app.php:177,
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-outlet-options.php:48
+#: includes/admin/meta-boxes/class-pos-host-meta-box-outlet-options.php:48
 msgid "Address"
 msgstr "Διεύθυνση"
 
@@ -832,8 +832,8 @@ msgstr "Αναζήτηση"
 msgid "Sort by order number"
 msgstr "Ταξινόμηση κατά αριθμό παραγγελίας"
 
-#: i18n/app.php:182, includes/class-wc-pos-barcodes.php:102,
-#: includes/class-wc-pos-stocks.php:77
+#: i18n/app.php:182, includes/class-pos-host-barcodes.php:102,
+#: includes/class-pos-host-stocks.php:77
 msgid "Price"
 msgstr "Τιμή"
 
@@ -866,7 +866,7 @@ msgstr "Ολοκληρώθηκε"
 msgid "On-Hold"
 msgstr "Σε αναμονή"
 
-#: i18n/app.php:188, includes/admin/class-wc-pos-admin-orders-page.php:44
+#: i18n/app.php:188, includes/admin/class-pos-host-admin-orders-page.php:44
 #, fuzzy
 msgid "Walk-in Customer"
 msgstr "Πελάτης με τα πόδια"
@@ -927,7 +927,7 @@ msgid "Qty"
 msgstr "Ποσότητα"
 
 #: i18n/app.php:201, includes/views/html-print-receipt.php:618,
-#: includes/admin/settings/wc-pos-settings-tax.php:25,
+#: includes/admin/settings/pos-host-settings-tax.php:25,
 #: includes/admin/views/html-admin-receipt-customize-preview.php:151,
 #: includes/admin/views/html-admin-receipt-customize-preview.php:185
 msgid "Tax"
@@ -944,7 +944,7 @@ msgid "No shipping address set."
 msgstr "Δεν έχει οριστεί διεύθυνση αποστολής."
 
 #: i18n/app.php:204,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:287
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:287
 #, fuzzy
 msgid "Open Register"
 msgstr "Άνοιγμα μητρώου"
@@ -953,11 +953,11 @@ msgstr "Άνοιγμα μητρώου"
 msgid "Float"
 msgstr "Κινητή"
 
-#: i18n/app.php:206, includes/api/class-wc-pos-api.php:369,
-#: includes/api/class-wc-pos-api.php:393,
-#: includes/api/class-wc-pos-api.php:396,
-#: includes/api/class-wc-pos-api.php:399,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:162
+#: i18n/app.php:206, includes/api/class-pos-host-api.php:369,
+#: includes/api/class-pos-host-api.php:393,
+#: includes/api/class-pos-host-api.php:396,
+#: includes/api/class-pos-host-api.php:399,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:162
 msgid "Yes"
 msgstr "Ναι"
 
@@ -969,12 +969,12 @@ msgstr "Σημείωση παραγγελίας"
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: i18n/app.php:209, includes/class-wc-pos-post-types.php:49,
-#: includes/class-wc-pos-post-types.php:96,
-#: includes/class-wc-pos-post-types.php:147,
-#: includes/class-wc-pos-post-types.php:198,
-#: includes/class-wc-pos-post-types.php:249,
-#: includes/admin/class-wc-pos-admin.php:107
+#: i18n/app.php:209, includes/class-pos-host-post-types.php:49,
+#: includes/class-pos-host-post-types.php:96,
+#: includes/class-pos-host-post-types.php:147,
+#: includes/class-pos-host-post-types.php:198,
+#: includes/class-pos-host-post-types.php:249,
+#: includes/admin/class-pos-host-admin.php:107
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -986,7 +986,7 @@ msgstr ""
 "Έχεις αντικείμενα στο καρότσι. Είστε βέβαιοι ότι θέλετε να %s το καλάθι;"
 
 #: i18n/app.php:212,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:162,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:162,
 #: includes/admin/meta-boxes/views/html-register-options-end-of-sale.php:46
 msgid "No"
 msgstr "Όχι"
@@ -1001,21 +1001,21 @@ msgstr "Σάρωση ή εισαγωγή αριθμού κάρτας"
 msgid "Product Image"
 msgstr "Εικόνα προϊόντος"
 
-#: i18n/app.php:215, includes/class-wc-pos-stocks.php:76,
-#: includes/admin/class-wc-pos-admin-menus.php:62,
-#: includes/admin/class-wc-pos-admin-menus.php:63
+#: i18n/app.php:215, includes/class-pos-host-stocks.php:76,
+#: includes/admin/class-pos-host-admin-menus.php:62,
+#: includes/admin/class-pos-host-admin-menus.php:63
 msgid "Stock"
 msgstr "Απόθεμα"
 
-#: i18n/app.php:216, includes/class-wc-pos-barcodes.php:99,
-#: includes/class-wc-pos-stocks.php:61,
+#: i18n/app.php:216, includes/class-pos-host-barcodes.php:99,
+#: includes/class-pos-host-stocks.php:61,
 #: includes/admin/meta-boxes/views/html-grid-tile.php:29
 msgid "SKU"
 msgstr "Κωδικός Προϊόντος"
 
-#: i18n/app.php:217, includes/gateways/class-wc-pos-gateway-cash.php:107,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:75,
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:60
+#: i18n/app.php:217, includes/gateways/class-pos-host-gateway-cash.php:107,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:75,
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:60
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -1149,7 +1149,7 @@ msgid "First Name, Last Name, Email Address will also be updated."
 msgstr ""
 "Όνομα, επώνυμο, διεύθυνση ηλεκτρονικού ταχυδρομείου θα ενημερωθούν επίσης."
 
-#: i18n/app.php:247, includes/class-wc-pos-barcodes.php:101
+#: i18n/app.php:247, includes/class-pos-host-barcodes.php:101
 msgid "Product Name"
 msgstr "Όνομα προϊόντος"
 
@@ -1200,8 +1200,8 @@ msgstr "Υπολογίζονται"
 msgid "Difference"
 msgstr "Διαφορά"
 
-#: i18n/app.php:260, includes/gateways/class-wc-pos-gateway-cash.php:23,
-#: includes/gateways/class-wc-pos-gateway-cash.php:103
+#: i18n/app.php:260, includes/gateways/class-pos-host-gateway-cash.php:23,
+#: includes/gateways/class-pos-host-gateway-cash.php:103
 msgid "Cash"
 msgstr "Μετρητά"
 
@@ -1253,15 +1253,15 @@ msgstr "Ενημέρωση προϊόντος"
 msgid "Tax Class"
 msgstr "Φορολογική Κατηγορία"
 
-#: i18n/app.php:275, includes/gateways/class-wc-pos-gateway-chip-and-pin.php:82
+#: i18n/app.php:275, includes/gateways/class-pos-host-gateway-chip-and-pin.php:82
 msgid "Reference Number"
 msgstr "Αριθμός Αναφοράς"
 
-#: i18n/app.php:276, includes/class-wc-pos-ajax.php:848,
-#: includes/class-wc-pos-post-types.php:193,
+#: i18n/app.php:276, includes/class-pos-host-ajax.php:848,
+#: includes/class-pos-host-post-types.php:193,
 #: includes/views/html-print-receipt.php:11,
 #: includes/views/html-print-receipt.php:301,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:95,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:95,
 #: includes/admin/views/html-admin-receipt-customize-preview.php:30
 msgid "Receipt"
 msgstr "Απόδειξη"
@@ -1319,7 +1319,7 @@ msgstr "Καταμετρημένη τιμή"
 msgid "Minimum 1"
 msgstr "Ελάχιστο 1"
 
-#: i18n/app.php:290, includes/class-wc-pos-ajax.php:545
+#: i18n/app.php:290, includes/class-pos-host-ajax.php:545
 msgid "An error occurred"
 msgstr "Παρουσιάστηκε κάποιο σφάλμα."
 
@@ -1912,94 +1912,94 @@ msgstr "%s έτος"
 msgid "%1$s and a %2$s sign-up fee"
 msgstr "%1$s και ένα %2$s τέλος εγγραφής"
 
-#: includes/class-wc-pos-ajax.php:201
+#: includes/class-pos-host-ajax.php:201
 msgid "Product "
 msgstr "Προϊόν"
 
-#: includes/class-wc-pos-ajax.php:211
+#: includes/class-pos-host-ajax.php:211
 #, fuzzy
 msgid " stock increased by "
 msgstr "απόθεμα αυξήθηκε κατά"
 
-#: includes/class-wc-pos-ajax.php:214
+#: includes/class-pos-host-ajax.php:214
 #, fuzzy
 msgid " stock replaced by "
 msgstr "απόθεμα που αντικαθίσταται από"
 
-#: includes/class-wc-pos-ajax.php:220
+#: includes/class-pos-host-ajax.php:220
 #, fuzzy
 msgid " stock reduced by "
 msgstr "απόθεμα μειώνεται κατά"
 
-#: includes/class-wc-pos-ajax.php:277, includes/class-wc-pos-ajax.php:292
+#: includes/class-pos-host-ajax.php:277, includes/class-pos-host-ajax.php:292
 msgid "In stock"
 msgstr "Άμεσα διαθέσιμο"
 
-#: includes/class-wc-pos-ajax.php:279, includes/class-wc-pos-ajax.php:294
+#: includes/class-pos-host-ajax.php:279, includes/class-pos-host-ajax.php:294
 msgid "Out of stock"
 msgstr "Εξαντλήθηκε"
 
-#: includes/class-wc-pos-ajax.php:456
+#: includes/class-pos-host-ajax.php:456
 #, fuzzy
 msgid "Invalid register ID"
 msgstr "Το αναγνωριστικό καταχώρησης δεν είναι έγκυρο"
 
-#: includes/class-wc-pos-ajax.php:462
+#: includes/class-pos-host-ajax.php:462
 #, fuzzy
 msgid "Could not get session"
 msgstr "Δεν ήταν δυνατή η κατάληξη της περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-ajax.php:473
+#: includes/class-pos-host-ajax.php:473
 #, fuzzy
 msgid "Could not update session"
 msgstr "Δεν ήταν δυνατή η ενημέρωση της περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-ajax.php:492
+#: includes/class-pos-host-ajax.php:492
 #, fuzzy
 msgid "You can use this code"
 msgstr "Μπορείτε να χρησιμοποιήσετε αυτόν τον κωδικό"
 
-#: includes/class-wc-pos-ajax.php:494
+#: includes/class-pos-host-ajax.php:494
 #, fuzzy
 msgid "Sorry, this code is already present"
 msgstr "Λυπούμαστε, αυτός ο κωδικός είναι ήδη παρών"
 
-#: includes/class-wc-pos-ajax.php:511
+#: includes/class-pos-host-ajax.php:511
 #, fuzzy
 msgid "User not found"
 msgstr "Ο χρήστης δεν βρέθηκε"
 
-#: includes/class-wc-pos-ajax.php:576
+#: includes/class-pos-host-ajax.php:576
 #, fuzzy
 msgid "Register not found."
 msgstr "Η καταχώρηση δεν βρέθηκε."
 
-#: includes/class-wc-pos-ajax.php:609
+#: includes/class-pos-host-ajax.php:609
 #, fuzzy
 msgid "Register not found"
 msgstr "Η καταχώρηση δεν βρέθηκε"
 
-#: includes/class-wc-pos-ajax.php:788
+#: includes/class-pos-host-ajax.php:788
 #, fuzzy
 msgid "No tiles to be deleted!"
 msgstr "Δεν υπάρχουν πλακίδια που πρέπει να διαγραφούν!"
 
-#: includes/class-wc-pos-ajax.php:817
+#: includes/class-pos-host-ajax.php:817
 #, fuzzy
 msgid "Tile could not be moved."
 msgstr "Δεν ήταν δυνατή η μετακίνηση του πλακιδίου."
 
-#: includes/class-wc-pos-ajax.php:833
+#: includes/class-pos-host-ajax.php:833
 #, fuzzy
 msgid "No data sent"
 msgstr "Δεν στάλθηκαν δεδομένα"
 
-#: includes/class-wc-pos-barcodes.php:45
+#: includes/class-pos-host-barcodes.php:45
 #, fuzzy
 msgid "Barcode Label Printing"
 msgstr "Εκτύπωση ετικέτας γραμμικού κώδικα"
 
-#: includes/class-wc-pos-barcodes.php:46
+#: includes/class-pos-host-barcodes.php:46
 #, fuzzy
 msgid ""
 "Barcode labels for your store can be printed here. To change the the fields "
@@ -2010,7 +2010,7 @@ msgstr ""
 "Για να αλλάξετε τα πεδία που θα εκτυπωθούν στην ετικέτα, μπορείτε να "
 "επιλέξετε τα πλαίσια για την εκτύπωση των ετικετών στον πίνακα στα δεξιά."
 
-#: includes/class-wc-pos-barcodes.php:49
+#: includes/class-pos-host-barcodes.php:49
 #, fuzzy
 msgid ""
 "<strong>Connection lost.</strong> Saving has been disabled until you&#8217;"
@@ -2019,118 +2019,118 @@ msgstr ""
 "<strong>Η σύνδεση χάθηκε.</strong> Η αποθήκευση έχει απενεργοποιηθεί μέχρι "
 "να συνδεθείτε."
 
-#: includes/class-wc-pos-barcodes.php:50
+#: includes/class-pos-host-barcodes.php:50
 #, fuzzy
 msgid "We&#8217;re backing up this post in your browser, just in case."
 msgstr ""
 "Εμείς&#8217;re δημιουργία αντιγράφων ασφαλείας αυτήτη θέση στο πρόγραμμα "
 "περιήγησής σας, μόνο στην περίπτωση."
 
-#: includes/class-wc-pos-barcodes.php:66
+#: includes/class-pos-host-barcodes.php:66
 #, fuzzy
 msgid "Print Settings"
 msgstr "Ρυθμίσεις εκτύπωσης"
 
-#: includes/class-wc-pos-barcodes.php:70
+#: includes/class-pos-host-barcodes.php:70
 #, fuzzy
 msgid "Number of Labels"
 msgstr "Αριθμός ετικετών"
 
-#: includes/class-wc-pos-barcodes.php:74
+#: includes/class-pos-host-barcodes.php:74
 #, fuzzy
 msgid "Label Type"
 msgstr "Τύπος ετικέτας"
 
-#: includes/class-wc-pos-barcodes.php:76
+#: includes/class-pos-host-barcodes.php:76
 msgid "Continuous"
 msgstr "Συνεχής"
 
-#: includes/class-wc-pos-barcodes.php:77
+#: includes/class-pos-host-barcodes.php:77
 #, fuzzy
 msgid "Continuous Feed"
 msgstr "Συνεχής τροφοδοσία"
 
-#: includes/class-wc-pos-barcodes.php:78
+#: includes/class-pos-host-barcodes.php:78
 #, fuzzy
 msgid "Continuous Feed (4cm x 3cm)"
 msgstr "Συνεχής τροφοδοσία (4cm x 3cm)"
 
-#: includes/class-wc-pos-barcodes.php:79
+#: includes/class-pos-host-barcodes.php:79
 #, fuzzy
 msgid "Continuous Feed (40mm x 20mm)"
 msgstr "Συνεχής τροφοδοσία (40mm x 20mm)"
 
-#: includes/class-wc-pos-barcodes.php:81
+#: includes/class-pos-host-barcodes.php:81
 msgid "A4"
 msgstr "A4"
 
-#: includes/class-wc-pos-barcodes.php:82
+#: includes/class-pos-host-barcodes.php:82
 #, fuzzy
 msgid "2 x 7"
 msgstr "2 x 7"
 
-#: includes/class-wc-pos-barcodes.php:83
+#: includes/class-pos-host-barcodes.php:83
 #, fuzzy
 msgid "3 x 7"
 msgstr "3 x 7"
 
-#: includes/class-wc-pos-barcodes.php:84
+#: includes/class-pos-host-barcodes.php:84
 #, fuzzy
 msgid "3 x 9"
 msgstr "3 x 9"
 
-#: includes/class-wc-pos-barcodes.php:86
+#: includes/class-pos-host-barcodes.php:86
 msgid "Letter"
 msgstr "Γράμμα / Χαρακτήρας"
 
-#: includes/class-wc-pos-barcodes.php:87
+#: includes/class-pos-host-barcodes.php:87
 #, fuzzy
 msgid "4 x 5"
 msgstr "4 x 5"
 
-#: includes/class-wc-pos-barcodes.php:88
+#: includes/class-pos-host-barcodes.php:88
 #, fuzzy
 msgid "3 x 10"
 msgstr "3 x 10"
 
-#: includes/class-wc-pos-barcodes.php:89
+#: includes/class-pos-host-barcodes.php:89
 #, fuzzy
 msgid "4 x 20"
 msgstr "4 x 20"
 
-#: includes/class-wc-pos-barcodes.php:91
+#: includes/class-pos-host-barcodes.php:91
 msgid "Other"
 msgstr "Άλλο"
 
-#: includes/class-wc-pos-barcodes.php:92
+#: includes/class-pos-host-barcodes.php:92
 #, fuzzy
 msgid "Jewellery Tag (50mm x 10mm)"
 msgstr "Ετικέτα κοσμήματος (50mm X 10mm)"
 
-#: includes/class-wc-pos-barcodes.php:97
+#: includes/class-pos-host-barcodes.php:97
 msgid "Product Fields"
 msgstr "Πεδία Προϊόντος"
 
-#: includes/class-wc-pos-barcodes.php:98,
+#: includes/class-pos-host-barcodes.php:98,
 #: includes/views/html-admin-barcode-options.php:21
 msgid "Barcode"
 msgstr "Ραβδωτός κώδικας"
 
-#: includes/class-wc-pos-barcodes.php:100
+#: includes/class-pos-host-barcodes.php:100
 #, fuzzy
 msgid "SKU Label"
 msgstr "Ετικέτα SKU"
 
-#: includes/class-wc-pos-barcodes.php:103
+#: includes/class-pos-host-barcodes.php:103
 msgid "Variation"
 msgstr "Παραλλαγή"
 
-#: includes/class-wc-pos-barcodes.php:104
+#: includes/class-pos-host-barcodes.php:104
 #, fuzzy
 msgid "Variation Label"
 msgstr "Ετικέτα παραλλαγής"
 
-#: includes/class-wc-pos-barcodes.php:107
+#: includes/class-pos-host-barcodes.php:107
 #, fuzzy
 msgid ""
 "Note: set your paper size to the corresponding template size. Printing "
@@ -2140,578 +2140,578 @@ msgstr ""
 "περιθώρια εκτύπωσης πρέπει να οριστούν σε κανένα για να εξασφαλιστεί η "
 "ακριβής εκτύπωση."
 
-#: includes/class-wc-pos-grid.php:162
+#: includes/class-pos-host-grid.php:162
 #, fuzzy
 msgid "Error saving grid."
 msgstr "Παρουσιάστηκε σφάλμα κατά την αποθήκευση πλέγματος."
 
-#: includes/class-wc-pos-install.php:188,
-#: includes/updates/wc_pos-update-5.0.0.php:347
+#: includes/class-pos-host-install.php:188,
+#: includes/updates/pos_host-update-5.0.0.php:347
 #, fuzzy
 msgid "Default Receipt"
 msgstr "Προεπιλεγμένη παραλαβή"
 
-#: includes/class-wc-pos-install.php:215,
-#: includes/updates/wc_pos-update-5.0.0.php:376
+#: includes/class-pos-host-install.php:215,
+#: includes/updates/pos_host-update-5.0.0.php:376
 #, fuzzy
 msgid "Default Outlet"
 msgstr "Προεπιλεγμένη έξοδος"
 
-#: includes/class-wc-pos-install.php:243,
-#: includes/updates/wc_pos-update-5.0.0.php:406
+#: includes/class-pos-host-install.php:243,
+#: includes/updates/pos_host-update-5.0.0.php:406
 #, fuzzy
 msgid "Default Register"
 msgstr "Προεπιλεγμένο μητρώο"
 
-#: includes/class-wc-pos-install.php:302
+#: includes/class-pos-host-install.php:302
 msgid "Cashier"
 msgstr "Ταμίας"
 
-#: includes/class-wc-pos-install.php:314
+#: includes/class-pos-host-install.php:314
 #, fuzzy
 msgid "POS Manager"
 msgstr "Διαχείριση POS"
 
-#: includes/class-wc-pos-my-account.php:39,
-#: includes/class-wc-pos-my-account.php:49, includes/class-wc-pos.php:195,
-#: includes/admin/class-wc-pos-admin-menus.php:40,
-#: includes/admin/class-wc-pos-admin-menus.php:41,
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:250,
-#: includes/admin/class-wc-pos-admin-orders-page.php:169,
-#: includes/admin/class-wc-pos-admin.php:307,
-#: includes/admin/class-wc-pos-admin.php:633,
+#: includes/class-pos-host-my-account.php:39,
+#: includes/class-pos-host-my-account.php:49, includes/class-pos-host.php:195,
+#: includes/admin/class-pos-host-admin-menus.php:40,
+#: includes/admin/class-pos-host-admin-menus.php:41,
+#: includes/admin/class-pos-host-admin-meta-boxes.php:250,
+#: includes/admin/class-pos-host-admin-orders-page.php:169,
+#: includes/admin/class-pos-host-admin.php:307,
+#: includes/admin/class-pos-host-admin.php:633,
 #: includes/views/html-admin-pos.php:17,
 #: includes/admin/views/html-quick-edit-product.php:13
 msgid "Point of Sale"
 msgstr "Σημείο Εντατικής Πώλησης"
 
-#: includes/class-wc-pos-post-types.php:43,
-#: includes/class-wc-pos-post-types.php:45,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-outlets.php:98,
-#: includes/admin/settings/wc-pos-settings-general.php:60,
+#: includes/class-pos-host-post-types.php:43,
+#: includes/class-pos-host-post-types.php:45,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-outlets.php:98,
+#: includes/admin/settings/pos-host-settings-general.php:60,
 #: includes/admin/views/html-notice-install.php:17
 msgid "Registers"
 msgstr "Καταχωρητές"
 
-#: includes/class-wc-pos-post-types.php:46
+#: includes/class-pos-host-post-types.php:46
 msgctxt "Admin menu name"
 msgid "Registers"
 msgstr "Καταχωρητές"
 
-#: includes/class-wc-pos-post-types.php:47,
-#: includes/class-wc-pos-post-types.php:94,
-#: includes/class-wc-pos-post-types.php:145,
-#: includes/class-wc-pos-post-types.php:196,
-#: includes/class-wc-pos-post-types.php:247
+#: includes/class-pos-host-post-types.php:47,
+#: includes/class-pos-host-post-types.php:94,
+#: includes/class-pos-host-post-types.php:145,
+#: includes/class-pos-host-post-types.php:196,
+#: includes/class-pos-host-post-types.php:247
 msgid "Add New"
 msgstr "Προσθήκη Νέου"
 
-#: includes/class-wc-pos-post-types.php:48
+#: includes/class-pos-host-post-types.php:48
 #, fuzzy
 msgid "Add new register"
 msgstr "Προσθήκη νέου μητρώου"
 
-#: includes/class-wc-pos-post-types.php:50
+#: includes/class-pos-host-post-types.php:50
 #, fuzzy
 msgid "Edit register"
 msgstr "Επεξεργασία μητρώου"
 
-#: includes/class-wc-pos-post-types.php:51
+#: includes/class-pos-host-post-types.php:51
 #, fuzzy
 msgid "New register"
 msgstr "Νέο μητρώο"
 
-#: includes/class-wc-pos-post-types.php:52
+#: includes/class-pos-host-post-types.php:52
 #, fuzzy
 msgid "View register"
 msgstr "Προβολή μητρώου"
 
-#: includes/class-wc-pos-post-types.php:53
+#: includes/class-pos-host-post-types.php:53
 msgid "View registers"
 msgstr "Προβολή καταχωρητών"
 
-#: includes/class-wc-pos-post-types.php:54
+#: includes/class-pos-host-post-types.php:54
 #, fuzzy
 msgid "Search registers"
 msgstr "Αναζήτηση καταχωρητών"
 
-#: includes/class-wc-pos-post-types.php:55
+#: includes/class-pos-host-post-types.php:55
 #, fuzzy
 msgid "No registers found"
 msgstr "Δεν βρέθηκαν μητρώα"
 
-#: includes/class-wc-pos-post-types.php:56
+#: includes/class-pos-host-post-types.php:56
 #, fuzzy
 msgid "No registers found in trash"
 msgstr "Δεν βρέθηκαν μητρώα στα σκουπίδια"
 
-#: includes/class-wc-pos-post-types.php:57
+#: includes/class-pos-host-post-types.php:57
 #, fuzzy
 msgid "Parent register"
 msgstr "Γονικό μητρώο"
 
-#: includes/class-wc-pos-post-types.php:58
+#: includes/class-pos-host-post-types.php:58
 #, fuzzy
 msgid "Insert into register"
 msgstr "Εισαγωγή στο μητρώο"
 
-#: includes/class-wc-pos-post-types.php:59
+#: includes/class-pos-host-post-types.php:59
 #, fuzzy
 msgid "Uploaded to this register"
 msgstr "Μεταφόρτωση σε αυτό το μητρώο"
 
-#: includes/class-wc-pos-post-types.php:60
+#: includes/class-pos-host-post-types.php:60
 #, fuzzy
 msgid "Filter registers"
 msgstr "Μητρώα φίλτρων"
 
-#: includes/class-wc-pos-post-types.php:61
+#: includes/class-pos-host-post-types.php:61
 #, fuzzy
 msgid "Registers navigation"
 msgstr "Καταχώρηση περιήγησης"
 
-#: includes/class-wc-pos-post-types.php:62
+#: includes/class-pos-host-post-types.php:62
 #, fuzzy
 msgid "Registers list"
 msgstr "Λίστα καταχωρητών"
 
-#: includes/class-wc-pos-post-types.php:64
+#: includes/class-pos-host-post-types.php:64
 #, fuzzy
 msgid "This is where you can add new registers to the Point of Sale."
 msgstr "Αυτό είναι όπου μπορείτε να προσθέσετε νέα μητρώα στο σημείο πώλησης."
 
-#: includes/class-wc-pos-post-types.php:90,
-#: includes/class-wc-pos-post-types.php:92,
-#: includes/admin/settings/wc-pos-settings-general.php:61,
+#: includes/class-pos-host-post-types.php:90,
+#: includes/class-pos-host-post-types.php:92,
+#: includes/admin/settings/pos-host-settings-general.php:61,
 #: includes/admin/views/html-notice-install.php:18
 msgid "Outlets"
 msgstr "Αγορές"
 
-#: includes/class-wc-pos-post-types.php:93
+#: includes/class-pos-host-post-types.php:93
 msgctxt "Admin menu name"
 msgid "Outlets"
 msgstr "Αγορές"
 
-#: includes/class-wc-pos-post-types.php:95
+#: includes/class-pos-host-post-types.php:95
 #, fuzzy
 msgid "Add new outlet"
 msgstr "Προσθήκη νέας εξόδου"
 
-#: includes/class-wc-pos-post-types.php:97
+#: includes/class-pos-host-post-types.php:97
 #, fuzzy
 msgid "Edit outlet"
 msgstr "Επεξεργασία εξόδου"
 
-#: includes/class-wc-pos-post-types.php:98
+#: includes/class-pos-host-post-types.php:98
 #, fuzzy
 msgid "New outlet"
 msgstr "Νέα πρίζα"
 
-#: includes/class-wc-pos-post-types.php:99
+#: includes/class-pos-host-post-types.php:99
 #, fuzzy
 msgid "View outlet"
 msgstr "Προβολή εξόδου"
 
-#: includes/class-wc-pos-post-types.php:100
+#: includes/class-pos-host-post-types.php:100
 #, fuzzy
 msgid "View outlets"
 msgstr "Προβολή σημείων πώλησης"
 
-#: includes/class-wc-pos-post-types.php:101
+#: includes/class-pos-host-post-types.php:101
 #, fuzzy
 msgid "Search outlets"
 msgstr "Σημεία αναζήτησης"
 
-#: includes/class-wc-pos-post-types.php:102
+#: includes/class-pos-host-post-types.php:102
 msgid "No outlets found"
 msgstr "Δεν βρέθηκαν καταστήματα"
 
-#: includes/class-wc-pos-post-types.php:103
+#: includes/class-pos-host-post-types.php:103
 #, fuzzy
 msgid "No outlets found in trash"
 msgstr "Δεν βρέθηκαν καταστήματα στα σκουπίδια"
 
-#: includes/class-wc-pos-post-types.php:104
+#: includes/class-pos-host-post-types.php:104
 #, fuzzy
 msgid "Parent outlet"
 msgstr "Γονική πρίζα"
 
-#: includes/class-wc-pos-post-types.php:105
+#: includes/class-pos-host-post-types.php:105
 #, fuzzy
 msgid "Outlet image"
 msgstr "Εικόνα εξόδου"
 
-#: includes/class-wc-pos-post-types.php:106
+#: includes/class-pos-host-post-types.php:106
 #, fuzzy
 msgid "Set outlet image"
 msgstr "Ορισμός εικόνας εξόδου"
 
-#: includes/class-wc-pos-post-types.php:107
+#: includes/class-pos-host-post-types.php:107
 #, fuzzy
 msgid "Remove outlet image"
 msgstr "Κατάργηση εικόνας εξόδου"
 
-#: includes/class-wc-pos-post-types.php:108
+#: includes/class-pos-host-post-types.php:108
 #, fuzzy
 msgid "Use as outlet image"
 msgstr "Χρήση ως εικόνας εξόδου"
 
-#: includes/class-wc-pos-post-types.php:109
+#: includes/class-pos-host-post-types.php:109
 #, fuzzy
 msgid "Insert into outlet"
 msgstr "Εισαγωγή στην πρίζα"
 
-#: includes/class-wc-pos-post-types.php:110
+#: includes/class-pos-host-post-types.php:110
 #, fuzzy
 msgid "Uploaded to this outlet"
 msgstr "Μεταφόρτωση σε αυτήν την έξοδο"
 
-#: includes/class-wc-pos-post-types.php:111
+#: includes/class-pos-host-post-types.php:111
 #, fuzzy
 msgid "Filter outlets"
 msgstr "Διηθητήρες φίλτρου"
 
-#: includes/class-wc-pos-post-types.php:112
+#: includes/class-pos-host-post-types.php:112
 #, fuzzy
 msgid "Outlets navigation"
 msgstr "Πλοήγηση σε καταστήματα"
 
-#: includes/class-wc-pos-post-types.php:113
+#: includes/class-pos-host-post-types.php:113
 #, fuzzy
 msgid "Outlets list"
 msgstr "Λίστα σημείων πώλησης"
 
-#: includes/class-wc-pos-post-types.php:115
+#: includes/class-pos-host-post-types.php:115
 #, fuzzy
 msgid "This is where you can add new outlets to the Point of Sale."
 msgstr ""
 "Αυτό είναι όπου μπορείτε να προσθέσετε τις νέες εξόδους στο σημείο της "
 "πώλησης."
 
-#: includes/class-wc-pos-post-types.php:142,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-grids.php:92
+#: includes/class-pos-host-post-types.php:142,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-grids.php:92
 msgid "Grid"
 msgstr "Πλέγμα"
 
-#: includes/class-wc-pos-post-types.php:144
+#: includes/class-pos-host-post-types.php:144
 #, fuzzy
 msgctxt "Admin menu name"
 msgid "Grids"
 msgstr "Πλέγματα"
 
-#: includes/class-wc-pos-post-types.php:146
+#: includes/class-pos-host-post-types.php:146
 #, fuzzy
 msgid "Add new grid"
 msgstr "Προσθήκη νέου πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:148
+#: includes/class-pos-host-post-types.php:148
 #, fuzzy
 msgid "Edit grid"
 msgstr "Επεξεργασία πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:149
+#: includes/class-pos-host-post-types.php:149
 #, fuzzy
 msgid "New grid"
 msgstr "Νέο πλέγμα"
 
-#: includes/class-wc-pos-post-types.php:150
+#: includes/class-pos-host-post-types.php:150
 #, fuzzy
 msgid "View grid"
 msgstr "Προβολή πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:151
+#: includes/class-pos-host-post-types.php:151
 #, fuzzy
 msgid "View grids"
 msgstr "Προβολή πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:152
+#: includes/class-pos-host-post-types.php:152
 #, fuzzy
 msgid "Search grids"
 msgstr "Πλέγματα αναζήτησης"
 
-#: includes/class-wc-pos-post-types.php:153
+#: includes/class-pos-host-post-types.php:153
 #, fuzzy
 msgid "No grids found"
 msgstr "Δεν βρέθηκαν πλέγματα"
 
-#: includes/class-wc-pos-post-types.php:154
+#: includes/class-pos-host-post-types.php:154
 #, fuzzy
 msgid "No grids found in trash"
 msgstr "Δεν βρέθηκαν πλέγματα στα σκουπίδια"
 
-#: includes/class-wc-pos-post-types.php:155
+#: includes/class-pos-host-post-types.php:155
 #, fuzzy
 msgid "Parent grid"
 msgstr "Γονικό πλέγμα"
 
-#: includes/class-wc-pos-post-types.php:156
+#: includes/class-pos-host-post-types.php:156
 #, fuzzy
 msgid "Grid image"
 msgstr "Εικόνα πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:157
+#: includes/class-pos-host-post-types.php:157
 #, fuzzy
 msgid "Set grid image"
 msgstr "Ορισμός εικόνας πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:158
+#: includes/class-pos-host-post-types.php:158
 #, fuzzy
 msgid "Remove grid image"
 msgstr "Κατάργηση εικόνας πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:159
+#: includes/class-pos-host-post-types.php:159
 #, fuzzy
 msgid "Use as grid image"
 msgstr "Χρήση ως εικόνας πλέγματος"
 
-#: includes/class-wc-pos-post-types.php:160
+#: includes/class-pos-host-post-types.php:160
 #, fuzzy
 msgid "Insert into grid"
 msgstr "Εισαγωγή στο πλέγμα"
 
-#: includes/class-wc-pos-post-types.php:161
+#: includes/class-pos-host-post-types.php:161
 #, fuzzy
 msgid "Uploaded to this grid"
 msgstr "Αποστολή σε αυτό το πλέγμα"
 
-#: includes/class-wc-pos-post-types.php:162
+#: includes/class-pos-host-post-types.php:162
 #, fuzzy
 msgid "Filter grids"
 msgstr "Πλέγματα φίλτρων"
 
-#: includes/class-wc-pos-post-types.php:163
+#: includes/class-pos-host-post-types.php:163
 #, fuzzy
 msgid "Grids navigation"
 msgstr "Περιήγηση πλέγματα"
 
-#: includes/class-wc-pos-post-types.php:164
+#: includes/class-pos-host-post-types.php:164
 #, fuzzy
 msgid "Grids list"
 msgstr "Λίστα πλέγματα"
 
-#: includes/class-wc-pos-post-types.php:166,
-#: includes/class-wc-pos-post-types.php:217
+#: includes/class-pos-host-post-types.php:166,
+#: includes/class-pos-host-post-types.php:217
 #, fuzzy
 msgid "This is where you can add new grids to the Point of Sale."
 msgstr ""
 "Αυτό είναι όπου μπορείτε να προσθέσετε νέα πλέγματα στο σημείο πώλησης."
 
-#: includes/class-wc-pos-post-types.php:192,
-#: includes/class-wc-pos-post-types.php:194
+#: includes/class-pos-host-post-types.php:192,
+#: includes/class-pos-host-post-types.php:194
 msgid "Receipts"
 msgstr "Αποδείξεις"
 
-#: includes/class-wc-pos-post-types.php:195
+#: includes/class-pos-host-post-types.php:195
 msgctxt "Admin menu name"
 msgid "Receipts"
 msgstr "Αποδείξεις"
 
-#: includes/class-wc-pos-post-types.php:197
+#: includes/class-pos-host-post-types.php:197
 #, fuzzy
 msgid "Add new receipt"
 msgstr "Προσθήκη νέας παραλαβής"
 
-#: includes/class-wc-pos-post-types.php:199
+#: includes/class-pos-host-post-types.php:199
 #, fuzzy
 msgid "Edit receipt"
 msgstr "Επεξεργασία αποδεικτικού"
 
-#: includes/class-wc-pos-post-types.php:200
+#: includes/class-pos-host-post-types.php:200
 #, fuzzy
 msgid "New receipt"
 msgstr "Νέα απόδειξη"
 
-#: includes/class-wc-pos-post-types.php:201
+#: includes/class-pos-host-post-types.php:201
 #, fuzzy
 msgid "View receipt"
 msgstr "Προβολή παραλαβής"
 
-#: includes/class-wc-pos-post-types.php:202
+#: includes/class-pos-host-post-types.php:202
 #, fuzzy
 msgid "View receipts"
 msgstr "Προβολή αποδείξεων"
 
-#: includes/class-wc-pos-post-types.php:203
+#: includes/class-pos-host-post-types.php:203
 #, fuzzy
 msgid "Search receipts"
 msgstr "Αποδεικτικά αναζήτησης"
 
-#: includes/class-wc-pos-post-types.php:204
+#: includes/class-pos-host-post-types.php:204
 #, fuzzy
 msgid "No receipts found"
 msgstr "Δεν βρέθηκαν αποδείξεις"
 
-#: includes/class-wc-pos-post-types.php:205
+#: includes/class-pos-host-post-types.php:205
 #, fuzzy
 msgid "No receipts found in trash"
 msgstr "Δεν βρέθηκαν αποδείξεις στα σκουπίδια"
 
-#: includes/class-wc-pos-post-types.php:206
+#: includes/class-pos-host-post-types.php:206
 #, fuzzy
 msgid "Parent receipt"
 msgstr "Μητρική απόδειξη"
 
-#: includes/class-wc-pos-post-types.php:207
+#: includes/class-pos-host-post-types.php:207
 #, fuzzy
 msgid "Receipt image"
 msgstr "Εικόνα παραλαβής"
 
-#: includes/class-wc-pos-post-types.php:208
+#: includes/class-pos-host-post-types.php:208
 #, fuzzy
 msgid "Set receipt image"
 msgstr "Ορισμός εικόνας παραλαβής"
 
-#: includes/class-wc-pos-post-types.php:209
+#: includes/class-pos-host-post-types.php:209
 #, fuzzy
 msgid "Remove receipt image"
 msgstr "Κατάργηση εικόνας παραλαβής"
 
-#: includes/class-wc-pos-post-types.php:210
+#: includes/class-pos-host-post-types.php:210
 #, fuzzy
 msgid "Use as receipt image"
 msgstr "Χρήση ως εικόνας παραλαβής"
 
-#: includes/class-wc-pos-post-types.php:211
+#: includes/class-pos-host-post-types.php:211
 #, fuzzy
 msgid "Insert into receipt"
 msgstr "Εισαγωγή στην παραλαβή"
 
-#: includes/class-wc-pos-post-types.php:212
+#: includes/class-pos-host-post-types.php:212
 #, fuzzy
 msgid "Uploaded to this receipt"
 msgstr "Μεταφόρτωση σε αυτήν την απόδειξη"
 
-#: includes/class-wc-pos-post-types.php:213
+#: includes/class-pos-host-post-types.php:213
 #, fuzzy
 msgid "Filter receipts"
 msgstr "Παραλαβές φίλτρου"
 
-#: includes/class-wc-pos-post-types.php:214
+#: includes/class-pos-host-post-types.php:214
 #, fuzzy
 msgid "Receipts navigation"
 msgstr "Πλοήγηση παραλαβών"
 
-#: includes/class-wc-pos-post-types.php:215
+#: includes/class-pos-host-post-types.php:215
 #, fuzzy
 msgid "Receipts list"
 msgstr "Λίστα παραλαβών"
 
-#: includes/class-wc-pos-post-types.php:243,
-#: includes/class-wc-pos-post-types.php:245
+#: includes/class-pos-host-post-types.php:243,
+#: includes/class-pos-host-post-types.php:245
 msgid "Sessions"
 msgstr "Συνδέσεις"
 
-#: includes/class-wc-pos-post-types.php:244
+#: includes/class-pos-host-post-types.php:244
 msgid "Session"
 msgstr "Συνεδρία"
 
-#: includes/class-wc-pos-post-types.php:246
+#: includes/class-pos-host-post-types.php:246
 msgctxt "Admin menu name"
 msgid "Sessions"
 msgstr "Συνδέσεις"
 
-#: includes/class-wc-pos-post-types.php:248
+#: includes/class-pos-host-post-types.php:248
 #, fuzzy
 msgid "Add new session"
 msgstr "Προσθήκη νέας περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:250
+#: includes/class-pos-host-post-types.php:250
 #, fuzzy
 msgid "Edit session"
 msgstr "Επεξεργασία περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:251
+#: includes/class-pos-host-post-types.php:251
 #, fuzzy
 msgid "New session"
 msgstr "Νέα περίοδος λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:252
+#: includes/class-pos-host-post-types.php:252
 #, fuzzy
 msgid "View session"
 msgstr "Προβολή περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:253
+#: includes/class-pos-host-post-types.php:253
 #, fuzzy
 msgid "View sessions"
 msgstr "Προβολή περιόδων λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:254
+#: includes/class-pos-host-post-types.php:254
 #, fuzzy
 msgid "Search sessions"
 msgstr "Περίοδοι λειτουργίας αναζήτησης"
 
-#: includes/class-wc-pos-post-types.php:255
+#: includes/class-pos-host-post-types.php:255
 #, fuzzy
 msgid "No sessions found"
 msgstr "Δεν βρέθηκαν περίοδοι λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:256
+#: includes/class-pos-host-post-types.php:256
 #, fuzzy
 msgid "No sessions found in trash"
 msgstr "Δεν βρέθηκαν συνεδρίες σε κάδους απορριμμάτων"
 
-#: includes/class-wc-pos-post-types.php:257
+#: includes/class-pos-host-post-types.php:257
 #, fuzzy
 msgid "Parent session"
 msgstr "Γονική περίοδος λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:258
+#: includes/class-pos-host-post-types.php:258
 #, fuzzy
 msgid "Session image"
 msgstr "Εικόνα περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:259
+#: includes/class-pos-host-post-types.php:259
 #, fuzzy
 msgid "Set session image"
 msgstr "Ορισμός εικόνας περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:260
+#: includes/class-pos-host-post-types.php:260
 #, fuzzy
 msgid "Remove session image"
 msgstr "Κατάργηση εικόνας περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:261
+#: includes/class-pos-host-post-types.php:261
 #, fuzzy
 msgid "Use as session image"
 msgstr "Χρήση ως εικόνας περιόδου λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:262
+#: includes/class-pos-host-post-types.php:262
 #, fuzzy
 msgid "Insert into session"
 msgstr "Εισαγωγή στην περίοδο λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:263
+#: includes/class-pos-host-post-types.php:263
 #, fuzzy
 msgid "Uploaded to this session"
 msgstr "Μεταφόρτωση σε αυτήν την περίοδο λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:264
+#: includes/class-pos-host-post-types.php:264
 #, fuzzy
 msgid "Filter sessions"
 msgstr "Φίλτρο περιόδων λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:265
+#: includes/class-pos-host-post-types.php:265
 #, fuzzy
 msgid "Sessions navigation"
 msgstr "Περιήγηση σε περιόδους λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:266
+#: includes/class-pos-host-post-types.php:266
 #, fuzzy
 msgid "Sessions list"
 msgstr "Λίστα περιόδων λειτουργίας"
 
-#: includes/class-wc-pos-post-types.php:268
+#: includes/class-pos-host-post-types.php:268
 #, fuzzy
 msgid "This is where you can add new sessions to the Point of Sale."
 msgstr ""
 "Αυτό είναι όπου μπορείτε να προσθέσετε νέες συνεδρίες στο σημείο πώλησης."
 
-#: includes/class-wc-pos-stocks.php:54
+#: includes/class-pos-host-stocks.php:54
 #, fuzzy
 msgid "Stock Controller"
 msgstr "Ελεγκτής αποθεμάτων"
 
-#: includes/class-wc-pos-stocks.php:55
+#: includes/class-pos-host-stocks.php:55
 #, fuzzy
 msgid ""
 "Manage your stock instantly using the barcode scanner. Simply scan the SKU "
@@ -2721,146 +2721,146 @@ msgstr ""
 "κώδικα. Απλά σαρώστε το SKU και το προϊόν θα φορτώσει παρακάτω με την "
 "επιλογή να εισάγετε ενημέρωση αξία ς αποθέματος."
 
-#: includes/class-wc-pos-stocks.php:63
+#: includes/class-pos-host-stocks.php:63
 msgid "Find"
 msgstr "Εύρημα"
 
-#: includes/class-wc-pos-stocks.php:74
+#: includes/class-pos-host-stocks.php:74
 msgid "Image"
 msgstr "Εικόνα"
 
-#: includes/class-wc-pos-stocks.php:75,
+#: includes/class-pos-host-stocks.php:75,
 #: includes/admin/meta-boxes/views/html-grid-options-panel.php:22
 msgid "Name"
 msgstr "Όνομα"
 
-#: includes/class-wc-pos-stocks.php:78
+#: includes/class-pos-host-stocks.php:78
 #, fuzzy
 msgid "Update Stock"
 msgstr "Ενημέρωση Αποθέματος"
 
-#: includes/class-wc-pos-stocks.php:79
+#: includes/class-pos-host-stocks.php:79
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: includes/class-wc-pos-stocks.php:276
+#: includes/class-pos-host-stocks.php:276
 #, fuzzy
 msgid "Barcode Template created."
 msgstr "Δημιουργήθηκε πρότυπο γραμμικού κώδικα."
 
-#: includes/class-wc-pos-stocks.php:277
+#: includes/class-pos-host-stocks.php:277
 #, fuzzy
 msgid "Barcode Template updated."
 msgstr "Ενημερώθηκε το πρότυπο γραμμικού κώδικα."
 
-#: includes/class-wc-pos-subscriptions.php:32,
-#: includes/class-wc-pos-subscriptions.php:91
+#: includes/class-pos-host-subscriptions.php:32,
+#: includes/class-pos-host-subscriptions.php:91
 msgid "Subscription"
 msgstr "Συνδρομή"
 
 #. translators: $s currency symbol
-#: includes/class-wc-pos-subscriptions.php:98
+#: includes/class-pos-host-subscriptions.php:98
 #, fuzzy
 msgid "Sign-up Fee (%s)"
 msgstr "Τέλος εγγραφής (%s)"
 
-#: includes/class-wc-pos-subscriptions.php:101
+#: includes/class-pos-host-subscriptions.php:101
 msgid "Interval"
 msgstr "Διάστημα"
 
-#: includes/class-wc-pos-subscriptions.php:102
+#: includes/class-pos-host-subscriptions.php:102
 msgid "Period"
 msgstr "Περίοδος"
 
-#: includes/class-wc-pos-subscriptions.php:103
+#: includes/class-pos-host-subscriptions.php:103
 msgid "Length"
 msgstr "Μήκος"
 
-#: includes/class-wc-pos.php:522, includes/class-wc-pos.php:571,
-#: includes/admin/class-wc-pos-admin.php:97,
+#: includes/class-pos-host.php:522, includes/class-pos-host.php:571,
+#: includes/admin/class-pos-host-admin.php:97,
 #: includes/admin/views/html-quick-edit-product.php:27
 #, fuzzy
 msgid "POS Only"
 msgstr "POS μόνο"
 
-#: includes/class-wc-pos.php:530, includes/class-wc-pos.php:572,
-#: includes/admin/class-wc-pos-admin.php:98,
+#: includes/class-pos-host.php:530, includes/class-pos-host.php:572,
+#: includes/admin/class-pos-host-admin.php:98,
 #: includes/admin/views/html-quick-edit-product.php:28
 #, fuzzy
 msgid "Online Only"
 msgstr "Μόνο σε σύνδεση"
 
-#: includes/class-wc-pos.php:562
+#: includes/class-pos-host.php:562
 #, fuzzy
 msgid "POS Status"
 msgstr "Κατάσταση POS"
 
-#: includes/class-wc-pos.php:569
+#: includes/class-pos-host.php:569
 msgid "— No Change —"
 msgstr "-Καμία Αλλαγή-"
 
-#: includes/class-wc-pos.php:570
+#: includes/class-pos-host.php:570
 #, fuzzy
 msgid "POS & Online"
 msgstr "POS & Online"
 
-#: includes/class-wc-pos.php:611,
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:199,
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:276,
-#: includes/admin/class-wc-pos-admin-notices.php:107,
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-grid-options.php:42,
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-outlet-options.php:79,
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-register-options.php:67
+#: includes/class-pos-host.php:611,
+#: includes/admin/class-pos-host-admin-meta-boxes.php:199,
+#: includes/admin/class-pos-host-admin-meta-boxes.php:276,
+#: includes/admin/class-pos-host-admin-notices.php:107,
+#: includes/admin/meta-boxes/class-pos-host-meta-box-grid-options.php:42,
+#: includes/admin/meta-boxes/class-pos-host-meta-box-outlet-options.php:79,
+#: includes/admin/meta-boxes/class-pos-host-meta-box-register-options.php:67
 #, fuzzy
 msgid "Action failed. Please refresh the page and retry."
 msgstr "Η ενέργεια απέτυχε. Ανανεώστε τη σελίδα και προσπαθήστε ξανά."
 
-#: includes/class-wc-pos.php:681
+#: includes/class-pos-host.php:681
 #, fuzzy
 msgid "Incorrect Permalinks Structure."
 msgstr "Εσφαλμένη Δομή Permalinks."
 
-#: includes/class-wc-pos.php:681
+#: includes/class-pos-host.php:681
 #, fuzzy
 msgid "Change Permalinks"
 msgstr "Αλλαγή περμανάτς"
 
-#: includes/class-wc-pos.php:751
+#: includes/class-pos-host.php:751
 #, fuzzy
 msgid "Reprints receipts"
 msgstr "Ανατυπώνει τις παραλαβές"
 
-#: includes/class-wc-pos.php:835
+#: includes/class-pos-host.php:835
 #, fuzzy
 msgid "You are not allowed to view this page."
 msgstr "Δεν επιτρέπεται να προβάλετε αυτήν τη σελίδα."
 
-#: includes/class-wc-pos.php:968
+#: includes/class-pos-host.php:968
 msgid "%"
 msgstr "%"
 
-#: includes/wc-pos-register-functions.php:42
+#: includes/pos-host-register-functions.php:42
 #, fuzzy
 msgid "Categories Layout"
 msgstr "Διάταξη κατηγοριών"
 
-#: includes/wc-pos-session-functions.php:49,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:137
+#: includes/pos-host-session-functions.php:49,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:137
 #, fuzzy
 msgid "Deleted Register"
 msgstr "Διαγραμμένο μητρώο"
 
-#: includes/wc-pos-session-functions.php:50
+#: includes/pos-host-session-functions.php:50
 #, fuzzy
 msgid "Deleted Outlet"
 msgstr "Διαγραμμένη έξοδος"
 
-#: includes/wc-pos-session-functions.php:51,
-#: includes/wc-pos-session-functions.php:52
+#: includes/pos-host-session-functions.php:51,
+#: includes/pos-host-session-functions.php:52
 msgid "Deleted User"
 msgstr "Διαγραμμένος χρήστης"
 
-#: includes/admin/class-wc-pos-admin-assets.php:124
+#: includes/admin/class-pos-host-admin-assets.php:124
 #, fuzzy
 msgid ""
 "Orders placed by the deleted register will be assigned to the Default "
@@ -2869,7 +2869,7 @@ msgstr ""
 "Οι παραγγελίες που έγιναν από το διαγραμμένο μητρώο θα αντιστοιχιστούν στο "
 "προεπιλεγμένο μητρώο."
 
-#: includes/admin/class-wc-pos-admin-assets.php:125
+#: includes/admin/class-pos-host-admin-assets.php:125
 #, fuzzy
 msgid ""
 "Orders placed by the deleted registers will be assigned to the Default "
@@ -2878,38 +2878,38 @@ msgstr ""
 "Οι παραγγελίες που θα γίνουν από τα διαγραμμένα αρχεία καταχωρήσεων θα "
 "αντιστοιχιστούν στο προεπιλεγμένο μητρώο."
 
-#: includes/admin/class-wc-pos-admin-assets.php:142
+#: includes/admin/class-pos-host-admin-assets.php:142
 msgid "Select an option&hellip;"
 msgstr "Επιλέξτε&hellip;"
 
-#: includes/admin/class-wc-pos-admin-assets.php:143
+#: includes/admin/class-pos-host-admin-assets.php:143
 #, fuzzy
 msgid "Please enter in a valid email address."
 msgstr "Πληκτρολογήστε μια έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου."
 
-#: includes/admin/class-wc-pos-admin-assets.php:144
+#: includes/admin/class-pos-host-admin-assets.php:144
 #, fuzzy
 msgid "Please enter in a valid phone number."
 msgstr "Πληκτρολογήστε έναν έγκυρο αριθμό τηλεφώνου."
 
-#: includes/admin/class-wc-pos-admin-assets.php:145
+#: includes/admin/class-pos-host-admin-assets.php:145
 #, fuzzy
 msgid "Please enter in a valid fax number."
 msgstr "Πληκτρολογήστε έναν έγκυρο αριθμό φαξ."
 
-#: includes/admin/class-wc-pos-admin-assets.php:146
+#: includes/admin/class-pos-host-admin-assets.php:146
 #, fuzzy
 msgid "Please enter in a valid URL."
 msgstr "Πληκτρολογήστε σε μια έγκυρη διεύθυνση URL."
 
-#: includes/admin/class-wc-pos-admin-assets.php:147
+#: includes/admin/class-pos-host-admin-assets.php:147
 #, fuzzy
 msgid "Are you sure you want to fill out the fields from the store address?"
 msgstr ""
 "Είστε βέβαιοι ότι θέλετε να συμπληρώσετε τα πεδία από τη διεύθυνση του "
 "καταστήματος;"
 
-#: includes/admin/class-wc-pos-admin-assets.php:158
+#: includes/admin/class-pos-host-admin-assets.php:158
 #, fuzzy
 msgid ""
 "Are you sure you want to delete all tiles in this grid? This cannot be "
@@ -2918,110 +2918,110 @@ msgstr ""
 "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα πλακίδια σε αυτό το πλέγμα; "
 "Αυτό δεν μπορεί να αναιρεθεί."
 
-#: includes/admin/class-wc-pos-admin-assets.php:159
+#: includes/admin/class-pos-host-admin-assets.php:159
 #, fuzzy
 msgid "Are you sure you want to delete this tile? This cannot be undone."
 msgstr ""
 "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το πλακίδιο; Αυτό δεν μπορεί να "
 "αναιρεθεί."
 
-#: includes/admin/class-wc-pos-admin-assets.php:171
+#: includes/admin/class-pos-host-admin-assets.php:171
 #, fuzzy
 msgid "The field “Receipt Name” cannot be empty."
 msgstr "Το πεδίο \"Όνομα Παραλαβής\" δεν μπορεί να είναι κενό."
 
-#: includes/admin/class-wc-pos-admin-assets.php:172
+#: includes/admin/class-pos-host-admin-assets.php:172
 #, fuzzy
 msgid "The field “Receipt Width” cannot be empty."
 msgstr "Το πεδίο \"Πλάτος παραλαβής\" δεν μπορεί να είναι κενό."
 
-#: includes/admin/class-wc-pos-admin-assets.php:173
+#: includes/admin/class-pos-host-admin-assets.php:173
 #, fuzzy
 msgid "The field “Receipt Width” cannot be a negative value."
 msgstr "Το πεδίο \"Πλάτος Παραλαβής\" δεν μπορεί να είναι αρνητική τιμή."
 
-#: includes/admin/class-wc-pos-admin-assets.php:184
+#: includes/admin/class-pos-host-admin-assets.php:184
 #, fuzzy
 msgid "Are you sure you want to remove the selected items?"
 msgstr "Είστε βέβαιοι ότι θέλετε να καταργήσετε τα επιλεγμένα στοιχεία;"
 
-#: includes/admin/class-wc-pos-admin-assets.php:185,
+#: includes/admin/class-pos-host-admin-assets.php:185,
 #: includes/admin/meta-boxes/views/html-grid-tiles-panel.php:107
 msgid "Search for a category&hellip;"
 msgstr "Αναζήτηση κατηγορίας & hellip;"
 
-#: includes/admin/class-wc-pos-admin-assets.php:196,
+#: includes/admin/class-pos-host-admin-assets.php:196,
 #: includes/admin/settings/views/html-admin-page-register-denominations.php:38
 msgid "Coin"
 msgstr "Νομίσματα"
 
-#: includes/admin/class-wc-pos-admin-assets.php:197,
+#: includes/admin/class-pos-host-admin-assets.php:197,
 #: includes/admin/views/html-admin-receipt-customize-section-logo.php:24,
 #: includes/admin/settings/views/html-admin-page-register-denominations.php:44
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: includes/admin/class-wc-pos-admin-menus.php:52,
-#: includes/admin/class-wc-pos-admin-menus.php:53
+#: includes/admin/class-pos-host-admin-menus.php:52,
+#: includes/admin/class-pos-host-admin-menus.php:53
 #, fuzzy
 msgid "Barcodes"
 msgstr "Barcodes"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:108
+#: includes/admin/class-pos-host-admin-meta-boxes.php:108
 #, fuzzy
 msgid "Register data"
 msgstr "Καταχώρηση δεδομένων"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:109
+#: includes/admin/class-pos-host-admin-meta-boxes.php:109
 #, fuzzy
 msgid "Register actions"
 msgstr "Καταγραφή ενεργειών"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:113
+#: includes/admin/class-pos-host-admin-meta-boxes.php:113
 #, fuzzy
 msgid "Outlet data"
 msgstr "Δεδομένα εξόδου"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:114
+#: includes/admin/class-pos-host-admin-meta-boxes.php:114
 #, fuzzy
 msgid "Outlet actions"
 msgstr "Δράσεις εξόδου"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:118
+#: includes/admin/class-pos-host-admin-meta-boxes.php:118
 #, fuzzy
 msgid "Tile options"
 msgstr "Επιλογές πλακιδίων"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:119,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-grids.php:93,
-#: includes/admin/settings/wc-pos-settings-tiles.php:25
+#: includes/admin/class-pos-host-admin-meta-boxes.php:119,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-grids.php:93,
+#: includes/admin/settings/pos-host-settings-tiles.php:25
 msgid "Tiles"
 msgstr "Πλήκτρα"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:120
+#: includes/admin/class-pos-host-admin-meta-boxes.php:120
 #, fuzzy
 msgid "Grid actions"
 msgstr "Ενέργειες πλέγματος"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:125
+#: includes/admin/class-pos-host-admin-meta-boxes.php:125
 #, fuzzy
 msgid "Product grids"
 msgstr "Πλέγματα προϊόντων"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:310
+#: includes/admin/class-pos-host-admin-meta-boxes.php:310
 msgid "Move to Trash"
 msgstr "Μετακίνηση στον  Κάδο απορριμμάτων"
 
-#: includes/admin/class-wc-pos-admin-meta-boxes.php:310
+#: includes/admin/class-pos-host-admin-meta-boxes.php:310
 msgid "Delete Permanently"
 msgstr "Οριστική Διαγραφή"
 
-#: includes/admin/class-wc-pos-admin-notices.php:111
+#: includes/admin/class-pos-host-admin-notices.php:111
 #, fuzzy
 msgid "You don&#8217;t have permission to do this."
 msgstr "Δεν έχετε #8217 άδεια για να το κάνετε αυτό."
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:58
+#: includes/admin/class-pos-host-admin-orders-page.php:58
 #, fuzzy
 msgid ""
 "<span class=\"order-type tips\" data-tip=\"Order Type\">Order Type</span>"
@@ -3029,151 +3029,151 @@ msgstr ""
 "<span class=\"order-type tips\" data-tip=\"Order Type\">Τύπος Παραγγελίας</"
 "span>"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:83
+#: includes/admin/class-pos-host-admin-orders-page.php:83
 #, fuzzy
 msgid "<span class=\"order-type-web tips\" data-tip=\"Website\"><span>"
 msgstr "<span class=\"order-type-web tips\" data-tip=\"Website\"><span></span>"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:85
+#: includes/admin/class-pos-host-admin-orders-page.php:85
 #, fuzzy
 msgid "<span class=\"order-type-staff tips\" data-tip=\"Manual\"><span>"
 msgstr ""
 "<span class=\"order-type-staff tips\" data-tip=\"Manual\"><span></span>"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:89
+#: includes/admin/class-pos-host-admin-orders-page.php:89
 #, fuzzy
 msgid "<span class=\"order-type-pos tips\" data-tip=\"Point of Sale\"><span>"
 msgstr ""
 "<span class=\"order-type-pos tips\" data-tip=\"Point of Sale\"><span></span>"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:108
+#: includes/admin/class-pos-host-admin-orders-page.php:108
 msgid "All types"
 msgstr "Όλοι οι τύποι"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:109
+#: includes/admin/class-pos-host-admin-orders-page.php:109
 msgid "Online"
 msgstr "Δημοσιευμένα"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:110,
-#: includes/admin/class-wc-pos-admin.php:145,
-#: includes/admin/class-wc-pos-admin.php:637
+#: includes/admin/class-pos-host-admin-orders-page.php:110,
+#: includes/admin/class-pos-host-admin.php:145,
+#: includes/admin/class-pos-host-admin.php:637
 msgid "POS"
 msgstr "POS"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:129,
-#: includes/admin/class-wc-pos-admin.php:647,
-#: includes/admin/class-wc-pos-admin.php:650
+#: includes/admin/class-pos-host-admin-orders-page.php:129,
+#: includes/admin/class-pos-host-admin.php:647,
+#: includes/admin/class-pos-host-admin.php:650
 #, fuzzy
 msgid "All registers"
 msgstr "Όλα τα μητρώα"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:149
+#: includes/admin/class-pos-host-admin-orders-page.php:149
 #, fuzzy
 msgid "All outlets"
 msgstr "Όλα τα καταστήματα"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:184
+#: includes/admin/class-pos-host-admin-orders-page.php:184
 msgid "Register:"
 msgstr "Εγγραφή:"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:188
+#: includes/admin/class-pos-host-admin-orders-page.php:188
 #, fuzzy
 msgid "Cashier:"
 msgstr "Ταμίας"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:191
+#: includes/admin/class-pos-host-admin-orders-page.php:191
 msgid "Total:"
 msgstr "Σύνολο:"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:194
+#: includes/admin/class-pos-host-admin-orders-page.php:194
 #, fuzzy
 msgid "Tendered:"
 msgstr "Δημοπρατηθεί:"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:198
+#: includes/admin/class-pos-host-admin-orders-page.php:198
 #, fuzzy
 msgid "Change:"
 msgstr "Αλλαγή"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:203
+#: includes/admin/class-pos-host-admin-orders-page.php:203
 #, fuzzy
 msgid "Amount Due:"
 msgstr "Οφειλόμενο ποσό"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:207
+#: includes/admin/class-pos-host-admin-orders-page.php:207
 msgid "Order #:"
 msgstr "# Παραγγελία:"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:221
+#: includes/admin/class-pos-host-admin-orders-page.php:221
 #, fuzzy
 msgid "Discount Reason:"
 msgstr "Λόγος έκπτωσης:"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:232
+#: includes/admin/class-pos-host-admin-orders-page.php:232
 #, fuzzy
 msgid "View Receipt"
 msgstr "Προβολή παραλαβής"
 
-#: includes/admin/class-wc-pos-admin-orders-page.php:234,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:98,
+#: includes/admin/class-pos-host-admin-orders-page.php:234,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:98,
 #: includes/admin/meta-boxes/views/html-register-options-end-of-sale.php:17
 msgid "Print Receipt"
 msgstr "Εκτύπωση απόδειξης"
 
-#: includes/admin/class-wc-pos-admin-post-types.php:159
+#: includes/admin/class-pos-host-admin-post-types.php:159
 #, fuzzy
 msgid "Register Updated."
 msgstr "Εγγραφή Ενημέρωση."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:160
+#: includes/admin/class-pos-host-admin-post-types.php:160
 #, fuzzy
 msgid "Register Created."
 msgstr "Εγγραφή Δημιουργήθηκε."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:166
+#: includes/admin/class-pos-host-admin-post-types.php:166
 #, fuzzy
 msgid "Outlet Updated."
 msgstr "Ενημέρωση εξόδου."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:167
+#: includes/admin/class-pos-host-admin-post-types.php:167
 #, fuzzy
 msgid "Outlet Created."
 msgstr "Δημιουργήθηκε."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:173
+#: includes/admin/class-pos-host-admin-post-types.php:173
 #, fuzzy
 msgid "Grid Updated."
 msgstr "Ενημερώθηκε το πλέγμα."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:174
+#: includes/admin/class-pos-host-admin-post-types.php:174
 #, fuzzy
 msgid "Grid Created."
 msgstr "Δημιουργήθηκε πλέγμα."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:202
+#: includes/admin/class-pos-host-admin-post-types.php:202
 #, fuzzy
 msgid "Register name"
 msgstr "Όνομα καταχώρησης"
 
-#: includes/admin/class-wc-pos-admin-post-types.php:205
+#: includes/admin/class-pos-host-admin-post-types.php:205
 #, fuzzy
 msgid "Outlet name"
 msgstr "Όνομα εξόδου"
 
-#: includes/admin/class-wc-pos-admin-post-types.php:208
+#: includes/admin/class-pos-host-admin-post-types.php:208
 #, fuzzy
 msgid "Grid name"
 msgstr "Όνομα πλέγματος"
 
 #. translators: %s Display name
-#: includes/admin/class-wc-pos-admin-post-types.php:270
+#: includes/admin/class-pos-host-admin-post-types.php:270
 #, fuzzy
 msgid "This register is opened by %s and cannot be deleted at the moment."
 msgstr ""
 "Αυτό το αρχείο καταχωρήσεων ανοίγει από το %s και δεν είναι δυνατή η "
 "διαγραφή του αυτήν τη στιγμή."
 
-#: includes/admin/class-wc-pos-admin-post-types.php:274
+#: includes/admin/class-pos-host-admin-post-types.php:274
 #, fuzzy
 msgid ""
 "This register is opened and cannot be deleted at the moment. Please make "
@@ -3182,159 +3182,159 @@ msgstr ""
 "Αυτό το μητρώο ανοίγει και δεν είναι δυνατό να διαγραφεί αυτήν τη στιγμή. "
 "Βεβαιωθείτε ότι έχετε κλείσει το μητρώο για να μπορέσετε να το διαγράψετε."
 
-#: includes/admin/class-wc-pos-admin-settings.php:76
+#: includes/admin/class-pos-host-admin-settings.php:76
 msgid "Your settings have been saved."
 msgstr "Οι ρυθμίσεις σας έχουν αποθηκευτεί."
 
-#: includes/admin/class-wc-pos-admin.php:96,
+#: includes/admin/class-pos-host-admin.php:96,
 #: includes/admin/views/html-quick-edit-product.php:26
 #, fuzzy
 msgid "POS &amp; Online"
 msgstr "POS και σε απευθείας σύνδεση"
 
-#: includes/admin/class-wc-pos-admin.php:102
+#: includes/admin/class-pos-host-admin.php:102
 #, fuzzy
 msgid "POS visibility:"
 msgstr "POS ορατότητα:"
 
-#: includes/admin/class-wc-pos-admin.php:118,
-#: includes/admin/settings/wc-pos-settings-advanced.php:56
+#: includes/admin/class-pos-host-admin.php:118,
+#: includes/admin/settings/pos-host-settings-advanced.php:56
 msgid "OK"
 msgstr "καλά"
 
-#: includes/admin/class-wc-pos-admin.php:148
+#: includes/admin/class-pos-host-admin.php:148
 #, fuzzy
 msgid "Sales by register"
 msgstr "Πωλήσεις ανά μητρώο"
 
-#: includes/admin/class-wc-pos-admin.php:154
+#: includes/admin/class-pos-host-admin.php:154
 #, fuzzy
 msgid "Sales by outlet"
 msgstr "Πωλήσεις ανά κατάστημα"
 
-#: includes/admin/class-wc-pos-admin.php:160
+#: includes/admin/class-pos-host-admin.php:160
 #, fuzzy
 msgid "Sales by cashier"
 msgstr "Πωλήσεις ανά ταμείο"
 
-#: includes/admin/class-wc-pos-admin.php:249
+#: includes/admin/class-pos-host-admin.php:249
 #, fuzzy
 msgid "Change Card Number"
 msgstr "Αλλαγή αριθμού κάρτας"
 
-#: includes/admin/class-wc-pos-admin.php:310
+#: includes/admin/class-pos-host-admin.php:310
 #, fuzzy
 msgid "Assigned Outlets"
 msgstr "Εκχωρημένες έξοδοι"
 
-#: includes/admin/class-wc-pos-admin.php:316
+#: includes/admin/class-pos-host-admin.php:316
 #, fuzzy
 msgid "Ensure the user is logged out before changing the outlet."
 msgstr "Βεβαιωθείτε ότι ο χρήστης έχει αποσυνδεθεί πριν αλλάξετε την έξοδο."
 
-#: includes/admin/class-wc-pos-admin.php:334
+#: includes/admin/class-pos-host-admin.php:334
 msgid "Card Number"
 msgstr "Αριθμός Κάρτας"
 
-#: includes/admin/class-wc-pos-admin.php:340
+#: includes/admin/class-pos-host-admin.php:340
 #, fuzzy
 msgid "Tender Orders"
 msgstr "Παραγγελίες Προσφορών"
 
-#: includes/admin/class-wc-pos-admin.php:359
+#: includes/admin/class-pos-host-admin.php:359
 msgid "View Settings"
 msgstr "Ρυθμίσεις Προβολής"
 
-#: includes/admin/class-wc-pos-admin.php:375
+#: includes/admin/class-pos-host-admin.php:375
 msgid "View Documentation"
 msgstr "Διαβάστε την τεκμηρίωση"
 
-#: includes/admin/class-wc-pos-admin.php:375
+#: includes/admin/class-pos-host-admin.php:375
 msgid "Docs"
 msgstr "Έγγραφα"
 
-#: includes/admin/class-wc-pos-admin.php:376
+#: includes/admin/class-pos-host-admin.php:376
 #, fuzzy
 msgid "Visit Support"
 msgstr "Επισκεφθείτε την υποστήριξη"
 
-#: includes/admin/class-wc-pos-admin.php:376
+#: includes/admin/class-pos-host-admin.php:376
 msgid "Support"
 msgstr "Υποστήριξη"
 
-#: includes/admin/class-wc-pos-admin.php:446,
+#: includes/admin/class-pos-host-admin.php:446,
 #: includes/admin/meta-boxes/views/html-register-options-general.php:44
 #, fuzzy
 msgid "Product Grid"
 msgstr "Πλέγμα προϊόντος"
 
 #. translators: %s grid name
-#: includes/admin/class-wc-pos-admin.php:487
+#: includes/admin/class-pos-host-admin.php:487
 #, fuzzy
 msgid "Add to %s"
 msgstr "Προσθήκη στο %s"
 
-#: includes/api/class-wc-pos-api-orders.php:153
+#: includes/api/class-pos-host-api-orders.php:153
 #, fuzzy
 msgid "You do not have permission to create orders."
 msgstr "Δεν έχετε δικαίωμα δημιουργίας παραγγελιών."
 
-#: includes/api/class-wc-pos-api-orders.php:169
+#: includes/api/class-pos-host-api-orders.php:169
 #, fuzzy
 msgid "Guest checkout is not allowed."
 msgstr "Η ολοκλήρωση της αναχώρησης επισκεπτών δεν επιτρέπεται."
 
-#: includes/api/class-wc-pos-api-orders.php:177
+#: includes/api/class-pos-host-api-orders.php:177
 #, fuzzy
 msgid "Customer ID is invalid."
 msgstr "Το Αναγνωριστικό πελάτη δεν είναι έγκυρο."
 
-#: includes/api/class-wc-pos-api-orders.php:182
+#: includes/api/class-pos-host-api-orders.php:182
 msgid "Customer ID does not belong to this site."
 msgstr "Το ID πελάτη δεν ανήκει σε αυτόν τον ιστότοπο."
 
-#: includes/api/class-wc-pos-api-orders.php:280
+#: includes/api/class-pos-host-api-orders.php:280
 msgid "Order item ID provided is not associated with order."
 msgstr ""
 "Ο αριθμός αναγνώρισης του προϊόντος της παραγγελίας που εισάγατε, δεν "
 "σχετίζεται με την παραγγελία."
 
-#: includes/api/class-wc-pos-api-orders.php:345
+#: includes/api/class-pos-host-api-orders.php:345
 msgid "Coupon code is required."
 msgstr "Ο κωδικός έκπτωσης απαιτείται."
 
 #. translators: %1$d: points redeemed. %2$s: points reward label. %3$s: discount amount.
-#: includes/api/class-wc-pos-api-orders.php:383
+#: includes/api/class-pos-host-api-orders.php:383
 msgid "%1$d %2$s redeemed for a %3$s discount."
 msgstr ""
 "<ph id=\"mtc_1\" equiv-text=\"base64:JTEkZA==\"/> <ph id=\"mtc_2\" equiv-"
 "text=\"base64:JTIkcw==\"/> εξαργυρώθηκαν για <ph id=\"mtc_3\" equiv-text="
 "\"base64:JTMkcw==\"/> έκπτωση."
 
-#: includes/api/class-wc-pos-api.php:68
+#: includes/api/class-pos-host-api.php:68
 #, fuzzy
 msgid "User not authorized to access WooCommerce POS"
 msgstr ""
 "Χρήστης δεν είναι εξουσιοδοτημένος να έχει πρόσβαση στο WooCommerce POS"
 
-#: includes/api/class-wc-pos-api.php:353, includes/api/class-wc-pos-api.php:407
+#: includes/api/class-pos-host-api.php:353, includes/api/class-pos-host-api.php:407
 msgid "Via"
 msgstr "Μέσω"
 
-#: includes/api/class-wc-pos-api.php:359, includes/api/class-wc-pos-api.php:360
+#: includes/api/class-pos-host-api.php:359, includes/api/class-pos-host-api.php:360
 msgid "Unpublished"
 msgstr "Αδημοσίευτο"
 
-#: includes/api/class-wc-pos-api.php:362
+#: includes/api/class-pos-host-api.php:362
 msgid "Y/m/d g:i:s A"
 msgstr "Έτος/μήνας/ημέρα g:i:s A"
 
-#: includes/api/class-wc-pos-api.php:363
+#: includes/api/class-pos-host-api.php:363
 msgid "Y/m/d"
 msgstr "Έτος/μήνας/ημέρα"
 
 #. translators:  %d notes count
-#: includes/api/class-wc-pos-api.php:396
+#: includes/api/class-pos-host-api.php:396
 #, fuzzy
 msgid "plus %d other note"
 msgid_plural "plus %d other notes"
@@ -3342,44 +3342,44 @@ msgstr[0] "συν %d άλλη σημείωση"
 msgstr[1] "συν %d άλλες σημειώσεις"
 
 #. translators:  %d notes count
-#: includes/api/class-wc-pos-api.php:399
+#: includes/api/class-pos-host-api.php:399
 #, fuzzy
 msgid "%d note"
 msgid_plural "%d notes"
 msgstr[0] "%d σημείωση"
 msgstr[1] "%d σημειώσεις"
 
-#: includes/data-stores/class-wc-pos-grid-data-store-cpt.php:82
+#: includes/data-stores/class-pos-host-grid-data-store-cpt.php:82
 #, fuzzy
 msgid "Invalid grid."
 msgstr "Το πλέγμα δεν είναι έγκυρο."
 
-#: includes/data-stores/class-wc-pos-outlet-data-store-cpt.php:82
+#: includes/data-stores/class-pos-host-outlet-data-store-cpt.php:82
 #, fuzzy
 msgid "Invalid outlet."
 msgstr "Η πρίζα δεν είναι έγκυρη."
 
-#: includes/data-stores/class-wc-pos-receipt-data-store-cpt.php:82
+#: includes/data-stores/class-pos-host-receipt-data-store-cpt.php:82
 #, fuzzy
 msgid "Invalid receipt."
 msgstr "Η απόδειξη δεν είναι έγκυρη."
 
-#: includes/data-stores/class-wc-pos-register-data-store-cpt.php:82
+#: includes/data-stores/class-pos-host-register-data-store-cpt.php:82
 #, fuzzy
 msgid "Invalid register."
 msgstr "Το μητρώο δεν είναι έγκυρο."
 
-#: includes/data-stores/class-wc-pos-session-data-store-cpt.php:88
+#: includes/data-stores/class-pos-host-session-data-store-cpt.php:88
 #, fuzzy
 msgid "Invalid session."
 msgstr "Η περίοδος λειτουργίας δεν είναι έγκυρη."
 
-#: includes/emails/class-wc-pos-email-customer-new-account.php:61
+#: includes/emails/class-pos-host-email-customer-new-account.php:61
 #, fuzzy
 msgid "New POS account"
 msgstr "Νέος λογαριασμός POS"
 
-#: includes/emails/class-wc-pos-email-customer-new-account.php:62
+#: includes/emails/class-pos-host-email-customer-new-account.php:62
 #, fuzzy
 msgid ""
 "New customer accocunt emails are sent to the customer when a new account is "
@@ -3388,26 +3388,26 @@ msgstr ""
 "Τα νέα email accocunt πελατών αποστέλλονται στον πελάτη όταν δημιουργείται "
 "ένας νέος λογαριασμός για αυτούς μέσω του σημείου πώλησης."
 
-#: includes/emails/class-wc-pos-email-customer-new-account.php:76
+#: includes/emails/class-pos-host-email-customer-new-account.php:76
 msgid "Your {site_title} account has been created!"
 msgstr "Ο λογαριασμός σας στο {site_title} έχει δημιουργηθεί!"
 
-#: includes/emails/class-wc-pos-email-customer-new-account.php:85
+#: includes/emails/class-pos-host-email-customer-new-account.php:85
 msgid "Welcome to {site_title}"
 msgstr "Καλώς ήλθατε στο {site_title}"
 
-#: includes/emails/class-wc-pos-email-customer-new-account.php:165
+#: includes/emails/class-pos-host-email-customer-new-account.php:165
 msgid "We look forward to seeing you soon."
 msgstr "Ανυπομονούμε να σας δούμε σύντομα."
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:34,
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:62,
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:72
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:34,
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:62,
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:72
 #, fuzzy
 msgid "End of Sale Report"
 msgstr "Αναφορά τέλους πώλησης"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:35
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:35
 #, fuzzy
 msgid ""
 "End of Sale reports are sent to chosen recipient(s) when a register is "
@@ -3416,90 +3416,90 @@ msgstr ""
 "Οι αναφορές τέλους πώλησης αποστέλλονται σε επιλεγμένους παραλήπτες όταν "
 "κλείνει ένα αρχείο καταχωρήσεων."
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:151
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:151
 #, fuzzy
 msgid "Congratulations on the sales"
 msgstr "Συγχαρητήρια για τις πωλήσεις"
 
 #. translators: %s: list of placeholders
 #. translators: %s: list of placeholders
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:159,
-#: includes/emails/class-wc-pos-email-new-order.php:158
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:159,
+#: includes/emails/class-pos-host-email-new-order.php:158
 msgid "Available placeholders: %s"
 msgstr "Διαθέσιμα σύμβολα υποκατάστασης: %s"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:162,
-#: includes/emails/class-wc-pos-email-new-order.php:162,
-#: includes/gateways/class-wc-pos-gateway-cash.php:93,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:61,
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:47
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:162,
+#: includes/emails/class-pos-host-email-new-order.php:162,
+#: includes/gateways/class-pos-host-gateway-cash.php:93,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:61,
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:47
 msgid "Enable/Disable"
 msgstr "Ενεργοποίηση/Απενεργοποίηση"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:164,
-#: includes/emails/class-wc-pos-email-new-order.php:164
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:164,
+#: includes/emails/class-pos-host-email-new-order.php:164
 msgid "Enable this email notification"
 msgstr "Ενεργοποίηση αυτής της ειδοποίησης email"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:168,
-#: includes/emails/class-wc-pos-email-new-order.php:168
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:168,
+#: includes/emails/class-pos-host-email-new-order.php:168
 msgid "Recipient(s)"
 msgstr "Παραλήπτης (ες)"
 
 #. translators: %s: WP admin email
 #. translators: %s: WP admin email
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:171,
-#: includes/emails/class-wc-pos-email-new-order.php:171
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:171,
+#: includes/emails/class-pos-host-email-new-order.php:171
 msgid "Enter recipients (comma separated) for this email. Defaults to %s."
 msgstr ""
 "Εισάγετε τους παραλήπτες (διαχωρισμένους με κόμμα) για αυτό το email. "
 "Προεπιλεγμένη τιμή %s."
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:177,
-#: includes/emails/class-wc-pos-email-new-order.php:177
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:177,
+#: includes/emails/class-pos-host-email-new-order.php:177
 msgid "Subject"
 msgstr "Θέμα"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:185,
-#: includes/emails/class-wc-pos-email-new-order.php:185
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:185,
+#: includes/emails/class-pos-host-email-new-order.php:185
 msgid "Email heading"
 msgstr "Επικεφαλίδα Email"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:193,
-#: includes/emails/class-wc-pos-email-new-order.php:193
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:193,
+#: includes/emails/class-pos-host-email-new-order.php:193
 msgid "Additional content"
 msgstr "Πρόσθετο περιεχόμενο"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:194,
-#: includes/emails/class-wc-pos-email-new-order.php:194
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:194,
+#: includes/emails/class-pos-host-email-new-order.php:194
 msgid "Text to appear below the main email content."
 msgstr ""
 "Κείμενο που θα εμφανιστεί κάτω από το κύριο περιεχόμενο ηλεκτρονικού "
 "ταχυδρομείου."
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:196,
-#: includes/emails/class-wc-pos-email-new-order.php:196
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:196,
+#: includes/emails/class-pos-host-email-new-order.php:196
 msgid "N/A"
 msgstr "Μη Διαθέσιμο"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:202,
-#: includes/emails/class-wc-pos-email-new-order.php:202
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:202,
+#: includes/emails/class-pos-host-email-new-order.php:202
 msgid "Email type"
 msgstr "Τύπος Email"
 
-#: includes/emails/class-wc-pos-email-end-of-sale-report.php:204,
-#: includes/emails/class-wc-pos-email-new-order.php:204
+#: includes/emails/class-pos-host-email-end-of-sale-report.php:204,
+#: includes/emails/class-pos-host-email-new-order.php:204
 msgid "Choose which format of email to send."
 msgstr ""
 "Επιλέξτε τη μορφή του μηνύματος ηλεκτρονικού ταχυδρομείου που θέλετε να "
 "στείλετε."
 
-#: includes/emails/class-wc-pos-email-new-order.php:29
+#: includes/emails/class-pos-host-email-new-order.php:29
 #, fuzzy
 msgid "New POS order"
 msgstr "Νέα παραγγελία POS"
 
-#: includes/emails/class-wc-pos-email-new-order.php:30
+#: includes/emails/class-pos-host-email-new-order.php:30
 #, fuzzy
 msgid ""
 "New order emails are sent to chosen recipient(s) when a new Point of Sale "
@@ -3508,92 +3508,92 @@ msgstr ""
 "Τα νέα μηνύματα ηλεκτρονικού ταχυδρομείου παραγγελιών αποστέλλονται σε "
 "επιλεγμένους παραλήπτες όταν λαμβάνεται μια νέα παραγγελία σημείου πώλησης."
 
-#: includes/emails/class-wc-pos-email-new-order.php:91
+#: includes/emails/class-pos-host-email-new-order.php:91
 msgid "[{site_title}]: New order #{order_number}"
 msgstr "[{site_title}]: Νέα παραγγελία #{order_number}"
 
-#: includes/emails/class-wc-pos-email-new-order.php:100
+#: includes/emails/class-pos-host-email-new-order.php:100
 msgid "New Order: #{order_number}"
 msgstr "Νέα παραγγελία: # {order_number}"
 
-#: includes/emails/class-wc-pos-email-new-order.php:148
+#: includes/emails/class-pos-host-email-new-order.php:148
 msgid "Congratulations on the sale!"
 msgstr "Συγχαρητήρια για την πώληση"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:24
+#: includes/gateways/class-pos-host-gateway-cash.php:24
 #, fuzzy
 msgid "Have your customers pay with cash (or by other means)."
 msgstr "Έχετε τους πελάτες σας πληρώνουν με μετρητά (ή με άλλα μέσα)."
 
 #. translators: %1$s shipping method name.
-#: includes/gateways/class-wc-pos-gateway-cash.php:66
+#: includes/gateways/class-pos-host-gateway-cash.php:66
 #, fuzzy
 msgid "Any &quot;%1$s&quot; method"
 msgstr "Οποιαδήποτε μέθοδος &quot;%1$s&quot;"
 
 #. translators: %1$s shipping method title, %2$s shipping method id.
-#: includes/gateways/class-wc-pos-gateway-cash.php:81
+#: includes/gateways/class-pos-host-gateway-cash.php:81
 #, fuzzy
 msgid "%1$s (#%2$s)"
 msgstr "%1$s %2$s"
 
 #. translators: %1$s zone name, %2$s shipping method instance name.
-#: includes/gateways/class-wc-pos-gateway-cash.php:84
+#: includes/gateways/class-pos-host-gateway-cash.php:84
 msgid "%1$s &ndash; %2$s"
 msgstr "%1$s &ndash; %2$s"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:84
+#: includes/gateways/class-pos-host-gateway-cash.php:84
 #, fuzzy
 msgid "Other locations"
 msgstr "Άλλες τοποθεσίες"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:94
+#: includes/gateways/class-pos-host-gateway-cash.php:94
 #, fuzzy
 msgid "Enable Cash for POS"
 msgstr "Ενεργοποίηση μετρητών για POS"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:100,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:68,
+#: includes/gateways/class-pos-host-gateway-cash.php:100,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:68,
 #: includes/admin/views/html-admin-receipt-customize-section-general.php:22,
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:53
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:53
 msgid "Title"
 msgstr "Τίτλος"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:102,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:70
+#: includes/gateways/class-pos-host-gateway-cash.php:102,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:70
 msgid "Payment method description that the customer will see on your checkout."
 msgstr ""
 "Περιγραφή τρόπου πληρωμής όπως εμφανίζεται στον πελάτη κατά την πληρωμή."
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:109,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:77
+#: includes/gateways/class-pos-host-gateway-cash.php:109,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:77
 msgid "Payment method description that the customer will see on your website."
 msgstr ""
 "Περιγραφή τρόπου πληρωμής όπως εμφανίζεται στον πελάτη στην ιστοσελίδα σας."
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:110
+#: includes/gateways/class-pos-host-gateway-cash.php:110
 #, fuzzy
 msgid "Pay with cash."
 msgstr "Πλήρωσε με μετρητά."
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:114
+#: includes/gateways/class-pos-host-gateway-cash.php:114
 msgid "Instructions"
 msgstr "Οδηγίες"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:116
+#: includes/gateways/class-pos-host-gateway-cash.php:116
 msgid "Instructions that will be added to the thank you page."
 msgstr "Οδηγίες όπως εμφανίζονται στη σελίδα ευχαριστηρίων."
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:117
+#: includes/gateways/class-pos-host-gateway-cash.php:117
 #, fuzzy
 msgid "Thank you for your purchase."
 msgstr "Σας ευχαριστώ για την αγορά σας."
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:121
+#: includes/gateways/class-pos-host-gateway-cash.php:121
 msgid "Enable for shipping methods"
 msgstr "Ενεργοποίηστε για τις ακόλουθες μεθόδους αποστολής"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:126
+#: includes/gateways/class-pos-host-gateway-cash.php:126
 #, fuzzy
 msgid ""
 "If the payment method is only available for certain methods, set it up here. "
@@ -3602,59 +3602,59 @@ msgstr ""
 "Εάν η μέθοδος πληρωμής είναι διαθέσιμη μόνο για ορισμένες μεθόδους, ρυθμίστε "
 "την εδώ. Αφήστε κενό για να ενεργοποιήσετε για όλες τις μεθόδους."
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:130
+#: includes/gateways/class-pos-host-gateway-cash.php:130
 msgid "Select shipping methods"
 msgstr "Διαλέξτε μεθόδους αποστολής"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:134
+#: includes/gateways/class-pos-host-gateway-cash.php:134
 #, fuzzy
 msgid "Accept for virtual orders"
 msgstr "Αποδοχή για εικονικές παραγγελίες"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:135
+#: includes/gateways/class-pos-host-gateway-cash.php:135
 #, fuzzy
 msgid "Accept only if the order is virtual"
 msgstr "Αποδοχή μόνο εάν η σειρά είναι εικονική"
 
-#: includes/gateways/class-wc-pos-gateway-cash.php:266,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:115
+#: includes/gateways/class-pos-host-gateway-cash.php:266,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:115
 msgid "Payment to be made upon delivery."
 msgstr "Η πληρωμή πρέπει να γίνει κατά την παράδοση."
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:50,
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:71
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:50,
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:71
 #, fuzzy
 msgid "Chip & PIN"
 msgstr "Τσιπ και καρφίτσα"
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:51
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:51
 #, fuzzy
 msgid "Replace this with a description for the Chip & PIN payment method."
 msgstr "Αντικαταστήστε το με μια περιγραφή για τη μέθοδο πληρωμής Chip & PIN."
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:62
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:62
 #, fuzzy
 msgid "Enable Chip & PIN"
 msgstr "Ενεργοποίηση chip & PIN"
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:78
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:78
 #, fuzzy
 msgid "Pay via Chip & PIN."
 msgstr "Πληρώστε μέσω Chip & PIN."
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:84
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:84
 #, fuzzy
 msgid "Require reference number"
 msgstr "Απαίτηση αριθμού αναφοράς"
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:85
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:85
 #, fuzzy
 msgid "Check this box to make the reference number mandatory filed."
 msgstr ""
 "Επιλέξτε αυτό το πλαίσιο για να κάνετε τον αριθμό αναφοράς υποχρεωτικό "
 "αρχείο."
 
-#: includes/gateways/class-wc-pos-gateway-chip-and-pin.php:123
+#: includes/gateways/class-pos-host-gateway-chip-and-pin.php:123
 msgid "Success!"
 msgstr "Επιτυχία!"
 
@@ -3662,10 +3662,10 @@ msgstr "Επιτυχία!"
 #. translators: %s average sales
 #. translators: %s average sales
 #. translators: %s average sales
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:490,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:476,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:467,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:467
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:490,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:476,
+#: includes/reports/class-pos-host-report-sales-by-register.php:467,
+#: includes/reports/class-pos-host-report-sales-by-session.php:467
 msgid "%s average daily sales"
 msgstr "%s μέσες ημερήσιες πωλήσεις"
 
@@ -3673,23 +3673,23 @@ msgstr "%s μέσες ημερήσιες πωλήσεις"
 #. translators: %s average sales
 #. translators: %s average sales
 #. translators: %s average sales
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:495,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:481,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:472,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:472
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:495,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:481,
+#: includes/reports/class-pos-host-report-sales-by-register.php:472,
+#: includes/reports/class-pos-host-report-sales-by-session.php:472
 msgid "%s average monthly sales"
 msgstr "%s μέσες μηνιαίες πωλήσεις"
 
 #. translators: %s total sales
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:501
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:501
 #, fuzzy
 msgid "%s gross sales"
 msgstr "%s ακαθάριστες πωλήσεις"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:502,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:488,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:479,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:479
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:502,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:488,
+#: includes/reports/class-pos-host-report-sales-by-register.php:479,
+#: includes/reports/class-pos-host-report-sales-by-session.php:479
 msgid ""
 "This is the sum of the order totals after any refunds and including shipping "
 "and taxes."
@@ -3698,15 +3698,15 @@ msgstr ""
 "συμπεριλαμβανομένων των μεταφορικών και των φόρων."
 
 #. translators: %s net sales
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:508
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:508
 #, fuzzy
 msgid "%s net sales"
 msgstr "%s καθαρές πωλήσεις"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:509,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:495,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:486,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:486
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:509,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:495,
+#: includes/reports/class-pos-host-report-sales-by-register.php:486,
+#: includes/reports/class-pos-host-report-sales-by-session.php:486
 msgid ""
 "This is the sum of the order totals after any refunds and excluding shipping "
 "and taxes."
@@ -3717,17 +3717,17 @@ msgstr ""
 #. translators: %s saved sales
 #. translators: %s saved sales
 #. translators: %s saved sales
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:520,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:506,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:497
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:520,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:506,
+#: includes/reports/class-pos-host-report-sales-by-register.php:497
 #, fuzzy
 msgid "%s sales from this register for saved orders"
 msgstr "%s πωλήσεις από αυτό το μητρώο για αποθηκευμένες παραγγελίες"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:521,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:507,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:498,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:498
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:521,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:507,
+#: includes/reports/class-pos-host-report-sales-by-register.php:498,
+#: includes/reports/class-pos-host-report-sales-by-session.php:498
 #, fuzzy
 msgid ""
 "This is the sum of the saved order totals after any refunds and including "
@@ -3741,10 +3741,10 @@ msgstr ""
 #. translators: %s number of orders
 #. translators: %s number of orders
 #. translators: %s number of orders
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:527,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:513,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:504,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:504
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:527,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:513,
+#: includes/reports/class-pos-host-report-sales-by-register.php:504,
+#: includes/reports/class-pos-host-report-sales-by-session.php:504
 msgid "%s orders placed"
 msgstr "<ph id=\"mtc_1\" equiv-text=\"base64:JXM=\"/> παραγγελίες έγιναν"
 
@@ -3752,10 +3752,10 @@ msgstr "<ph id=\"mtc_1\" equiv-text=\"base64:JXM=\"/> παραγγελίες έ�
 #. translators: %s number of items
 #. translators: %s number of items
 #. translators: %s number of items
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:534,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:520,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:511,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:511
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:534,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:520,
+#: includes/reports/class-pos-host-report-sales-by-register.php:511,
+#: includes/reports/class-pos-host-report-sales-by-session.php:511
 #, fuzzy
 msgid "%s items purchased"
 msgstr "%s είδη που αγοράστηκαν"
@@ -3764,10 +3764,10 @@ msgstr "%s είδη που αγοράστηκαν"
 #. translators: %s total shipping
 #. translators: %s total shipping
 #. translators: %s total shipping
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:541,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:527,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:518,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:518
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:541,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:527,
+#: includes/reports/class-pos-host-report-sales-by-register.php:518,
+#: includes/reports/class-pos-host-report-sales-by-session.php:518
 #, fuzzy
 msgid "%s charged for shipping"
 msgstr "%s που χρεώνεται για αποστολή"
@@ -3776,10 +3776,10 @@ msgstr "%s που χρεώνεται για αποστολή"
 #. translators: %s total refunds
 #. translators: %s total refunds
 #. translators: %s total refunds
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:547,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:533,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:524,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:524
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:547,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:533,
+#: includes/reports/class-pos-host-report-sales-by-register.php:524,
+#: includes/reports/class-pos-host-report-sales-by-session.php:524
 #, fuzzy
 msgid "%s in refunds"
 msgstr "%s σε επιστροφές χρημάτων"
@@ -3788,81 +3788,81 @@ msgstr "%s σε επιστροφές χρημάτων"
 #. translators: %s total coupons
 #. translators: %s total coupons
 #. translators: %s total coupons
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:553,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:539,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:530,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:530
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:553,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:539,
+#: includes/reports/class-pos-host-report-sales-by-register.php:530,
+#: includes/reports/class-pos-host-report-sales-by-session.php:530
 msgid "%s worth of coupons used"
 msgstr ""
 "χρησιμοποιήθηκαν κουπόνια <ph id=\"mtc_1\" equiv-text=\"base64:JXM=\"/> αξίας"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:567,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:553,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:544,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:544
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:567,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:553,
+#: includes/reports/class-pos-host-report-sales-by-register.php:544,
+#: includes/reports/class-pos-host-report-sales-by-session.php:544
 msgid "Year"
 msgstr "Έτος"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:568,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:554,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:545,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:545
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:568,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:554,
+#: includes/reports/class-pos-host-report-sales-by-register.php:545,
+#: includes/reports/class-pos-host-report-sales-by-session.php:545
 msgid "Last Month"
 msgstr "Τον Τελευταίο Μήνα"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:569,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:555,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:546,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:546
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:569,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:555,
+#: includes/reports/class-pos-host-report-sales-by-register.php:546,
+#: includes/reports/class-pos-host-report-sales-by-session.php:546
 msgid "This Month"
 msgstr "Αυτόν το Μήνα"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:570,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:556,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:547,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:547
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:570,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:556,
+#: includes/reports/class-pos-host-report-sales-by-register.php:547,
+#: includes/reports/class-pos-host-report-sales-by-session.php:547
 msgid "Last 7 Days"
 msgstr "Τελευταίες 7 μέρες"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:607,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:593,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:584,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:584
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:607,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:593,
+#: includes/reports/class-pos-host-report-sales-by-register.php:584,
+#: includes/reports/class-pos-host-report-sales-by-session.php:584
 msgid "Showing reports for:"
 msgstr "Εμφάνισε εκθέσεις για:"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:653
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:653
 #, fuzzy
 msgid "Search Cashier"
 msgstr "Αναζήτηση Ταμείου"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:657
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:657
 #, fuzzy
 msgid "Search for a cashier&hellip;"
 msgstr "Αναζήτηση ενός ταμία&hellip?"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:658,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:632,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:629,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:629
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:658,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:632,
+#: includes/reports/class-pos-host-report-sales-by-register.php:629,
+#: includes/reports/class-pos-host-report-sales-by-session.php:629
 msgid "Show"
 msgstr "Εμφάνιση"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:704
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:704
 #, fuzzy
 msgid "Top cashiers"
 msgstr "Κορυφαία ταμίες"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:763,
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:825
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:763,
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:825
 #, fuzzy
 msgid "No cashiers found in range"
 msgstr "Δεν βρέθηκαν ταμίες στην περιοχή"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:768,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:732,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:724,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:724
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:768,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:732,
+#: includes/reports/class-pos-host-report-sales-by-register.php:724,
+#: includes/reports/class-pos-host-report-sales-by-session.php:724
 #, fuzzy
 msgid "Top Earners"
 msgstr "Κορυφαίοι μισθωτοί"
@@ -3871,10 +3871,10 @@ msgstr "Κορυφαίοι μισθωτοί"
 #. translators: $1$s total worth %2$d last number of days
 #. translators: %1$s total worth %2$d last number of days
 #. translators: %1$s total worth %2$d last number of days
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:950,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:905,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:893,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:893
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:950,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:905,
+#: includes/reports/class-pos-host-report-sales-by-register.php:893,
+#: includes/reports/class-pos-host-report-sales-by-session.php:893
 #, fuzzy
 msgid "Sold %1$s worth in the last %2$d days"
 msgstr "Πωλήθηκε αξίας %1$s τις τελευταίες %2$d ημέρες"
@@ -3883,222 +3883,222 @@ msgstr "Πωλήθηκε αξίας %1$s τις τελευταίες %2$d ημέ
 #. translators: $1$s number of orders %2$d last number of days
 #. translators: %1$d total number of orders %2$d last number of days
 #. translators: %1$d total number of orders %2$d last number of days
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:953,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:908,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:896,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:896
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:953,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:908,
+#: includes/reports/class-pos-host-report-sales-by-register.php:896,
+#: includes/reports/class-pos-host-report-sales-by-session.php:896
 #, fuzzy
 msgid "%1$d order placed in the last %2$d days"
 msgid_plural "%1$d orders placed in the last %2$d days"
 msgstr[0] "Παραγγελία %1$d που τοποθετήθηκε τις τελευταίες %2$d ημέρες"
 msgstr[1] "%1$d παραγγελίες που έγιναν τις τελευταίες %2$d ημέρες"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:973,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:928,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:916,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:916,
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:973,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:928,
+#: includes/reports/class-pos-host-report-sales-by-register.php:916,
+#: includes/reports/class-pos-host-report-sales-by-session.php:916,
 #: includes/views/html-print-receipt.php:522,
 #: includes/admin/views/html-admin-receipt-customize-preview.php:71
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:976,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:931,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:919,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:919
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:976,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:931,
+#: includes/reports/class-pos-host-report-sales-by-register.php:919,
+#: includes/reports/class-pos-host-report-sales-by-session.php:919
 msgid "Export CSV"
 msgstr "Εξαγωγή CSV"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1006
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1006
 #, fuzzy
 msgid "&larr; Choose a cashier to view stats"
 msgstr "&larr; Επιλέξτε έναν ταμία για να δείτε στατιστικά"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1054,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1009,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:997,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:997
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1054,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1009,
+#: includes/reports/class-pos-host-report-sales-by-register.php:997,
+#: includes/reports/class-pos-host-report-sales-by-session.php:997
 msgid "Number of items sold"
 msgstr "Αριθμός προϊόντων που πουλήθηκαν"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1062,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1017,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1005,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1005
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1062,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1017,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1005,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1005
 msgid "Number of orders"
 msgstr "Αριθμός παραγγελιών"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1070,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1025,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1013,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1013
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1070,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1025,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1013,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1013
 #, fuzzy
 msgid "Average sales amount"
 msgstr "Μέσο ποσό πωλήσεων"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1080,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1035,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1023,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1023
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1080,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1035,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1023,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1023
 msgid "Coupon amount"
 msgstr "Ποσό κουπονιού"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1090,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1045,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1033,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1033
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1090,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1045,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1033,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1033
 msgid "Refund amount"
 msgstr "Ποσό επιστροφής"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1100,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1055,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1043,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1043
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1100,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1055,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1043,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1043
 #, fuzzy
 msgid "Shipping amount"
 msgstr "Ποσό αποστολής"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1110,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1065,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1053,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1053
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1110,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1065,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1053,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1053
 #, fuzzy
 msgid "Gross Sales amount"
 msgstr "Ακαθάριστο ποσό πωλήσεων"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1120,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1075,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1063,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1063
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1120,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1075,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1063,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1063
 #, fuzzy
 msgid "Net Sales amount"
 msgstr "Ποσό καθαρών πωλήσεων"
 
-#: includes/reports/class-wc-pos-report-sales-by-cashier.php:1130,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:1085,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:1073,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:1073
+#: includes/reports/class-pos-host-report-sales-by-cashier.php:1130,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:1085,
+#: includes/reports/class-pos-host-report-sales-by-register.php:1073,
+#: includes/reports/class-pos-host-report-sales-by-session.php:1073
 #, fuzzy
 msgid "Sales amount for saved orders"
 msgstr "Ποσό πωλήσεων για αποθηκευμένες παραγγελίες"
 
 #. translators: %s total sales
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:487
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:487
 #, fuzzy
 msgid "%s gross sales from this outlet"
 msgstr "%s ακαθάριστες πωλήσεις από αυτό το κατάστημα"
 
 #. translators: %s net sales
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:494
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:494
 #, fuzzy
 msgid "%s net sales from this outlet"
 msgstr "%s καθαρές πωλήσεις από αυτό το κατάστημα"
 
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:627
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:627
 #, fuzzy
 msgid "Outlet Search"
 msgstr "Αναζήτηση εξόδου"
 
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:631
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:631
 #, fuzzy
 msgid "Search for a outlet&hellip;"
 msgstr "Αναζήτηση για ένα κατάστημα &amp; hellip?"
 
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:678
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:678
 #, fuzzy
 msgid "Top Outlets"
 msgstr "Κορυφαίες έξοδοι"
 
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:727,
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:782
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:727,
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:782
 #, fuzzy
 msgid "No outlets found in range"
 msgstr "Δεν βρέθηκαν σημεία πώλησης στην περιοχή"
 
-#: includes/reports/class-wc-pos-report-sales-by-outlet.php:961
+#: includes/reports/class-pos-host-report-sales-by-outlet.php:961
 #, fuzzy
 msgid "&larr; Choose outlet to view stats"
 msgstr "&larr; Επιλέξτε την έξοδο για να δείτε τα στατιστικά"
 
 #. translators: %s total sales
-#: includes/reports/class-wc-pos-report-sales-by-register.php:478
+#: includes/reports/class-pos-host-report-sales-by-register.php:478
 #, fuzzy
 msgid "%s gross sales from this register"
 msgstr "%s ακαθάριστες πωλήσεις από αυτό το μητρώο"
 
 #. translators: %s net sales
-#: includes/reports/class-wc-pos-report-sales-by-register.php:485
+#: includes/reports/class-pos-host-report-sales-by-register.php:485
 #, fuzzy
 msgid "%s net sales from this register"
 msgstr "%s καθαρές πωλήσεις από αυτό το μητρώο"
 
-#: includes/reports/class-wc-pos-report-sales-by-register.php:624
+#: includes/reports/class-pos-host-report-sales-by-register.php:624
 #, fuzzy
 msgid "Register Search"
 msgstr "Καταχώρηση αναζήτησης"
 
-#: includes/reports/class-wc-pos-report-sales-by-register.php:628
+#: includes/reports/class-pos-host-report-sales-by-register.php:628
 #, fuzzy
 msgid "Search for a register&hellip;"
 msgstr "Αναζήτηση για ένα μητρώο&hellip;"
 
-#: includes/reports/class-wc-pos-report-sales-by-register.php:668
+#: includes/reports/class-pos-host-report-sales-by-register.php:668
 #, fuzzy
 msgid "Top Registers"
 msgstr "Κορυφαία μητρώα"
 
-#: includes/reports/class-wc-pos-report-sales-by-register.php:719,
-#: includes/reports/class-wc-pos-report-sales-by-register.php:774
+#: includes/reports/class-pos-host-report-sales-by-register.php:719,
+#: includes/reports/class-pos-host-report-sales-by-register.php:774
 #, fuzzy
 msgid "No registers found in range"
 msgstr "Δεν βρέθηκαν μητρώα στην περιοχή"
 
-#: includes/reports/class-wc-pos-report-sales-by-register.php:949
+#: includes/reports/class-pos-host-report-sales-by-register.php:949
 #, fuzzy
 msgid "&larr; Choose a register to view stats"
 msgstr "&larr; Επιλέξτε ένα μητρώο για να δείτε στατιστικά"
 
 #. translators: %s total sales
-#: includes/reports/class-wc-pos-report-sales-by-session.php:478
+#: includes/reports/class-pos-host-report-sales-by-session.php:478
 #, fuzzy
 msgid "%s gross sales from this session"
 msgstr "%s ακαθάριστες πωλήσεις από αυτήν την περίοδο λειτουργίας"
 
 #. translators: %s net sales
-#: includes/reports/class-wc-pos-report-sales-by-session.php:485
+#: includes/reports/class-pos-host-report-sales-by-session.php:485
 #, fuzzy
 msgid "%s net sales from this session"
 msgstr "%s καθαρές πωλήσεις από αυτήν την περίοδο λειτουργίας"
 
 #. translators: %s saved sales
-#: includes/reports/class-wc-pos-report-sales-by-session.php:497
+#: includes/reports/class-pos-host-report-sales-by-session.php:497
 #, fuzzy
 msgid "%s sales from this session for saved orders"
 msgstr ""
 "%s πωλήσεις από αυτήν την περίοδο λειτουργίας για αποθηκευμένες παραγγελίες"
 
-#: includes/reports/class-wc-pos-report-sales-by-session.php:624
+#: includes/reports/class-pos-host-report-sales-by-session.php:624
 #, fuzzy
 msgid "Session Search"
 msgstr "Αναζήτηση περιόδου λειτουργίας"
 
-#: includes/reports/class-wc-pos-report-sales-by-session.php:628
+#: includes/reports/class-pos-host-report-sales-by-session.php:628
 #, fuzzy
 msgid "Search for a session&hellip;"
 msgstr "Αναζήτηση για μια συνεδρία&hellip;"
 
-#: includes/reports/class-wc-pos-report-sales-by-session.php:668
+#: includes/reports/class-pos-host-report-sales-by-session.php:668
 #, fuzzy
 msgid "Top Sessions"
 msgstr "Κορυφαίες περίοδοι σύνδεσης"
 
-#: includes/reports/class-wc-pos-report-sales-by-session.php:719,
-#: includes/reports/class-wc-pos-report-sales-by-session.php:774
+#: includes/reports/class-pos-host-report-sales-by-session.php:719,
+#: includes/reports/class-pos-host-report-sales-by-session.php:774
 #, fuzzy
 msgid "No sessions found in range"
 msgstr "Δεν βρέθηκαν περίοδοι λειτουργίας στην περιοχή"
 
-#: includes/reports/class-wc-pos-report-sales-by-session.php:949
+#: includes/reports/class-pos-host-report-sales-by-session.php:949
 #, fuzzy
 msgid "&larr; Choose a session to view stats"
 msgstr "&larr; Επιλέξτε μια περίοδο λειτουργίας για να δείτε στατιστικά"
@@ -4173,16 +4173,16 @@ msgid "Actions"
 msgstr "Ενέργειες"
 
 #: includes/views/html-my-account-tab.php:53,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:286
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:286
 msgid "Enter"
 msgstr "Καταχώρηση"
 
 #: includes/views/html-my-account-tab.php:53,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:165,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:286,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:302,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:304,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:311
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:165,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:286,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:302,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:304,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:311
 msgid "Open"
 msgstr "Ανοιχτό"
 
@@ -4280,8 +4280,8 @@ msgid "at"
 msgstr "σε"
 
 #: includes/views/html-print-receipt.php:530,
-#: includes/admin/settings/wc-pos-settings-customer.php:25,
-#: includes/admin/settings/wc-pos-settings-customer.php:37,
+#: includes/admin/settings/pos-host-settings-customer.php:25,
+#: includes/admin/settings/pos-host-settings-customer.php:37,
 #: includes/admin/views/html-admin-receipt-customize-preview.php:79,
 #: includes/admin/meta-boxes/views/html-register-options-general.php:94
 msgid "Customer"
@@ -4319,294 +4319,294 @@ msgstr "Όνομα Φόρου"
 msgid "Tax Rate"
 msgstr "Φορολογικός Συντελεστής"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-grids.php:118
+#: includes/admin/list-tables/class-pos-host-admin-list-table-grids.php:118
 #, fuzzy
 msgid "Create your first product grid"
 msgstr "Δημιουργήστε το πρώτο πλέγμα προϊόντος"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-grids.php:119
+#: includes/admin/list-tables/class-pos-host-admin-list-table-grids.php:119
 #, fuzzy
 msgid "Learn more about grids"
 msgstr "Μάθετε περισσότερα σχετικά με τα πλέγματα"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-grids.php:127,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-outlets.php:121,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:121,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:131
+#: includes/admin/list-tables/class-pos-host-admin-list-table-grids.php:127,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-outlets.php:121,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:121,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:131
 #, fuzzy
 msgid "(no-title)"
 msgstr "(χωρίς τίτλο)"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-outlets.php:97
+#: includes/admin/list-tables/class-pos-host-admin-list-table-outlets.php:97
 msgid "Contact Details"
 msgstr "Στοιχεία επικοινωνίας"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-outlets.php:141
+#: includes/admin/list-tables/class-pos-host-admin-list-table-outlets.php:141
 #, fuzzy
 msgid "This is the default outlet and it cannot be deleted."
 msgstr "Αυτή είναι η προεπιλεγμένη έξοδος και δεν είναι δυνατή η διαγραφή της."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:96,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:96,
 #: includes/admin/views/html-admin-receipt-customize-section-general.php:40
 msgid "Number of Copies"
 msgstr "Αριθμός αντιγράφων"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:97,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:97,
 #: includes/admin/views/html-admin-receipt-customize-section-general.php:53
 #, fuzzy
 msgid "Print Width"
 msgstr "Πλάτος εκτύπωσης"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:98
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:98
 #, fuzzy
 msgid "Show Tax Summary"
 msgstr "Εμφάνιση σύνοψης φόρου"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:129
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:129
 #, fuzzy
 msgid "This is the default receipt and it cannot be deleted."
 msgstr ""
 "Αυτή είναι η προεπιλεγμένη παραλαβή και δεν είναι δυνατή η διαγραφή της."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:155,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:155,
 #: includes/admin/views/html-admin-receipt-customize-section-general.php:55
 msgctxt "Millimeter"
 msgid "mm"
 msgstr ".Mm"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-receipts.php:155
+#: includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php:155
 msgid "Dynamic"
 msgstr "Σε κίνηση"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:95,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:95
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:95,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:95
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:96,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:96,
 #: includes/admin/meta-boxes/views/html-register-options-end-of-sale.php:79
 #, fuzzy
 msgid "Change Cashier"
 msgstr "Αλλαγή Ταμείου"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:96
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:96
 #, fuzzy
 msgid "Change User"
 msgstr "Αλλαγή χρήστη"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:97,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:97,
 #: includes/admin/meta-boxes/views/html-register-options-end-of-sale.php:42
 #, fuzzy
 msgid "Email Receipt"
 msgstr "Απόδειξη ηλεκτρονικού ταχυδρομείου"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:99,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:99,
 #: includes/admin/meta-boxes/views/html-register-options-end-of-sale.php:61
 #, fuzzy
 msgid "Note Request"
 msgstr "Σημείωση Αίτηση"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:100,
-#: includes/admin/settings/wc-pos-settings-register.php:41,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:100,
+#: includes/admin/settings/pos-host-settings-register.php:41,
 #: includes/admin/meta-boxes/views/html-register-options-general.php:108
 #, fuzzy
 msgid "Cash Management"
 msgstr "Διαχείριση Μετρητών"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:101
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:101
 msgid "Access"
 msgstr "Πρόσβαση"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:129
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:129
 #, fuzzy
 msgid "Category Layout"
 msgstr "Διάταξη κατηγορίας"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:134
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:134
 #, fuzzy
 msgid "located in"
 msgstr "βρίσκεται στο"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:145
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:145
 #, fuzzy
 msgid "This is the default register and it cannot be deleted."
 msgstr ""
 "Αυτό είναι το προεπιλεγμένο μητρώο και δεν είναι δυνατή η διαγραφή του."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:167,
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:262
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:167,
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:262
 msgid "Closed"
 msgstr "Κλειστό"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:176
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:176
 #, fuzzy
 msgid "User changes after sale."
 msgstr "Αλλαγές χρήστη μετά την πώληση."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:178
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:178
 #, fuzzy
 msgid "User does not change after sale."
 msgstr "Ο χρήστης δεν αλλάζει μετά την πώληση."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:188
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:188
 #, fuzzy
 msgid "Receipt is emailed to all customers."
 msgstr "Η απόδειξη είναι μέσω ηλεκτρονικού ταχυδρομείου σε όλους τους πελάτες."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:191
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:191
 #, fuzzy
 msgid "Receipt is emailed to non-guest customers only."
 msgstr ""
 "Η απόδειξη είναι μέσω ηλεκτρονικού ταχυδρομείου μόνο σε πελάτες που δεν "
 "είναι φιλοξενούμενοι."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:194
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:194
 #, fuzzy
 msgid "Receipt is not emailed."
 msgstr "Η απόδειξη δεν έχει αποσταλεί μέσω ηλεκτρονικού ταχυδρομείου."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:204
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:204
 #, fuzzy
 msgid "Receipt is printed."
 msgstr "Η απόδειξη εκτυπώνεται."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:206
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:206
 #, fuzzy
 msgid "Receipt is not printed."
 msgstr "Η παραλαβή δεν εκτυπώνεται."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:216
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:216
 #, fuzzy
 msgid "Note is taken on save."
 msgstr "Η σημείωση λαμβάνεται κατά την αποθήκευση."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:219
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:219
 #, fuzzy
 msgid "Note is taken on all sales."
 msgstr "Λαμβάνεται υπόψη για όλες τις πωλήσεις."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:222
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:222
 #, fuzzy
 msgid "Note is not taken."
 msgstr "Η σημείωση δεν έχει ληφθεί."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:232
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:232
 #, fuzzy
 msgid "Cash is managed."
 msgstr "Η διαχείριση των μετρητών."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:234
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:234
 #, fuzzy
 msgid "Cash is not managed."
 msgstr "Δεν γίνεται διαχείριση μετρητών."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:254
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:254
 #, fuzzy
 msgid "No outlet assigned."
 msgstr "Δεν έχει εκχωρηθεί έξοδος."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:258
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:258
 #, fuzzy
 msgid "No receipt template assigned."
 msgstr "Δεν έχει αντιστοιχιστεί πρότυπο παραλαβής."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:287
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:287
 #, fuzzy
 msgid "Enter Register"
 msgstr "Εισαγωγή καταχώρησης"
 
 #. translators: %s: user full name
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:299
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:299
 #, fuzzy
 msgid "%s is currently logged on this register."
 msgstr ""
 "Το %s είναι συνδεδεμένο αυτήν τη στιγμή σε αυτό το αρχείο καταχωρήσεων."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:311
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:311
 #, fuzzy
 msgid "You are not assigned to the register outlet."
 msgstr "Δεν έχετε αντιστοιχιστεί στο κατάστημα καταχώρησης."
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-registers.php:353
+#: includes/admin/list-tables/class-pos-host-admin-list-table-registers.php:353
 #, fuzzy
 msgid "Filter by outlet"
 msgstr "Φιλτράρισμα κατά πρίζα"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:92
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:92
 #, fuzzy
 msgid "Reigser"
 msgstr "Ρέγκσερ"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:94
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:94
 #, fuzzy
 msgid "Opened at"
 msgstr "Ανοίχτηκαν"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:95
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:95
 msgid "Closed at"
 msgstr "Ώρα Λήξης"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:96
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:96
 #, fuzzy
 msgid "Opened by"
 msgstr "Ανοίχτηκαν"
 
-#: includes/admin/list-tables/class-wc-pos-admin-list-table-sessions.php:97
+#: includes/admin/list-tables/class-pos-host-admin-list-table-sessions.php:97
 #, fuzzy
 msgid "Closed by"
 msgstr "Ώρα Λήξης"
 
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-outlet-options.php:53
+#: includes/admin/meta-boxes/class-pos-host-meta-box-outlet-options.php:53
 msgid "Contact"
 msgstr "Επικοινωνία"
 
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-outlet-options.php:58
+#: includes/admin/meta-boxes/class-pos-host-meta-box-outlet-options.php:58
 msgid "WiFi"
 msgstr "Wifi"
 
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-outlet-options.php:63
+#: includes/admin/meta-boxes/class-pos-host-meta-box-outlet-options.php:63
 msgid "Social"
 msgstr "Κοινωνικά"
 
-#: includes/admin/meta-boxes/class-wc-pos-meta-box-register-options.php:46,
-#: includes/admin/settings/wc-pos-settings-general.php:25
+#: includes/admin/meta-boxes/class-pos-host-meta-box-register-options.php:46,
+#: includes/admin/settings/pos-host-settings-general.php:25
 msgid "General"
 msgstr "Γενικά"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:43
+#: includes/admin/settings/pos-host-settings-advanced.php:43
 msgid "Advanced"
 msgstr "Προχωρημένος"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:65
+#: includes/admin/settings/pos-host-settings-advanced.php:65
 msgid "Database"
 msgstr "Σφάλμα Βάσης Δεδομένων"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:72
+#: includes/admin/settings/pos-host-settings-advanced.php:72
 #, fuzzy
 msgid "Last Forced Update: "
 msgstr "Τελευταία αναγκαστική ενημέρωση:"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:75
+#: includes/admin/settings/pos-host-settings-advanced.php:75
 #, fuzzy
 msgid "No forced update made"
 msgstr "Δεν έγινε αναγκαστική ενημέρωση"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:80
+#: includes/admin/settings/pos-host-settings-advanced.php:80
 #, fuzzy
 msgid "POS Database Version: "
 msgstr "Έκδοση βάσης δεδομένων POS:"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:88
+#: includes/admin/settings/pos-host-settings-advanced.php:88
 #, fuzzy
 msgid "Database Update: "
 msgstr "Ενημέρωση βάσης δεδομένων:"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:91
+#: includes/admin/settings/pos-host-settings-advanced.php:91
 #, fuzzy
 msgid "Force Update"
 msgstr "Εξαναγκαστηβία"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:93
+#: includes/admin/settings/pos-host-settings-advanced.php:93
 #, fuzzy
 msgid ""
 "Use with caution: this tool will update the database to the latest version - "
@@ -4618,11 +4618,11 @@ msgstr ""
 "σύμφωνα με τις παραμέτρους που έχουν ρυθμιστεί στις ρυθμίσεις, τα μητρώα, "
 "τις αποδείξεις και τα σημεία πώλησης."
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:99
+#: includes/admin/settings/pos-host-settings-advanced.php:99
 msgid "Settings:"
 msgstr "Ρυθμίσεις:"
 
-#: includes/admin/settings/wc-pos-settings-advanced.php:103
+#: includes/admin/settings/pos-host-settings-advanced.php:103
 #, fuzzy
 msgid ""
 "This tool will update the database to the latest version - useful when "
@@ -4634,12 +4634,12 @@ msgstr ""
 "έχουν ρυθμιστεί στις ρυθμίσεις, τα μητρώα, τις αποδείξεις και τα σημεία "
 "πώλησης."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:57
+#: includes/admin/settings/pos-host-settings-customer.php:57
 #, fuzzy
 msgid "End of Sale Actions"
 msgstr "Ενέργειες τέλους πώλησης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:58
+#: includes/admin/settings/pos-host-settings-customer.php:58
 #, fuzzy
 msgid ""
 "The following options affect the actions presented at the end of the "
@@ -4648,33 +4648,33 @@ msgstr ""
 "Οι παρακάτω επιλογές επηρεάζουν τις ενέργειες που παρουσιάζονται στο τέλος "
 "της διαδικασίας ολοκλήρωσης αγοράς."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:64
+#: includes/admin/settings/pos-host-settings-customer.php:64
 #, fuzzy
 msgid "Signature Capture"
 msgstr "Καταγραφή υπογραφής"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:65
+#: includes/admin/settings/pos-host-settings-customer.php:65
 #, fuzzy
 msgid "Enable signature capture"
 msgstr "Ενεργοποίηση καταγραφής υπογραφής"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:66
+#: includes/admin/settings/pos-host-settings-customer.php:66
 #, fuzzy
 msgid "Presents a modal window to capture the signature of user or customer."
 msgstr ""
 "Παρουσιάζει ένα αποκλειστικό παράθυρο για να καταγράψετε την υπογραφή του "
 "χρήστη ή του πελάτη."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:73
+#: includes/admin/settings/pos-host-settings-customer.php:73
 msgid "Signature Required"
 msgstr "Απαιτείται Υπογραφή"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:74
+#: includes/admin/settings/pos-host-settings-customer.php:74
 #, fuzzy
 msgid "Enforce capturing of signature"
 msgstr "Επιβολή καταγραφής υπογραφής"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:75
+#: includes/admin/settings/pos-host-settings-customer.php:75
 #, fuzzy
 msgid ""
 "Allows you to force user to enter signature before proceeding with register "
@@ -4683,22 +4683,22 @@ msgstr ""
 "Σας επιτρέπει να αναγκάσετε το χρήστη να εισαγάγει την υπογραφή πριν "
 "συνεχίσετε με τις εντολές καταχώρησης."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:83
+#: includes/admin/settings/pos-host-settings-customer.php:83
 #, fuzzy
 msgid "Signature Commands"
 msgstr "Εντολές υπογραφής"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:84
+#: includes/admin/settings/pos-host-settings-customer.php:84
 #, fuzzy
 msgid ""
 "Choose which commands would you like the signature panel to be shown for."
 msgstr "Επιλέξτε για ποιες εντολές θέλετε να εμφανίζεται ο πίνακας υπογραφής."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:108
+#: includes/admin/settings/pos-host-settings-customer.php:108
 msgid "Customer Options"
 msgstr "Επιλογές πελάτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:109
+#: includes/admin/settings/pos-host-settings-customer.php:109
 #, fuzzy
 msgid ""
 "The following options affect the account creation process when creating "
@@ -4707,27 +4707,27 @@ msgstr ""
 "Οι ακόλουθες επιλογές επηρεάζουν τη διαδικασία δημιουργίας λογαριασμού κατά "
 "τη δημιουργία πελατών."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:115
+#: includes/admin/settings/pos-host-settings-customer.php:115
 msgid "Default Country"
 msgstr "Προκαθορισμένη χώρα"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:116
+#: includes/admin/settings/pos-host-settings-customer.php:116
 #, fuzzy
 msgid "Sets the default country for shipping and customer accounts."
 msgstr ""
 "Ορίζει την προεπιλεγμένη χώρα για λογαριασμούς αποστολής και λογαριασμούς "
 "πελατών."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:123
+#: includes/admin/settings/pos-host-settings-customer.php:123
 #, fuzzy
 msgid "Guest Checkout"
 msgstr "Ενεργοποίηση checkout επισκεπτών"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:126
+#: includes/admin/settings/pos-host-settings-customer.php:126
 msgid "Enable guest checkout"
 msgstr "Ενεργοποίηση checkout επισκεπτών"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:127
+#: includes/admin/settings/pos-host-settings-customer.php:127
 #, fuzzy
 msgid ""
 "Allows register cashiers to process and fulfil an order without choosing a "
@@ -4736,17 +4736,17 @@ msgstr ""
 "Επιτρέπει στους ταμίες εγγραφής να επεξεργάζονται και να εκπληρώνουν μια "
 "παραγγελία χωρίς να επιλέγουν έναν πελάτη."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:132
+#: includes/admin/settings/pos-host-settings-customer.php:132
 #, fuzzy
 msgid "Customer Cards"
 msgstr "Κάρτες Πελατών"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:133
+#: includes/admin/settings/pos-host-settings-customer.php:133
 #, fuzzy
 msgid "Enable customer cards"
 msgstr "Ενεργοποίηση καρτών πελατών"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:134
+#: includes/admin/settings/pos-host-settings-customer.php:134
 #, fuzzy
 msgid ""
 "Allow the ability to scan customers cards to load their account instantly."
@@ -4754,11 +4754,11 @@ msgstr ""
 "Επιτρέψτε τη δυνατότητα να σαρώσετε τις κάρτες των πελατών για να φορτώσετε "
 "το λογαριασμό τους αμέσως."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:141
+#: includes/admin/settings/pos-host-settings-customer.php:141
 msgid "Required Fields"
 msgstr "Υποχρεωτικά Πεδία"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:145
+#: includes/admin/settings/pos-host-settings-customer.php:145
 #, fuzzy
 msgid ""
 "Select the fields that are required when creating a customer through the "
@@ -4767,99 +4767,99 @@ msgstr ""
 "Επιλέξτε τα πεδία που απαιτούνται κατά τη δημιουργία ενός πελάτη μέσω του "
 "αρχείου καταχωρήσεων."
 
-#: includes/admin/settings/wc-pos-settings-customer.php:147
+#: includes/admin/settings/pos-host-settings-customer.php:147
 msgid "Billing First Name"
 msgstr "Όνομα Χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:148
+#: includes/admin/settings/pos-host-settings-customer.php:148
 msgid "Billing Last Name"
 msgstr "Επώνυμο Χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:149
+#: includes/admin/settings/pos-host-settings-customer.php:149
 msgid "Billing Email"
 msgstr "Email Χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:150
+#: includes/admin/settings/pos-host-settings-customer.php:150
 msgid "Billing Company"
 msgstr "Εταιρεία Χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:151
+#: includes/admin/settings/pos-host-settings-customer.php:151
 msgid "Billing Address 1"
 msgstr "Διεύθυνση Χρέωσης 1"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:152
+#: includes/admin/settings/pos-host-settings-customer.php:152
 msgid "Billing Address 2"
 msgstr "Διεύθυνση Χρέωσης 2"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:153
+#: includes/admin/settings/pos-host-settings-customer.php:153
 msgid "Billing City"
 msgstr "Πόλη χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:154
+#: includes/admin/settings/pos-host-settings-customer.php:154
 msgid "Billing State"
 msgstr "Νομός Χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:155
+#: includes/admin/settings/pos-host-settings-customer.php:155
 #, fuzzy
 msgid "Billing Postcode"
 msgstr "Ταχυδρομικός κώδικας χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:156
+#: includes/admin/settings/pos-host-settings-customer.php:156
 msgid "Billing Country"
 msgstr "Χώρα Χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:157
+#: includes/admin/settings/pos-host-settings-customer.php:157
 #, fuzzy
 msgid "Billing Phone"
 msgstr "Τηλέφωνο χρέωσης"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:158
+#: includes/admin/settings/pos-host-settings-customer.php:158
 msgid "Shipping First Name"
 msgstr "Όνομα Παραλήπτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:159
+#: includes/admin/settings/pos-host-settings-customer.php:159
 msgid "Shipping Last Name"
 msgstr "Επώνυμο Παραλήπτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:160
+#: includes/admin/settings/pos-host-settings-customer.php:160
 msgid "Shipping Company"
 msgstr "Εταιρεία Παραλήπτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:161
+#: includes/admin/settings/pos-host-settings-customer.php:161
 msgid "Shipping Address 1"
 msgstr "Διεύθυνση Παραλήπτη 1"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:162
+#: includes/admin/settings/pos-host-settings-customer.php:162
 msgid "Shipping Address 2"
 msgstr "Διεύθυνση Παραλήπτη 2"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:163
+#: includes/admin/settings/pos-host-settings-customer.php:163
 msgid "Shipping City"
 msgstr "Πόλη Παραλήπτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:164
+#: includes/admin/settings/pos-host-settings-customer.php:164
 msgid "Shipping State"
 msgstr "Νομός Παραλήπτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:165
+#: includes/admin/settings/pos-host-settings-customer.php:165
 msgid "Shipping Postcode"
 msgstr "Ταχ. Κώδ. Αποστολής"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:166
+#: includes/admin/settings/pos-host-settings-customer.php:166
 msgid "Shipping Country"
 msgstr "Χώρα Παραλήπτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:182
+#: includes/admin/settings/pos-host-settings-customer.php:182
 #, fuzzy
 msgid "Optional Fields"
 msgstr "Προαιρετικά πεδία"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:185
+#: includes/admin/settings/pos-host-settings-customer.php:185
 #, fuzzy
 msgid "Hide optional fields when adding customer"
 msgstr "Απόκρυψη προαιρετικών πεδίων κατά την προσθήκη πελάτη"
 
-#: includes/admin/settings/wc-pos-settings-customer.php:186
+#: includes/admin/settings/pos-host-settings-customer.php:186
 #, fuzzy
 msgid ""
 "Optional fields will not be shown to make capturing of customer data easier "
@@ -4868,32 +4868,32 @@ msgstr ""
 "Τα προαιρετικά πεδία δεν θα εμφανίζονται για να διευκολύνουν την καταγραφή "
 "των δεδομένων των πελατών για το ταμείο."
 
-#: includes/admin/settings/wc-pos-settings-general.php:47
+#: includes/admin/settings/pos-host-settings-general.php:47
 msgid "General Options"
 msgstr "Γενικές Επιλογές"
 
-#: includes/admin/settings/wc-pos-settings-general.php:53
+#: includes/admin/settings/pos-host-settings-general.php:53
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: includes/admin/settings/wc-pos-settings-general.php:54
+#: includes/admin/settings/pos-host-settings-general.php:54
 #, fuzzy
 msgid "Select which filters appear on the Orders page."
 msgstr "Επιλέξτε ποια φίλτρα θα εμφανίζονται στη σελίδα \"Παραγγελίες\"."
 
-#: includes/admin/settings/wc-pos-settings-general.php:66
+#: includes/admin/settings/pos-host-settings-general.php:66
 #, fuzzy
 msgid "Front End Access"
 msgstr "Πρόσβαση στο μπροστινό άκρο"
 
-#: includes/admin/settings/wc-pos-settings-general.php:67
+#: includes/admin/settings/pos-host-settings-general.php:67
 #, fuzzy
 msgid "Enable front-end access to assigned registers"
 msgstr ""
 "Ενεργοποίηση πρόσβασης προσκηνιστηθέντος προσκηνιστηθέντος σε εκχωρημένα "
 "μητρώα"
 
-#: includes/admin/settings/wc-pos-settings-general.php:68
+#: includes/admin/settings/pos-host-settings-general.php:68
 #, fuzzy
 msgid ""
 "Allows cashiers to access their assigned registers from their My Account "
@@ -4902,12 +4902,12 @@ msgstr ""
 "Επιτρέπει στους ταμίες να έχουν πρόσβαση στους εγγεγραμμένους τους από τη "
 "σελίδα \"Ο λογαριασμός μου\"."
 
-#: includes/admin/settings/wc-pos-settings-general.php:75
+#: includes/admin/settings/pos-host-settings-general.php:75
 #, fuzzy
 msgid "Auto Logout"
 msgstr "Αυτόματη αποσύνδεση"
 
-#: includes/admin/settings/wc-pos-settings-general.php:76
+#: includes/admin/settings/pos-host-settings-general.php:76
 #, fuzzy
 msgid ""
 "Choose whether to automatically exit the register screen after inactive "
@@ -4916,41 +4916,41 @@ msgstr ""
 "Επιλέξτε εάν θα κλείσετε αυτόματα την οθόνη καταχώρησης μετά από ανενεργό "
 "χρόνο. Αυτό δεν θα κλείσει το μητρώο."
 
-#: includes/admin/settings/wc-pos-settings-general.php:82
+#: includes/admin/settings/pos-host-settings-general.php:82
 msgid "Disable"
 msgstr "Απενεργοποίηση"
 
-#: includes/admin/settings/wc-pos-settings-general.php:83
+#: includes/admin/settings/pos-host-settings-general.php:83
 #, fuzzy
 msgid "1 min"
 msgstr "1 λεπτό"
 
-#: includes/admin/settings/wc-pos-settings-general.php:84
+#: includes/admin/settings/pos-host-settings-general.php:84
 msgid "5 min"
 msgstr "5 λεπτά"
 
-#: includes/admin/settings/wc-pos-settings-general.php:85
+#: includes/admin/settings/pos-host-settings-general.php:85
 msgid "15 min"
 msgstr "15 λεπτά"
 
-#: includes/admin/settings/wc-pos-settings-general.php:86
+#: includes/admin/settings/pos-host-settings-general.php:86
 msgid "30 mins"
 msgstr "30 λεπτά"
 
-#: includes/admin/settings/wc-pos-settings-general.php:87
+#: includes/admin/settings/pos-host-settings-general.php:87
 msgid "1 hour"
 msgstr "1 ώρα"
 
-#: includes/admin/settings/wc-pos-settings-general.php:88
+#: includes/admin/settings/pos-host-settings-general.php:88
 msgid "2 hours"
 msgstr "2 ώρες"
 
-#: includes/admin/settings/wc-pos-settings-general.php:92,
+#: includes/admin/settings/pos-host-settings-general.php:92,
 #: includes/admin/views/html-admin-receipt-customize-section-header.php:113
 msgid "Tax Number"
 msgstr "Αριθμός φορολογικού μητρώου"
 
-#: includes/admin/settings/wc-pos-settings-general.php:94
+#: includes/admin/settings/pos-host-settings-general.php:94
 #, fuzzy
 msgid ""
 "Enter the tax number which is applied to this particular register. This will "
@@ -4960,17 +4960,17 @@ msgstr ""
 "μητρώο. Αυτό θα εκτυπωθεί στις παραλαβές αν ο αριθμός φόρου είναι "
 "ενεργοποιημένος στο πρότυπο παραλαβής."
 
-#: includes/admin/settings/wc-pos-settings-general.php:98
+#: includes/admin/settings/pos-host-settings-general.php:98
 #, fuzzy
 msgid "Transitions and Effects"
 msgstr "Μεταβάσεις και εφέ"
 
-#: includes/admin/settings/wc-pos-settings-general.php:102
+#: includes/admin/settings/pos-host-settings-general.php:102
 #, fuzzy
 msgid "Disable transitions and effects"
 msgstr "Απενεργοποίηση μεταβάσεων και εφέ"
 
-#: includes/admin/settings/wc-pos-settings-general.php:103
+#: includes/admin/settings/pos-host-settings-general.php:103
 #, fuzzy
 msgid ""
 "Check this box to disable transitions and effects when using the register."
@@ -4978,24 +4978,24 @@ msgstr ""
 "Επιλέξτε αυτό το πλαίσιο για να απενεργοποιήσετε τις μεταβάσεις και τα εφέ "
 "κατά τη χρήση του μητρώου."
 
-#: includes/admin/settings/wc-pos-settings-general.php:112
+#: includes/admin/settings/pos-host-settings-general.php:112
 #, fuzzy
 msgid "Enable dining option"
 msgstr "Ενεργοποίηση επιλογής φαγητού"
 
-#: includes/admin/settings/wc-pos-settings-general.php:113
+#: includes/admin/settings/pos-host-settings-general.php:113
 #, fuzzy
 msgid "Check this box to enable dining when using the register."
 msgstr ""
 "Επιλέξτε αυτό το πλαίσιο για να ενεργοποιήσετε το φαγητό όταν χρησιμοποιείτε "
 "το μητρώο."
 
-#: includes/admin/settings/wc-pos-settings-general.php:122
+#: includes/admin/settings/pos-host-settings-general.php:122
 #, fuzzy
 msgid "Status Options"
 msgstr "Επιλογές κατάστασης"
 
-#: includes/admin/settings/wc-pos-settings-general.php:123
+#: includes/admin/settings/pos-host-settings-general.php:123
 #, fuzzy
 msgid ""
 "The following options affect the status of the orders when using the "
@@ -5004,64 +5004,64 @@ msgstr ""
 "Οι ακόλουθες επιλογές επηρεάζουν την κατάσταση των παραγγελιών κατά τη χρήση "
 "του αρχείου καταχωρήσεων."
 
-#: includes/admin/settings/wc-pos-settings-general.php:128
+#: includes/admin/settings/pos-host-settings-general.php:128
 #, fuzzy
 msgid "Fulfilled Orders"
 msgstr "Εκπληρωμένες Παραγγελίες"
 
-#: includes/admin/settings/wc-pos-settings-general.php:129
+#: includes/admin/settings/pos-host-settings-general.php:129
 #, fuzzy
 msgid "Select the order status of completed orders when using the register."
 msgstr ""
 "Επιλέξτε την κατάσταση παραγγελίας των ολοκληρωμένων παραγγελιών κατά τη "
 "χρήση του αρχείου καταχωρήσεων."
 
-#: includes/admin/settings/wc-pos-settings-general.php:139
+#: includes/admin/settings/pos-host-settings-general.php:139
 #, fuzzy
 msgid "Parked Orders"
 msgstr "Παρκαρισμένες παραγγελίες"
 
-#: includes/admin/settings/wc-pos-settings-general.php:140
+#: includes/admin/settings/pos-host-settings-general.php:140
 #, fuzzy
 msgid "Select the order status of saved orders when using the register."
 msgstr ""
 "Επιλέξτε την κατάσταση παραγγελίας των αποθηκευμένων παραγγελιών κατά τη "
 "χρήση του αρχείου καταχωρήσεων."
 
-#: includes/admin/settings/wc-pos-settings-general.php:148
+#: includes/admin/settings/pos-host-settings-general.php:148
 #, fuzzy
 msgid "Fetch Orders "
 msgstr "Λήψη παραγγελιών"
 
-#: includes/admin/settings/wc-pos-settings-general.php:149
+#: includes/admin/settings/pos-host-settings-general.php:149
 #, fuzzy
 msgid "Select the order statuses of loaded orders when using the register."
 msgstr ""
 "Επιλέξτε τις καταστάσεις παραγγελίας των φορτωμένων παραγγελιών κατά τη "
 "χρήση του αρχείου καταχωρήσεων."
 
-#: includes/admin/settings/wc-pos-settings-general.php:157
+#: includes/admin/settings/pos-host-settings-general.php:157
 #, fuzzy
 msgid "Website Orders "
 msgstr "Παραγγελίες ιστότοπων"
 
-#: includes/admin/settings/wc-pos-settings-general.php:161
+#: includes/admin/settings/pos-host-settings-general.php:161
 #, fuzzy
 msgid "Load website orders"
 msgstr "Φόρτωση παραγγελιών τοποθεσίας Web"
 
-#: includes/admin/settings/wc-pos-settings-general.php:162
+#: includes/admin/settings/pos-host-settings-general.php:162
 #, fuzzy
 msgid "Loads orders placed through the web store."
 msgstr ""
 "Φορτώνει παραγγελίες που έχουν τοποθετηθεί μέσω του καταστήματος ιστού."
 
-#: includes/admin/settings/wc-pos-settings-register.php:61
+#: includes/admin/settings/pos-host-settings-register.php:61
 #, fuzzy
 msgid "Cash Management Options"
 msgstr "Επιλογές Διαχείρισης Μετρητών"
 
-#: includes/admin/settings/wc-pos-settings-register.php:63
+#: includes/admin/settings/pos-host-settings-register.php:63
 #, fuzzy
 msgid ""
 "The following options affect the settings that are applied when using the "
@@ -5070,29 +5070,29 @@ msgstr ""
 "Οι παρακάτω επιλογές επηρεάζουν τις ρυθμίσεις που εφαρμόζονται κατά τη χρήση "
 "της λειτουργίας διαχείρισης μετρητών."
 
-#: includes/admin/settings/wc-pos-settings-register.php:67
+#: includes/admin/settings/pos-host-settings-register.php:67
 #, fuzzy
 msgid "Order Status Criteria "
 msgstr "Κριτήρια κατάστασης παραγγελίας"
 
-#: includes/admin/settings/wc-pos-settings-register.php:68
+#: includes/admin/settings/pos-host-settings-register.php:68
 #, fuzzy
 msgid "Select the order statuses to be included to the cash management."
 msgstr ""
 "Επιλέξτε τις καταστάσεις παραγγελίας που θα συμπεριληφθούν στη διαχείριση "
 "μετρητών."
 
-#: includes/admin/settings/wc-pos-settings-register.php:76
+#: includes/admin/settings/pos-host-settings-register.php:76
 #, fuzzy
 msgid "Currency Rounding"
 msgstr "Στρογγυλοποίηση νομισμάτων"
 
-#: includes/admin/settings/wc-pos-settings-register.php:77
+#: includes/admin/settings/pos-host-settings-register.php:77
 #, fuzzy
 msgid "Enable currency rounding"
 msgstr "Ενεργοποίηση στρογγυλοποίησης νομισμάτων"
 
-#: includes/admin/settings/wc-pos-settings-register.php:78
+#: includes/admin/settings/pos-host-settings-register.php:78
 #, fuzzy
 msgid ""
 "Rounds the total to the nearest value defined below. Used by some countries "
@@ -5102,12 +5102,12 @@ msgstr ""
 "Χρησιμοποιείται από ορισμένες χώρες όπου δεν είναι διαθέσιμες όλες οι "
 "ονομαστικές αξίες."
 
-#: includes/admin/settings/wc-pos-settings-register.php:85
+#: includes/admin/settings/pos-host-settings-register.php:85
 #, fuzzy
 msgid "Rounding Value"
 msgstr "Τιμή στρογγυλοποίησης"
 
-#: includes/admin/settings/wc-pos-settings-register.php:86
+#: includes/admin/settings/pos-host-settings-register.php:86
 #, fuzzy
 msgid ""
 "Select the rounding value which you want the register to round nearest to."
@@ -5115,35 +5115,35 @@ msgstr ""
 "Επιλέξτε την τιμή στρογγυλοποίησης στην οποία θέλετε να στρογγυλοποιεί το "
 "μητρώο στο πλησιέστερο."
 
-#: includes/admin/settings/wc-pos-settings-register.php:94
+#: includes/admin/settings/pos-host-settings-register.php:94
 msgid "0.01"
 msgstr "0,01"
 
-#: includes/admin/settings/wc-pos-settings-register.php:95
+#: includes/admin/settings/pos-host-settings-register.php:95
 msgid "0.05"
 msgstr "0,05"
 
-#: includes/admin/settings/wc-pos-settings-register.php:96
+#: includes/admin/settings/pos-host-settings-register.php:96
 msgid "0.10"
 msgstr "0,10"
 
-#: includes/admin/settings/wc-pos-settings-register.php:97
+#: includes/admin/settings/pos-host-settings-register.php:97
 msgid "0.50"
 msgstr "0.50"
 
-#: includes/admin/settings/wc-pos-settings-register.php:98
+#: includes/admin/settings/pos-host-settings-register.php:98
 msgid "1.00"
 msgstr "1,00"
 
-#: includes/admin/settings/wc-pos-settings-register.php:99
+#: includes/admin/settings/pos-host-settings-register.php:99
 msgid "5.00"
 msgstr "5,00"
 
-#: includes/admin/settings/wc-pos-settings-register.php:116
+#: includes/admin/settings/pos-host-settings-register.php:116
 msgid "Register Options"
 msgstr "Επιλογές μητρώου"
 
-#: includes/admin/settings/wc-pos-settings-register.php:118
+#: includes/admin/settings/pos-host-settings-register.php:118
 #, fuzzy
 msgid ""
 "The following options affect the settings that are applied when loading all "
@@ -5152,12 +5152,12 @@ msgstr ""
 "Οι παρακάτω επιλογές επηρεάζουν τις ρυθμίσεις που εφαρμόζονται κατά τη "
 "φόρτωση όλων των καταχωρητών."
 
-#: includes/admin/settings/wc-pos-settings-register.php:122
+#: includes/admin/settings/pos-host-settings-register.php:122
 #, fuzzy
 msgid "Keypad Presets"
 msgstr "Προκαθορισμένες ρυθμίσεις πληκτρολογίου"
 
-#: includes/admin/settings/wc-pos-settings-register.php:123
+#: includes/admin/settings/pos-host-settings-register.php:123
 #, fuzzy
 msgid ""
 "Define the preset keys that appear when applying discounts in the register."
@@ -5165,98 +5165,98 @@ msgstr ""
 "Ορίστε τα προκαθορισμένα κλειδιά που εμφανίζονται κατά την εφαρμογή "
 "εκπτώσεων στο μητρώο."
 
-#: includes/admin/settings/wc-pos-settings-register.php:130
+#: includes/admin/settings/pos-host-settings-register.php:130
 msgid "5%"
 msgstr "5%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:131
+#: includes/admin/settings/pos-host-settings-register.php:131
 msgid "10%"
 msgstr "10%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:132
+#: includes/admin/settings/pos-host-settings-register.php:132
 msgid "15%"
 msgstr "15%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:133
+#: includes/admin/settings/pos-host-settings-register.php:133
 msgid "20%"
 msgstr "20%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:134
+#: includes/admin/settings/pos-host-settings-register.php:134
 msgid "25%"
 msgstr "25%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:135
+#: includes/admin/settings/pos-host-settings-register.php:135
 msgid "30%"
 msgstr "30%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:136
+#: includes/admin/settings/pos-host-settings-register.php:136
 msgid "35%"
 msgstr "35%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:137
+#: includes/admin/settings/pos-host-settings-register.php:137
 msgid "40%"
 msgstr "40%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:138
+#: includes/admin/settings/pos-host-settings-register.php:138
 msgid "45%"
 msgstr "45%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:139
+#: includes/admin/settings/pos-host-settings-register.php:139
 msgid "50%"
 msgstr "50%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:140
+#: includes/admin/settings/pos-host-settings-register.php:140
 msgid "55%"
 msgstr "55%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:141
+#: includes/admin/settings/pos-host-settings-register.php:141
 msgid "60%"
 msgstr "60%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:142
+#: includes/admin/settings/pos-host-settings-register.php:142
 #, fuzzy
 msgid "65%"
 msgstr "65%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:143
+#: includes/admin/settings/pos-host-settings-register.php:143
 msgid "70%"
 msgstr "70%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:144
+#: includes/admin/settings/pos-host-settings-register.php:144
 msgid "75%"
 msgstr "75%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:145
+#: includes/admin/settings/pos-host-settings-register.php:145
 msgid "80%"
 msgstr "80%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:146
+#: includes/admin/settings/pos-host-settings-register.php:146
 msgid "85%"
 msgstr "85%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:147
+#: includes/admin/settings/pos-host-settings-register.php:147
 msgid "90%"
 msgstr "90%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:148
+#: includes/admin/settings/pos-host-settings-register.php:148
 msgid "95%"
 msgstr "95%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:149
+#: includes/admin/settings/pos-host-settings-register.php:149
 msgid "100%"
 msgstr "100%"
 
-#: includes/admin/settings/wc-pos-settings-register.php:155
+#: includes/admin/settings/pos-host-settings-register.php:155
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: includes/admin/settings/wc-pos-settings-register.php:156
+#: includes/admin/settings/pos-host-settings-register.php:156
 #, fuzzy
 msgid "Enable keyboard shortcuts"
 msgstr "Ενεργοποίηση συντομεύσεων πληκτρολογίου"
 
 #. translators: 1: opening anchor tag for the shortcuts link 2: closing anchor tag
-#: includes/admin/settings/wc-pos-settings-register.php:158
+#: includes/admin/settings/pos-host-settings-register.php:158
 #, fuzzy
 msgid ""
 "Allows you to use keyboard shortcuts to execute popular and frequent "
@@ -5266,12 +5266,12 @@ msgstr ""
 "δημοφιλών και συχνών ενεργειών. Κάντε κλικ στο κουμπί %1$shere%2$s για τη "
 "λίστα συντομεύσεων πληκτρολογίου."
 
-#: includes/admin/settings/wc-pos-settings-register.php:165
+#: includes/admin/settings/pos-host-settings-register.php:165
 #, fuzzy
 msgid "Scanning Fields"
 msgstr "Σάρωση πεδίων"
 
-#: includes/admin/settings/wc-pos-settings-register.php:166
+#: includes/admin/settings/pos-host-settings-register.php:166
 #, fuzzy
 msgid ""
 "Control what fields are used when using the scanner on the register. You can "
@@ -5280,42 +5280,42 @@ msgstr ""
 "Ελέγξτε ποια πεδία χρησιμοποιούνται κατά τη χρήση του σαρωτή στο μητρώο. "
 "Μπορείτε να επιλέξετε πολλά πεδία. Η προεπιλογή είναι SKU."
 
-#: includes/admin/settings/wc-pos-settings-register.php:172
+#: includes/admin/settings/pos-host-settings-register.php:172
 #, fuzzy
 msgid "WooCommerce SKU"
 msgstr "WooΕμπόριο SKU"
 
-#: includes/admin/settings/wc-pos-settings-register.php:178
+#: includes/admin/settings/pos-host-settings-register.php:178
 #, fuzzy
 msgid "Force Logout"
 msgstr "Εξαναγκαστηβία αποσύνδεσης"
 
-#: includes/admin/settings/wc-pos-settings-register.php:179
+#: includes/admin/settings/pos-host-settings-register.php:179
 #, fuzzy
 msgid "Enable taking over of registers"
 msgstr "Ενεργοποίηση της ανάληψης μητρώων"
 
-#: includes/admin/settings/wc-pos-settings-register.php:180
+#: includes/admin/settings/pos-host-settings-register.php:180
 #, fuzzy
 msgid "Allows shop managers to take over an already opened register."
 msgstr ""
 "Επιτρέπει στους διευθυντές καταστημάτων να αναλάβουν ένα μητρώο που έχει ήδη "
 "ανοίξει."
 
-#: includes/admin/settings/wc-pos-settings-register.php:248
+#: includes/admin/settings/pos-host-settings-register.php:248
 msgid "GTIN"
 msgstr "GTIN"
 
-#: includes/admin/settings/wc-pos-settings-reports.php:25
+#: includes/admin/settings/pos-host-settings-reports.php:25
 msgid "Reports"
 msgstr "Αναφορές"
 
-#: includes/admin/settings/wc-pos-settings-reports.php:45
+#: includes/admin/settings/pos-host-settings-reports.php:45
 #, fuzzy
 msgid "Report Options"
 msgstr "Επιλογές αναφοράς"
 
-#: includes/admin/settings/wc-pos-settings-reports.php:46
+#: includes/admin/settings/pos-host-settings-reports.php:46
 #, fuzzy
 msgid ""
 "The following options affect the reports that are displayed when closing the "
@@ -5324,30 +5324,30 @@ msgstr ""
 "Οι παρακάτω επιλογές επηρεάζουν τις αναφορές που εμφανίζονται κατά το "
 "κλείσιμο του αρχείου καταχωρήσεων."
 
-#: includes/admin/settings/wc-pos-settings-reports.php:51
+#: includes/admin/settings/pos-host-settings-reports.php:51
 #, fuzzy
 msgid "Closing Reports"
 msgstr "Κλείσιμο αναφορών"
 
-#: includes/admin/settings/wc-pos-settings-reports.php:52
+#: includes/admin/settings/pos-host-settings-reports.php:52
 #, fuzzy
 msgid "Display end of day report when closing register"
 msgstr ""
 "Εμφάνιση αναφοράς τέλους ημέρας κατά το κλείσιμο του αρχείου καταχωρήσεων"
 
-#: includes/admin/settings/wc-pos-settings-reports.php:53
+#: includes/admin/settings/pos-host-settings-reports.php:53
 #, fuzzy
 msgid "End of day report displayed with total sales when register closes."
 msgstr ""
 "Αναφορά τέλους ημέρας εμφανίζεται με συνολικές πωλήσεις όταν κλείνει η "
 "καταχώρηση."
 
-#: includes/admin/settings/wc-pos-settings-reports.php:60
+#: includes/admin/settings/pos-host-settings-reports.php:60
 #, fuzzy
 msgid "Report Orders"
 msgstr "Παραγγελίες αναφοράς"
 
-#: includes/admin/settings/wc-pos-settings-reports.php:61
+#: includes/admin/settings/pos-host-settings-reports.php:61
 #, fuzzy
 msgid ""
 "Select which order statuses to include in the final counts displayed in the "
@@ -5356,13 +5356,13 @@ msgstr ""
 "Επιλέξτε ποιες καταστάσεις παραγγελίας θα συμπεριληφθούν στις τελικές "
 "μετρήσεις που εμφανίζονται στην αναφορά τέλους ημέρας."
 
-#: includes/admin/settings/wc-pos-settings-reports.php:74
+#: includes/admin/settings/pos-host-settings-reports.php:74
 #, fuzzy
 msgid "End of Sale Email"
 msgstr "Ηλεκτρονικό ταχυδρομείο τέλους πώλησης"
 
 #. translators: %1$s opening anchor tag %2$s closing anchor tag
-#: includes/admin/settings/wc-pos-settings-reports.php:76
+#: includes/admin/settings/pos-host-settings-reports.php:76
 #, fuzzy
 msgid ""
 "The end of sale email notification can be customized in %1$sWooCommerce &gt; "
@@ -5371,157 +5371,157 @@ msgstr ""
 "Η ειδοποίηση ηλεκτρονικού ταχυδρομείου τέλους πώλησης μπορεί να προσαρμοστεί "
 "στο %1$sWooCommerce &gt; Μηνύματα ηλεκτρονικού ταχυδρομείου%2$s."
 
-#: includes/admin/settings/wc-pos-settings-tax.php:56
+#: includes/admin/settings/pos-host-settings-tax.php:56
 #, fuzzy
 msgid "Tax Calculation"
 msgstr "Υπολογισμός Φόρου"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:59
+#: includes/admin/settings/pos-host-settings-tax.php:59
 #, fuzzy
 msgid "Enables the calculation of tax using the WooCommerce configurations."
 msgstr ""
 "Ενεργοποιεί τον υπολογισμό του φόρου χρησιμοποιώντας τις διαμορφώσεις "
 "WooCommerce."
 
-#: includes/admin/settings/wc-pos-settings-tax.php:64
+#: includes/admin/settings/pos-host-settings-tax.php:64
 #, fuzzy
 msgid "Enabled (using WooCommerce configurations)"
 msgstr "Ενεργοποιημένη (χρησιμοποιώντας διαμορφώσεις WooCommerce)"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:65
+#: includes/admin/settings/pos-host-settings-tax.php:65
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:69
+#: includes/admin/settings/pos-host-settings-tax.php:69
 #, fuzzy
 msgid "Calculate Tax Based On"
 msgstr "Υπολογισμός φόρου βάσει"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:74
+#: includes/admin/settings/pos-host-settings-tax.php:74
 #, fuzzy
 msgid "This option determines which address used to calculate tax."
 msgstr ""
 "Αυτή η επιλογή καθορίζει τη διεύθυνση που χρησιμοποιείται για τον υπολογισμό "
 "του φόρου."
 
-#: includes/admin/settings/wc-pos-settings-tax.php:78
+#: includes/admin/settings/pos-host-settings-tax.php:78
 #, fuzzy
 msgid "Default WooCommerce"
 msgstr "Προεπιλεγμένο εμπόριο woo"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:79
+#: includes/admin/settings/pos-host-settings-tax.php:79
 #, fuzzy
 msgid "Customer shipping address"
 msgstr "Διεύθυνση Αποστολής Πελάτη"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:80
+#: includes/admin/settings/pos-host-settings-tax.php:80
 #, fuzzy
 msgid "Customer billing address"
 msgstr "Διεύθυνση χρέωσης πελάτη"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:81
+#: includes/admin/settings/pos-host-settings-tax.php:81
 msgid "Shop base address"
 msgstr "Διεύθυνση βάσης καταστήματος"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:82
+#: includes/admin/settings/pos-host-settings-tax.php:82
 #, fuzzy
 msgid "Outlet address"
 msgstr "Διεύθυνση εξόδου"
 
-#: includes/admin/settings/wc-pos-settings-tax.php:91
+#: includes/admin/settings/pos-host-settings-tax.php:91
 #, fuzzy
 msgid "Tax Options"
 msgstr "Φορολογικές Επιλογές"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:43
+#: includes/admin/settings/pos-host-settings-tiles.php:43
 #, fuzzy
 msgid "Tile Options"
 msgstr "Επιλογές πλακιδίων"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:44
+#: includes/admin/settings/pos-host-settings-tiles.php:44
 #, fuzzy
 msgid "The following options affect how the tiles appear on the product grid."
 msgstr ""
 "Οι ακόλουθες επιλογές επηρεάζουν τον τρόπο εμφάνισης των πλακιδίων στο "
 "πλέγμα προϊόντος."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:49
+#: includes/admin/settings/pos-host-settings-tiles.php:49
 #, fuzzy
 msgid "Default Tile Sorting"
 msgstr "Προεπιλεγμένη ταξινόμηση πλακιδίων"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:50
+#: includes/admin/settings/pos-host-settings-tiles.php:50
 #, fuzzy
 msgid "This controls the default sort order of the tile."
 msgstr "Αυτό ελέγχει την προεπιλεγμένη σειρά ταξινόμησης του πλακιδίου."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:59
+#: includes/admin/settings/pos-host-settings-tiles.php:59
 msgid "Default sorting (custom ordering + name)"
 msgstr "Προεπιλεγμένη ταξινόμηση (προσαρμοσμένη παραγγελία + όνομα)"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:60
+#: includes/admin/settings/pos-host-settings-tiles.php:60
 msgid "Popularity (sales)"
 msgstr "Δημοτικότητα (πωλήσεις)"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:61
+#: includes/admin/settings/pos-host-settings-tiles.php:61
 msgid "Average Rating"
 msgstr "Bαθμολογία"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:62
+#: includes/admin/settings/pos-host-settings-tiles.php:62
 msgid "Sort by most recent"
 msgstr "Ταξινόμηση κατά τα πιο πρόσφατα"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:63
+#: includes/admin/settings/pos-host-settings-tiles.php:63
 msgid "Sort by price (asc)"
 msgstr "Ταξινόμηση κατά τιμή (αυξ)"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:64
+#: includes/admin/settings/pos-host-settings-tiles.php:64
 msgid "Sort by price (desc)"
 msgstr "Ταξινόμηση κατά τιμή (φθιν)"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:65
+#: includes/admin/settings/pos-host-settings-tiles.php:65
 #, fuzzy
 msgid "Name (asc)"
 msgstr "Όνομα (asc)"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:70
+#: includes/admin/settings/pos-host-settings-tiles.php:70
 #, fuzzy
 msgid "Product Previews"
 msgstr "Προεπισκοπήσεις προϊόντων"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:73
+#: includes/admin/settings/pos-host-settings-tiles.php:73
 #, fuzzy
 msgid "Enable product preview panels"
 msgstr "Ενεργοποίηση πινάκων προεπισκόπησης προϊόντος"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:74
+#: includes/admin/settings/pos-host-settings-tiles.php:74
 #, fuzzy
 msgid "Shows a button on each tile for cashiers to view full product details."
 msgstr ""
 "Εμφανίζει ένα κουμπί σε κάθε πλακίδιο για να βλέπουν οι ταμίες τις πλήρεις "
 "λεπτομέρειες του προϊόντος."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:82
+#: includes/admin/settings/pos-host-settings-tiles.php:82
 #, fuzzy
 msgid "Enable out of stock products"
 msgstr "Ενεργοποίηση προϊόντων εκτός αποθέματος"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:83
+#: includes/admin/settings/pos-host-settings-tiles.php:83
 #, fuzzy
 msgid "Shows out of stock products in the product grid."
 msgstr "Εμφανίζει προϊόντα από απόθεμα στο πλέγμα προϊόντων."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:88
+#: includes/admin/settings/pos-host-settings-tiles.php:88
 #, fuzzy
 msgid "Product Visiblity"
 msgstr "Προϊόν Ορατά"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:89
+#: includes/admin/settings/pos-host-settings-tiles.php:89
 #, fuzzy
 msgid "Enable product visibility control"
 msgstr "Ενεργοποίηση ελέγχου ορατότητας προϊόντος"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:90
+#: includes/admin/settings/pos-host-settings-tiles.php:90
 #, fuzzy
 msgid ""
 "Allows you to show and hide products from either the POS, web or both shops."
@@ -5529,18 +5529,18 @@ msgstr ""
 "Σας επιτρέπει να εμφανίσετε και να αποκρύψετε προϊόντα είτε από το POS, web "
 "ή και τα δύο καταστήματα."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:97,
-#: includes/admin/views/html-product-data-point-of-sale.php:21
+#: includes/admin/settings/pos-host-settings-tiles.php:97,
+#: includes/admin/views/html-product-data-pos-host.php:21
 #, fuzzy
 msgid "Unit of Measurement"
 msgstr "Μονάδα Μέτρησης"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:98
+#: includes/admin/settings/pos-host-settings-tiles.php:98
 #, fuzzy
 msgid "Enable decimal stock counts and change of unit of measurement."
 msgstr "Ενεργοποίηση δεκαδικών αποθεμάτων και αλλαγή μονάδας μέτρησης."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:99
+#: includes/admin/settings/pos-host-settings-tiles.php:99
 #, fuzzy
 msgid ""
 "Allows you to sell your stock in decimal quantities and set the default unit "
@@ -5551,19 +5551,19 @@ msgstr ""
 "ορίσετε την προεπιλεγμένη μονάδα μέτρησης των τιμών των αποθεμάτων. Χρήσιμο "
 "για όσους θέλουν να πουλήσουν το βάρος ή γραμμική με βάση τα προϊόντα."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:106
+#: includes/admin/settings/pos-host-settings-tiles.php:106
 #, fuzzy
 msgid "Add to Cart Behaviour"
 msgstr "Προσθήκη στη συμπεριφορά του καλαθιού"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:107
+#: includes/admin/settings/pos-host-settings-tiles.php:107
 #, fuzzy
 msgid ""
 "Control what happens to the grid after a product is added to the basket."
 msgstr ""
 "Ελέγξτε τι συμβαίνει στο πλέγμα μετά την προσθήκη ενός προϊόντος στο καλάθι."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:108
+#: includes/admin/settings/pos-host-settings-tiles.php:108
 #, fuzzy
 msgid ""
 "Allows shop managers to choose the behaviour of grids when adding products "
@@ -5572,12 +5572,12 @@ msgstr ""
 "Επιτρέπει στους διευθυντές καταστημάτων να επιλέγουν τη συμπεριφορά των "
 "δικτύων κατά την προσθήκη προϊόντων στο καλάθι."
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:114
+#: includes/admin/settings/pos-host-settings-tiles.php:114
 #, fuzzy
 msgid "Stay on the selected category"
 msgstr "Παραμείνετε στην επιλεγμένη κατηγορία"
 
-#: includes/admin/settings/wc-pos-settings-tiles.php:115
+#: includes/admin/settings/pos-host-settings-tiles.php:115
 #, fuzzy
 msgid "Return to the category selection"
 msgstr "Επιστροφή στην επιλογή κατηγορίας"
@@ -6314,26 +6314,26 @@ msgstr ""
 "WooCommerce δεν θα λειτουργεί σωστά. Επικοινωνήστε με το διαχειριστή του "
 "διακομιστή για να τον ξεμπλοκάρετε."
 
-#: includes/admin/views/html-product-data-point-of-sale.php:22
+#: includes/admin/views/html-product-data-pos-host.php:22
 #, fuzzy
 msgid "Change the unit of measurement of stock values."
 msgstr "Αλλαγή της μονάδας μέτρησης των τιμών των αποθεμάτων."
 
-#: includes/admin/views/html-product-data-point-of-sale.php:31
+#: includes/admin/views/html-product-data-pos-host.php:31
 msgid "Unit"
 msgstr "Μονάδα"
 
-#: includes/admin/views/html-product-data-point-of-sale.php:32
+#: includes/admin/views/html-product-data-pos-host.php:32
 #, fuzzy
 msgid "Select unit of measurement."
 msgstr "Επιλέξτε μονάδα μέτρησης."
 
-#: includes/admin/views/html-product-data-point-of-sale.php:74
+#: includes/admin/views/html-product-data-pos-host.php:74
 #, fuzzy
 msgid "Value Increment"
 msgstr "Αύξηση τιμής"
 
-#: includes/admin/views/html-product-data-point-of-sale.php:75
+#: includes/admin/views/html-product-data-pos-host.php:75
 #, fuzzy
 msgid "Select incremental value when used when browsing as a tile."
 msgstr ""
@@ -6724,58 +6724,58 @@ msgstr "Δεν έχουν προστεθεί ακόμα ονομαστικές �
 msgid "Add Denomination"
 msgstr "Προσθήκη ονομασίας"
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:24,
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:56
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:24,
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:56
 #, fuzzy
 msgid "Stripe Terminal"
 msgstr "Τερματικό λωρίδας"
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:25
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:25
 #, fuzzy
 msgid "Take payments in person via Stripe Terminal."
 msgstr "Λάβετε πληρωμές αυτοπροσώπως μέσω του Τερματικού Stripe."
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:49
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:49
 #, fuzzy
 msgid "Enable Stripe for POS"
 msgstr "Ενεργοποίηση λωρίδας για POS"
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:55
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:55
 msgid "This controls the title which the user sees during checkout."
 msgstr "Ο τίτλος που βλέπει ο χρήστης κατά την ολοκλήρωση της παραγγελίας."
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:61
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:61
 #, fuzzy
 msgid "Payment method description that the customer will see on your website"
 msgstr ""
 "Περιγραφή τρόπου πληρωμής όπως εμφανίζεται στον πελάτη στην ιστοσελίδα σας."
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:63
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:63
 #, fuzzy
 msgid "Pay with Stripe Terminal."
 msgstr "Πληρώστε με το τερματικό Stripe."
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:67
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:67
 #, fuzzy
 msgid "Stripe secret key"
 msgstr "Πλήκτρο μυστικού διαλήθουν"
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:68
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:68
 #, fuzzy
 msgid "Secret key of your stripe account."
 msgstr "Μυστικό κλειδί του λογαριασμού σας λωρίδα."
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:73
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:73
 #, fuzzy
 msgid "Simulated reader"
 msgstr "Προσομοιωμένος αναγνώστης"
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:74
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:74
 #, fuzzy
 msgid "Enable simulated reader"
 msgstr "Ενεργοποίηση προσομοιωμένα προγράμματα ανάγνωσης"
 
-#: includes/gateways/stripe/includes/class-wc-pos-gateway-stripe.php:120
+#: includes/gateways/stripe/includes/class-pos-host-gateway-stripe.php:120
 #, fuzzy
 msgid "Available Terminals"
 msgstr "Διαθέσιμα τερματικά"

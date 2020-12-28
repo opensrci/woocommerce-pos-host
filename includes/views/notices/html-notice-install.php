@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 	<p><?php echo wp_kses_post( __( '<strong>Welcome to pos.host!</strong>', 'woocommerce-pos-host' ) ); ?></p>
 	<p class="submit">
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=pos_settings' ) ); ?>" class="button-primary"><?php esc_html_e( 'Settings', 'woocommerce-pos-host' ); ?></a>
-		<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pos_register' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Registers', 'woocommerce-pos-host' ); ?></a>
-		<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pos_outlet' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Outlets', 'woocommerce-pos-host' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pos_host_register' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Registers', 'woocommerce-pos-host' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pos_host_outlet' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Outlets', 'woocommerce-pos-host' ); ?></a>
 	</p>
 </div>

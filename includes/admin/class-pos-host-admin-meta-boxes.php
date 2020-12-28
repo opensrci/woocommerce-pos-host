@@ -40,9 +40,9 @@ class POS_HOST_Admin_Meta_Boxes {
 		add_action( 'woocommerce_process_product_meta', array( $this, 'save_product_grids' ), 10, 2 );
 
 		// Save meta boxes.
-		add_action( 'pos_host_process_pos_register_meta', 'POS_HOST_Meta_Box_Register_Options::save', 10, 2 );
-		add_action( 'pos_host_process_pos_outlet_meta', 'POS_HOST_Meta_Box_Outlet_Options::save', 10, 2 );
-		add_action( 'pos_host_process_pos_grid_meta', 'POS_HOST_Meta_Box_Grid_Options::save', 10, 2 );
+		add_action( 'pos_host_process_pos_host_register_meta', 'POS_HOST_Meta_Box_Register_Options::save', 10, 2 );
+		add_action( 'pos_host_process_pos_host_outlet_meta', 'POS_HOST_Meta_Box_Outlet_Options::save', 10, 2 );
+		add_action( 'pos_host_process_pos_host_register_meta', 'POS_HOST_Meta_Box_Grid_Options::save', 10, 2 );
 
 		// Add a new Point of Sale tab to the product options meta box.
 		if ( 'yes' === get_option( 'pos_host_decimal_quantities', 'no' ) ) {
@@ -104,38 +104,38 @@ class POS_HOST_Admin_Meta_Boxes {
 		$screen_id = $screen ? $screen->id : '';
 
 		// Register.
-		add_meta_box( 'pos-host-register-options', __( 'Register data', 'woocommerce-point-of-sale' ), 'POS_HOST_Meta_Box_Register_Options::output', 'pos_register', 'normal', 'high' );
-		add_meta_box( 'submitdiv', __( 'Register actions', 'woocommerce-point-of-sale' ), array( $this, 'actions_panel' ), 'pos_register', 'side', 'high' );
-		add_filter( 'postbox_classes_pos_register_pos-host-register-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
+		add_meta_box( 'pos-host-register-options', __( 'Register data', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Register_Options::output', 'pos_host_register', 'normal', 'high' );
+		add_meta_box( 'submitdiv', __( 'Register actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_register', 'side', 'high' );
+		add_filter( 'postbox_classes_pos_host_register_pos-host-register-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
 		// Outlet.
-		add_meta_box( 'pos-host-outlet-options', __( 'Outlet data', 'woocommerce-point-of-sale' ), 'POS_HOST_Meta_Box_Outlet_Options::output', 'pos_outlet', 'normal', 'high' );
-		add_meta_box( 'submitdiv', __( 'Outlet actions', 'woocommerce-point-of-sale' ), array( $this, 'actions_panel' ), 'pos_outlet', 'side', 'high' );
-		add_filter( 'postbox_classes_pos_outlet_pos-host-outlet-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
+		add_meta_box( 'pos-host-outlet-options', __( 'Outlet data', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Outlet_Options::output', 'pos_host_outlet', 'normal', 'high' );
+		add_meta_box( 'submitdiv', __( 'Outlet actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_outlet', 'side', 'high' );
+		add_filter( 'postbox_classes_pos_host_outlet_pos-host-outlet-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
 		// Grid.
-		add_meta_box( 'pos-host-grid-options', __( 'Tile options', 'woocommerce-point-of-sale' ), 'POS_HOST_Meta_Box_Grid_Options::output', 'pos_grid', 'normal', 'high' );
-		add_meta_box( 'pos-host-grid-tiles', __( 'Tiles', 'woocommerce-point-of-sale' ), 'POS_HOST_Meta_Box_Grid_Tiles::output', 'pos_grid', 'normal', 'high' );
-		add_meta_box( 'submitdiv', __( 'Grid actions', 'woocommerce-point-of-sale' ), array( $this, 'actions_panel' ), 'pos_grid', 'side', 'high' );
-		add_filter( 'postbox_classes_pos_grid_pos-host-grid-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
-		add_filter( 'postbox_classes_pos_grid_pos-host-grid-tiles', array( $this, 'add_meta_box_classes' ), 10, 1 );
+		add_meta_box( 'pos-host-grid-options', __( 'Tile options', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Grid_Options::output', 'pos_host_register', 'normal', 'high' );
+		add_meta_box( 'pos-host-grid-tiles', __( 'Tiles', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Grid_Tiles::output', 'pos_host_register', 'normal', 'high' );
+		add_meta_box( 'submitdiv', __( 'Grid actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_register', 'side', 'high' );
+		add_filter( 'postbox_classes_pos_host_register_pos-host-grid-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
+		add_filter( 'postbox_classes_pos_host_register_pos-host-grid-tiles', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
 		// Product.
-		add_meta_box( 'product-grids', __( 'Product grids', 'woocommerce-point-of-sale' ), 'POS_HOST_Meta_Box_Product_Grids::output', 'product', 'side', 'core' );
+		add_meta_box( 'product-grids', __( 'Product grids', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Product_Grids::output', 'product', 'side', 'core' );
 	}
 
 	/**
 	 * Remove meta boxes.
 	 */
 	public function remove_meta_boxes() {
-		// pos_register.
-		remove_meta_box( 'slugdiv', 'pos_register', 'normal' );
+		// pos_host_register.
+		remove_meta_box( 'slugdiv', 'pos_host_register', 'normal' );
 
-		// pos_outlet.
-		remove_meta_box( 'slugdiv', 'pos_outlet', 'normal' );
+		// pos_host_outlet.
+		remove_meta_box( 'slugdiv', 'pos_host_outlet', 'normal' );
 
-		// pos_grid.
-		remove_meta_box( 'slugdiv', 'pos_grid', 'normal' );
+		// pos_host_register.
+		remove_meta_box( 'slugdiv', 'pos_host_register', 'normal' );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class POS_HOST_Admin_Meta_Boxes {
 		self::$saved_meta_boxes = true;
 
 		// Check the post type.
-		if ( in_array( $post->post_type, array( 'pos_register', 'pos_outlet', 'pos_grid', 'pos_receipt', 'pos_report' ), true ) ) {
+		if ( in_array( $post->post_type, array( 'pos_host_register', 'pos_host_outlet', 'pos_host_register', 'pos_host_register', 'pos_host_report' ), true ) ) {
 			do_action( 'pos_host_process_' . $post->post_type . '_meta', $post_id, $post );
 		}
 	}
@@ -195,7 +195,7 @@ class POS_HOST_Admin_Meta_Boxes {
 		}
 
 		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'update-post_' . $post_id ) ) {
-			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-point-of-sale' ) );
+			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-pos-host' ) );
 		}
 
 		$current_grids = pos_host_get_tile_grids( $post_id );
@@ -251,8 +251,8 @@ class POS_HOST_Admin_Meta_Boxes {
 	 * @return array
 	 */
 	public function product_options_tabs( $tabs ) {
-		$tabs['woocommerce-point-of-sale'] = array(
-			'label'    => __( 'Point of Sale', 'woocommerce-point-of-sale' ),
+		$tabs['woocommerce-pos-host'] = array(
+			'label'    => __( 'Point of Sale', 'woocommerce-pos-host' ),
 			'target'   => 'point_of_sale_product_data',
 			'class'    => array(),
 			'priority' => 71,
@@ -267,7 +267,7 @@ class POS_HOST_Admin_Meta_Boxes {
 	public function product_options_panels() {
 		global $thepostid;
 
-		include POS_HOST()->plugin_path() . '/includes/admin/views/html-product-data-point-of-sale.php';
+		include POS_HOST()->plugin_path() . '/includes/admin/views/html-product-data-pos-host.php';
 	}
 
 	/**
@@ -278,7 +278,7 @@ class POS_HOST_Admin_Meta_Boxes {
 	 */
 	public function process_product_meta( $post_id, $post ) {
 		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'update-post_' . $post_id ) ) {
-			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-point-of-sale' ) );
+			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-pos-host' ) );
 		}
 
 		$uom = isset( $_POST['unit_of_measurement'] ) ? 'yes' : 'no';
@@ -317,7 +317,7 @@ class POS_HOST_Admin_Meta_Boxes {
 
 		$post_type        = $post->post_type;
 		$post_type_object = get_post_type_object( $post_type );
-		$delete_text      = EMPTY_TRASH_DAYS ? __( 'Move to Trash', 'woocommerce-point-of-sale' ) : __( 'Delete Permanently', 'woocommerce-point-of-sale' );
+		$delete_text      = EMPTY_TRASH_DAYS ? __( 'Move to Trash', 'woocommerce-pos-host' ) : __( 'Delete Permanently', 'woocommerce-pos-host' );
 		$submit_action    = 'edit' === $action ? 'update' : 'publish';
 
 		include POS_HOST_ABSPATH . '/includes/admin/meta-boxes/views/html-actions-panel.php';

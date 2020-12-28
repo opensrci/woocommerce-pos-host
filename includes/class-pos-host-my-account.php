@@ -49,7 +49,7 @@ class POS_HOST_My_Account {
 		foreach ( $items as $key => $item ) {
 			$new_items[ $key ] = $item;
 			if ( 'edit-account' === $key ) {
-				$new_items['point-of-sale'] = 'pos host';
+				$new_items['pos-host'] = 'pos host';
 			}
 		}
 

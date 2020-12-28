@@ -126,7 +126,6 @@ class POS_HOST_Admin {
 	 */
 	public function includes() {
 		include_once 'class-pos-host-admin-menus.php';
-		include_once 'class-pos-host-admin-notices.php';
 		include_once 'class-pos-host-admin-orders-page.php';
 	}
 
@@ -194,7 +193,7 @@ class POS_HOST_Admin {
 	 */
 	public function add_customer_meta_fields( $user ) {
 
-		if ( ! current_user_can( 'manage_woocommerce_point_of_sale' ) ) {
+		if ( ! current_user_can( 'manage_WooCommerce_pos_host' ) ) {
 			return;
 		}
 
@@ -356,7 +355,7 @@ class POS_HOST_Admin {
 	public static function plugin_row_meta( $links, $file ) {
 		if ( plugin_basename( POS_HOST_PLUGIN_FILE ) === $file ) {
 			$row_meta = array(
-				'docs'    => '<a href="' . esc_url( apply_filters( 'pos_host_docs_url', 'https://docs.woocommerce.com/document/point-of-sale/' ) ) . '" title="' . esc_attr( __( 'View Documentation', 'woocommerce-pos-host' ) ) . '">' . __( 'Docs', 'woocommerce-pos-host' ) . '</a>',
+				'docs'    => '<a href="' . esc_url( apply_filters( 'pos_host_docs_url', 'https://docs.woocommerce.com/document/pos-host/' ) ) . '" title="' . esc_attr( __( 'View Documentation', 'woocommerce-pos-host' ) ) . '">' . __( 'Docs', 'woocommerce-pos-host' ) . '</a>',
 				'support' => '<a href="' . esc_url( apply_filters( 'pos_host_docs_url', 'https://pos.host/support/' ) ) . '" title="' . esc_attr( __( 'Visit Support', 'woocommerce-pos-host' ) ) . '">' . __( 'Support', 'woocommerce-pos-host' ) . '</a>',
 			);
 

@@ -127,7 +127,7 @@ class POS_HOST_Admin_Orders_Page {
 			$registers = get_posts(
 				array(
 					'numberposts' => -1,
-					'post_type'   => 'pos_register',
+					'post_type'   => 'pos_host_register',
 				)
 			);
 			if ( $registers ) {
@@ -147,7 +147,7 @@ class POS_HOST_Admin_Orders_Page {
 			$outlets = get_posts(
 				array(
 					'numberposts' => - 1,
-					'post_type'   => 'pos_outlet',
+					'post_type'   => 'pos_host_outlet',
 				)
 			);
 			if ( $outlets ) {
@@ -173,7 +173,7 @@ class POS_HOST_Admin_Orders_Page {
 			return;
 		}
 
-		add_meta_box( 'wc-pos-print', __( 'Point of Sale', 'woocommerce-pos-host' ), array( $this, 'pos_print_output' ), 'shop_order', 'side' );
+		add_meta_box( 'pos-host-print', __( 'Point of Sale', 'woocommerce-pos-host' ), array( $this, 'pos_print_output' ), 'shop_order', 'side' );
 	}
 
 	public function pos_print_output() {
@@ -235,7 +235,7 @@ class POS_HOST_Admin_Orders_Page {
 			</div>
 			<a href="#TB_inline?width=300&height=300&inlineId=signature-content" id="preview-signature" class="thickbox button button-block"><?php esc_html_e( 'Signature', 'woocommerce-pos-host' ); ?></a>
 		<?php endif; ?>
-		<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?print_pos_receipt=true&print_from_wc=true&order_id=' . $post_id ), 'print_pos_receipt' ) ); ?>" target="_blank" id="view-post-receipt" class="button button-block">
+		<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?print_pos_host_receipt=true&print_from_wc=true&order_id=' . $post_id ), 'print_pos_host_receipt' ) ); ?>" target="_blank" id="view-post-receipt" class="button button-block">
 			<?php esc_html_e( 'View Receipt', 'woocommerce-pos-host' ); ?>
 		</a>
 		<button id="print-post-receipt" class="button button-primary button-block"><?php esc_html_e( 'Print Receipt', 'woocommerce-pos-host' ); ?></button>

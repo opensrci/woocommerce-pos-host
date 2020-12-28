@@ -21,8 +21,8 @@ class POS_HOST_Admin_Post_Types {
 		include_once dirname( __FILE__ ) . '/class-pos-host-admin-meta-boxes.php';
 
 		// Add/edit a receipt.
-		add_action( 'load-post.php', array( $this, 'pos_receipt' ) );
-		add_action( 'load-post-new.php', array( $this, 'pos_receipt' ) );
+		add_action( 'load-post.php', array( $this, 'pos_host_receipt' ) );
+		add_action( 'load-post-new.php', array( $this, 'pos_host_receipt' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		add_action( 'current_screen', array( $this, 'setup_screen' ) );
@@ -43,9 +43,9 @@ class POS_HOST_Admin_Post_Types {
 	}
 
 	/**
-	 * Loads the receipt customiser on pos_receipt screen.
+	 * Loads the receipt customiser on pos_host_receipt screen.
 	 */
-	public function pos_receipt() {
+	public function pos_host_receipt() {
 		$action    = 'load-post.php' === current_action() ? 'edit' : 'new';
 		$screen_id = false;
 
@@ -58,7 +58,7 @@ class POS_HOST_Admin_Post_Types {
 			$screen_id = wc_clean( wp_unslash( $_REQUEST['screen'] ) );
 		}
 
-		if ( ! $screen_id || 'pos_receipt' !== $screen_id ) {
+		if ( ! $screen_id || 'pos_host_receipt' !== $screen_id ) {
 			return;
 		}
 
@@ -66,7 +66,7 @@ class POS_HOST_Admin_Post_Types {
 			return;
 		}
 
-		$receipt_object = 'edit' === $action && isset( $_GET['post'] ) ? wc_pos_get_receipt( (int) $_GET['post'] ) : new POS_HOST_Receipt();
+		$receipt_object = 'edit' === $action && isset( $_GET['post'] ) ? pos_host_get_receipt( (int) $_GET['post'] ) : new POS_HOST_Receipt();
 
 		// Load only what we need here.
 		require_once ABSPATH . 'wp-admin/admin-header.php';
@@ -95,7 +95,7 @@ class POS_HOST_Admin_Post_Types {
 			$screen_id = wc_clean( wp_unslash( $_REQUEST['screen'] ) ); // WPCS: input var ok, sanitization ok.
 		}
 
-		if ( $screen_id && 'pos_receipt' === $screen_id ) {
+		if ( $screen_id && 'pos_host_receipt' === $screen_id ) {
 			$class = 'wp-customizer';
 		}
 
@@ -120,19 +120,19 @@ class POS_HOST_Admin_Post_Types {
 		}
 
 		switch ( $screen_id ) {
-			case 'edit-pos_register':
+			case 'edit-pos_host_register':
 				include_once POS_HOST_ABSPATH . '/includes/admin/list-tables/class-pos-host-admin-list-table-registers.php';
 				$wc_list_table = new POS_HOST_Admin_List_Table_Registers();
 				break;
-			case 'edit-pos_outlet':
+			case 'edit-pos_host_outlet':
 				include_once POS_HOST_ABSPATH . '/includes/admin/list-tables/class-pos-host-admin-list-table-outlets.php';
 				$wc_list_table = new POS_HOST_Admin_List_Table_Outlets();
 				break;
-			case 'edit-pos_grid':
+			case 'edit-pos_host_grid':
 				include_once POS_HOST_ABSPATH . '/includes/admin/list-tables/class-pos-host-admin-list-table-grids.php';
 				$wc_list_table = new POS_HOST_Admin_List_Table_Grids();
 				break;
-			case 'edit-pos_receipt':
+			case 'edit-pos_host_receipt':
 				include_once POS_HOST_ABSPATH . '/includes/admin/list-tables/class-pos-host-admin-list-table-receipts.php';
 				$wc_list_table = new POS_HOST_Admin_List_Table_Receipts();
 				break;
@@ -153,24 +153,24 @@ class POS_HOST_Admin_Post_Types {
 		global $post;
 
 		// Registers.
-		$messages['pos_register'] = array(
+		$messages['pos_host_register'] = array(
 			0 => '', // Unused. Messages start at index 1.
-			4 => __( 'Register Updated.', 'woocommerce-point-of-sale' ),
-			6 => __( 'Register Created.', 'woocommerce-point-of-sale' ),
+			4 => __( 'Register Updated.', 'woocommerce-pos-host' ),
+			6 => __( 'Register Created.', 'woocommerce-pos-host' ),
 		);
 
 		// Outlets.
-		$messages['pos_outlet'] = array(
+		$messages['pos_host_outlet'] = array(
 			0 => '', // Unused. Messages start at index 1.
-			4 => __( 'Outlet Updated.', 'woocommerce-point-of-sale' ),
-			6 => __( 'Outlet Created.', 'woocommerce-point-of-sale' ),
+			4 => __( 'Outlet Updated.', 'woocommerce-pos-host' ),
+			6 => __( 'Outlet Created.', 'woocommerce-pos-host' ),
 		);
 
 		// Grids.
-		$messages['pos_grid'] = array(
+		$messages['pos_host_grid'] = array(
 			0 => '', // Unused. Messages start at index 1.
-			4 => __( 'Grid Updated.', 'woocommerce-point-of-sale' ),
-			6 => __( 'Grid Created.', 'woocommerce-point-of-sale' ),
+			4 => __( 'Grid Updated.', 'woocommerce-pos-host' ),
+			6 => __( 'Grid Created.', 'woocommerce-pos-host' ),
 		);
 
 		return $messages;
@@ -182,7 +182,7 @@ class POS_HOST_Admin_Post_Types {
 	public function disable_autosave() {
 		global $post;
 
-		if ( $post && in_array( get_post_type( $post->ID ), array( 'pos_register', 'pos_outlet', 'pos_grid' ), true ) ) {
+		if ( $post && in_array( get_post_type( $post->ID ), array( 'pos_host_register', 'pos_host_outlet', 'pos_host_grid' ), true ) ) {
 			wp_dequeue_script( 'autosave' );
 		}
 	}
@@ -197,14 +197,14 @@ class POS_HOST_Admin_Post_Types {
 	 */
 	public function enter_title_here( $text, $post ) {
 		switch ( $post->post_type ) {
-			case 'pos_register':
-				$text = esc_html__( 'Register name', 'woocommerce-point-of-sale' );
+			case 'pos_host_register':
+				$text = esc_html__( 'Register name', 'woocommerce-pos-host' );
 				break;
-			case 'pos_outlet':
-				$text = esc_html__( 'Outlet name', 'woocommerce-point-of-sale' );
+			case 'pos_host_outlet':
+				$text = esc_html__( 'Outlet name', 'woocommerce-pos-host' );
 				break;
-			case 'pos_grid':
-				$text = esc_html__( 'Grid name', 'woocommerce-point-of-sale' );
+			case 'pos_host_grid':
+				$text = esc_html__( 'Grid name', 'woocommerce-pos-host' );
 				break;
 		}
 
@@ -213,9 +213,9 @@ class POS_HOST_Admin_Post_Types {
 
 	public function require_post_title( $post ) {
 		$post_types = array(
-			'pos_register',
-			'pos_outlet',
-			'pos_grid',
+			'pos_host_register',
+			'pos_host_outlet',
+			'pos_host_grid',
 		);
 
 		if ( ! in_array( $post->post_type, $post_types, true ) ) {
@@ -240,9 +240,9 @@ class POS_HOST_Admin_Post_Types {
 	 */
 	public function disable_delete_default_posts( $check, $post ) {
 		if (
-			( 'pos_register' === $post->post_type && wc_pos_is_default_register( $post->ID ) ) ||
-			( 'pos_outlet' === $post->post_type && wc_pos_is_default_outlet( $post->ID ) ) ||
-			( 'pos_receipt' === $post->post_type && wc_pos_is_default_receipt( $post->ID ) )
+			( 'pos_host_register' === $post->post_type && pos_host_is_default_register( $post->ID ) ) ||
+			( 'pos_host_outlet' === $post->post_type && pos_host_is_default_outlet( $post->ID ) ) ||
+			( 'pos_host_receipt' === $post->post_type && pos_host_is_default_receipt( $post->ID ) )
 		) {
 			return false;
 		}
@@ -257,20 +257,20 @@ class POS_HOST_Admin_Post_Types {
 	 * @return bool
 	 */
 	public function disable_delete_open_registers( $check, $post ) {
-		if ( 'pos_register' !== $post->post_type ) {
+		if ( 'pos_host_register' !== $post->post_type ) {
 			return $check;
 		}
 
-		$locked = wc_pos_is_register_locked( $post->ID );
+		$locked = pos_host_is_register_locked( $post->ID );
 		if ( $locked ) {
 			$by = get_user_by( 'id', $locked );
 
 			/* translators: %s Display name */
-			wp_die( sprintf( esc_html__( 'This register is opened by %s and cannot be deleted at the moment.', 'woocommerce-point-of-sale' ), esc_html( $by->display_name ) ) );
+			wp_die( sprintf( esc_html__( 'This register is opened by %s and cannot be deleted at the moment.', 'woocommerce-pos-host' ), esc_html( $by->display_name ) ) );
 		}
 
-		if ( wc_pos_is_register_open( $post->ID ) ) {
-			wp_die( esc_html__( 'This register is opened and cannot be deleted at the moment. Please make sure to close the register before you can delete it.', 'woocommerce-point-of-sale' ) );
+		if ( pos_host_is_register_open( $post->ID ) ) {
+			wp_die( esc_html__( 'This register is opened and cannot be deleted at the moment. Please make sure to close the register before you can delete it.', 'woocommerce-pos-host' ) );
 		}
 
 		return $check;
@@ -289,44 +289,44 @@ class POS_HOST_Admin_Post_Types {
 		global $wpdb;
 
 		// Register.
-		if ( 'pos_register' === get_post_type( $post_id ) ) {
+		if ( 'pos_host_register' === get_post_type( $post_id ) ) {
 			// Re-assign the orders assigned to this register to the default register.
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->postmeta} pm
 				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'shop_order'
 				SET pm.meta_value = %d
-				WHERE pm.meta_key = 'wc_pos_register_id' AND pm.meta_value = %d
+				WHERE pm.meta_key = 'pos_host_host_register_id' AND pm.meta_value = %d
 				",
-					absint( get_option( 'wc_pos_default_register' ) ),
+					absint( get_option( 'pos_host_default_register' ) ),
 					$post_id
 				)
 			);
 		}
 
 		// Outlet.
-		if ( 'pos_outlet' === get_post_type( $post_id ) ) {
+		if ( 'pos_host_outlet' === get_post_type( $post_id ) ) {
 			// Re-assign the registers assigned to this outlet to the default outlet.
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->postmeta} pm
-				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'pos_register'
+				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'pos_host_register'
 				SET pm.meta_value = %d
 				WHERE pm.meta_key = 'outlet' AND pm.meta_value = %d
 				",
-					absint( get_option( 'wc_pos_default_outlet' ) ),
+					absint( get_option( 'pos_host_default_outlet' ) ),
 					$post_id
 				)
 			);
 		}
 
 		// Grid.
-		if ( 'pos_grid' === get_post_type( $post_id ) ) {
+		if ( 'pos_host_grid' === get_post_type( $post_id ) ) {
 			// Re-assign the registers assigned to this grid to the categories grid.
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->postmeta} pm
-				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'pos_register'
+				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'pos_host_register'
 				SET pm.meta_value = 0
 				WHERE pm.meta_key = 'grid' AND pm.meta_value = %d
 				",
@@ -336,16 +336,16 @@ class POS_HOST_Admin_Post_Types {
 		}
 
 		// Receipt.
-		if ( 'pos_receipt' === get_post_type( $post_id ) ) {
+		if ( 'pos_host_receipt' === get_post_type( $post_id ) ) {
 			// Re-assign registers assigned to this receipt template to the default receipt.
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->postmeta} pm
-				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'pos_register'
+				LEFT JOIN {$wpdb->posts} p ON pm.post_id = p.ID AND p.post_type = 'pos_host_register'
 				SET pm.meta_value = %d
 				WHERE pm.meta_key = 'receipt' AND pm.meta_value = %d
 				",
-					absint( get_option( 'wc_pos_default_receipt' ) ),
+					absint( get_option( 'pos_host_default_receipt' ) ),
 					$post_id
 				)
 			);

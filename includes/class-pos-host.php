@@ -135,17 +135,6 @@ class POS_HOST {
 		delete_option( 'pos_host_custom_product_id' );
 	}
 
-
-	/**
-	 * On plugin update.
-	 * NO SUPPORT
-	 * @param WC_Upgrade $wc_upgrade
-	 * @param array      $hook_extra Array of bulk item update data.
-	 */
-	public function update( $wc_upgrade, $hook_extra ) {
-            //no support
-        }
-
 	/**
 	 * Returns the WooCommerce API endpoint.
 	 *
@@ -233,12 +222,12 @@ class POS_HOST {
 	 *
 	 * @return array
 	 */
-	public function pos_register_status( $response, $data ) {
-		if ( empty( $data['pos_register_id'] ) ) {
+	public function pos_host_register_status( $response, $data ) {
+		if ( empty( $data['pos_host_register_id'] ) ) {
 			return $response;
 		}
 
-		$is_lock = pos_host_is_register_locked( (int) $data['pos_register_id'] );
+		$is_lock = pos_host_is_register_locked( (int) $data['pos_host_register_id'] );
 		if ( ! $is_lock ) {
 			return $response;
 		}
@@ -302,13 +291,6 @@ class POS_HOST {
 		/*
 		 * Global includes.
 		 */
-                
-                /* No need 
-                 * 
-                include_once 'class-pos-host-install.php';
-                *  
-
-                * end of No need           */
 		
                 include_once 'pos-host-core-functions.php';
                 include_once 'pos-host-register-functions.php';
@@ -343,14 +325,6 @@ class POS_HOST {
 	 * Hooks.
 	 */
 	public function init_hooks() {
-		// Activation/deactivation.
-                /* no need
-                	add_action( 'upgrader_process_complete', array( $this, 'update' ), 10, 2 );
-                        add_action( 'plugins_loaded', array( $this, 'init_payment_gateways' ) );
-        		add_filter( 'woocommerce_order_number', array( $this, 'add_prefix_suffix_order_number' ), 99, 2 );
-                        add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
-                        add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-                */
             
 		register_activation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'activate' ) );
 		register_deactivation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'deactivate' ) );
@@ -369,10 +343,9 @@ class POS_HOST {
 		add_filter( 'request', array( $this, 'orders_by_order_type' ) );
 		add_filter( 'pos_host_discount_presets', array( $this, 'add_custom_discounts' ) );
                 add_filter( 'woocommerce_data_stores', array( $this, 'register_data_stores' ), 10, 1 );
+        	add_filter( 'woocommerce_order_number', array( $this, 'add_prefix_suffix_order_number' ), 99, 2 );
 
                 add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-		add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-		add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
 		add_filter( 'rest_shop_order_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
 		add_filter( 'rest_shop_coupon_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
 		add_action( 'woocommerce_loaded', array( $this, 'manage_floatval_quantity' ) );
@@ -388,14 +361,13 @@ class POS_HOST {
 			add_action( 'woocommerce_process_product_meta', array( $this, 'save_visibility' ), 10, 2 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation_visibility' ), 10, 2 );
 		}
-
- /* @todo: debug
- * 
- */
-return; 
-             
 		add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
 		add_filter( 'woocommerce_payment_gateways', array( $this, 'add_payment_gateways' ), 100 );
+                add_action( 'plugins_loaded', array( $this, 'init_payment_gateways' ) );
+
+
+            return; 
+             
 
 	}
 
@@ -453,29 +425,6 @@ return;
 		}
 	}
 
-	/**
-	 * Check if the WC REST API is blocked (i.e. status code != 200).
-	 */
-	public function check_wc_rest_api() {
-                include_once 'admin/class-pos-host-admin-notices.php';
-            
-		try {
-			$request     = new WP_REST_Request( 'GET', '/wc/v3' );
-			$response    = rest_do_request( $request );
-			$status_code = $response->get_status();
-		} catch ( Exception $e ) {
-			// Cannot get the status code (e.g. cURL error). Bypass the check.
-			$status_code = 200;
-		}
-
-		if ( 200 !== $status_code ) {
-			POS_HOST_Admin_Notices::add_notice( 'wc-rest-api' );
-			return;
-		}
-
-		// Remove the notice if added.
-		POS_HOST_Admin_Notices::remove_notice( 'wc-rest-api' );
-	}
 
 	/**
 	 * Filter the WP_Query based on the value of pos_host_visibility.
@@ -798,7 +747,7 @@ return;
 
 		if ( $amount_change && $register ) {
 			$actions['reprint_receipts'] = array(
-				'url'    => wp_nonce_url( admin_url( 'admin.php?print_pos_receipt=true&print_from_wc=true&order_id=' . $the_order->get_id() ), 'print_pos_receipt' ),
+				'url'    => wp_nonce_url( admin_url( 'admin.php?print_pos_host_receipt=true&print_from_wc=true&order_id=' . $the_order->get_id() ), 'print_pos_host_receipt' ),
 				'name'   => __( 'Reprints receipts', 'woocommerce-pos-host' ),
 				'action' => 'reprint_receipts',
 				'target' => '_parent',
@@ -873,7 +822,7 @@ return;
 	}
 
 	public function print_report() {
-		if ( ! isset( $_GET['print_pos_receipt'] ) || empty( $_GET['print_pos_receipt'] ) ) {
+		if ( ! isset( $_GET['print_pos_host_receipt'] ) || empty( $_GET['print_pos_host_receipt'] ) ) {
 			return;
 		}
 
@@ -894,7 +843,7 @@ return;
 		}
 
 		$nonce = isset( $_REQUEST['_wpnonce'] ) ? wc_clean( wp_unslash( $_REQUEST['_wpnonce'] ) ) : '';
-		if ( ! wp_verify_nonce( $nonce, 'print_pos_receipt' ) || ! is_user_logged_in() ) {
+		if ( ! wp_verify_nonce( $nonce, 'print_pos_host_receipt' ) || ! is_user_logged_in() ) {
 			wp_die( esc_html__( 'You are not allowed to view this page.', 'woocommerce-pos-host' ) );
 		}
 
@@ -1013,6 +962,7 @@ return;
 	public function init_payment_gateways() {
         
                 include_once 'gateways/class-pos-host-gateway-cash.php';
+		include_once 'gateways/class-pos-host-gateway-terminal.php';
 		
         /*@todo Debug *
          * 
@@ -1020,7 +970,6 @@ return;
 	return;
                 include_once 'gateways/class-pos-host-gateway-bacs.php';
 		include_once 'gateways/class-pos-host-gateway-cheque.php';
-		include_once 'gateways/class-pos-host-gateway-chip-and-pin.php';
 		include_once 'gateways/stripe/class-pos-host-stripe.php';
 		include_once 'gateways/paymentsense/class-pos-host-paymentsense.php';
 	}
@@ -1055,11 +1004,11 @@ return;
 
 		$screen       = $current_screen ? $current_screen->id : null;
 		$gateways     = pos_host_get_available_payment_gateways();
-		$pos_gateways = array( 'pos_chip_and_pin' );
+		$pos_gateways = array( 'pos_host_terminal' );
 
-		$chip_and_pin = empty( get_option( 'pos_host_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_chip_and_pin_gateways', 1 );
-		for ( $n = 2; $n <= (int) $chip_and_pin; $n++ ) {
-			$pos_gateways[] = 'pos_chip_and_pin_' . $n;
+		$terminals = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
+		for ( $n = 2; $n <= (int) $terminals; $n++ ) {
+			$pos_gateways[] = 'pos_host_terminal_' . $n;
 		}
 
 		if ( in_array( $value, $pos_gateways, true ) && 'shop_order' === $screen ) {
@@ -1113,11 +1062,11 @@ return;
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-grid-data-store-cpt.php';
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-session-data-store-cpt.php';
 
-		$stores['pos_register'] = 'POS_HOST_Register_Data_Store_CPT';	
-                $stores['pos_outlet']   = 'POS_HOST_Outlet_Data_Store_CPT';
-		$stores['pos_receipt']  = 'POS_HOST_Receipt_Data_Store_CPT';               
-		$stores['pos_grid']     = 'POS_HOST_Grid_Data_Store_CPT';
-		$stores['pos_session']  = 'POS_HOST_Session_Data_Store_CPT';
+		$stores['pos_host_register'] = 'POS_HOST_Register_Data_Store_CPT';	
+                $stores['pos_host_outlet']   = 'POS_HOST_Outlet_Data_Store_CPT';
+		$stores['pos_host_receipt']  = 'POS_HOST_Receipt_Data_Store_CPT';               
+		$stores['pos_host_grid']     = 'POS_HOST_Grid_Data_Store_CPT';
+		$stores['pos_host_session']  = 'POS_HOST_Session_Data_Store_CPT';
 
 		return $stores;
 	}

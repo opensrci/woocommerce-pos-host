@@ -63,12 +63,12 @@ class POS_HOST_Admin_Assets {
 		}
 
 		// Add/edit receipt.
-		if ( 'pos_receipt' === $screen_id ) {
+		if ( 'pos_host_receipt' === $screen_id ) {
 			wp_enqueue_style( 'customize-controls' );
 		}
 
 		// Our custom post type pages.
-		if ( in_array( $screen_id, array( 'pos_host_register', 'pos_outlet', 'pos_grid' ), true ) ) {
+		if ( in_array( $screen_id, array( 'pos_host_register', 'pos_host_outlet', 'pos_host_grid' ), true ) ) {
 			wp_enqueue_style( 'pos-host-admin-meta-boxes' );
 		}
 	}
@@ -124,8 +124,8 @@ class POS_HOST_Admin_Assets {
 					'check_user_card_uniqueness_nonce' => wp_create_nonce( 'check-user-card-uniqueness' ),
 					'get_user_by_card_number_nonce'    => wp_create_nonce( 'get-user-by-card-number' ),
 					'paymentsense_eod_report_nonce'    => wp_create_nonce( 'paymentsense-eod-report' ),
-					'i18n_confirm_delete_register'     => __( 'Orders placed by the deleted register will be assigned to the Default Register.', 'woocommerce-point-of-sale' ),
-					'i18n_confirm_delete_registers'    => __( 'Orders placed by the deleted registers will be assigned to the Default Register.', 'woocommerce-point-of-sale' ),
+					'i18n_confirm_delete_register'     => __( 'Orders placed by the deleted register will be assigned to the Default Register.', 'woocommerce-pos-host' ),
+					'i18n_confirm_delete_registers'    => __( 'Orders placed by the deleted registers will be assigned to the Default Register.', 'woocommerce-pos-host' ),
 				)
 			)
 		);
@@ -142,12 +142,12 @@ class POS_HOST_Admin_Assets {
 				'base_postcode'                  => WC()->countries->get_base_postcode(),
 				'base_country'                   => WC()->countries->get_base_country(),
 				'base_state'                     => '*' === WC()->countries->get_base_state() ? '' : WC()->countries->get_base_state(),
-				'i18n_select_state_text'         => esc_attr__( 'Select an option&hellip;', 'woocommerce-point-of-sale' ),
-				'i18n_email_error'               => __( 'Please enter in a valid email address.', 'woocommerce-point-of-sale' ),
-				'i18n_phone_error'               => __( 'Please enter in a valid phone number.', 'woocommerce-point-of-sale' ),
-				'i18n_fax_error'                 => __( 'Please enter in a valid fax number.', 'woocommerce-point-of-sale' ),
-				'i18n_url_error'                 => __( 'Please enter in a valid URL.', 'woocommerce-point-of-sale' ),
-				'i18n_confirm_use_store_address' => __( 'Are you sure you want to fill out the fields from the store address?', 'woocommerce-point-of-sale' ),
+				'i18n_select_state_text'         => esc_attr__( 'Select an option&hellip;', 'woocommerce-pos-host' ),
+				'i18n_email_error'               => __( 'Please enter in a valid email address.', 'woocommerce-pos-host' ),
+				'i18n_phone_error'               => __( 'Please enter in a valid phone number.', 'woocommerce-pos-host' ),
+				'i18n_fax_error'                 => __( 'Please enter in a valid fax number.', 'woocommerce-pos-host' ),
+				'i18n_url_error'                 => __( 'Please enter in a valid URL.', 'woocommerce-pos-host' ),
+				'i18n_confirm_use_store_address' => __( 'Are you sure you want to fill out the fields from the store address?', 'woocommerce-pos-host' ),
 			)
 		);
 
@@ -158,8 +158,8 @@ class POS_HOST_Admin_Assets {
 			array(
 				'grid_id'               => isset( $post->ID ) ? $post->ID : '',
 				'grid_tile_nonce'       => wp_create_nonce( 'grid-tile' ),
-				'i18n_delete_all_tiles' => esc_js( __( 'Are you sure you want to delete all tiles in this grid? This cannot be undone.', 'woocommerce-point-of-sale' ) ),
-				'i18n_delete_tile'      => esc_js( __( 'Are you sure you want to delete this tile? This cannot be undone.', 'woocommerce-point-of-sale' ) ),
+				'i18n_delete_all_tiles' => esc_js( __( 'Are you sure you want to delete all tiles in this grid? This cannot be undone.', 'woocommerce-pos-host' ) ),
+				'i18n_delete_tile'      => esc_js( __( 'Are you sure you want to delete this tile? This cannot be undone.', 'woocommerce-pos-host' ) ),
 			)
 		);
 
@@ -171,9 +171,9 @@ class POS_HOST_Admin_Assets {
 				'receipt_id'                => isset( $_GET['post'] ) ? (int) $_GET['post'] : '',
 				'update_receipt_nonce'      => wp_create_nonce( 'update-receipt' ),
 				'date_i18n_nonce'           => wp_create_nonce( 'date-i18n' ),
-				'i18n_field_name_empty'     => __( 'The field “Receipt Name” cannot be empty.', 'woocommerce-point-of-sale' ),
-				'i18n_field_width_empty'    => __( 'The field “Receipt Width” cannot be empty.', 'woocommerce-point-of-sale' ),
-				'i18n_field_width_negative' => __( 'The field “Receipt Width” cannot be a negative value.', 'woocommerce-point-of-sale' ),
+				'i18n_field_name_empty'     => __( 'The field “Receipt Name” cannot be empty.', 'woocommerce-pos-host' ),
+				'i18n_field_width_empty'    => __( 'The field “Receipt Width” cannot be empty.', 'woocommerce-pos-host' ),
+				'i18n_field_width_negative' => __( 'The field “Receipt Width” cannot be a negative value.', 'woocommerce-pos-host' ),
 			)
 		);
 
@@ -184,8 +184,8 @@ class POS_HOST_Admin_Assets {
 			array(
 				'ajax_url'                    => WC()->ajax_url(),
 				'product_for_barcode_nonce'   => wp_create_nonce( 'product_for_barcode' ),
-				'remove_item_notice'          => __( 'Are you sure you want to remove the selected items?', 'woocommerce-point-of-sale' ),
-				'select_placeholder_category' => __( 'Search for a category&hellip;', 'woocommerce-point-of-sale' ),
+				'remove_item_notice'          => __( 'Are you sure you want to remove the selected items?', 'woocommerce-pos-host' ),
+				'select_placeholder_category' => __( 'Search for a category&hellip;', 'woocommerce-pos-host' ),
 			)
 		);
 
@@ -195,14 +195,14 @@ class POS_HOST_Admin_Assets {
 			'pos_host_admin_settings_params',
 			array(
 				'time'        => time(),
-				'i18n_note'   => __( 'Note', 'woocommerce-point-of-sale' ),
-				'i18n_coin'   => __( 'Coin', 'woocommerce-point-of-sale' ),
-				'i18n_remove' => __( 'Remove', 'woocommerce-point-of-sale' ),
+				'i18n_note'   => __( 'Note', 'woocommerce-pos-host' ),
+				'i18n_coin'   => __( 'Coin', 'woocommerce-pos-host' ),
+				'i18n_remove' => __( 'Remove', 'woocommerce-pos-host' ),
 			)
 		);
 
 		// Receipt printing page.
-		if ( isset( $_GET['print_pos_receipt'] ) ) {
+		if ( isset( $_GET['print_pos_host_receipt'] ) ) {
 			// Dequeue all registered scripts so far.
 			$wp_scripts->queue = array();
 			$wp_styles->queue  = array();
@@ -217,7 +217,7 @@ class POS_HOST_Admin_Assets {
 
 		// Load the necessary assets for the media JS APIs.
 		if (
-			in_array( $screen_id, array( 'pos_receipt' ), true ) ||
+			in_array( $screen_id, array( 'pos_host_receipt' ), true ) ||
 			$pos_host_screen_id . '_page_pos-host-settings' === $screen_id
 		) {
 			wp_enqueue_media();
@@ -257,7 +257,7 @@ class POS_HOST_Admin_Assets {
 		}
 
 		// Our custom post type pages.
-		if ( in_array( $screen_id, array( 'pos_host_register', 'pos_host_outlet', 'pos_grid' ), true ) ) {
+		if ( in_array( $screen_id, array( 'pos_host_register', 'pos_host_outlet', 'pos_host_grid' ), true ) ) {
 			wp_enqueue_script( 'wc-admin-meta-boxes' );
 			wp_enqueue_script( 'pos-host-admin-meta-boxes' );
 		}
@@ -268,13 +268,13 @@ class POS_HOST_Admin_Assets {
 		}
 
 		// Add/edit grids.
-		if ( 'pos_grid' === $screen_id ) {
+		if ( 'pos_host_grid' === $screen_id ) {
 			wp_enqueue_script( 'wc-backbone-modal' );
 			wp_enqueue_script( 'pos-host-admin-grids' );
 		}
 
 		// Add/edit receipt.
-		if ( 'pos_receipt' === $screen_id ) {
+		if ( 'pos_host_receipt' === $screen_id ) {
 			wp_enqueue_code_editor( array() );
 			wp_enqueue_script( 'customize-controls' );
 			wp_enqueue_script( 'pos-host-admin-receipts' );

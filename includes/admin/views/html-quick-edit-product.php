@@ -2,17 +2,17 @@
 /**
  * Admin View: Quick Edit Product
  *
- * @package WooCommerce_Point_Of_Sale/Admin/Views
+ * @package WooCommerce_pos_host/Admin/Views
  */
 
 defined( 'ABSPATH' ) || exit;
 ?>
 <fieldset class="inline-edit-col-left clear">
 	<div id="visibility-fields" class="inline-edit-col">
-		<h4><?php esc_html_e( 'Point of Sale', 'woocommerce-point-of-sale' ); ?></h4>
+		<h4><?php esc_html_e( 'Point of Sale', 'woocommerce-pos-host' ); ?></h4>
 		<div class="inline-edit-group">
 			<label class="alignleft">
-				<span class="title"><?php esc_html_e( 'Visibility', 'woocommerce-point-of-sale' ); ?></span>
+				<span class="title"><?php esc_html_e( 'Visibility', 'woocommerce-pos-host' ); ?></span>
 				<span class="input-text-wrap">
 					<select class="pos_visibility" name="_pos_visibility">
 					<?php
@@ -20,11 +20,11 @@ defined( 'ABSPATH' ) || exit;
 					$pos_visibility = $pos_visibility ? $pos_visibility : 'pos_online';
 
 					$visibility_options = apply_filters(
-						'wc_pos_visibility_options',
+						'pos_host_visibility_options',
 						array(
-							'pos_online' => __( 'POS &amp; Online', 'woocommerce-point-of-sale' ),
-							'pos'        => __( 'POS Only', 'woocommerce-point-of-sale' ),
-							'online'     => __( 'Online Only', 'woocommerce-point-of-sale' ),
+							'pos_online' => __( 'POS &amp; Online', 'woocommerce-pos-host' ),
+							'pos'        => __( 'POS Only', 'woocommerce-pos-host' ),
+							'online'     => __( 'Online Only', 'woocommerce-pos-host' ),
 						)
 					);
 

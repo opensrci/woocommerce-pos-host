@@ -62,18 +62,18 @@ function pos_host_get_screen_ids() {
 		$pos_host_screen_id . '_page_pos-host-settings',
 		'edit-shop_order',
 		'edit-product',
-		'edit-pos_register',
-		'edit-pos_outlet',
-		'edit-pos_grid',
-		'edit-pos_receipt',
-		'edit-pos_report',
+		'edit-pos_host_register',
+		'edit-pos_host_outlet',
+		'edit-pos_host_grid',
+		'edit-pos_host_receipt',
+		'edit-pos_host_report',
 		'shop_order',
 		'product',
-		'pos_register',
-		'pos_outlet',
-		'pos_grid',
-		'pos_receipt',
-		'pos_report',
+		'pos_host_register',
+		'pos_host_outlet',
+		'pos_host_grid',
+		'pos_host_receipt',
+		'pos_host_report',
 		'profile',
 		'user-edit',
 	);
@@ -90,7 +90,7 @@ function pos_host_get_screen_ids() {
  * @return bool
  */
 function pos_host_is_default_post( $post_id, $post_type ) {
-	if ( ! in_array( $post_type, array( 'pos_register', 'pos_outlet', 'pos_receipt' ) ) ) {
+	if ( ! in_array( $post_type, array( 'pos_host_register', 'pos_host_outlet', 'pos_host_receipt' ) ) ) {
 		return false;
 	}
 
@@ -273,7 +273,7 @@ function pos_host_get_registers_by_outlet( $outlet_id = 0 ) {
 	$get_posts = get_posts(
 		array(
 			'numberposts' => -1,
-			'post_type'   => 'pos_register',
+			'post_type'   => 'pos_host_register',
 			'meta_key'    => 'outlet',
 			'meta_value'  => $outlet_id,
 		)

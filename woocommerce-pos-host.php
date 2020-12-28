@@ -36,7 +36,7 @@ if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 		'admin_notices',
 		function() {
 			/* translators: 1. URL link. */
-			echo '<div class="error"><p><strong>' . sprintf( esc_html__( 'POS HOST for WooCommerce requires WooCommerce to be installed and active. You can download %s here.', 'woocommerce-point-of-sale' ), '<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>' ) . '</strong></p></div>';
+			echo '<div class="error"><p><strong>' . sprintf( esc_html__( 'POS HOST for WooCommerce requires WooCommerce to be installed and active. You can download %s here.', 'woocommerce-pos-host' ), '<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>' ) . '</strong></p></div>';
 		}
 	);
 
