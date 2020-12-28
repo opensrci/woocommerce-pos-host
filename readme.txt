@@ -1,6 +1,6 @@
 === pos.host WooCommerce ===
 
-Author: pos.host
+Author: OpenSRCi
 Tags: woocommerce, pos, point, of, sale, point of sale, tiles, grids, outlets, register, till, cashier, scan, barcode, stock, control, card, cash
 Requires at least: 4.9.0
 Tested up to: 5.5.3
