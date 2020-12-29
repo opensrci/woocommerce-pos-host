@@ -22,7 +22,7 @@ $sections    = array(
 );
 ?>
 <div id="customize-controls" class="wp-full-overlay expanded preview-desktop">
-	<form class="wrap wp-full-overlay-sidebar" action="<?php echo esc_attr( $action ); ?>" id="wc-pos-receipt-form" method="post">
+	<form class="wrap wp-full-overlay-sidebar" action="<?php echo esc_attr( $action ); ?>" id="pos-host-receipt-form" method="post">
 		<?php wp_nonce_field( 'save-receipt' ); ?>
 		<input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $action ); ?>"/>
 		<input type="hidden" id="referredby" name="referredby" value="<?php echo esc_url( wp_get_referer() ); ?>"/>

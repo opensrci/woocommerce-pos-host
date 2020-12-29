@@ -114,11 +114,11 @@ class POS_HOST_Admin_Meta_Boxes {
 		add_filter( 'postbox_classes_pos_host_outlet_pos-host-outlet-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
 		// Grid.
-		add_meta_box( 'pos-host-grid-options', __( 'Tile options', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Grid_Options::output', 'pos_host_register', 'normal', 'high' );
-		add_meta_box( 'pos-host-grid-tiles', __( 'Tiles', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Grid_Tiles::output', 'pos_host_register', 'normal', 'high' );
-		add_meta_box( 'submitdiv', __( 'Grid actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_register', 'side', 'high' );
-		add_filter( 'postbox_classes_pos_host_register_pos-host-grid-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
-		add_filter( 'postbox_classes_pos_host_register_pos-host-grid-tiles', array( $this, 'add_meta_box_classes' ), 10, 1 );
+		add_meta_box( 'pos-host-grid-options', __( 'Tile options', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Grid_Options::output', 'pos_host_grid', 'normal', 'high' );
+		add_meta_box( 'pos-host-grid-tiles', __( 'Tiles', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Grid_Tiles::output', 'pos_host_grid', 'normal', 'high' );
+		add_meta_box( 'submitdiv', __( 'Grid actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_grid', 'side', 'high' );
+		add_filter( 'postbox_classes_pos_host_grid_pos-host-grid-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
+		add_filter( 'postbox_classes_pos_host_grid_pos-host-grid-tiles', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
 		// Product.
 		add_meta_box( 'product-grids', __( 'Product grids', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Product_Grids::output', 'product', 'side', 'core' );
@@ -134,8 +134,8 @@ class POS_HOST_Admin_Meta_Boxes {
 		// pos_host_outlet.
 		remove_meta_box( 'slugdiv', 'pos_host_outlet', 'normal' );
 
-		// pos_host_register.
-		remove_meta_box( 'slugdiv', 'pos_host_register', 'normal' );
+		// pos_host_grid.
+		remove_meta_box( 'slugdiv', 'pos_host_grid', 'normal' );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class POS_HOST_Admin_Meta_Boxes {
 		self::$saved_meta_boxes = true;
 
 		// Check the post type.
-		if ( in_array( $post->post_type, array( 'pos_host_register', 'pos_host_outlet', 'pos_host_register', 'pos_host_register', 'pos_host_report' ), true ) ) {
+		if ( in_array( $post->post_type, array( 'pos_host_register', 'pos_host_outlet', 'pos_host_grid', 'pos_host_receipt', 'pos_host_report' ), true ) ) {
 			do_action( 'pos_host_process_' . $post->post_type . '_meta', $post_id, $post );
 		}
 	}

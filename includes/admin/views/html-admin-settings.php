@@ -11,7 +11,7 @@ $tab_exists        = isset( $tabs[ $current_tab ] ) || has_action( 'pos_host_sec
 $current_tab_label = isset( $tabs[ $current_tab ] ) ? $tabs[ $current_tab ] : '';
 
 if ( ! $tab_exists ) {
-	wp_safe_redirect( admin_url( 'admin.php?page=wc-pos-settings' ) );
+	wp_safe_redirect( admin_url( 'admin.php?page=pos-host-settings' ) );
 	exit;
 }
 ?>
@@ -20,7 +20,7 @@ if ( ! $tab_exists ) {
 		<nav class="nav-tab-wrapper woo-nav-tab-wrapper">
 			<?php
 			foreach ( $tabs as $slug => $label ) {
-				echo '<a href="' . esc_html( admin_url( 'admin.php?page=wc-pos-settings&tab=' . esc_attr( $slug ) ) ) . '" class="nav-tab ' . ( $current_tab === $slug ? 'nav-tab-active' : '' ) . '">' . esc_html( $label ) . '</a>';
+				echo '<a href="' . esc_html( admin_url( 'admin.php?page=pos-host-settings&tab=' . esc_attr( $slug ) ) ) . '" class="nav-tab ' . ( $current_tab === $slug ? 'nav-tab-active' : '' ) . '">' . esc_html( $label ) . '</a>';
 			}
 			do_action( 'pos_host_settings_tabs' );
 			?>
@@ -35,7 +35,7 @@ if ( ! $tab_exists ) {
 			<?php if ( empty( $GLOBALS['hide_save_button'] ) ) : ?>
 				<button name="save" class="button-primary woocommerce-save-button" type="submit" value="<?php esc_attr_e( 'Save changes', 'woocommerce-pos-host' ); ?>"><?php esc_html_e( 'Save changes', 'woocommerce-pos-host' ); ?></button>
 			<?php endif; ?>
-			<?php wp_nonce_field( 'wc-pos-settings' ); ?>
+			<?php wp_nonce_field( 'pos-host-settings' ); ?>
 		</p>
 	</form>
 </div>

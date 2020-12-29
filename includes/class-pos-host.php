@@ -301,6 +301,7 @@ class POS_HOST {
 		include_once 'class-pos-host-post-types.php';
 		include_once 'class-pos-host-emails.php';
 		include_once 'class-pos-host-autoloader.php';
+		include_once 'class-pos-host-stocks.php';
 		include_once 'admin/class-pos-host-admin-post-types.php';
 		include_once 'admin/class-pos-host-admin.php';
 		include_once 'admin/class-pos-host-admin-assets.php';
