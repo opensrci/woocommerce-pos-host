@@ -2,7 +2,7 @@
 /**
  * Register Session
  *
- * @since 5.2.0
+ * @since 0.0.1
  *
  * @package WooCommerce_pos_host/Classes
  */
@@ -42,21 +42,21 @@ class POS_HOST_Session extends WC_Data {
 	 *
 	 * @var string
 	 */
-	protected $object_type = 'pos_session';
+	protected $object_type = 'pos_host_session';
 
 	/**
 	 * Post type.
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'pos_session';
+	protected $post_type = 'pos_host_session';
 
 	/**
 	 * Cache group.
 	 *
 	 * @var string
 	 */
-	protected $cache_group = 'pos_sessions';
+	protected $cache_group = 'pos_host_sessions';
 
 	/**
 	 * Constructor.
@@ -76,7 +76,7 @@ class POS_HOST_Session extends WC_Data {
 		}
 
 		// This filter allows custom session objects to be created on the fly.
-		$session = apply_filters( 'pos_host_get_pos_session_data', false, $data, $this );
+		$session = apply_filters( 'pos_host_get_pos_host_session_data', false, $data, $this );
 
 		if ( $session ) {
 			$this->read_manual_session( $data, $session );
@@ -84,17 +84,17 @@ class POS_HOST_Session extends WC_Data {
 		}
 
 		// Try to load session using slug or ID.
-		if ( is_string( $data ) && 'pos_session' === get_post_type( absint( $data ) ) ) {
+		if ( is_string( $data ) && 'pos_host_session' === get_post_type( absint( $data ) ) ) {
 			$this->set_id( absint( $data ) );
 		} elseif ( is_string( $data ) ) {
-			$post = get_page_by_path( $data, OBJECT, 'pos_session' );
+			$post = get_page_by_path( $data, OBJECT, 'pos_host_session' );
 
-			if ( $post && isset( $post->ID ) && 'pos_session' === get_post_type( $post->ID ) ) {
+			if ( $post && isset( $post->ID ) && 'pos_host_session' === get_post_type( $post->ID ) ) {
 				$this->set_id( $post->ID );
 			} else {
 				$this->set_object_read( true );
 			}
-		} elseif ( is_int( $data ) && 'pos_session' === get_post_type( $data ) ) {
+		} elseif ( is_int( $data ) && 'pos_host_session' === get_post_type( $data ) ) {
 			$this->set_id( $data );
 		} else {
 			$this->set_object_read( true );
@@ -107,7 +107,7 @@ class POS_HOST_Session extends WC_Data {
 	 * If the object has an ID, read using the data store.
 	 */
 	protected function read_object_from_database() {
-		$this->data_store = WC_Data_Store::load( 'pos_session' );
+		$this->data_store = WC_Data_Store::load( 'pos_host_session' );
 
 		if ( $this->get_id() > 0 ) {
 			$this->data_store->read( $this );

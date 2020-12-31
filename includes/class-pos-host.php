@@ -691,7 +691,7 @@ class POS_HOST {
 			$register = wc_clean( $_GET['register'] );
 			$outlet   = wc_clean( $_GET['outlet'] );
 
-			$register_url = get_home_url() . "/p/$outlet/$register";
+			$register_url = get_home_url() . "/pos-host/$outlet/$register";
 
 			return $register_url;
 		} else {
@@ -991,10 +991,10 @@ class POS_HOST {
 		// $methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
 		// $methods[] = 'POS_HOST_Gateway_Paymentsense';
 
-		$chip_and_pin = empty( get_option( 'pos_host_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_chip_and_pin_gateways', 1 );
+		$chip_and_pin = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
 
 		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
-			$methods[] = 'POS_HOST_Gateway_Chip_And_PIN';
+			$methods[] = 'POS_HOST_Gateway_Terminal';
 		}
 
 		return $methods;

@@ -41,10 +41,7 @@ class POS_HOST_Sell {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'template_redirect', array( $this, 'template_redirect' ) );
-        /*@todo debug
-         * 
-         */        
+		add_action( 'template_redirect', array( $this, 'template_redirect' ) );      
 		add_action( 'rest_api_init', array( $this, 'wc_api_init' ), 11 );
 		add_action( 'rest_api_init', array( $this, 'wc_api_loaded' ), 12 );
 		add_action( 'rest_api_init', array( $this, 'wc_api_classes' ), 15 );
@@ -207,7 +204,7 @@ class POS_HOST_Sell {
 
 	public function is_pos_referer() {
 		$referer = wp_get_referer();
-		$pos_url = get_home_url() . '/p/';
+		$pos_url = get_home_url() . '/pos-host/';
 
 		if ( ! $referer ) {
 			if ( isset( $_SERVER['HTTP_REFERER'] ) && strpos( wc_clean( wp_unslash( $_SERVER['HTTP_REFERER'] ) ), 'p' ) !== false ) {

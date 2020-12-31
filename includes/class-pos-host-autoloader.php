@@ -43,7 +43,7 @@ class POS_HOST_Autoloader {
 	 * @return string File name.
 	 */
 	private function get_file_name_from_class( $class ) {
-		return 'class-' . str_replace( '_', '-', $class ) . '.php';
+		return 'class-' . strtolower(str_replace( '_', '-', $class ) ). '.php';
 	}
 
 	/**

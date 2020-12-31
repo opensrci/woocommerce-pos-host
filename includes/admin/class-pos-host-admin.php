@@ -15,7 +15,7 @@ if ( class_exists( 'POS_HOST_Admin', false ) ) {
  * POS_HOST_Admin.
  */
 class POS_HOST_Admin {
-
+      
 	/**
 	 * Constructor.
 	 */
@@ -367,10 +367,11 @@ class POS_HOST_Admin {
 
 	public static function create_rewrite_rules( $rules ) {
 		global $wp_rewrite;
-		$newRule = array(
-			'^p/([^/]+)/([^/]+)/?$' => 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]',
-			'^p/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
-
+                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
+		
+                $newRule = array(
+			  $pos_host_rewrite => $pos_host_dest,
 		);
 		$newRules = $newRule + $rules;
 		return $newRules;
@@ -378,23 +379,26 @@ class POS_HOST_Admin {
 
 	public static function create_rewrite_rules_wpml() {
 		global $wp_rewrite;
+                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
 		$newRule = array(
-			'^p/([^/]+)/([^/]+)/?$' => 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]',
-			'^p/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
+			  $pos_host_rewrite => $pos_host_dest,
 		);
 
 		$wp_rewrite->rules = $newRule + $wp_rewrite->rules;
 	}
 
 	public static function on_rewrite_rule() {
-		add_rewrite_rule( '^p/([^/]+)/([^/]+)/?$', 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]', 'top' );
-		add_rewrite_rule( '^p/sw/?$', ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js', 'top' );
+                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
+		add_rewrite_rule(   $pos_host_rewrite, $pos_host_dest, 'top' );
 	}
 
 	public static function flush_rules() {
 		$rules = get_option( 'rewrite_rules' );
+                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
 
-		if ( ! isset( $rules['^p/([^/]+)/([^/]+)/?$'] ) || ! isset( $rules['^p/sw/?$'] ) ) {
+		if ( ! isset( $rules[ $pos_host_rewrite ] ) ) {
 			global $wp_rewrite;
 			$wp_rewrite->flush_rules();
 		}
