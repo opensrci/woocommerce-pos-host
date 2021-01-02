@@ -364,7 +364,7 @@ class POS_HOST_Admin {
 
 		return (array) $links;
 	}
-
+ 
 	public static function create_rewrite_rules( $rules ) {
 		global $wp_rewrite;
                 $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
@@ -372,6 +372,7 @@ class POS_HOST_Admin {
 		
                 $newRule = array(
 			  $pos_host_rewrite => $pos_host_dest,
+			'^pos-host/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
 		);
 		$newRules = $newRule + $rules;
 		return $newRules;
@@ -383,6 +384,8 @@ class POS_HOST_Admin {
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
 		$newRule = array(
 			  $pos_host_rewrite => $pos_host_dest,
+			'^pos-host/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
+                    
 		);
 
 		$wp_rewrite->rules = $newRule + $wp_rewrite->rules;
@@ -392,6 +395,7 @@ class POS_HOST_Admin {
                 $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
 		add_rewrite_rule(   $pos_host_rewrite, $pos_host_dest, 'top' );
+		add_rewrite_rule( '^pos-host/sw/?$', ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js', 'top' );
 	}
 
 	public static function flush_rules() {

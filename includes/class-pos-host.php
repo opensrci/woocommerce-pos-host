@@ -134,7 +134,25 @@ class POS_HOST {
 		wp_delete_post( (int) get_option( 'pos_host_custom_product_id' ), true );
 		delete_option( 'pos_host_custom_product_id' );
 	}
+        /**
+	 * Check if the WC REST API is blocked (i.e. status code != 200).
+	 */
+	public function check_wc_rest_api() {
+		try {
+			$request     = new WP_REST_Request( 'GET', '/wc/v3' );
+			$response    = rest_do_request( $request );
+			$status_code = $response->get_status();
+		} catch ( Exception $e ) {
+			// Cannot get the status code (e.g. cURL error). Bypass the check.
+			$status_code = 200;
+		}
 
+		if ( 200 !== $status_code ) {
+                	return;
+		}
+
+	}
+        
 	/**
 	 * Returns the WooCommerce API endpoint.
 	 *
@@ -333,6 +351,8 @@ class POS_HOST {
 		add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
 		add_action( 'admin_init', array( $this, 'force_country_display' ) );
 		add_action( 'admin_init', array( $this, 'print_report' ), 100 );
+                add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
+
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 0 );
 		add_action( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ), 150, 1 );
 		add_filter( 'woocommerce_get_checkout_order_received_url', array( $this, 'order_received_url' ) );

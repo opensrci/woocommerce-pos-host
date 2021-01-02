@@ -101,8 +101,8 @@ class POS_HOST_Sell {
 				}
 				"
 			);
-			wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
-			wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
+			//wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
+			//wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/before-main.min.js', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js', array(), POS_HOST_VERSION );
 		}
@@ -116,10 +116,10 @@ class POS_HOST_Sell {
 		if ( class_exists( 'WC_Product_Addons' ) && 'yes' === get_option( 'pos_host_force_enable_addons', 'pos_host_force_enable_addons' ) ) {
 			include_once 'class-pos-host-product-addons.php';
 		}
+                add_filter( 'bwp_minify_is_loadable', array( $this, 'bwp_minify' ) );
                 /*
                  * @todo Debug
                     include_once 'class-pos-host-payment-gateways.php';
-                    add_filter( 'bwp_minify_is_loadable', array( $this, 'bwp_minify' ) );
                  *
                  *                  */
 		
@@ -248,7 +248,7 @@ class POS_HOST_Sell {
 	/**
 	 * Include required files for REST API request
 	 *
-	 * @since 3.0.0
+	 * @since 0.0.1
 	 */
 	public function wc_api_loaded() {
 		include_once 'api/class-pos-host-api-orders.php';
@@ -270,13 +270,13 @@ class POS_HOST_Sell {
 	/**
 	 * Register available API resources
 	 *
-	 * @since 3.0.0
+	 * @since 0.0.1
 	 * @param WC_API_Server $server the REST server
 	 */
 	public function wc_api_classes() {
 		$api_classes = array(
-			'WC_API_POS_Orders',
-			'WC_API_POS_Orders_Refunds',
+			'POS_HOST_REST_Orders',
+			'POS_HOST_REST_Orders_Refunds',
 			'POS_HOST_REST_Products_Controller',
 			'POS_HOST_REST_Product_Variations_Controller',
 			'POS_HOST_REST_Product_Categories_Controller',
