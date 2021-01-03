@@ -40,7 +40,7 @@ class POS_HOST_REST_Users_Controller extends WP_REST_Users_Controller {
 				$meta_query,
 				array(
 					array(
-						'key'     => 'pos_host__assigned_outlets',
+						'key'     => 'pos_host_assigned_outlets',
 						'value'   => sprintf( 's:%s:"%s";', strlen( $request->get_param( 'outlet_id' ) ), $request->get_param( 'outlet_id' ) ),
 						'compare' => 'LIKE',
 					),

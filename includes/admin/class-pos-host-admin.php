@@ -394,15 +394,16 @@ class POS_HOST_Admin {
 	public static function on_rewrite_rule() {
                 $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
+                $pos_host_sw_dest = ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js';
 		add_rewrite_rule(   $pos_host_rewrite, $pos_host_dest, 'top' );
-		add_rewrite_rule( '^pos-host/sw/?$', ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js', 'top' );
+		add_rewrite_rule( '^pos-host/sw/?$', $pos_host_sw_dest , 'top' );
 	}
 
 	public static function flush_rules() {
 		$rules = get_option( 'rewrite_rules' );
                 $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
 
-		if ( ! isset( $rules[ $pos_host_rewrite ] ) ) {
+		if ( ! isset( $rules[ $pos_host_rewrite ] ) || ! isset( $rules['^pos_host/sw/?$'] )  ) {
 			global $wp_rewrite;
 			$wp_rewrite->flush_rules();
 		}

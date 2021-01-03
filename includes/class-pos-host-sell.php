@@ -684,7 +684,7 @@ class POS_HOST_Sell {
 				'parked_order_status'            => get_option( 'pos_host_parked_order_status', 'pending' ),
 				'fetch_order_statuses'           => $fetch_order_statuses,
 				'wc_api_url'                     => POS_HOST()->wc_api_url(),
-				'pos_host_api_url'                 => POS_HOST()->pos_host_api_url(),
+				'pos_host_api_url'               => POS_HOST()->pos_host_api_url(),
 				'discount_presets'               => (array) get_option( 'pos_host_discount_presets', array( '5', '10', '15', '20' ) ),
 				'signature_panel'                => 'yes' === get_option( 'pos_host_signature', 'no' ),
 				'signature_required'             => 'yes' === get_option( 'pos_host_signature_required', 'no' ),
