@@ -8,7 +8,9 @@ Stable tag: 5.3.5
 Requires WooCommerce at least: 3.5.0
 Tested WooCommerce up to: 4.7.0
 
-Point of Sale Engine and UX for pos.host on WooCommerce. Private use only. NO FOR PUBLIC DISTRIBUTION.
+Point of Sale Engine and UX for pos.host on WooCommerce. The project is based on WooCommerce Point-of-Sale plugin and refactored to pos.host.
+
+Private use only. NO FOR PUBLIC DISTRIBUTION.
 
 = Documentation =
 
