@@ -283,11 +283,11 @@ class POS_HOST_Post_Types {
 			);
 		}
 
-		if ( ! post_type_exists( 'pos_temp_order' ) ) {
+		if ( ! post_type_exists( 'pos_host_temp_order' ) ) {
 			wc_register_order_type(
-				'pos_temp_order',
+				'pos_host_temp_order',
 				apply_filters(
-					'pos_host_register_post_type_pos_temp_order',
+					'pos_host_register_post_type_pos_host_temp_order',
 					array(
 						'capability_type'                  => 'shop_order',
 						'public'                           => false,

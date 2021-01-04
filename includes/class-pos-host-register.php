@@ -230,7 +230,7 @@ class POS_HOST_Register extends WC_Data {
 	}
 
 	/**
-	 * Get the pos_temp_order associated to this register.
+	 * Get the pos_host_temp_order associated to this register.
 	 *
 	 * @param string $context What the value is for. Valid values are 'view' and 'edit'.
 	 * @return int Post ID.
@@ -479,7 +479,7 @@ class POS_HOST_Register extends WC_Data {
 	}
 
 	/**
-	 * Set the pos_temp_order ID.
+	 * Set the pos_host_temp_order ID.
 	 *
 	 * @param int $id Post ID.
 	 */

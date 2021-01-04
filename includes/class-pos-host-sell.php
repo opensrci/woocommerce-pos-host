@@ -318,7 +318,7 @@ class POS_HOST_Sell {
 		 global $wp;
 		$result = false;
 
-		if ( isset( $wp->query_vars ) && isset( $wp->query_vars['wc-api-route'] ) && strpos( $wp->query_vars['wc-api-route'], 'pos_orders' ) !== false ) {
+		if ( isset( $wp->query_vars ) && isset( $wp->query_vars['wc-api-route'] ) && strpos( $wp->query_vars['wc-api-route'], 'pos_host_orders' ) !== false ) {
 			$result = true;
 		}
 

@@ -268,9 +268,9 @@ body.no-animations * :before{
 
 /* For vertical iPhone */
 @media only screen and (max-width: 375px) {
-    .pos_register_shop_name,
+    .pos_host_register_shop_name,
     #regiser_top_bar .page-title-action,
-    .pos_register_user_name {
+    .pos_host_register_user_name {
         display: none !important;
     }
 	.q-dialog__inner--minimized {

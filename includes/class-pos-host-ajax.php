@@ -83,7 +83,7 @@ class POS_HOST_AJAX {
 
 		$registers = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM $wpdb->posts WHERE post_type = 'pos_register' AND name LIKE %s OR slug LIKE %s",
+				"SELECT * FROM $wpdb->posts WHERE post_type = 'pos_host_register' AND name LIKE %s OR slug LIKE %s",
 				'%' . $wpdb->esc_like( $search ) . '%'
 			)
 		);

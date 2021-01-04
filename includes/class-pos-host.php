@@ -927,7 +927,7 @@ class POS_HOST {
 		if (
 			is_pos_referer() ||
 			is_pos() ||
-			( isset( $_SERVER['REQUEST_URI'] ) && false !== strpos( wc_clean( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'pos_orders' ) )
+			( isset( $_SERVER['REQUEST_URI'] ) && false !== strpos( wc_clean( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'pos_host_orders' ) )
 		) {
 			foreach ( $email_actions as $key => $action ) {
 				if ( strpos( $action, 'woocommerce_order_status_' ) === 0 ) {

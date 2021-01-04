@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
 	$registers = get_posts(
 		array(
 			'numberposts' => -1,
-			'post_type'   => 'pos_register',
+			'post_type'   => 'pos_host_register',
 		)
 	);
 	$count     = 0;
