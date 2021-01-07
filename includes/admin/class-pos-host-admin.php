@@ -372,7 +372,7 @@ class POS_HOST_Admin {
 		
                 $newRule = array(
 			  $pos_host_rewrite => $pos_host_dest,
-			'^pos-host/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
+			// '^pos-host/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
 		);
 		$newRules = $newRule + $rules;
 		return $newRules;
@@ -384,7 +384,7 @@ class POS_HOST_Admin {
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
 		$newRule = array(
 			  $pos_host_rewrite => $pos_host_dest,
-			'^pos-host/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
+			// '^pos-host/sw/?$'              => ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js',
                     
 		);
 
@@ -394,9 +394,9 @@ class POS_HOST_Admin {
 	public static function on_rewrite_rule() {
                 $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
-                $pos_host_sw_dest = ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js';
+                // $pos_host_sw_dest = ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js';
 		add_rewrite_rule(   $pos_host_rewrite, $pos_host_dest, 'top' );
-		add_rewrite_rule( '^pos-host/sw/?$', $pos_host_sw_dest , 'top' );
+		// add_rewrite_rule( '^pos-host/sw/?$', $pos_host_sw_dest , 'top' );
 	}
 
 	public static function flush_rules() {

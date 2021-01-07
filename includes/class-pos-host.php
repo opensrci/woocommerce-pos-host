@@ -984,15 +984,15 @@ class POS_HOST {
         
                 include_once 'gateways/class-pos-host-gateway-cash.php';
 		include_once 'gateways/class-pos-host-gateway-terminal.php';
+		include_once 'gateways/stripe/class-pos-host-stripe.php';
 		
         /*@todo Debug *
-         * 
-         */
-	return;
                 include_once 'gateways/class-pos-host-gateway-bacs.php';
 		include_once 'gateways/class-pos-host-gateway-cheque.php';
-		include_once 'gateways/stripe/class-pos-host-stripe.php';
 		include_once 'gateways/paymentsense/class-pos-host-paymentsense.php';
+         * 
+         */
+            return;
 	}
 
 	/**
@@ -1005,10 +1005,10 @@ class POS_HOST {
 	 */
 	public function add_payment_gateways( $methods ) {
 		$methods[] = 'POS_HOST_Gateway_Cash';
-		$methods[] = 'POS_HOST_Gateway_BACS';
 		$methods[] = 'POS_HOST_Gateway_Cheque';
 		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
-		// $methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
+		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
+    		// $methods[] = 'POS_HOST_Gateway_BACS';
 		// $methods[] = 'POS_HOST_Gateway_Paymentsense';
 
 		$chip_and_pin = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );

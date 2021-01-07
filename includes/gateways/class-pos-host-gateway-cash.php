@@ -17,7 +17,7 @@ class POS_HOST_Gateway_Cash extends WC_Payment_Gateway {
 	 */
 	public function __construct() {
 		// General properties.
-		$this->id                 = 'pos_cash';
+		$this->id                 = 'pos_host_cash';
 		$this->icon               = apply_filters( 'pos_host_cash_icon', '' );
 		$this->method_title       = __( 'Cash', 'woocommerce-pos-host' );
 		$this->method_description = __( 'Pay with cash.', 'woocommerce-pos-host' );
@@ -262,7 +262,7 @@ class POS_HOST_Gateway_Cash extends WC_Payment_Gateway {
 
 		if ( $order->get_total() > 0 ) {
 			// Mark as processing or on-hold (payment won't be taken until delivery).
-			$order->update_status( apply_filters( 'woocommerce_pos_cash_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order ), __( 'Payment to be made upon delivery.', 'woocommerce-pos-host' ) );
+			$order->update_status( apply_filters( 'woocommerce_pos_host_cash_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order ), __( 'Payment to be made upon delivery.', 'woocommerce-pos-host' ) );
 		} else {
 			$order->payment_complete();
 		}
@@ -278,7 +278,7 @@ class POS_HOST_Gateway_Cash extends WC_Payment_Gateway {
 	 * @return string
 	 */
 	public function change_payment_complete_order_status( $status, $order_id = 0, $order = false ) {
-		if ( $order && 'pos_cash' === $order->get_payment_method() ) {
+		if ( $order && 'pos_host_cash' === $order->get_payment_method() ) {
 			$status = 'completed';
 		}
 

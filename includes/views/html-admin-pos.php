@@ -15,7 +15,13 @@ defined( 'ABSPATH' ) || exit;
 <html>
 	<head>
 		<title><?php echo esc_html( $register_data['name'] ) . ' &lsaquo; ' . esc_html( $outlet_data['name'] ) . ' &lsaquo; ' . esc_html__( 'POS HOST', 'woocommerce-point-of-sale' ); ?></title>
-		<link rel="manifest" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/manifest.json'; ?>">
+		<link rel="manifest" href="<?php
+                        $home_url                     = home_url( $wp->request );
+                        $parsed                       = wp_parse_url($home_url);
+                        $home_host                    = $parsed['host'];
+                        echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/manifest.'.$home_host.'.json'; 
+                        
+                        ?>">
 		<link rel="apple-touch-icon" sizes="57x57" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/apple-icon-57x57.png'; ?>">
 		<link rel="apple-touch-icon" sizes="60x60" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/apple-icon-60x60.png'; ?>">
 		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/apple-icon-72x72.png'; ?>">

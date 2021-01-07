@@ -4,10 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-class POS_HOST_Payment_Gateways {
+class WC_POS_Payment_Gateways {
 
 	public static function init() {
-		 // add_filter('pos_host_enqueue_scripts',   array(__CLASS__, 'pos_enqueue_scripts'), 10, 1);
+		 // add_filter('wc_pos_enqueue_scripts',   array(__CLASS__, 'pos_enqueue_scripts'), 10, 1);
 		add_action( 'pos_admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 		add_filter( 'woocommerce_is_checkout', array( __CLASS__, 'woocommerce_is_checkout' ) );
 
@@ -30,7 +30,7 @@ class POS_HOST_Payment_Gateways {
 
 	public static function pos_enqueue_scripts( $sctipts ) {
 		if ( class_exists( 'WooCommerceSecureSubmitGateway' ) ) {
-			$sctipts['WooCommerceSecureSubmitGateway'] = POS_HOST()->plugin_url() . '/assets/js/register/subscriptions.js';
+			$sctipts['WooCommerceSecureSubmitGateway'] = WC_POS()->plugin_url() . '/assets/js/register/subscriptions.js';
 		}
 		return $sctipts;
 	}
@@ -42,4 +42,4 @@ class POS_HOST_Payment_Gateways {
 	}
 }
 
-POS_HOST_Payment_Gateways::init();
+WC_POS_Payment_Gateways::init();

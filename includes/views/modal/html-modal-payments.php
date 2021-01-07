@@ -31,7 +31,7 @@ $available_gateways = array_filter( WC()->payment_gateways()->get_available_paym
 		<q-tab-panels v-model="paymentGateway">
 			<?php
 			foreach ( $available_gateways as $gateway ) {
-				if ( 'pos_cash' === $gateway->id ) {
+				if ( 'pos_host_cash' === $gateway->id ) {
 					continue;
 				}
 				?>
@@ -41,11 +41,11 @@ $available_gateways = array_filter( WC()->payment_gateways()->get_available_paym
 						?>
 						<chip-pin></chip-pin>
 						<?php
-					} elseif ( 0 === strpos( $gateway->id, 'pos_bacs' ) ) {
+					} elseif ( 0 === strpos( $gateway->id, 'pos_host_bacs' ) ) {
 						?>
 						<bacs-payment></bacs-payment>
 						<?php
-					} elseif ( 0 === strpos( $gateway->id, 'pos_cheque' ) ) {
+					} elseif ( 0 === strpos( $gateway->id, 'pos_host_cheque' ) ) {
 						?>
 						<cheque-payment></cheque-payment>
 						<?php

@@ -27,10 +27,10 @@ defined( 'ABSPATH' ) || exit;
 	$count     = 0;
 
 	foreach ( $registers as $register ) {
-		$register = wc_pos_get_register( $register->ID );
-		if ( wc_pos_current_user_can_open_register( $register->get_id() ) ) {
+		$register = pos_host_get_register( $register->ID );
+		if ( pos_host_current_user_can_open_register( $register->get_id() ) ) {
 			$count++;
-			$outlet        = wc_pos_get_outlet( $register->get_outlet() );
+			$outlet        = pos_host_get_outlet( $register->get_outlet() );
 			$register_link = get_home_url( null, '/pos-host/' . $outlet->get_slug() . '/' . $register->get_slug() );
 			?>
 			<tr class="">
@@ -50,9 +50,9 @@ defined( 'ABSPATH' ) || exit;
 				</td>
 				<td>
 					<?php
-						$can_force_logout   = wc_pos_current_user_can_force_logout();
-						$is_register_locked = wc_pos_is_register_locked( $register->get_id() );
-						$is_register_open   = wc_pos_is_register_open( $register->get_id() );
+						$can_force_logout   = pos_host_current_user_can_force_logout();
+						$is_register_locked = pos_host_is_register_locked( $register->get_id() );
+						$is_register_open   = pos_host_is_register_open( $register->get_id() );
 
 					if ( $is_register_locked ) {
 						$user           = get_userdata( $is_register_locked );

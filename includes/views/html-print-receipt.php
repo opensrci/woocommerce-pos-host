@@ -238,7 +238,7 @@ $total_rows['sales']  = array(
 	'value' => $sales,
 );
 
-if ( 'pos_cash' === $order->get_payment_method() ) {
+if ( 'pos_host_cash' === $order->get_payment_method() ) {
 	$amount_change = get_post_meta( $order->get_id(), 'pos_host_amount_change', true );
 	$amount_change = $amount_change ? $amount_change : 0;
 

@@ -77,7 +77,7 @@ $last_update = empty( $last_update ) ? array( 'date' => '' ) : $last_update;
 				<?php esc_html_e( 'Reset Settings', 'woocommerce-pos-host' ); ?>
 			</th>
 			<td class="forminp">
-				<input id="pos_host_reset_settings" name="wc_pos_reset_settings" type="submit" class="button" value="<?php esc_attr_e( 'Reset Settings', 'woocommerce-pos-host' ); ?>">
+				<input id="pos_host_reset_settings" name="pos_host_reset_settings" type="submit" class="button" value="<?php esc_attr_e( 'Reset Settings', 'woocommerce-pos-host' ); ?>">
 				<p class="description">
 					<?php esc_html_e( 'Reset all plugin settings.', 'woocommerce-pos-host' ); ?>
 				</p>

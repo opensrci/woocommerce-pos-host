@@ -116,12 +116,9 @@ class POS_HOST_Sell {
 		if ( class_exists( 'WC_Product_Addons' ) && 'yes' === get_option( 'pos_host_force_enable_addons', 'pos_host_force_enable_addons' ) ) {
 			include_once 'class-pos-host-product-addons.php';
 		}
+
+                include_once 'class-pos-host-payment-gateways.php';
                 add_filter( 'bwp_minify_is_loadable', array( $this, 'bwp_minify' ) );
-                /*
-                 * @todo Debug
-                    include_once 'class-pos-host-payment-gateways.php';
-                 *
-                 *                  */
 		
 	}
 
@@ -187,14 +184,19 @@ class POS_HOST_Sell {
 		$primary_color = get_option( 'pos_host_theme_primary_color', '#7f54b3' );
 
 		// Update manifest.json.
-		$file                         = POS_HOST()->plugin_path() . '/assets/dist/images/manifest.json';
+                $home_url                     = home_url( $wp->request );
+                $parsed                       = wp_parse_url($home_url);
+		$home_host                    = $parsed['host'];
+                $file                         = POS_HOST()->plugin_path() . '/assets/dist/images/manifest.json';
+		$new_file                     = POS_HOST()->plugin_path() . '/assets/dist/images/manifest.'.$home_host.'.json';
 		$contents                     = file_get_contents( $file );
 		$contentsDecoded              = json_decode( $contents, true );
-		$contentsDecoded['start_url'] = esc_url( home_url( $wp->request ) );
+		$contentsDecoded['start_url'] = esc_url( $home_url );
 		$json                         = json_encode( $contentsDecoded );
 
-		if ( is_writable( $file ) ) {
-			file_put_contents( $file, $json );
+		//if ( is_writable( $new_file ) ) 
+                {
+			file_put_contents( $new_file, $json );
 		}
 
 		include_once POS_HOST()->plugin_path() . '/includes/views/html-admin-pos.php';
@@ -207,7 +209,7 @@ class POS_HOST_Sell {
 		$pos_url = get_home_url() . '/pos-host/';
 
 		if ( ! $referer ) {
-			if ( isset( $_SERVER['HTTP_REFERER'] ) && strpos( wc_clean( wp_unslash( $_SERVER['HTTP_REFERER'] ) ), 'p' ) !== false ) {
+			if ( isset( $_SERVER['HTTP_REFERER'] ) && strpos( wc_clean( wp_unslash( $_SERVER['HTTP_REFERER'] ) ), 'pos-host' ) !== false ) {
 				return true;
 			};
 
@@ -342,7 +344,7 @@ class POS_HOST_Sell {
 				if ( ! in_array( $gateway_id, $enabled_gateways, true ) ) {
 					add_filter( 'option_woocommerce_' . $gateway_id . '_settings', array( $this, 'disable_gateway' ) );
 				} else {
-					if ( 'pos_cash' === $gateway_id ) {
+					if ( 'pos_host_cash' === $gateway_id ) {
 						add_filter( 'pre_option_woocommerce_' . $gateway_id . '_settings', array( $this, 'enable_gateway_cod' ) );
 					} else {
 						add_filter( 'option_woocommerce_' . $gateway_id . '_settings', array( $this, 'enable_gateway' ) );
@@ -443,37 +445,33 @@ class POS_HOST_Sell {
 			'orders_count'       => 0,
 			'orders_total'       => 0,
 			'gateways'           => array(
-				'pos_cash'               => array(
+				'pos_host_cash'               => array(
 					'orders_count' => 0,
 					'orders_total' => 0,
 				),
-				'pos_bacs'               => array(
+				'pos_host_bacs'               => array(
 					'orders_count' => 0,
 					'orders_total' => 0,
 				),
-				'pos_cheque'             => array(
+				'pos_host_cheque'             => array(
 					'orders_count' => 0,
 					'orders_total' => 0,
 				),
-				'pos_stripe_terminal'    => array(
+				'pos_host_stripe_terminal'    => array(
 					'orders_count' => 0,
 					'orders_total' => 0,
 				),
-				'pos_stripe_credit_card' => array(
-					'orders_count' => 0,
-					'orders_total' => 0,
-				),
-				'pos_paymentsense'       => array(
+				'pos_host_credit_card' => array(
 					'orders_count' => 0,
 					'orders_total' => 0,
 				),
 			),
 		);
 
-		$chip_and_pin = empty( get_option( 'pos_host_number_chip_and_pin_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_chip_and_pin_gateways', 1 );
+		$chip_and_pin = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
 
 		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
-			$gateway_name = 1 === $n ? 'pos_chip_and_pin' : 'pos_chip_and_pin_' . $n;
+			$gateway_name = 1 === $n ? 'pos_host_terminal' : 'pos_host_terminal_' . $n;
 			$register_data['session']['gateways'][ $gateway_name ] = array(
 				'orders_count' => 0,
 				'orders_total' => 0,
