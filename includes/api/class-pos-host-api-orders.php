@@ -255,6 +255,7 @@ class POS_HOST_REST_Orders extends WC_REST_Orders_Controller {
 			 *
 			 * @param $order_id Order ID.
 			 */
+                        
 			do_action( 'woocommerce_pos_new_order', $object->get_id() );
 
 			return $this->get_object( $object->get_id() );

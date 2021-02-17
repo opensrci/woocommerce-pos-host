@@ -237,7 +237,7 @@ class POS_HOST_Stripe {
 
 		if ( $enabled ) {
 			$tabs['stripe_terminal'] = array(
-				'label'  => __( 'Stripe Terminal', 'woocommerce-pos-host' ),
+				'label'  => __( 'Stripe Terminal2', 'woocommerce-pos-host' ),
 				'target' => 'stripe_terminal_register_options',
 				'class'  => '',
 			);

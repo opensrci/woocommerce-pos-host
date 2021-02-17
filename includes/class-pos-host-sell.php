@@ -162,6 +162,7 @@ class POS_HOST_Sell {
 	 * Display the POS front-end.
 	 */
 	public function template_redirect() {
+             
 		// Bail if not POS.
 		if ( ! is_pos() ) {
 			return;

@@ -62,6 +62,8 @@ class POS_HOST_AJAX {
 
 		foreach ( $ajax_events as $ajax_event ) {
 			add_action( 'wp_ajax_pos_host_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+//@todo debug                        
+			add_action( 'wp_ajax_nopriv_pos_host_' . $ajax_event, array( __CLASS__, $ajax_event ) );
 		}
 	}
 
@@ -569,17 +571,21 @@ class POS_HOST_AJAX {
 	 */
 	public static function auth_user() {
 		check_ajax_referer( 'auth-user', 'security' );
-
 		// @todo The password field should not be sanitized. Sanitization is done here to pass PHPCS checks.
+		$remember = isset( $_POST['$remember'] ) ? wc_clean( $_POST['remember'] ) : '';
 		$username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
 		$password = isset( $_POST['password'] ) ? wc_clean( $_POST['password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
-		$user = wp_authenticate_username_password( null, $username, $password );
-
+		//$user = wp_authenticate_username_password( null, $username, $password );
+                 $user_info = Array ('user_login'=>$username,'user_password'=>$password,'remember'=>$remember );
+                 $user = wp_signon($user_info,false);
+                 
 		if ( is_wp_error( $user ) ) {
 			wp_send_json_error( $user->get_error_data() );
 		}
-
+                
+                 wp_set_current_user($user->ID);
+                 
 		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
 		$register    = pos_host_get_register( $register_id );
 

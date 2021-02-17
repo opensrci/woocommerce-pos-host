@@ -393,7 +393,8 @@ class POS_HOST_REST_Products_Controller extends WC_REST_Products_Controller {
 	 */
 	public function get_totals_permissions_check( $request ) {
 		if ( ! current_user_can( 'view_register' ) ) {
-			return new WP_Error( 'woocommerce_rest_cannot_view', __( 'Sorry, you cannot list resources.', 'woocommerce-pos-host' ), array( 'status' => rest_authorization_required_code() ) );
+		
+                          return new WP_Error( 'woocommerce_rest_cannot_view', __( 'Sorry, you cannot list resources.', 'woocommerce-pos-host' ), array( 'status' => rest_authorization_required_code() ) );
 		}
 
 		return true;

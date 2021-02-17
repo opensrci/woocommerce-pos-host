@@ -240,6 +240,8 @@ function pos_host_create_temp_order( $register_id ) {
 
 	// Update the order_id field of the register.
 	$register = pos_host_get_register( $register_id );
+        if( !$register_id)
+            wp_die( "Reg id:".$register_id, 486);
 	$register->set_temp_order( $order_id );
 	$register->save();
 

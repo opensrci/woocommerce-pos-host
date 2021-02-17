@@ -312,17 +312,17 @@ class POS_HOST {
 		
                 include_once 'pos-host-core-functions.php';
                 include_once 'pos-host-register-functions.php';
-		include_once 'pos-host-receipt-functions.php';
-		include_once 'pos-host-outlet-functions.php';
-		include_once 'pos-host-grid-functions.php';
-		include_once 'pos-host-session-functions.php';
-		include_once 'class-pos-host-post-types.php';
-		include_once 'class-pos-host-emails.php';
-		include_once 'class-pos-host-autoloader.php';
-		include_once 'class-pos-host-stocks.php';
-		include_once 'admin/class-pos-host-admin-post-types.php';
-		include_once 'admin/class-pos-host-admin.php';
-		include_once 'admin/class-pos-host-admin-assets.php';
+                include_once 'pos-host-receipt-functions.php';
+                include_once 'pos-host-outlet-functions.php';
+                include_once 'pos-host-grid-functions.php';
+                include_once 'pos-host-session-functions.php';
+                include_once 'class-pos-host-post-types.php';
+                include_once 'class-pos-host-emails.php';
+                include_once 'class-pos-host-autoloader.php';
+                include_once 'class-pos-host-stocks.php';
+                include_once 'admin/class-pos-host-admin-post-types.php';
+                include_once 'admin/class-pos-host-admin.php';
+                include_once 'admin/class-pos-host-admin-assets.php';
             
 		// On the front-end.
 		if ( ! is_admin() ) {
@@ -345,31 +345,31 @@ class POS_HOST {
 	 */
 	public function init_hooks() {
             
-		register_activation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'activate' ) );
-		register_deactivation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'deactivate' ) );
-		add_action( 'init', array( $this, 'visibility' ) );
-		add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
-		add_action( 'admin_init', array( $this, 'force_country_display' ) );
-		add_action( 'admin_init', array( $this, 'print_report' ), 100 );
+                register_activation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'activate' ) );
+                register_deactivation_hook( POS_HOST_PLUGIN_FILE, array( $this, 'deactivate' ) );
+                add_action( 'init', array( $this, 'visibility' ) );
+                add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
+                add_action( 'admin_init', array( $this, 'force_country_display' ) );
+                add_action( 'admin_init', array( $this, 'print_report' ), 100 );
                 add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
 
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 0 );
-		add_action( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ), 150, 1 );
-		add_filter( 'woocommerce_get_checkout_order_received_url', array( $this, 'order_received_url' ) );
-		add_filter( 'woocommerce_email_actions', array( $this, 'woocommerce_email_actions' ), 150, 1 );
-		add_filter( 'woocommerce_admin_order_actions', array( $this, 'order_actions_reprint_receipts' ), 2, 20 );
-		add_action( 'woocommerce_loaded', array( $this, 'woocommerce_delete_shop_order_transients' ) );
-		add_filter( 'woocommerce_screen_ids', array( $this, 'screen_ids' ), 10, 1 );
-		add_action( 'pre_get_posts', array( $this, 'hide_pos_custom_product' ), 99, 1 );
-		add_filter( 'request', array( $this, 'orders_by_order_type' ) );
-		add_filter( 'pos_host_discount_presets', array( $this, 'add_custom_discounts' ) );
+                add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 0 );
+                add_action( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ), 150, 1 );
+                add_filter( 'woocommerce_get_checkout_order_received_url', array( $this, 'order_received_url' ) );
+                add_filter( 'woocommerce_email_actions', array( $this, 'woocommerce_email_actions' ), 150, 1 );
+                add_filter( 'woocommerce_admin_order_actions', array( $this, 'order_actions_reprint_receipts' ), 2, 20 );
+                add_action( 'woocommerce_loaded', array( $this, 'woocommerce_delete_shop_order_transients' ) );
+                add_filter( 'woocommerce_screen_ids', array( $this, 'screen_ids' ), 10, 1 );
+                add_action( 'pre_get_posts', array( $this, 'hide_pos_custom_product' ), 99, 1 );
+                add_filter( 'request', array( $this, 'orders_by_order_type' ) );
+                add_filter( 'pos_host_discount_presets', array( $this, 'add_custom_discounts' ) );
                 add_filter( 'woocommerce_data_stores', array( $this, 'register_data_stores' ), 10, 1 );
-        	add_filter( 'woocommerce_order_number', array( $this, 'add_prefix_suffix_order_number' ), 99, 2 );
+                add_filter( 'woocommerce_order_number', array( $this, 'add_prefix_suffix_order_number' ), 99, 2 );
 
                 add_filter( 'rest_product_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-		add_filter( 'rest_shop_order_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-		add_filter( 'rest_shop_coupon_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
-		add_action( 'woocommerce_loaded', array( $this, 'manage_floatval_quantity' ) );
+                add_filter( 'rest_shop_order_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
+                add_filter( 'rest_shop_coupon_collection_params', array( $this, 'per_page_limits' ), 9999, 2 );
+                add_action( 'woocommerce_loaded', array( $this, 'manage_floatval_quantity' ) );
 		// For compatibility with WooCommerce Subscriptions.
 		if ( in_array( 'woocommerce-subscriptions/woocommerce-subscriptions.php', get_option( 'active_plugins' ), true ) ) {
 			add_filter( 'woocommerce_subscription_payment_method_to_display', array( $this, 'get_subscription_payment_method' ), 10, 2 );
@@ -382,8 +382,8 @@ class POS_HOST {
 			add_action( 'woocommerce_process_product_meta', array( $this, 'save_visibility' ), 10, 2 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation_visibility' ), 10, 2 );
 		}
-		add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
-		add_filter( 'woocommerce_payment_gateways', array( $this, 'add_payment_gateways' ), 100 );
+                add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
+                add_filter( 'woocommerce_payment_gateways', array( $this, 'add_payment_gateways' ), 100 );
                 add_action( 'plugins_loaded', array( $this, 'init_payment_gateways' ) );
 
 
@@ -981,15 +981,15 @@ class POS_HOST {
 	 * @since 0.0.1
 	 */
 	public function init_payment_gateways() {
-        
-                include_once 'gateways/class-pos-host-gateway-cash.php';
-		include_once 'gateways/class-pos-host-gateway-terminal.php';
+                 include_once 'gateways/class-pos-host-gateway-cash.php';
+ 		include_once 'gateways/class-pos-host-gateway-cod.php';
+		include_once 'gateways/trx-host/class-pos-host-trx-host.php';
+/*    
 		include_once 'gateways/stripe/class-pos-host-stripe.php';
-		
+*/		
         /*@todo Debug *
                 include_once 'gateways/class-pos-host-gateway-bacs.php';
 		include_once 'gateways/class-pos-host-gateway-cheque.php';
-		include_once 'gateways/paymentsense/class-pos-host-paymentsense.php';
          * 
          */
             return;
@@ -1005,12 +1005,12 @@ class POS_HOST {
 	 */
 	public function add_payment_gateways( $methods ) {
 		$methods[] = 'POS_HOST_Gateway_Cash';
-		$methods[] = 'POS_HOST_Gateway_Cheque';
-		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
-		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
-    		// $methods[] = 'POS_HOST_Gateway_BACS';
-		// $methods[] = 'POS_HOST_Gateway_Paymentsense';
+		//$methods[] = 'POS_HOST_Gateway_Cheque';
+		//$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
+		//$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
+    		$methods[] = 'POS_HOST_Gateway_trx_host';
 
+                
 		$chip_and_pin = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
 
 		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
@@ -1077,14 +1077,14 @@ class POS_HOST {
 	 */
 	public function register_data_stores( $stores ) {
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-data-store-wp.php';
-		include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-register-data-store-cpt.php';
+                include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-register-data-store-cpt.php';
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-outlet-data-store-cpt.php';
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-receipt-data-store-cpt.php';
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-grid-data-store-cpt.php';
                 include_once dirname( __FILE__ ) . '/data-stores/class-pos-host-session-data-store-cpt.php';
 
 		$stores['pos_host_register'] = 'POS_HOST_Register_Data_Store_CPT';	
-                $stores['pos_host_outlet']   = 'POS_HOST_Outlet_Data_Store_CPT';
+                 $stores['pos_host_outlet']   = 'POS_HOST_Outlet_Data_Store_CPT';
 		$stores['pos_host_receipt']  = 'POS_HOST_Receipt_Data_Store_CPT';               
 		$stores['pos_host_grid']     = 'POS_HOST_Grid_Data_Store_CPT';
 		$stores['pos_host_session']  = 'POS_HOST_Session_Data_Store_CPT';

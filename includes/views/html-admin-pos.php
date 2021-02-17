@@ -59,6 +59,9 @@ defined( 'ABSPATH' ) || exit;
 			window.pos_host_i18n = <?php echo wp_kses_post( json_encode( require_once POS_HOST()->plugin_path() . '/i18n/app.php' ) ); ?>;
 			window.pos_host_coupon_i18n = <?php echo wp_kses_post( json_encode( require_once POS_HOST()->plugin_path() . '/i18n/coupon.php' ) ); ?>;
 			window.pos_host_custom_product = <?php echo wp_kses_post( POS_HOST_Sell::instance()->get_custom_product_params() ); ?>;
+                          //added
+                          window.pos_host_options = {"db_current_step":"done","db_loaded":false}
+
 		</script>
 
 		<?php
