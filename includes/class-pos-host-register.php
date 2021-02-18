@@ -45,6 +45,7 @@ class POS_HOST_Register extends WC_Data {
 		'print_receipt'   => false,
 		'gift_receipt'    => false,
 		'note_request'    => 'none',
+		'terminalid'      => '',
 	);
 
 	/**
@@ -138,6 +139,17 @@ class POS_HOST_Register extends WC_Data {
 	 *
 	 * Methods for getting data from the register object.
 	 */
+
+	/**
+	 * Get register slug.
+	 *
+	 * @param string $context What the value is for. Valid values are 'view' and 'edit'.
+	 * @return string
+	 */
+	public function get_terminalid( $context = 'view' ) {
+		$tid =  $this->get_prop( 'terminalid', $context );
+                return $tid;
+	}
 
 	/**
 	 * Get register slug.
@@ -396,6 +408,15 @@ class POS_HOST_Register extends WC_Data {
 	 * database itself and should only change what is stored in the class
 	 * object.
 	 */
+
+	/**
+	 * Set Terminalid.
+	 *
+	 * @param string $tid Register terminal id.
+	 */
+	public function set_terminalid( $tid ) {
+		$this->set_prop( 'terminalid', $tid );
+	}
 
 	/**
 	 * Set register name.

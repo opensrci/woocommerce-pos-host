@@ -214,7 +214,7 @@ class POS_HOST_Admin_Settings_Register extends POS_HOST_Settings_Page {
 					array(
 						'title'    => __( 'Additional Payment Methods', 'woocommerce-pos-host' ),
 						'desc_tip' => __( 'Select the number of Terminal Gateways to show in WooCommerce > Payments.', 'woocommerce-pos-host' ),
-						'id'       => 'pos_host_number_terminal_gateways',
+						'id'       => 'pos_host_terminal_gateways_number',
 						'default'  => 'no',
 						'type'     => 'select',
 						'options'  => apply_filters(

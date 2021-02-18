@@ -33,6 +33,7 @@ function pos_host_get_register( $register ) {
 	return 0 !== $register_object->get_id() ? $register_object : null;
 }
 
+
 /**
  * Get register grid options.
  *

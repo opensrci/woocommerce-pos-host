@@ -1,6 +1,6 @@
 <?php
 /**
- * Pay on Delivery (COD) payment gateway
+ * Terminal payment gateway via TRX HOST
  *
  * @since 0.0.1
  *
@@ -8,7 +8,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
 /**
  * POS_HOST_Gateway_Terminal.
  */
@@ -22,12 +21,19 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	 * @var int Number.
 	 */
 	public static $number = 0;
+	private $terminals = array();
+	private $api;
 
 	/**
 	 * Constructor.
 	 */
-	public function __construct() {
-		if ( intval( get_option( 'pos_host_number_terminal_gateways', 1 ) ) === self::$number ) {
+	public function __construct() { 
+ 	/**
+	 * Includes.
+	 */
+		self::includes();
+
+		if ( intval( get_option( 'pos_host_terminal_gateways_number', 1 ) ) === self::$number ) {
 			self::$number = 0;
 		}
 
@@ -35,7 +41,12 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 		self::$number++;
 
 		// Setup general properties.
-		$this->setup_properties();
+		$this->id   = 1 === self::$number ? 'pos_host_terminal' : 'pos_host_terminal_' . self::$number;
+		$this->icon = apply_filters( 'pos_host_host_terminal_icon', '' );
+		/* translators: %s gateway number */
+		$this->method_title       = sprintf( __( 'POS Terminal %s', 'woocommerce-pos-host' ), $this->process_gateway_number( self::$number ) );
+		$this->method_description = __( 'Payment on POS Terminals.', 'woocommerce-pos-host' );
+		$this->has_fields         = false;
 
 		// Load the settings.
 		$this->init_form_fields();
@@ -48,27 +59,22 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 		$this->enable_for_methods = $this->get_option( 'enable_for_methods', array() );
 		$this->enable_for_virtual = $this->get_option( 'enable_for_virtual', 'yes' ) === 'yes';
 		$this->supports           = array( 'products', 'woocommerce-pos-host' );
-
-		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
-		add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
-
-		// Customer Emails.
-		add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
+		$this->api                = new POS_HOST_Gateway_Trx_Host_API();
+                add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+                add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
+                
+                //process payment
+                add_action( 'woocommerce_pos_new_order', array( $this, 'pos_process_payment' ), 10 );
+                // Customer Emails.
+                add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
+	}
+	
+        public static function includes() {
+            	include_once 'includes/class-trx-host-api.php';
+//		/include_once 'includes/class-trx-host-admin.php';
 	}
 
-	/**
-	 * Setup general properties for the gateway.
-	 */
-	protected function setup_properties() {
-		$this->id   = 1 === self::$number ? 'pos_host_terminal' : 'pos_host_terminal_' . self::$number;
-		$this->icon = apply_filters( 'pos_host_host_terminal_icon', '' );
-		/* translators: %s gateway number */
-		$this->method_title       = sprintf( __( 'POS Cash on Delivery (POS-COD) %s', 'woocommerce-pos-host' ), $this->process_gateway_number( self::$number ) );
-		$this->method_description = __( 'Pay cash or other means on Delivery for POS gateway.', 'woocommerce-pos-host' );
-		$this->has_fields         = false;
-	}
-
-	/**
+         /**
 	 * Initialise gateway settings form fields.
 	 */
 	public function init_form_fields() {
@@ -86,24 +92,41 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 				'type'        => 'text',
 				'description' => __( 'Payment method description that the customer will see on your checkout.', 'woocommerce-pos-host' ),
 				/* translators: %s gateway number */
-				'default'     => sprintf( __( 'Terminal %s', 'woocommerce-pos-host' ), $this->process_gateway_number( self::$number ) ),
+				'default'     => sprintf( __( 'POS Terminal %s', 'woocommerce-pos-host' ), $this->process_gateway_number( self::$number ) ),
 				'desc_tip'    => true,
 			),
 			'description'              => array(
 				'title'       => __( 'Description', 'woocommerce-pos-host' ),
 				'type'        => 'textarea',
 				'description' => __( 'Payment method description that the customer will see on your website.', 'woocommerce-pos-host' ),
-				'default'     => __( 'Pay cash or other means on Delivery for POS.', 'woocommerce-pos-host' ),
+				'default'     => __( 'Pay on your POS Terminals.', 'woocommerce-pos-host' ),
 				'desc_tip'    => true,
 			),
-			'require_reference_number' => array(
-				'title'       => __( 'Reference Number', 'woocommerce-pos-host' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Require reference number', 'woocommerce-pos-host' ),
-				'description' => __( 'Check this box to make the reference number mandatory filed.', 'woocommerce-pos-host' ),
-				'default'     => 'no',
+			'host_address'      => array(
+				'title'       => __( 'Host Address', 'woocommerce-pos-host' ),
+				'type'        => 'text',
+				'description' => __( 'Enter the Host Address.', 'woocommerce-pos-host' ),
 				'desc_tip'    => true,
 			),
+			'merchant_id'      => array(
+				'title'       => __( 'Merchant ID', 'woocommerce-pos-host' ),
+				'type'        => 'text',
+				'description' => __( 'Enter the Merchant ID.', 'woocommerce-pos-host' ),
+				'desc_tip'    => true,
+			),
+			'terminal_id'      => array(
+				'title'       => __( 'Terminal ID', 'woocommerce-pos-host' ),
+				'type'        => 'text',
+				'description' => __( 'Enter the Terminal ID.', 'woocommerce-pos-host' ),
+				'desc_tip'    => true,
+			),
+			'security_key'           => array(
+				'title'       => __( 'Security Key', 'woocommerce-pos-host' ),
+				'type'        => 'text',
+				'description' => __( 'Enter the Security key.', 'woocommerce-pos-host' ),
+				'desc_tip'    => true,
+                          ),
+
 		);
 	}
 
@@ -113,8 +136,12 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	 * @return bool
 	 */
 	public function is_available() {
-		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( ! $screen || 'pos_page' !== $screen->id ) {
+
+		if ( ! function_exists( 'is_pos' ) || ! is_pos() ) {
+			return false;
+		}
+
+		if ( is_checkout() ) {
 			return false;
 		}
 
@@ -178,8 +205,6 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	 * @param int  $number        Gateway number.
 	 * @param bool $leading_space Whether to add a leading space.
 	 *
-	 * @since 5.2.7
-	 *
 	 * @return string
 	 */
 	private function process_gateway_number( $number, $leading_space = true ) {
@@ -189,4 +214,40 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 
 		return $leading_space ? ' ' . $number : $number;
 	}
+ 
+        /**
+	 * Process Payment before save order
+	 *
+	 *        return array(
+	 *            'result'   => 'success',
+	 *            'redirect' => $this->get_return_url( $order )
+	 *        );
+	 *
+	 * @param int $order_id Order ID.
+	 * @return array
+	 */
+        public function pos_process_payment($order_id) {
+            
+
+                 $ret = array(
+                      'result'   => 'success',
+	             'redirect' => $this->get_return_url( $order )
+                      );  
+		$order = wc_get_order( $order_id );
+
+		if ( $order->get_total() > 0 ) {
+                    $this->api->test();
+       
+                        // Mark as completed.
+                        $order->update_status( apply_filters( 'woocommerce_pos_host_trx_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order ),
+                                __( 'Payment completed.', 'woocommerce-pos-host' ) );
+                        
+		} else {
+                        $order->payment_complete();
+		}
+//wp_die("pos process payment.".$order_id,487);         
+                    
+                return $ret;
+	}
+        
 }

@@ -109,6 +109,7 @@ class POS_HOST_Register_Data_Store_CPT extends POS_HOST_Data_Store_WP implements
 				'print_receipt'   => 'yes' === get_post_meta( $register_id, 'print_receipt', true ),
 				'gift_receipt'    => 'yes' === get_post_meta( $register_id, 'gift_receipt', true ),
 				'note_request'    => get_post_meta( $register_id, 'note_request', true ),
+				'terminalid'    => get_post_meta( $register_id, 'terminalid', true ),
 			)
 		);
 		$register->read_meta_data();
@@ -221,6 +222,7 @@ class POS_HOST_Register_Data_Store_CPT extends POS_HOST_Data_Store_WP implements
 			'print_receipt'   => 'print_receipt',
 			'gift_receipt'    => 'gift_receipt',
 			'note_request'    => 'note_request',
+			'terminalid'    => 'terminalid',
 		);
 
 		$props_to_update = $this->get_props_to_update( $register, $meta_key_to_props );

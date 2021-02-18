@@ -982,14 +982,12 @@ class POS_HOST {
 	 */
 	public function init_payment_gateways() {
                  include_once 'gateways/class-pos-host-gateway-cash.php';
- 		include_once 'gateways/class-pos-host-gateway-cod.php';
-		include_once 'gateways/trx-host/class-pos-host-trx-host.php';
-/*    
-		include_once 'gateways/stripe/class-pos-host-stripe.php';
-*/		
+ 		include_once 'gateways/trx-host/class-pos-host-gateway-terminal.php';
         /*@todo Debug *
-                include_once 'gateways/class-pos-host-gateway-bacs.php';
-		include_once 'gateways/class-pos-host-gateway-cheque.php';
+            include_once 'gateways/class-pos-host-gateway-bacs.php';
+            include_once 'gateways/class-pos-host-gateway-cheque.php';
+            include_once 'gateways/stripe/class-pos-host-stripe.php';
+            include_once 'gateways/trx-host/class-pos-host-trx-host.php';
          * 
          */
             return;
@@ -1005,13 +1003,14 @@ class POS_HOST {
 	 */
 	public function add_payment_gateways( $methods ) {
 		$methods[] = 'POS_HOST_Gateway_Cash';
-		//$methods[] = 'POS_HOST_Gateway_Cheque';
-		//$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
-		//$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
+        /*@todo Debug *
+		$methods[] = 'POS_HOST_Gateway_Cheque';
+		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
+		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
     		$methods[] = 'POS_HOST_Gateway_trx_host';
-
+        */
                 
-		$chip_and_pin = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
+		$chip_and_pin = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
 
 		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
 			$methods[] = 'POS_HOST_Gateway_Terminal';
@@ -1027,7 +1026,7 @@ class POS_HOST {
 		$gateways     = pos_host_get_available_payment_gateways();
 		$pos_gateways = array( 'pos_host_terminal' );
 
-		$terminals = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
+		$terminals = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
 		for ( $n = 2; $n <= (int) $terminals; $n++ ) {
 			$pos_gateways[] = 'pos_host_terminal_' . $n;
 		}

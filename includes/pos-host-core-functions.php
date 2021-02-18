@@ -27,21 +27,57 @@ function pos_host_get_order_statuses_no_prefix() {
  *
  * @since 0.0.1
  *
- * @param boolean $available Only return the available (enabled) gateways.
+ * @param boolean $enabled Only return the available (enabled) gateways.
  * @return array List of payment gateways IDs.
  */
-function pos_host_get_payment_gateways_ids( $available = false ) {
+function pos_host_get_payment_gateways_ids( $enabled = false ) {
 	$gateways = WC()->payment_gateways()->payment_gateways();
 	$results  = array();
 
 	foreach ( $gateways as $id => $gateway ) {
-		if ( $available && 'yes' !== $gateway->enabled ) {
+		if ( $enabled && 'yes' !== $gateway->enabled ) {
 			continue;
 		}
+                array_push( $results, $id );
+	}
+	return $results;
+    
+}
 
-		array_push( $results, $id );
+
+function pos_host_get_available_payment_gateways() {
+	$available_gateways = array();
+	foreach ( WC()->payment_gateways()->get_available_payment_gateways() as $gateway ) {
+		array_push(
+			$available_gateways,
+			(object) array(
+				'id'    => $gateway->id,
+				'title' => $gateway->get_title(),
+			)
+		);
 	}
 
+	return $available_gateways;
+}
+
+
+/* return payment terminals gateways 
+ * 
+ */
+function pos_host_get_payment_terminal_options($filter) {
+	$gateways = WC()->payment_gateways()->payment_gateways();
+	$results  = array();
+
+	foreach ( $gateways as $id => $gateway ) {
+		if (  'yes' !== $gateway->enabled ||
+                        ( "" !== $filter && 
+                        strpos( $gateway->id, $filter ) === false
+                        )
+                     )
+                    continue;
+		
+		   $results[$gateway->id] = $gateway->get_title();
+	}
 	return $results;
 }
 
@@ -305,21 +341,6 @@ function is_pos() {
 		return false;
 	}
 
-}
-
-function pos_host_get_available_payment_gateways() {
-	$available_gateways = array();
-	foreach ( WC()->payment_gateways()->get_available_payment_gateways() as $gateway ) {
-		array_push(
-			$available_gateways,
-			(object) array(
-				'id'    => $gateway->id,
-				'title' => $gateway->get_title(),
-			)
-		);
-	}
-
-	return $available_gateways;
 }
 
 /**

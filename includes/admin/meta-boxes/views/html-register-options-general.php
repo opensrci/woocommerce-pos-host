@@ -69,6 +69,19 @@ defined( 'ABSPATH' ) || exit;
 			)
 		);
 
+		// POS terminal.
+		$tid = $register_object->get_terminalid( 'edit' );
+		woocommerce_wp_select(
+			array(
+				'id'          => 'terminalid',
+				'value'       => $tid ? $tid :'',
+				'label'       => __( 'Terminal ID', 'woocommerce-pos-host' ),
+				'options'     => pos_host_get_payment_terminal_options( "pos_host_terminal" ),
+				'desc_tip'    => true,
+				'description' => __( 'Select the terminal ID associated with this register.', 'woocommerce-pos-host' ),
+			)
+		);
+
 		// Prefix.
 		woocommerce_wp_text_input(
 			array(

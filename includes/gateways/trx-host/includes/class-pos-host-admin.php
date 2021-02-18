@@ -1,6 +1,6 @@
 <?php
 /**
- * trx_host for POS.
+ * .
  *
  * @package WooCommerce_Point_Of_Sale/Gateways
  */
@@ -8,29 +8,20 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * POS_HOST_trx_host.
+ * POS_HOST_trx_host_admin.
  */
-class POS_HOST_trx_host {
+class POS_HOST_Gateway_Terminal_admin {
 
 	/**
 	 * Init.
 	 */
 	public static function init() {
-		self::includes();
 
 		add_filter( 'pos_host_params', array( __CLASS__, 'params' ) );
 		add_filter( 'pos_host_register_options_tabs', array( __CLASS__, 'register_options_tabs' ) );
 		add_action( 'pos_host_register_options_panels', array( __CLASS__, 'register_options_panels' ), 10, 2 );
 		add_action( 'pos_host_register_options_save', array( __CLASS__, 'save_register_data' ), 10, 2 );
 		add_filter( 'pos_host_register_data', array( __CLASS__, 'add_register_data' ) );
-	}
-
-	/**
-	 * Includes.
-	 */
-	public static function includes() {
-		include_once 'includes/class-trx-host-api.php';
-		include_once 'includes/class-trx-host-gateway.php';
 	}
 
 	/**
@@ -42,8 +33,8 @@ class POS_HOST_trx_host {
 	public static function params( $params ) {
 		$trx_host_data = get_option( 'woocommerce_pos_trx_host_settings', array() );
 
-		$params['trx_host_host_address']      = isset( $trx_host_data['host_address'] ) ? set_url_scheme( esc_url( $trx_host_data['host_address'] ), 'https' ) : '';
-		$params['trx_host_security_key']           = isset( $trx_host_data['security_key'] ) ? $trx_host_data['security_key'] : '';
+		$params['trx_host_host_address']     = isset( $trx_host_data['host_address'] ) ? set_url_scheme( esc_url( $trx_host_data['host_address'] ), 'https' ) : '';
+		$params['trx_host_security_key']     = isset( $trx_host_data['security_key'] ) ? $trx_host_data['security_key'] : '';
 		$params['trx_host_merchant_id']      = isset( $trx_host_data['merchant_id'] ) ? $trx_host_data['merchant_id'] : '';
 		
 		return $params;
@@ -108,4 +99,4 @@ class POS_HOST_trx_host {
 
 }
 
-POS_HOST_trx_host::init();
+POS_HOST_Gateway_Terminal_admin::init();

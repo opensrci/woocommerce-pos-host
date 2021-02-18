@@ -6,7 +6,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
 /**
  * POS_HOST_Gateway_Trx_Host_API.
  */
@@ -93,7 +92,7 @@ class POS_HOST_Gateway_Trx_Host_API {
 	 * @return array|WP_Error
 	 */
 	public function test( ) {
-wp_die("in api test:",488 );                        
+wp_die("api test:",488 );                        
 	}
 
 	/**

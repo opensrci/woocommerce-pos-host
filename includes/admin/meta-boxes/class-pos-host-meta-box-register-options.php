@@ -74,8 +74,8 @@ class POS_HOST_Meta_Box_Register_Options {
 		/*
 		 * At this point, the post_title has already been saved by wp_insert_post().
 		 */
-		$register->set_props(
-			array(
+                
+                 $data = array(
 				'slug'            => $slug,
 				'grid'            => isset( $_POST['grid'] ) ? absint( $_POST['grid'] ) : 0,
 				'receipt'         => isset( $_POST['receipt'] ) ? absint( $_POST['receipt'] ) : 0,
@@ -92,8 +92,9 @@ class POS_HOST_Meta_Box_Register_Options {
 				'print_receipt'   => isset( $_POST['print_receipt'] ),
 				'gift_receipt'    => isset( $_POST['gift_receipt'] ),
 				'note_request'    => isset( $_POST['note_request'] ) ? wc_clean( wp_unslash( $_POST['note_request'] ) ) : 'none',
-			)
-		);
+				'terminalid'        => isset( $_POST['terminalid'] ) ? wc_clean( wp_unslash( $_POST['terminalid'] ) ) : '',
+			);
+		$register->set_props($data);
 
 		$register->save();
 
