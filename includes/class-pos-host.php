@@ -983,10 +983,10 @@ class POS_HOST {
 	public function init_payment_gateways() {
                  include_once 'gateways/class-pos-host-gateway-cash.php';
  		include_once 'gateways/trx-host/class-pos-host-gateway-terminal.php';
+                 include_once 'gateways/stripe/class-pos-host-stripe.php';
         /*@todo Debug *
             include_once 'gateways/class-pos-host-gateway-bacs.php';
             include_once 'gateways/class-pos-host-gateway-cheque.php';
-            include_once 'gateways/stripe/class-pos-host-stripe.php';
             include_once 'gateways/trx-host/class-pos-host-trx-host.php';
          * 
          */
@@ -1003,6 +1003,8 @@ class POS_HOST {
 	 */
 	public function add_payment_gateways( $methods ) {
 		$methods[] = 'POS_HOST_Gateway_Cash';
+		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
+		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
         /*@todo Debug *
 		$methods[] = 'POS_HOST_Gateway_Cheque';
 		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
@@ -1010,9 +1012,9 @@ class POS_HOST {
     		$methods[] = 'POS_HOST_Gateway_trx_host';
         */
                 
-		$chip_and_pin = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
+		$terminal = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
 
-		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
+		for ( $n = 1; $n <= (int) $terminal; $n++ ) {
 			$methods[] = 'POS_HOST_Gateway_Terminal';
 		}
 

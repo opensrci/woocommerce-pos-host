@@ -59,7 +59,8 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 		$this->enable_for_methods = $this->get_option( 'enable_for_methods', array() );
 		$this->enable_for_virtual = $this->get_option( 'enable_for_virtual', 'yes' ) === 'yes';
 		$this->supports           = array( 'products', 'woocommerce-pos-host' );
-		$this->api                = new POS_HOST_Gateway_Trx_Host_API();
+	       
+                /*@todo needed it? */
                 add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
                 add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
                 
@@ -68,7 +69,7 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
                 // Customer Emails.
                 add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
 	}
-	
+        
         public static function includes() {
             	include_once 'includes/class-trx-host-api.php';
 //		/include_once 'includes/class-trx-host-admin.php';
@@ -106,13 +107,8 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 				'title'       => __( 'Host Address', 'woocommerce-pos-host' ),
 				'type'        => 'text',
 				'description' => __( 'Enter the Host Address.', 'woocommerce-pos-host' ),
-				'desc_tip'    => true,
-			),
-			'merchant_id'      => array(
-				'title'       => __( 'Merchant ID', 'woocommerce-pos-host' ),
-				'type'        => 'text',
-				'description' => __( 'Enter the Merchant ID.', 'woocommerce-pos-host' ),
-				'desc_tip'    => true,
+				'default'     => 'spinpos.net/spin',
+                                   'desc_tip'    => true,
 			),
 			'terminal_id'      => array(
 				'title'       => __( 'Terminal ID', 'woocommerce-pos-host' ),
@@ -124,6 +120,13 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 				'title'       => __( 'Security Key', 'woocommerce-pos-host' ),
 				'type'        => 'text',
 				'description' => __( 'Enter the Security key.', 'woocommerce-pos-host' ),
+				'desc_tip'    => true,
+                          ),
+			'timeout'           => array(
+				'title'       => __( 'Connection Timeout', 'woocommerce-pos-host' ),
+				'type'        => 'text',
+				'description' => __( 'Enter the timeout connection in seconds.', 'woocommerce-pos-host' ),
+				'default'     => '30',
 				'desc_tip'    => true,
                           ),
 
@@ -146,27 +149,6 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 		}
 
 		return parent::is_available();
-	}
-
-	/**
-	 * Process the payment and return the result.
-	 *
-	 * @param int $order_id Order ID.
-	 * @return array
-	 */
-	public function process_payment( $order_id ) {
-		$order = wc_get_order( $order_id );
-
-		$order->update_status( apply_filters( "woocommerce_{$this->id}_process_payment_order_status", 'completed', $order ), __( 'Payment to be made upon delivery.', 'woocommerce-pos-host' ) );
-
-		// Remove cart.
-		WC()->cart->empty_cart();
-
-		// Return thankyou redirect.
-		return array(
-			'result'  => 'success',
-			'message' => __( 'Success!', 'woocommerce-pos-host' ),
-		);
 	}
 
 	/**
@@ -218,36 +200,41 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
         /**
 	 * Process Payment before save order
 	 *
-	 *        return array(
-	 *            'result'   => 'success',
-	 *            'redirect' => $this->get_return_url( $order )
-	 *        );
-	 *
 	 * @param int $order_id Order ID.
 	 * @return array
 	 */
         public function pos_process_payment($order_id) {
-            
+                 if( !$order_id ) return false;
+                 $trx_id = '';
+                 
+                 $order = wc_get_order( $order_id );
+		
+                 if ( $order->get_total() > 0 ) {
+                    $api = new POS_HOST_Gateway_Trx_Host_API( $order->get_payment_method() );
+                
+                 $ret = $api->do_order( $order );
+                 
+                 //retry if failed
+                 if( '0' != $ret['error_code']){
+                    //comm error, need retrieve transaction id
+                    sleep(30);
+                    $ret = $api->retrieve_trx($order->get_id());
 
-                 $ret = array(
-                      'result'   => 'success',
-	             'redirect' => $this->get_return_url( $order )
-                      );  
-		$order = wc_get_order( $order_id );
-
-		if ( $order->get_total() > 0 ) {
-                    $this->api->test();
-       
-                        // Mark as completed.
-                        $order->update_status( apply_filters( 'woocommerce_pos_host_trx_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order ),
-                                __( 'Payment completed.', 'woocommerce-pos-host' ) );
-                        
-		} else {
-                        $order->payment_complete();
-		}
-//wp_die("pos process payment.".$order_id,487);         
+                 } 
                     
-                return $ret;
+                 if ( '0' == $ret['result_code'] ){
+                        //approved
+                        $order->update_status( apply_filters( 'woocommerce_pos_host_trx_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order ),
+                                    __( 'Payment completed.', 'woocommerce-pos-host' ) );
+                        $trx_id = $ret['trx_id'];
+                    }
+                 }
+                 
+                 // $trx_id <> '', success, or failed.
+                 $order->payment_complete( $trx_id );
+                
+                 return true;
+                 
 	}
         
 }

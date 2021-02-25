@@ -11,27 +11,48 @@ defined( 'ABSPATH' ) || exit;
  */
 class POS_HOST_Gateway_Trx_Host_API {
 
-	public $base_url;
-	public $settings;
-	public $username;
-	public $key;
-	public $installer_id;
-	public $software_house_id;
-
-	/**
+    private $base_url = '';
+    private $timeout  = '';
+    private $tpn  = '';
+    private $auth_key  = '';
+    /*
+    private $payload= array( 
+            'TPN'=>'',
+            'AuthKey'=>'',
+            'Timeout'=>'',
+            'PaymentType'=>'',
+            'TransType'=>'',
+            'InvNum'=>'',
+            'Amount'=>'',
+            'Tip'=>'',
+            'RefId'=>'',
+            'AuthCode'=>'',
+            'ClerkId'=>'',
+            'TableNum'=>'',
+            'TicketNum'=>'',
+            'CashbackAmount'=>'',
+            'PrintReceipt'=>'',
+            );
+     * 
+     */
+        /**
 	 * Constructor.
 	 */
-	public function __construct() {
-		$this->init_settings();
-
-		$this->base_url          = $this->settings['host_address'];
-		$this->key               = $this->settings['api_key'];
-		$this->installer_id      = $this->settings['installer_id'];
-		$this->software_house_id = $this->settings['software_house_id'];
-		$this->username          = 'user';
+	public function __construct( $method ) {
+            if ( false === strpos( $method, "pos_host_terminal" ) ) return; 
+            self::init( $method );
 	}
+        
+        private function init($method){
+            //load settings
+            $settings = get_option("woocommerce_".$method."_settings",array());
+            $this->base_url = $settings['host_address'];
+            $this->timeout =  $settings['timeout']; 
+            $this->tpn =  $settings['terminal_id'];
+            $this->auth_key =  $settings['security_key']; 
 
-	/**
+        }
+        /**
 	 * Returns API URL.
 	 *
 	 * @return string
@@ -51,135 +72,114 @@ class POS_HOST_Gateway_Trx_Host_API {
 		return trailingslashit( $url );
 	}
 
-	/**
-	 * Init settings.
+        /**
+	 * Process a sale payment by data.
 	 *
-	 * @return array
-	 */
-	protected function init_settings() {
-		$this->settings = get_option(
-			'woocommerce_pos_paymentsense_settings',
-			array(
-				'host_address'      => '',
-				'api_key'           => '',
-				'installer_id'      => '',
-				'software_house_id' => '',
-			)
-		);
-
-		return $this->settings;
-	}
-
-	/**
-	 * Returns request headers.
-	 *
-	 * @return array
-	 */
-	protected function get_headers() {
-		return array(
-			'Content-Type'      => 'application/json',
-			'Accept'            => 'application/connect.v2+json',
-			'Authorization'     => 'Basic ' . base64_encode( $this->username . ':' . $this->key ),
-			'Software-House-Id' => $this->software_house_id,
-			'Installer-Id'      => $this->installer_id,
-		);
-	}
-
-	/**
-	 * Make a test.
-	 *
-	 * @param array $data
+	 * @param array $payload data
 	 * @return array|WP_Error
 	 */
-	public function test( ) {
-wp_die("api test:",488 );                        
-	}
+        public function do_order( $order ) {
+            if (!$order) return false;
+            
+            
+            $ret = array(
+                'error_code'=>0,
+                'error_msg'=>'',
+                'result_code'=>1,
+                'result_msg'=>'',
+                
+            );
+            $payload = array();
+            $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><request></request>");
+            
+            $payload['TPN'] = $this->tpn;
+            $payload['AuthKey'] = $this->auth_key;
+            $payload['TransType'] =  'Sale';
+            $payload['PaymentType'] =  'Card'; 
+            $payload['InvNum'] =  $order->get_id(); 
+            $payload['RefId']  =  $order->get_id(); 
+            $payload['Amount'] =  $order->get_total(); 
+     
+            foreach ( $payload as $k => $v ) {
+                if ($v)
+                    $xml->addChild("$k",esc_html("$v"));
+            }
+            
+            $url = $this->get_base_url()."spin/Transaction";
+            $options = [
+                'method'     => 'POST',
+                'body'       => $xml->asXML(),
+                'timeout'    => $this->timeout,
+                'headers'    => [
+                    'Content-Type' => 'application/xml',
+                ],
+                'sslverify'   => false,
+            ];
 
-	/**
-	 * Make a request.
+            $result = wp_remote_post( $url, $options );
+            if ( is_wp_error($result)){
+                //remote post error
+               $ret['error_msg'] = $result->get_error_message();
+               $ret['error_code'] = $result->get_error_code();                
+            }else{
+               $xml = simplexml_load_string($result['body']);
+               $ret['result_code'] = (int)$xml->response->ResultCode;
+               $ret['result_msg'] = (string)$xml->response->Message;
+               $ret['trx_id'] = (string)$xml->response->PNRef;
+                
+            } 
+            return $ret;
+        }
+        /**
+	 * Retrieve a payment by RefId.
 	 *
-	 * @param array $data
+	 * @param array $payload data
 	 * @return array|WP_Error
 	 */
-	protected function request( $url, $data = array() ) {
-		$data['headers'] = $this->get_headers();
-		return wp_remote_request( $url, $data );
-	}
+        public function retrieve_trx( $RefId ) {
+            if (!$RefId) return false;
+            
+            $ret = array(
+                'error_code'=>0,
+                'error_msg'=>'',
+                'result_code'=>1,
+                'result_msg'=>'',
+                
+            );
+            $payload = $req = array();
+            
+            $payload['TPN'] = $this->tpn;
+            $payload['AuthKey'] = $this->auth_key;
+            $payload['TransType'] =  'Status';
+            $payload['PaymentType'] =  'Card';
+            $payload['RefId']  =  $RefId; 
+     
+            $req_str ="<request>";
+             foreach ( $payload as $k => $v ) {
+                if ($v)
+                    //<key>val</key>
+                    $req_str .="<".$k.">".$v."</".$k.">";
+            }
+            $req_str .="</request>";
+            //remove xml version tag
+            //$req['TerminalTransaction'] = $req_str; 
+            $url = $this->get_base_url()."spin/cgi.html?TerminalTransaction=".$req_str;
+            
+            $result = wp_remote_get( $url,'');
 
-	/**
-	 * PAC terminals.
-	 *
-	 * @param int $single
-	 * @return array|WP_Error
-	 */
-	public function pac_terminals( $single = 0 ) {
-		$url = $this->get_base_url() . 'pac/terminals';
-		if ( ! empty( $single ) ) {
-			$url .= '/' . $single;
-		}
-
-		error_log( json_encode( $this->request( $url, array() ) ) );
-
-		return $this->request( $url, array() );
-	}
-
-	public function pac_terminals_response( $single = 0 ) {
-		$response = $this->pac_terminals( $single );
-		if ( $response instanceof WP_Error ) {
-			return array();
-		}
-
-		return json_decode( wp_remote_retrieve_body( $response ), true );
-	}
-
-	/**
-	 * PAC transactions.
-	 *
-	 * @param string $tid
-	 * @param string $single
-	 * @param array  $data
-	 *
-	 * @return array|WP_Error
-	 */
-	public function pac_transactions( $tid = '0', $single = '', $data = array() ) {
-		$url = $this->get_base_url() . "pac/terminals/$tid/transactions";
-		if ( ! empty( $single ) ) {
-			$url .= '/' . $single;
-		}
-
-		return $this->request( $url, $data );
-	}
-
-	/**
-	 * PAC reports.
-	 *
-	 * @param string $tid
-	 * @param int    $single
-	 * @param array  $data
-	 *
-	 * @return array|WP_Error
-	 */
-	public function pac_reports( $tid = '0', $single = 0, $data = array() ) {
-		$url = $this->get_base_url() . "pac/terminals/$tid/reports";
-		if ( ! empty( $single ) ) {
-			$url .= '/' . $single;
-		}
-
-		return $this->request( $url, $data );
-	}
-
-	/**
-	 * Returns first error message.
-	 */
-	public function get_first_error_message( $response ) {
-		$message = __( 'An error occurred', 'woocommerce-point-of-sale' );
-
-		if ( ! isset( $response['userMessage'] ) ) {
-			return $message;
-		}
-
-		$message = $response['userMessage'];
-
-		return $message;
-	}
-}
+            if ( is_wp_error($result)){
+                //remote post error
+               $ret['error_msg'] = $result->get_error_message();
+               $ret['error_code'] = $result->get_error_code();                
+            }else{
+               $xml = new SimpleXMLElement();
+               $xml = simplexml_load_string($result['body']);
+               $ret['result_code'] = (int)$xml->response->ResultCode;
+               $ret['result_msg'] = (string)$xml->response->Message;
+               $ret['trx_id'] = (string)$xml->response->PNRef;
+                
+            } 
+           
+            return $ret;
+        }
+ }

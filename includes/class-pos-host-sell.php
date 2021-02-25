@@ -187,13 +187,13 @@ class POS_HOST_Sell {
 		// Update manifest.json.
                 $home_url                     = home_url( $wp->request );
                 $parsed                       = wp_parse_url($home_url);
-		$home_host                    = $parsed['host'];
+                $home_host                    = $parsed['host'];
                 $file                         = POS_HOST()->plugin_path() . '/assets/dist/images/manifest.json';
-		$new_file                     = POS_HOST()->plugin_path() . '/assets/dist/images/manifest.'.$home_host.'.json';
-		$contents                     = file_get_contents( $file );
-		$contentsDecoded              = json_decode( $contents, true );
-		$contentsDecoded['start_url'] = esc_url( $home_url );
-		$json                         = json_encode( $contentsDecoded );
+                $new_file                     = POS_HOST()->plugin_path() . '/assets/dist/images/manifest.'.$home_host.'.json';
+                $contents                     = file_get_contents( $file );
+                $contentsDecoded              = json_decode( $contents, true );
+                $contentsDecoded['start_url'] = esc_url( $home_url );
+                $json                         = json_encode( $contentsDecoded );
 
 		//if ( is_writable( $new_file ) ) 
                 {
@@ -422,6 +422,7 @@ class POS_HOST_Sell {
 				'gift_receipt'    => $register_object->get_gift_receipt(),
 				'note_request'    => $register_object->get_note_request(),
 				'order_id'        => $register_object->get_temp_order(),
+				'terminalid'        => $register_object->get_terminalid(),
 			);
 
 			// Create a temp_order for the register if not created yet.
@@ -468,17 +469,7 @@ class POS_HOST_Sell {
 				),
 			),
 		);
-
-		$chip_and_pin = empty( get_option( 'pos_host_number_terminal_gateways', 1 ) ) ? 1 : get_option( 'pos_host_number_terminal_gateways', 1 );
-
-		for ( $n = 1; $n <= (int) $chip_and_pin; $n++ ) {
-			$gateway_name = 1 === $n ? 'pos_host_terminal' : 'pos_host_terminal_' . $n;
-			$register_data['session']['gateways'][ $gateway_name ] = array(
-				'orders_count' => 0,
-				'orders_total' => 0,
-			);
-		}
-
+                   
 		// Get session.
 		$session = pos_host_get_session( $register_data['current_session'] );
 		if ( $register_data['current_session'] && is_a( $session, 'POS_HOST_Session' ) ) {
