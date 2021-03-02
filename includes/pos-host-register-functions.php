@@ -61,6 +61,31 @@ function pos_host_get_register_grid_options() {
 }
 
 /**
+ * Get all registers 
+ * .
+ *
+ * @since 0.0.1
+ * @return array
+ */
+function pos_host_get_registers() {
+	$get_posts = get_posts(
+		array(
+			'numberposts' => -1,
+			'post_type'   => 'pos_host_register',
+			'orderby'     => 'post_name',
+			'order'       => 'asc',
+		)
+	);
+	$registers  = array();
+        for ($i=0;$i<count($get_posts);$i++){
+		$registers[$i]['id'] =  $get_posts[$i]->ID;
+		$registers[$i]['name'] =  $get_posts[$i]->post_title;            
+        }
+
+	return $registers;
+}
+
+/**
  * Get register receipt options.
  *
  * @since 0.0.1

@@ -37,11 +37,12 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 			self::$number = 0;
 		}
 
-		// Gateway ID.
+		// Terminal ID.
 		self::$number++;
 
 		// Setup general properties.
-		$this->id   = 1 === self::$number ? 'pos_host_terminal' : 'pos_host_terminal_' . self::$number;
+		//$this->id   = 1 === self::$number ? 'pos_host_terminal' : 'pos_host_terminal_' . self::$number;
+		$this->id   = 'pos_host_terminal_' . self::$number;
 		$this->icon = apply_filters( 'pos_host_host_terminal_icon', '' );
 		/* translators: %s gateway number */
 		$this->method_title       = sprintf( __( 'POS Terminal %s', 'woocommerce-pos-host' ), $this->process_gateway_number( self::$number ) );
@@ -60,12 +61,11 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 		$this->enable_for_virtual = $this->get_option( 'enable_for_virtual', 'yes' ) === 'yes';
 		$this->supports           = array( 'products', 'woocommerce-pos-host' );
 	       
-                /*@todo needed it? */
                 add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
                 add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
                 
                 //process payment
-                add_action( 'woocommerce_pos_new_order', array( $this, 'pos_process_payment' ), 10 );
+                //add_action( 'woocommerce_pos_new_order', array( $this, 'pos_process_payment' ), 10 );
                 // Customer Emails.
                 add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
 	}
@@ -190,9 +190,11 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	 * @return string
 	 */
 	private function process_gateway_number( $number, $leading_space = true ) {
-		if ( 1 === $number ) {
+		/*
+                if ( 1 === $number ) {
 			return '';
 		}
+                 */
 
 		return $leading_space ? ' ' . $number : $number;
 	}
@@ -208,7 +210,8 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
                  $trx_id = '';
                  
                  $order = wc_get_order( $order_id );
-		
+wp_die("Order:".var_dump($order), 410);
+
                  if ( $order->get_total() > 0 ) {
                     $api = new POS_HOST_Gateway_Trx_Host_API( $order->get_payment_method() );
                 

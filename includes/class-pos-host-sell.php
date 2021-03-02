@@ -46,7 +46,7 @@ class POS_HOST_Sell {
 		add_action( 'rest_api_init', array( $this, 'wc_api_loaded' ), 12 );
 		add_action( 'rest_api_init', array( $this, 'wc_api_classes' ), 15 );
 		add_action( 'woocommerce_available_payment_gateways', array( $this, 'pos_host_available_payment_gateways' ), 100, 1 );
-		//add_action( 'option_woocommerce_stripe_settings', array( $this, 'woocommerce_stripe_settings' ), 100, 1 );
+		add_action( 'option_woocommerce_stripe_settings', array( $this, 'woocommerce_stripe_settings' ), 100, 1 );
 		add_action( 'init', array( $this, 'pos_host_checkout_gateways' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'assets' ), PHP_INT_MAX );
 		add_action( 'wp_print_footer_scripts', array( $this, 'assets' ), PHP_INT_MAX );
@@ -179,7 +179,8 @@ class POS_HOST_Sell {
 		}
 
 		global $wp;
-
+                 
+                //
 		$register_data = $this->get_register( $wp->query_vars['register'] );
 		$outlet_data   = $this->get_outlet( $wp->query_vars['outlet'] );
 		$primary_color = get_option( 'pos_host_theme_primary_color', '#7f54b3' );

@@ -258,8 +258,6 @@ class POS_HOST_Gateway_Cash extends WC_Payment_Gateway {
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
-/*@todo debug*/            
-wp_die("In payment processing".$order_id,488);
 
 		$order = wc_get_order( $order_id );
 

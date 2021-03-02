@@ -53,6 +53,19 @@ class POS_HOST_Stripe_API {
 		return $captured->toArray();
 	}
 
+	public function get_locations() {
+		$locations = array();
+
+		try {
+			\Stripe\Stripe::setApiKey( $this->secret_key );
+			$locations = \Stripe\Terminal\Location::all( array( 'limit' => 20 ) )->data;
+		} catch ( Exception $e ) {
+			return array();
+		}
+
+		return $locations;
+	}
+
 	public function get_terminals() {
 		$terminals = array();
 

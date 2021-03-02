@@ -113,7 +113,11 @@ class POS_HOST_Gateway_Stripe_Terminal extends WC_Payment_Gateway {
 
 	public function admin_options() {
 		parent::admin_options();
-
+                 
+                 $outlets = pos_host_get_outlets();
+                
+//@todo debug   
+return;                 
 		if ( count( $this->terminals ) ) :
 			?>
 			<h3 class="wc-settings-sub-title"><?php esc_html_e( 'Available Terminals', 'woocommerce-pos-host' ); ?></h3>

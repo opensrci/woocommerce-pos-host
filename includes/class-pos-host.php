@@ -984,12 +984,6 @@ class POS_HOST {
                  include_once 'gateways/class-pos-host-gateway-cash.php';
  		include_once 'gateways/trx-host/class-pos-host-gateway-terminal.php';
                  include_once 'gateways/stripe/class-pos-host-stripe.php';
-        /*@todo Debug *
-            include_once 'gateways/class-pos-host-gateway-bacs.php';
-            include_once 'gateways/class-pos-host-gateway-cheque.php';
-            include_once 'gateways/trx-host/class-pos-host-trx-host.php';
-         * 
-         */
             return;
 	}
 
@@ -1005,12 +999,6 @@ class POS_HOST {
 		$methods[] = 'POS_HOST_Gateway_Cash';
 		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
 		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
-        /*@todo Debug *
-		$methods[] = 'POS_HOST_Gateway_Cheque';
-		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
-		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
-    		$methods[] = 'POS_HOST_Gateway_trx_host';
-        */
                 
 		$terminal = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
 

@@ -49,6 +49,8 @@ defined( 'ABSPATH' ) || exit;
 		</div>
 
 		<script data-cfasync="false" type="text/javascript" class="pos_host_params" >
+			window.pos_host_registers = <?php echo wp_kses_post( json_encode( pos_host_get_registers() ) ); ?>;
+			window.pos_host_outlets = <?php echo wp_kses_post( json_encode( pos_host_get_outlets() ) ); ?>;
 			window.pos_host_params = <?php echo wp_kses_post( POS_HOST_Sell::get_js_params() ); ?>;
 			window.pos_host_register_data = <?php echo wp_kses_post( json_encode( $register_data ) ); ?>;
 			window.pos_host_outlet_data = <?php echo wp_kses_post( json_encode( $outlet_data ) ); ?>;

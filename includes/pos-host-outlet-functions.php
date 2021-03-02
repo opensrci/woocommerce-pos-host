@@ -44,3 +44,28 @@ function pos_host_get_outlet( $outlet ) {
 function pos_host_is_default_outlet( $outlet_id ) {
 	return (int) get_option( 'pos_host_default_outlet', 0 ) === $outlet_id;
 }
+
+/**
+ * Get all outlets 
+ * .
+ *
+ * @since 0.0.1
+ * @return array
+ */
+function pos_host_get_outlets() {
+	$get_posts = get_posts(
+		array(
+			'numberposts' => -1,
+			'post_type'   => 'pos_host_outlet',
+			'orderby'     => 'post_name',
+			'order'       => 'asc',
+		)
+	);
+	$outlets  = array();
+        for ($i=0;$i<count($get_posts);$i++){
+		$outlets[$i]['id'] =  $get_posts[$i]->ID;
+		$outlets[$i]['name'] =  $get_posts[$i]->post_title;            
+        }
+
+	return $outlets;
+}
