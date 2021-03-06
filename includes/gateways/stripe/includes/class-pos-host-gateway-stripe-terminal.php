@@ -103,7 +103,7 @@ class POS_HOST_Gateway_Stripe_Terminal extends WC_Payment_Gateway {
 	 */
 	public function payment_fields() {
 		if ( function_exists( 'is_pos' ) && is_pos() ) {
-			include POS_HOST()->plugin_path() . '/includes/gateways/stripe/views/html-stripe-terminal-panel.php';
+			include POS_HOST()->plugin_path() . '/includes/gateways/stripe/includes/views/html-stripe-terminal-panel.php';
 
 			return;
 		}
@@ -114,10 +114,6 @@ class POS_HOST_Gateway_Stripe_Terminal extends WC_Payment_Gateway {
 	public function admin_options() {
 		parent::admin_options();
                  
-                 $outlets = pos_host_get_outlets();
-                
-//@todo debug   
-return;                 
 		if ( count( $this->terminals ) ) :
 			?>
 			<h3 class="wc-settings-sub-title"><?php esc_html_e( 'Available Terminals', 'woocommerce-pos-host' ); ?></h3>

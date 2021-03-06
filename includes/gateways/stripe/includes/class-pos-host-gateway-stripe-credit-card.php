@@ -87,7 +87,7 @@ class POS_HOST_Gateway_Stripe_Credit_Card extends WC_Payment_Gateway {
 	 */
 	public function payment_fields() {
 		if ( function_exists( 'is_pos' ) && is_pos() ) {
-			include POS_HOST()->plugin_path() . '/includes/gateways/stripe/views/html-stripe-credit-card-panel.php';
+			include POS_HOST()->plugin_path() . '/includes/gateways/stripe/includes/views/html-stripe-credit-card-panel.php';
 
 			return;
 		}

@@ -53,9 +53,37 @@ class POS_HOST_Stripe_API {
 		return $captured->toArray();
 	}
 
-	public function get_locations() {
+        /*
+         * Get location from Stripe 
+         * @param $location : location id
+         * 
+         */
+	public function get_location($location) {
+
+		try {
+			\Stripe\Stripe::setApiKey( $this->secret_key );
+			$locations = \Stripe\Terminal\Location::retrieve( $location )->data;
+		} catch ( Exception $e ) {
+			return array();
+		}
+
+		return $locations;
+	}
+
+	public function get_all_locations() {
 		$locations = array();
 
+		try {
+			\Stripe\Stripe::setApiKey( $this->secret_key );
+			$locations = \Stripe\Terminal\Location::all( array( 'limit' => 20 ) )->data;
+		} catch ( Exception $e ) {
+			return array();
+		}
+
+		return $locations;
+	}
+
+        public function set_locations($location) {
 		try {
 			\Stripe\Stripe::setApiKey( $this->secret_key );
 			$locations = \Stripe\Terminal\Location::all( array( 'limit' => 20 ) )->data;

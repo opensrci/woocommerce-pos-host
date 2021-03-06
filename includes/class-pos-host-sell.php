@@ -101,8 +101,8 @@ class POS_HOST_Sell {
 				}
 				"
 			);
-			//wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
-			//wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
+			wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
+			wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/before-main.min.js', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js', array(), POS_HOST_VERSION );
 		}
@@ -745,6 +745,7 @@ class POS_HOST_Sell {
 				'pos_tax_based_on'               => $pos_tax_based_on,
 				'precision'                      => $precision,
 				'all_rates'                      => pos_host_get_all_tax_rates(),
+				'outlet_rates'                   => pos_host_get_outlet_tax_rates($outlet_data),
 				'shop_location'                  => pos_host_get_shop_location(),
 				'tax_enabled'                    => wc_tax_enabled(),
 				'european_union_countries'       => WC()->countries->get_european_union_countries(),

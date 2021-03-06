@@ -20,38 +20,27 @@ class POS_HOST_Stripe {
 		self::add_ajax_events();
 
 		add_filter( 'pos_host_params', array( __CLASS__, 'params' ) );
-                 
-                 /*
-                  * add stripe location option to outlet's options
-                  * 
-                  */       
-                 add_filter( 'pos_host_outlet_options_tabs', array( __CLASS__, 'outlet_options_tabs' ) );
-		add_action( 'pos_host_outlet_options_panels', array( __CLASS__, 'outlet_options_panels' ), 10, 2 );
-		add_action( 'pos_host_outlet_options_save', array( __CLASS__, 'save_outlet_data' ), 10, 2 );
-		add_filter( 'pos_host_outlet_data', array( __CLASS__, 'add_outlet_data' ) );
-
-                 /*
-                  * add stripe terminal option to register's options
-                  * 
-                  */                       
-		add_filter( 'pos_host_register_options_tabs', array( __CLASS__, 'register_options_tabs' ) );
-		add_action( 'pos_host_register_options_panels', array( __CLASS__, 'register_options_panels' ), 10, 2 );
-		add_action( 'pos_host_register_options_save', array( __CLASS__, 'save_register_data' ), 10, 2 );
-		add_filter( 'pos_host_register_data', array( __CLASS__, 'add_register_data' ) );
-
+     
 	}
 
 	/**
 	 * Includes.
 	 */
 	public static function includes() {
-		if ( ! class_exists( '\Stripe\Stripe' ) ) {
+		/*
+                 * static classes
+                 * 
+                 */
+                 include dirname( __FILE__ ) . '/includes/class-pos-host-stripe-outlet-options.php';
+		include dirname( __FILE__ ) . '/includes/class-pos-host-stripe-register-options.php';
+
+                 if ( ! class_exists( '\Stripe\Stripe' ) ) {
 			include POS_HOST()->plugin_path() . '/vendor/stripe/stripe-php/init.php';
 		}
 
-		include dirname( __FILE__ ) . '/class-pos-host-stripe-api.php';
-		include dirname( __FILE__ ) . '/payment-methods/class-pos-host-gateway-stripe-terminal.php';
-		include dirname( __FILE__ ) . '/payment-methods/class-pos-host-gateway-stripe-credit-card.php';
+		include dirname( __FILE__ ) . '/includes/class-pos-host-stripe-api.php';
+		include dirname( __FILE__ ) . '/includes/class-pos-host-gateway-stripe-terminal.php';
+		include dirname( __FILE__ ) . '/includes/class-pos-host-gateway-stripe-credit-card.php';
 	}
 
 	/**
@@ -109,11 +98,12 @@ class POS_HOST_Stripe {
 	public static function params( $params ) {
 		$stripe_data = get_option( 'woocommerce_pos_stripe_terminal_settings', array() );
 
-		$params['stripe_publishable_key']       = self::get_publishable_key();
-		$params['stripe_secret_key']            = self::get_secret_key(); // Should not be sent to the front-end.
+		//$params['stripe_publishable_key']       = self::get_publishable_key();
+		//$params['stripe_secret_key']            = self::get_secret_key(); // Should not be sent to the front-end.
 		$params['stripe_terminal_debug_mode']   = ! empty( $stripe_data['debug_mode'] ) && 'yes' === $stripe_data['debug_mode'];
 		$params['stripe_payment_intent_nonce']  = wp_create_nonce( 'stripe-payment-intent' );
 		$params['stripe_capture_payment_nonce'] = wp_create_nonce( 'stripe-capture-payment' );
+		$params['stripe_connection_token'] = wp_create_nonce( 'stripe-connection-token' );
 
 		return $params;
 	}
@@ -240,120 +230,6 @@ class POS_HOST_Stripe {
 		}
 	}
 
-	/**
-	 * Add Stripe location tab to the register data meta box.
-	 *
-	 * @param array $tabs
-	 * @return array
-	 */
-	public static function outlet_options_tabs( $tabs ) {
-		$stripe_location_data = get_option( 'woocommerce_pos_stripe_terminal_settings', array() );
-		$enabled              = ! empty( $stripe_location_data['enabled'] ) && 'yes' === $stripe_location_data['enabled'];
-
-		if ( $enabled ) {
-			$tabs['stripe_location'] = array(
-				'label'  => __( 'Stripe location', 'woocommerce-pos-host' ),
-				'target' => 'stripe_location_outlet_options',
-				'class'  => '',
-			);
-		}
-
-		return $tabs;
-	}
-	/**
-	 * Display the Stripe location tab content.
-	 *
-	 * @param int             $thepostid
-	 * @param POS_HOST_Register $register
-	 */
-	public static function outlet_options_panels( $thepostid, $outlet_object ) {
-		include_once 'views/html-admin-outlet-options-stripe-location.php';
-	}
-
-	/**
-	 * On save outlet data.
-	 *
-	 * @param int             $post_id
-	 * @param POS_HOST_Register $outlet
-	 */
-	public static function save_outlet_data( $post_id, $outlet ) {
-		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'update-post_' . $post_id ) ) {
-			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-pos-host' ) );
-		}
-
-		$location = ! empty( $_POST['stripe_location'] ) ? wc_clean( wp_unslash( $_POST['stripe_location'] ) ) : 'none';
-		update_post_meta( $post_id, 'stripe_location', $location );
-	}
-
-	/**
-	 * Add Stripe location data to outlet data.
-	 *
-	 * @param array $outlet_data
-	 * @return array
-	 */
-	public static function add_outlet_data( $outlet_data ) {
-		$outlet_data['stripe_location'] = get_post_meta( $outlet_data['id'], 'stripe_location', true );
-
-		return $outlet_data;
-	}
-
-	/**
-	 * Add Stripe Terminal tab to the register data meta box.
-	 *
-	 * @param array $tabs
-	 * @return array
-	 */
-	public static function register_options_tabs( $tabs ) {
-		$stripe_terminal_data = get_option( 'woocommerce_pos_stripe_terminal_settings', array() );
-		$enabled              = ! empty( $stripe_terminal_data['enabled'] ) && 'yes' === $stripe_terminal_data['enabled'];
-
-		if ( $enabled ) {
-			$tabs['stripe_terminal'] = array(
-				'label'  => __( 'Stripe Terminal', 'woocommerce-pos-host' ),
-				'target' => 'stripe_terminal_register_options',
-				'class'  => '',
-			);
-		}
-
-		return $tabs;
-	}
-
-	/**
-	 * Display the Stripe Terminal tab content.
-	 *
-	 * @param int             $thepostid
-	 * @param POS_HOST_Register $register
-	 */
-	public static function register_options_panels( $thepostid, $register_object ) {
-		include_once 'views/html-admin-register-options-stripe-terminal.php';
-	}
-
-	/**
-	 * On save register data.
-	 *
-	 * @param int             $post_id
-	 * @param POS_HOST_Register $register
-	 */
-	public static function save_register_data( $post_id, $register ) {
-		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'update-post_' . $post_id ) ) {
-			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce-pos-host' ) );
-		}
-
-		$terminal = ! empty( $_POST['stripe_terminal'] ) ? wc_clean( wp_unslash( $_POST['stripe_terminal'] ) ) : 'none';
-		update_post_meta( $post_id, 'stripe_terminal', $terminal );
-	}
-
-	/**
-	 * Add Stripe Terminal data to register data.
-	 *
-	 * @param array $register_data
-	 * @return array
-	 */
-	public static function add_register_data( $register_data ) {
-		$register_data['stripe_terminal'] = get_post_meta( $register_data['id'], 'stripe_terminal', true );
-
-		return $register_data;
-	}
 }
 
 POS_HOST_Stripe::init();

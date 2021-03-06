@@ -207,6 +207,44 @@ function pos_host_get_shop_location() {
 }
 
 /**
+ * Get outlet tax rates.
+ *
+ * @todo Refactor this to perform less number of database queries.
+ * @return Array of rates.
+ */
+function pos_host_outlet_tax_rates($outlet_data = array()) {
+	global $wpdb;
+
+	$tax_class   = '';
+	$rates       = array();
+        $country  = $outlet_data["country"];        
+        $state  = $outlet_data["state"];        
+	$found_rates = $wpdb->get_results(
+		"SELECT tax_rates.*
+		FROM {$wpdb->prefix}woocommerce_tax_rates as tax_rates
+		LEFT OUTER JOIN {$wpdb->prefix}woocommerce_tax_rate_locations as locations ON tax_rates.tax_rate_id = locations.tax_rate_id
+                 WHERE tax_rates.tax_rate_country = '$country'  and tax_rates.tax_rate_state = '$state'
+		GROUP BY tax_rate_id
+		ORDER BY tax_rate_priority, tax_rate_order"
+	);
+
+	foreach ( $found_rates as $key_rate => $found_rate ) {
+		$rates[ $found_rate->tax_rate_id ] = array(
+			'rate'     => (float) $found_rate->tax_rate,
+			'label'    => $found_rate->tax_rate_name,
+			'shipping' => $found_rate->tax_rate_shipping ? 'yes' : 'no',
+			'compound' => $found_rate->tax_rate_compound ? 'yes' : 'no',
+			'country'  => $found_rate->tax_rate_country,
+			'state'    => $found_rate->tax_rate_state,
+			'taxclass' => $found_rate->tax_rate_class,
+			'priority' => $found_rate->tax_rate_priority,
+		);
+	}
+
+	return $rates;
+}
+
+/**
  * Get all tax rates.
  *
  * @todo Refactor this to perform less number of database queries.
@@ -221,7 +259,6 @@ function pos_host_get_all_tax_rates() {
 		"SELECT tax_rates.*
 		FROM {$wpdb->prefix}woocommerce_tax_rates as tax_rates
 		LEFT OUTER JOIN {$wpdb->prefix}woocommerce_tax_rate_locations as locations ON tax_rates.tax_rate_id = locations.tax_rate_id
-		LEFT OUTER JOIN {$wpdb->prefix}woocommerce_tax_rate_locations as locations2 ON tax_rates.tax_rate_id = locations2.tax_rate_id
 		GROUP BY tax_rate_id
 		ORDER BY tax_rate_priority, tax_rate_order"
 	);
