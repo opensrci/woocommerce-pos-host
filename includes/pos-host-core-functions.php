@@ -212,7 +212,7 @@ function pos_host_get_shop_location() {
  * @todo Refactor this to perform less number of database queries.
  * @return Array of rates.
  */
-function pos_host_outlet_tax_rates($outlet_data = array()) {
+function pos_host_get_outlet_tax_rates($outlet_data = array()) {
 	global $wpdb;
 
 	$tax_class   = '';
@@ -240,7 +240,6 @@ function pos_host_outlet_tax_rates($outlet_data = array()) {
 			'priority' => $found_rate->tax_rate_priority,
 		);
 	}
-
 	return $rates;
 }
 

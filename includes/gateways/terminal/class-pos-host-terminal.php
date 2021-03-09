@@ -21,8 +21,7 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	 * @var int Number.
 	 */
 	public static $number = 0;
-	private $terminals = array();
-	private $api;
+	protected $terminals = array();
 
 	/**
 	 * Constructor.
@@ -32,7 +31,8 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	 * Includes.
 	 */
 		self::includes();
-
+		self::add_ajax_events();
+                
 		if ( intval( get_option( 'pos_host_terminal_gateways_number', 1 ) ) === self::$number ) {
 			self::$number = 0;
 		}
@@ -61,8 +61,9 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 		$this->enable_for_virtual = $this->get_option( 'enable_for_virtual', 'yes' ) === 'yes';
 		$this->supports           = array( 'products', 'woocommerce-pos-host' );
 	       
-                add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
-                add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
+                 add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+                 add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
+		add_filter( 'pos_host_params', array( $this, 'params' ) );
                 
                 //process payment
                 //add_action( 'woocommerce_pos_new_order', array( $this, 'pos_process_payment' ), 10 );
@@ -71,8 +72,23 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	}
         
         public static function includes() {
-            	include_once 'includes/class-trx-host-api.php';
-//		/include_once 'includes/class-trx-host-admin.php';
+            	include_once 'includes/class-pos-host-terminal-api.php';
+	}
+
+        	/**
+	 * Hook in methods.
+	 */
+	public static function add_ajax_events() {
+		$ajax_events_nopriv = array(
+			'connect_terminal',
+			'terminal_capture_payment',
+			'terminal_process_payment',
+		);
+
+		foreach ( $ajax_events_nopriv as $ajax_event ) {
+			add_action( 'wp_ajax_pos_host_' . $ajax_event, array( __CLASS__, 'ajax_' . $ajax_event ) );
+			add_action( 'wp_ajax_nopriv_pos_host_' . $ajax_event, array( __CLASS__, 'ajax_' . $ajax_event ) );
+		}
 	}
 
          /**
@@ -152,6 +168,64 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	}
 
 	/**
+	 * Ajax: connect terminal payment.
+	 */
+	public static function ajax_connect_terminal() {
+                //
+                //@todo debug
+                //check_ajax_referer( 'pos-host-terminal', 'security' );
+                $payment_method  = isset( $_POST['payment_method'] ) ? wc_clean( wp_unslash( $_POST['payment_method'] ) ) : '';
+//@todo debug
+wp_die("connect terminal".$payment_method, 490);
+                if ( !$payment_method ){
+                    wp_send_json_error( 'empty payment method.' );
+                }
+                $api = new POS_HOST_Stripe_API($payment_method);
+                $ret = $api->connect_terminal();
+                return( json_encode($ret) );
+	}
+
+	/**
+	 * Ajax: process payment.
+          *  @param post[$order_id] - the woocommerce order id
+	 */
+	public static  function ajax_terminal_process_payment() {
+                //
+                //@todo debug
+                //check_ajax_referer( 'pos-host-terminal', 'security' );
+
+                $id  = isset( $_POST['order_id'] ) ? wc_clean( wp_unslash( $_POST['order_id'] ) ) : '';
+                $payment_method  = isset( $_POST['payment_method'] ) ? wc_clean( wp_unslash( $_POST['payment_method'] ) ) : '';
+                if ( !$id || !$payment_method ){
+                    wp_send_json_error( 'empty order_id or payment method.' );
+                }
+                
+                $api = new POS_HOST_Stripe_API($payment_method);
+                $ret = $api->process_payment($id);
+                return( json_encode($ret) );
+	}
+
+	/**
+	 * Ajax: capture payment.
+          *  @param post[refId] - 
+	 */
+	public static  function ajax_terminal_capture_payment() {
+                //
+                //@todo debug
+                //check_ajax_referer( 'pos-host-terminal', 'security' );
+
+                $id  = isset( $_POST['refId'] ) ? wc_clean( wp_unslash( $_POST['refId'] ) ) : '';
+                $payment_method  = isset( $_POST['payment_method'] ) ? wc_clean( wp_unslash( $_POST['payment_method'] ) ) : '';
+                if ( !$id || !$payment_method ){
+                    wp_send_json_error( 'empty intentId or payment method.' );
+                }
+                
+                $api = new POS_HOST_Stripe_API($payment_method);
+                $ret = $api->capture_payment( $id );
+                return( json_encode($ret) );
+	}
+
+	/**
 	 * Change payment complete order status to completed for Terminal orders.
 	 *
 	 * @param  string         $status Current order status.
@@ -169,7 +243,7 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 	}
 
 	/**
-	 * Add content to the WC emails.
+	 * Add content to the WC emails. (no use)
 	 *
 	 * @param WC_Order $order Order object.
 	 * @param bool     $sent_to_admin  Sent to admin.
@@ -198,46 +272,21 @@ class POS_HOST_Gateway_Terminal extends WC_Payment_Gateway {
 
 		return $leading_space ? ' ' . $number : $number;
 	}
- 
-        /**
-	 * Process Payment before save order
+
+	/**
+	 * Add gateway params.
 	 *
-	 * @param int $order_id Order ID.
+	 * @param array $params
 	 * @return array
 	 */
-        public function pos_process_payment($order_id) {
-                 if( !$order_id ) return false;
-                 $trx_id = '';
-                 
-                 $order = wc_get_order( $order_id );
-wp_die("Order:".var_dump($order), 410);
+	public function params( $params ) {
+		$params['pos_host_terminal_process_payment_nonce']  = wp_create_nonce( 'pos-host-terminal-process-payment' );
+		$params['pos_host_connect_terminal_nonce']  = wp_create_nonce( 'pos-host-connect-terminal' );
+		$params['pos_host_terminal_capture_payment_nonce']  = wp_create_nonce( 'pos-host-terminal-capture-payment' );
 
-                 if ( $order->get_total() > 0 ) {
-                    $api = new POS_HOST_Gateway_Trx_Host_API( $order->get_payment_method() );
-                
-                 $ret = $api->do_order( $order );
-                 
-                 //retry if failed
-                 if( '0' != $ret['error_code']){
-                    //comm error, need retrieve transaction id
-                    sleep(30);
-                    $ret = $api->retrieve_trx($order->get_id());
-
-                 } 
-                    
-                 if ( '0' == $ret['result_code'] ){
-                        //approved
-                        $order->update_status( apply_filters( 'woocommerce_pos_host_trx_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order ),
-                                    __( 'Payment completed.', 'woocommerce-pos-host' ) );
-                        $trx_id = $ret['trx_id'];
-                    }
-                 }
-                 
-                 // $trx_id <> '', success, or failed.
-                 $order->payment_complete( $trx_id );
-                
-                 return true;
-                 
+                return $params;
 	}
+
         
 }
+POS_HOST_Gateway_Terminal::init();

@@ -981,8 +981,8 @@ class POS_HOST {
 	 * @since 0.0.1
 	 */
 	public function init_payment_gateways() {
-                 include_once 'gateways/class-pos-host-gateway-cash.php';
- 		include_once 'gateways/trx-host/class-pos-host-gateway-terminal.php';
+                 include_once 'gateways/class-pos-host-cash.php';
+ 		include_once 'gateways/terminal/class-pos-host-terminal.php';
                  include_once 'gateways/stripe/class-pos-host-stripe.php';
             return;
 	}

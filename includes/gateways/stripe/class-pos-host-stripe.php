@@ -175,7 +175,7 @@ class POS_HOST_Stripe {
 	public static function ajax_stripe_payment_intent() {
 		check_ajax_referer( 'stripe-payment-intent', 'security' );
 
-		$amount         = isset( $_POST['amount'] ) ? floatval( $_POST['amount'] ) : 0.0;
+		$amount         = isset( $_POST['amount'] ) ? wc_clean( $_POST['amount'] ): 0;
 		$currency       = strtolower( get_woocommerce_currency() );
 		$payment_method = isset( $_POST['payment_method'] ) ? wc_clean( $_POST['payment_method'] ) : '';
 

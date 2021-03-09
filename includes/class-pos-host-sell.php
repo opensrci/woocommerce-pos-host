@@ -726,7 +726,7 @@ class POS_HOST_Sell {
 		return json_encode( $params );
 	}
 
-	public static function get_js_wc_params() {
+	public static function get_js_wc_params($outlet_data) {
 		$pos_tax_based_on = get_option( 'pos_host_calculate_tax_based_on', 'outlet' );
 		if ( 'default' === $pos_tax_based_on ) {
 			$pos_tax_based_on = get_option( 'woocommerce_tax_based_on' );
@@ -758,7 +758,7 @@ class POS_HOST_Sell {
 				'shipping_enabled'               => get_option( 'woocommerce_ship_to_countries', '' ),
 				'shipping_rates'                 => array(),
 				'shop_name'                      => get_bloginfo( 'name' ),
-			)
+			) 
 		);
 
 		return json_encode( $params );

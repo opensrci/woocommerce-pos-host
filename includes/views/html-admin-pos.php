@@ -56,7 +56,7 @@ defined( 'ABSPATH' ) || exit;
 			window.pos_host_outlet_data = <?php echo wp_kses_post( json_encode( $outlet_data ) ); ?>;
 			window.pos_host_receipt = <?php echo wp_kses_post( json_encode( POS_HOST_Sell::instance()->get_receipt( $register_data['receipt'] ) ) ); ?>;
 			window.pos_host_grid = <?php echo wp_kses_post( $this->get_grid() ); ?>;
-			window.pos_host_wc = <?php echo wp_kses_post( POS_HOST_Sell::get_js_wc_params() ); ?>;
+			window.pos_host_wc = <?php echo wp_kses_post( POS_HOST_Sell::get_js_wc_params($outlet_data) ); ?>;
 			window.pos_host_cart = <?php echo wp_kses_post( POS_HOST_Sell::get_js_cart_params() ); ?>;
 			window.pos_host_i18n = <?php echo wp_kses_post( json_encode( require_once POS_HOST()->plugin_path() . '/i18n/app.php' ) ); ?>;
 			window.pos_host_coupon_i18n = <?php echo wp_kses_post( json_encode( require_once POS_HOST()->plugin_path() . '/i18n/coupon.php' ) ); ?>;
