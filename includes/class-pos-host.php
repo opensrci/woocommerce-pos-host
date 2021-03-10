@@ -382,7 +382,7 @@ class POS_HOST {
 			add_action( 'woocommerce_process_product_meta', array( $this, 'save_visibility' ), 10, 2 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation_visibility' ), 10, 2 );
 		}
-                add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
+                //add_filter( 'woocommerce_order_get_payment_method', array( $this, 'pos_payment_gateway_labels' ), 10, 2 );
                 add_filter( 'woocommerce_payment_gateways', array( $this, 'add_payment_gateways' ), 100 );
                 add_action( 'plugins_loaded', array( $this, 'init_payment_gateways' ) );
 
@@ -999,38 +999,9 @@ class POS_HOST {
 		$methods[] = 'POS_HOST_Gateway_Cash';
 		$methods[] = 'POS_HOST_Gateway_Stripe_Terminal';
 		$methods[] = 'POS_HOST_Gateway_Stripe_Credit_Card';
-                
-		$terminal = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
-
-		for ( $n = 1; $n <= (int) $terminal; $n++ ) {
-			$methods[] = 'POS_HOST_Gateway_Terminal';
-		}
+                 $methods[] = 'POS_HOST_Gateway_Terminal';
 
 		return $methods;
-	}
-
-	public function pos_payment_gateway_labels( $value, $data ) {
-		global $current_screen;
-
-		$screen       = $current_screen ? $current_screen->id : null;
-		$gateways     = pos_host_get_available_payment_gateways();
-		$pos_gateways = array( 'pos_host_terminal' );
-
-		$terminals = empty( get_option( 'pos_host_terminal_gateways_number', 1 ) ) ? 1 : get_option( 'pos_host_terminal_gateways_number', 1 );
-		for ( $n = 2; $n <= (int) $terminals; $n++ ) {
-			$pos_gateways[] = 'pos_host_terminal_' . $n;
-		}
-
-		if ( in_array( $value, $pos_gateways, true ) && 'shop_order' === $screen ) {
-			foreach ( $gateways as $gateway ) {
-				if ( $value === $gateway->id ) {
-					$value = $gateway->title;
-					break;
-				}
-			}
-		}
-
-		return $value;
 	}
 
 	/**

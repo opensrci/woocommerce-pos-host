@@ -7,9 +7,9 @@
 
 defined( 'ABSPATH' ) || exit;
 /**
- * POS_HOST_Gateway_Trx_Host_API.
+ * POS_HOST_Gateway_Terminal_API.
  */
-class POS_HOST_Gateway_Trx_Host_API {
+class POS_HOST_Gateway_Terminal_API {
     /* singleton for each payament method
      * 
      */
@@ -44,43 +44,26 @@ class POS_HOST_Gateway_Trx_Host_API {
 	 * Constructor.
           */
 	public function __construct() {
+            self::init();
 	}
         
-        private function init($method){
+        private function init(){
             //load settings
-            $settings = get_option("woocommerce_".$method."_settings",array());
-            $this->params[$method][base_url] = $settings['host_address'];
-            $this->params[$method][timeout] =  $settings['timeout']; 
-            $this->params[$method][tpn] =  $settings['terminal_id'];
-            $this->params[$method][auth_key] =  $settings['security_key']; 
+            $settings = get_option("woocommerce_pos_host_terminal_settings",array());
+            $this->params['base_url'] = $settings['host_address'];
+            $this->params['timeout'] =  $settings['timeout']; 
+            $this->params['tpn'] =  $settings['terminal_id'];
+            $this->params['auth_key'] =  $settings['security_key']; 
 
         }
-        /* returen Instance id for each payment method
-         * @param id
-         * @
-         */
-        public static function getInstance($method)
-        {
-            /* only work for pos terminal method
-             * 
-             */
-            if ( false === strpos( $method, "pos_host_terminal" ) ) return; 
-            
-            if (self::$instance == null)
-              {
-                self::$instance[$method] = new POS_HOST_Gateway_Trx_Host_API();
-                self::init( $method );
-              }
 
-              return self::$instance;
-        }
-              /**
+         /**
 	 * Returns API URL.
 	 *
 	 * @return string
 	 */
 	protected function get_base_url() {
-		$url = esc_url( $this->base_url );
+		$url = esc_url( $this->params['base_url']  );
 		if ( empty( $url ) ) {
 			return '';
 		}
@@ -101,8 +84,19 @@ class POS_HOST_Gateway_Trx_Host_API {
 	 */
         public function connect_terminal() {
             /*@todo need support local connection */
-            $ret ['success'] = true;
-            $ret ['data']['connection'] ='remote';
+            $ret = false;
+            
+            $url = $this->get_base_url()."spin/GetTerminalStatus?tpn=".$this->params['tpn'] ;
+            
+            $result = wp_remote_get( $url,'');
+
+            if ( is_wp_error($result) ){
+                //remote post error
+                $ret = false;
+            }else {
+                $ret['status'] = strtolower($result['body']);
+            } 
+           
             return $ret;
         }
         /**
@@ -112,22 +106,18 @@ class POS_HOST_Gateway_Trx_Host_API {
 	 * @return array|WP_Error
 	 */
         public function process_payment( $id ) {
-            $order = wc_get_order( $order_id );
-            $ret = array(
-                'success'=> false,
-                'data'=>null,
-            );
+            $order = wc_get_order( $id );
+            $ret = false;
             
-            if (is_wp_error($order)){
-                $ret['data'] = $order->get_error_message();
+            if ( is_wp_error($order) || !$order ){
                 return $ret;
             }
             
             $payload = array();
             $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><request></request>");
             
-            $payload['TPN'] = $this->tpn;
-            $payload['AuthKey'] = $this->auth_key;
+            $payload['TPN'] = $this->params['tpn'] ;
+            $payload['AuthKey'] = $this->params['auth_key'] ;
             $payload['TransType'] =  'Sale';
             $payload['PaymentType'] =  'Card'; 
             $payload['InvNum'] =  $order->get_id(); 
@@ -143,24 +133,25 @@ class POS_HOST_Gateway_Trx_Host_API {
             $options = [
                 'method'     => 'POST',
                 'body'       => $xml->asXML(),
-                'timeout'    => $this->timeout,
+                'timeout'    => $this->params['timeout'],
                 'headers'    => [
                     'Content-Type' => 'application/xml',
                 ],
                 'sslverify'   => false,
             ];
+//@todo debug
+//            wp_die(var_dump($options));
 
             $result = wp_remote_post( $url, $options );
             if ( is_wp_error($result)){
                 //remote post error
-               $ret['data'] = $result->get_error_message();
+                return $ret;
             }else{
                $xml = simplexml_load_string($result['body']);
                
-               $ret['sucess'] = true;
-               $ret['data']['result_code'] = (int)$xml->response->ResultCode;
-               $ret['data']['result_msg'] = (string)$xml->response->Message;
-               $ret['data']['ref_id'] = (string)$xml->response->PNRef;
+               $ret['result_code'] = (int)$xml->response->ResultCode;
+               $ret['result_msg'] = (string)$xml->response->Message;
+               $ret['ref_id'] = (string)$xml->response->PNRef;
                 
             } 
             return $ret;
@@ -172,16 +163,14 @@ class POS_HOST_Gateway_Trx_Host_API {
 	 * @return array|WP_Error
 	 */
         public function capture_payment( $id ) {
-            if (!$RefId) return false;
+            $ret = false;
+            if (!$RefId)
+                return $ret;
             
-            $ret = array(
-                'success'=> false,
-                'data'=>null,
-            );
             $payload = $req = array();
             
-            $payload['TPN'] = $this->tpn;
-            $payload['AuthKey'] = $this->auth_key;
+            $payload['TPN'] = $this->params['tpn'];
+            $payload['AuthKey'] = $this->params['auth_key'];
             $payload['TransType'] =  'Status';
             $payload['PaymentType'] =  'Card';
             $payload['RefId']  =  $RefId; 
@@ -201,8 +190,7 @@ class POS_HOST_Gateway_Trx_Host_API {
 
             if ( is_wp_error($result)){
                 //remote post error
-               $ret['error_msg'] = $result->get_error_message();
-               $ret['error_code'] = $result->get_error_code();                
+                $ret = false;
             }else{
                $xml = new SimpleXMLElement();
                $xml = simplexml_load_string($result['body']);
