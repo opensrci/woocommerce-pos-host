@@ -102,9 +102,11 @@ class POS_HOST_Terminal {
                 
                 $api = new POS_HOST_Gateway_Terminal_API();
                 if ( $ret = $api->capture_payment( $id ) ){
-                    wp_send_json_success( $ret);
+                    wp_send_json_success($ret);
                 }else{
-                    wp_send_json_error( 'Terminal process payment error.' );
+//@todo debug
+                     $err = var_dump($ret);
+                    wp_send_json_error( 'Terminal process payment error.'.$err );
                 }
 	}
 

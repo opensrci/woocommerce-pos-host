@@ -162,7 +162,7 @@ class POS_HOST_Gateway_Terminal_API {
 	 * @param array $payload data
 	 * @return array|WP_Error
 	 */
-        public function capture_payment( $id ) {
+        public function capture_payment( $RefId ) {
             $ret = false;
             if (!$RefId)
                 return $ret;
@@ -190,9 +190,11 @@ class POS_HOST_Gateway_Terminal_API {
 
             if ( is_wp_error($result)){
                 //remote post error
+//@todo debug
+//wp_die(var_dump($result));                
                 $ret = false;
             }else{
-               $xml = new SimpleXMLElement();
+               $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><request></request>");
                $xml = simplexml_load_string($result['body']);
                $ret['result_code'] = (int)$xml->response->ResultCode;
                $ret['result_msg'] = (string)$xml->response->Message;
