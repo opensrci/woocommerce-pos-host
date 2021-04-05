@@ -103,8 +103,14 @@ class POS_HOST_Sell {
 			);
 			wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
-			wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/before-main.min.js', array(), POS_HOST_VERSION );
-			wp_enqueue_script( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js', array(), POS_HOST_VERSION );
+			wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/before-main.min.js', array(), POS_HOST_VERSION );
+                        $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js';
+                        
+			wp_enqueue_script( 'pos-host-main', $main_js , array() , POS_HOST_VERSION );
+//debug
+//exit($main_js);                        
+			//wp_enqueue_script( 'pos-host-main', POS_HOST()->plugin_url() . '/assets-ui/dist/js/app.f62ddabb.js', array(), POS_HOST_VERSION );
+			//wp_enqueue_script( 'pos-host-main', POS_HOST()->plugin_url() . '/assets-ui/dist/js/vendor.d4865f19.js', array(), POS_HOST_VERSION );
 		}
 	}
 
@@ -449,22 +455,6 @@ class POS_HOST_Sell {
 			'orders_total'       => 0,
 			'gateways'           => array(
 				'pos_host_cash'               => array(
-					'orders_count' => 0,
-					'orders_total' => 0,
-				),
-				'pos_host_bacs'               => array(
-					'orders_count' => 0,
-					'orders_total' => 0,
-				),
-				'pos_host_cheque'             => array(
-					'orders_count' => 0,
-					'orders_total' => 0,
-				),
-				'pos_host_stripe_terminal'    => array(
-					'orders_count' => 0,
-					'orders_total' => 0,
-				),
-				'pos_host_credit_card' => array(
 					'orders_count' => 0,
 					'orders_total' => 0,
 				),

@@ -572,7 +572,7 @@ class POS_HOST_AJAX {
 	public static function auth_user() {
 		check_ajax_referer( 'auth-user', 'security' );
 		// @todo The password field should not be sanitized. Sanitization is done here to pass PHPCS checks.
-		$remember = isset( $_POST['$remember'] ) ? wc_clean( $_POST['remember'] ) : '';
+		$remember = isset( $_POST['remember'] ) ? wc_clean( $_POST['remember'] ) : '';
 		$username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
 		$password = isset( $_POST['password'] ) ? wc_clean( $_POST['password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 

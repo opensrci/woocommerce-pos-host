@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo esc_html( $register_data['name'] ) . ' &lsaquo; ' . esc_html( $outlet_data['name'] ) . ' &lsaquo; ' . esc_html__( 'POS HOST', 'woocommerce-point-of-sale' ); ?></title>
+		<title><?php echo esc_html( $register_data['name'] ) . ' &lsaquo; ' . esc_html( $outlet_data['name'] ) . ' &lsaquo; ' . esc_html__( 'POS HOST', 'woocommerce-pos-host' ); ?></title>
 		<link rel="manifest" href="<?php
                         $home_url                     = home_url( $wp->request );
                         $parsed                       = wp_parse_url($home_url);
