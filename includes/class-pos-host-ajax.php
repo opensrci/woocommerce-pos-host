@@ -28,6 +28,8 @@ class POS_HOST_AJAX {
 			'generate_order_id',
 			'auth_user',
 			'check_db_changes',
+//@todo debug need move to ajax_events                    
+			'replace_grid_tile',
 		);
 
 		foreach ( $ajax_events_nopriv as $ajax_event ) {
@@ -738,6 +740,89 @@ class POS_HOST_AJAX {
 			$grid_object = new POS_HOST_Grid( (int) $_POST['grid_id'] );
 			$grid_object->delete_tile( (int) $_POST['tile_id'] );
 			$grid_object->save();
+		} catch ( Exception $e ) {
+			wp_send_json_error( array( 'error' => $e->getMessage() ) );
+		}
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Replace all tiles in a grid via AJAX.
+	 *
+	 * @throws Exception
+	 */
+	public static function replace_grid_tile() {
+		global $wpdb;
+
+		check_ajax_referer( 'grid-tile', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce_pos_host' ) || ! isset( $_POST["data"] ) ) {
+			wp_die( "replace_grid_tile wrong data" , -1 );
+		};
+		try {
+                         $data = json_decode( wc_clean( wp_unslash( $_POST["data"] )));
+                         $grid_id = (int) $_POST['grid_id'];
+                         if ( !$grid_id ){
+                                throw new Exception( 'Invalid product category ID' . json_encode( $product_cat ) );
+                         } 
+                          /* delete current tiles */
+			$result = $wpdb->delete(
+				$wpdb->prefix . 'pos_host_grid_tiles',
+				array(
+					'grid_id' => $grid_id ,
+				),
+				array( '%d' )
+			);
+                        
+                          /* add new ones */
+                          $grid_object = new POS_HOST_Grid( $grid_id );
+                          $error=array();
+                          foreach ( $data as $tile ){  
+                                if ( ! isset( $tile->tile_type ) ) {
+                                    $error[] = "Tile no type.";
+                                    continue;
+                                }
+                                $type = wc_clean( wp_unslash($tile->tile_type) );
+                                if ( ! in_array( $type, array( 'product', 'product_cat' ) )  ){
+                                    $error[] = "Tile wrong type $type.";
+                                    continue;
+                                } 
+                                if ( !isset( $tile->id ) ){
+                                        $error[] = "wrong product id or no id:".$tile->id;
+                                        continue;
+                                }
+                                $id = (int) $tile->id;
+                                
+                                if ( 'product' === $type ) {
+                                        $product = wc_get_product( $id );
+                                        if ( ! $product ) {
+                                                $error[] = "Invalid product:".$id;
+                                                continue;
+                                        }
+                                        $grid_object->add_tile(
+                                                array(
+                                                        'type'    => $type,
+                                                        'item_id' => $id,
+                                                )
+                                        );
+                                }else if ( 'product_cat' === $type ) {
+                                        $product_cat = get_term_by( 'id', $id, 'product_cat' );
+                                        if ( ! $product_cat ) {
+                                                $error[] = "Invalid cat:".$id;
+                                                continue;
+                                        }
+                                        $grid_object->add_tile(
+                                                array(
+                                                        'type'    => $type,
+                                                        'item_id' => $product_cat->term_id,
+                                                )
+                                        );
+                                }
+                          }
+			$grid_object->save();
+                      if ( [] != $error ){
+                            throw new Exception( 'Replacing tile error ' . json_encode( $error ) );
+                      }  
 		} catch ( Exception $e ) {
 			wp_send_json_error( array( 'error' => $e->getMessage() ) );
 		}

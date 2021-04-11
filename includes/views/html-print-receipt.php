@@ -294,7 +294,7 @@ defined( 'ABSPATH' ) || exit;
 		<meta charset="utf-8">
 		<title><?php esc_html_e( 'Receipt', 'woocommerce-pos-host' ); ?></title>
 		<style>
-			<?php echo esc_html( file_get_contents( WC_POS()->plugin_url() . '/assets/dist/css/admin/receipt.min.css' ) ); ?>
+			<?php echo esc_html( file_get_contents( POS_HOST()->plugin_url() . '/assets/dist/css/admin/receipt.min.css' ) ); ?>
 		</style>
 		<style>
 			@page {
@@ -517,7 +517,7 @@ defined( 'ABSPATH' ) || exit;
 							 * @since 5.2.6
 							 *
 							 * @param WC_Order
-							 * @param WC_POS_Register
+							 * @param POS_HOST_Register
 							 */
 							$header_text = apply_filters( 'pos_host_receipt_header_text', $receipt->get_header_text(), $order, $register );
 
@@ -714,7 +714,7 @@ defined( 'ABSPATH' ) || exit;
 							 * @since 5.2.6
 							 *
 							 * @param WC_Order
-							 * @param WC_POS_Register
+							 * @param POS_HOST_Register
 							 */
 							$footer_text = apply_filters( 'pos_host_receipt_footer_text', $receipt->get_footer_text(), $order, $register );
 
