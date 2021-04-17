@@ -86,7 +86,7 @@ class POS_HOST_Sell {
 			$primary_color = empty( get_option( 'pos_host_theme_primary_color' ) ) ? '#7f54b3' : get_option( 'pos_host_theme_primary_color', '#7f54b3' );
 
 			wp_enqueue_style( 'open-sans-font', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap', array(), POS_HOST_VERSION );
-			//wp_enqueue_style( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/css/register/pos_host_ui.css', array(), POS_HOST_VERSION );
+			wp_enqueue_style( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/css/register/pos_host_ui.css', array(), POS_HOST_VERSION );
 			wp_add_inline_style(
 				'pos-host-main',
 				"
@@ -104,9 +104,9 @@ class POS_HOST_Sell {
 			wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
 			//wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/before-main.min.js', array(), POS_HOST_VERSION );
-                          //$main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js';
-			//wp_enqueue_script( 'pos-host-main', $main_js , array() , POS_HOST_VERSION );
-			wp_enqueue_script( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/pos_host_ui.js', array(), POS_HOST_VERSION );
+                         // $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js';
+                          $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/pos_host_ui.js';
+			wp_enqueue_script( 'pos-host-main', $main_js , array() , POS_HOST_VERSION );
 		}
 	}
 
@@ -560,7 +560,7 @@ class POS_HOST_Sell {
 
 	public static function get_js_params() {
 		$pos_icon = wp_get_attachment_image_src( get_option( 'pos_host_theme_logo' ), 0 );
-		$pos_icon = $pos_icon ? $pos_icon[0] : POS_HOST()->plugin_url() . '/assets/dist/images/woo.png';
+		$pos_icon = $pos_icon ? $pos_icon[0] : POS_HOST()->plugin_url() . '/assets/dist/images/pos-host-logo-icon.png';
 
 		$fetch_order_statuses = get_option( 'pos_host_fetch_order_statuses', array( 'pending' ) );
 		$fetch_order_statuses = empty( $fetch_order_statuses ) ? array( 'pending' ) : $fetch_order_statuses;

@@ -44,7 +44,7 @@ defined( 'ABSPATH' ) || exit;
 		<meta name="apple-mobile-web-app-status-bar-style" content="<?php echo esc_attr( $primary_color ); ?>" />
 	</head>
 	<body>
-		<div id="pos-host-registers-edit">
+		<div id="q-app">
 			<app></app>
 		</div>
 
@@ -75,6 +75,5 @@ defined( 'ABSPATH' ) || exit;
 			print_late_styles();
 			print_footer_scripts();
 		?>
-		<?php require_once POS_HOST()->plugin_path() . '/includes/views/modal/html-modal-payments.php'; ?>
 	</body>
 </html>

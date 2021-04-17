@@ -22,11 +22,14 @@ class POS_HOST_API {
 
 	public function init_hooks() {
 		remove_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ), 10, 1 );
-
+//@todo debug?
 		// add_filter( 'woocommerce_rest_check_permissions', array( $this, 'rest_check_permissions' ), 999, 4 );
 		add_action( 'woocommerce_api_coupon_response', array( $this, 'api_coupon_response' ), 99, 4 );
 		add_filter( 'woocommerce_rest_shop_order_object_query', array( $this, 'filter_order_query' ), 999, 2 );
-		add_filter( 'woocommerce_rest_prepare_shop_order_object', array( $this, 'filter_order_response' ), 999, 3 );
+		
+                 // Do not filter the response 
+                 //add_filter( 'woocommerce_rest_prepare_shop_order_object', array( $this, 'filter_order_response' ), 999, 3 );
+                
 		add_filter( 'woocommerce_rest_prepare_shop_order_refund_object', array( $this, 'filter_order_refund_response' ), 999, 3 );
 		add_filter( 'woocommerce_api_query_args', array( $this, 'filter_api_query_args' ), 99, 2 );
 		add_filter( 'woocommerce_rest_customer_query', array( $this, 'filter_user_api_query_args' ), 99, 2 );
@@ -336,7 +339,7 @@ class POS_HOST_API {
 	 */
 	public function filter_order_response( $response, $the_order, $request ) {
 		global $wpdb;
-
+                
 		$order_data = $response->get_data();
 		$post       = get_post( $order_data['id'] );
 

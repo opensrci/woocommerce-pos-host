@@ -85,7 +85,6 @@ class POS_HOST_Gateway_Terminal_API {
         public function connect_terminal() {
             /*@todo need support local connection */
             $ret = false;
-            
             $url = $this->get_base_url()."spin/GetTerminalStatus?tpn=".$this->params['tpn'] ;
             
             $result = wp_remote_get( $url,'');
