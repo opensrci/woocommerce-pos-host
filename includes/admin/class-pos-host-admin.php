@@ -355,7 +355,7 @@ class POS_HOST_Admin {
 	public static function plugin_row_meta( $links, $file ) {
 		if ( plugin_basename( POS_HOST_PLUGIN_FILE ) === $file ) {
 			$row_meta = array(
-				'docs'    => '<a href="' . esc_url( apply_filters( 'pos_host_docs_url', 'https://docs.woocommerce.com/document/pos-host/' ) ) . '" title="' . esc_attr( __( 'View Documentation', 'woocommerce-pos-host' ) ) . '">' . __( 'Docs', 'woocommerce-pos-host' ) . '</a>',
+				'docs'    => '<a href="' . esc_url( apply_filters( 'pos_host_docs_url', 'https://pos-host/support' ) ) . '" title="' . esc_attr( __( 'View Documentation', 'woocommerce-pos-host' ) ) . '">' . __( 'Docs', 'woocommerce-pos-host' ) . '</a>',
 				'support' => '<a href="' . esc_url( apply_filters( 'pos_host_docs_url', 'https://pos.host/support/' ) ) . '" title="' . esc_attr( __( 'Visit Support', 'woocommerce-pos-host' ) ) . '">' . __( 'Support', 'woocommerce-pos-host' ) . '</a>',
 			);
 
@@ -367,7 +367,7 @@ class POS_HOST_Admin {
  
 	public static function create_rewrite_rules( $rules ) {
 		global $wp_rewrite;
-                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_rewrite = '^pos\/([^\/]+)\/([^\/]+)\/?$';
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
 		
                 $newRule = array(
@@ -380,7 +380,7 @@ class POS_HOST_Admin {
 
 	public static function create_rewrite_rules_wpml() {
 		global $wp_rewrite;
-                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_rewrite = '^pos\/([^\/]+)\/([^\/]+)\/?$';
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
 		$newRule = array(
 			  $pos_host_rewrite => $pos_host_dest,
@@ -392,7 +392,7 @@ class POS_HOST_Admin {
 	}
 
 	public static function on_rewrite_rule() {
-                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_rewrite = '^pos\/([^\/]+)\/([^\/]+)\/?$';
                 $pos_host_dest = 'index.php?page=pos-host-registers&action=view&outlet=$matches[1]&register=$matches[2]';
                 // $pos_host_sw_dest = ltrim( str_replace( get_home_url(), '', POS_HOST()->plugin_url() ), '/' ) . '/assets/service-worker.js';
 		add_rewrite_rule(   $pos_host_rewrite, $pos_host_dest, 'top' );
@@ -401,9 +401,9 @@ class POS_HOST_Admin {
 
 	public static function flush_rules() {
 		$rules = get_option( 'rewrite_rules' );
-                $pos_host_rewrite = '^pos-host\/([^\/]+)\/([^\/]+)\/?$';
+                $pos_host_rewrite = '^pos\/([^\/]+)\/([^\/]+)\/?$';
 
-		if ( ! isset( $rules[ $pos_host_rewrite ] ) || ! isset( $rules['^pos_host/sw/?$'] )  ) {
+		if ( ! isset( $rules[ $pos_host_rewrite ] ) || ! isset( $rules['^pos/sw/?$'] )  ) {
 			global $wp_rewrite;
 			$wp_rewrite->flush_rules();
 		}

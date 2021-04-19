@@ -104,9 +104,11 @@ class POS_HOST_Sell {
 			wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
 			wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
 			//wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/before-main.min.js', array(), POS_HOST_VERSION );
-                         // $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js';
+                          // $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js';
                           $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/pos_host_ui.js';
-			wp_enqueue_script( 'pos-host-main', $main_js , array() , POS_HOST_VERSION );
+			//wp_enqueue_script( 'pos-host-main', $main_js , array() , POS_HOST_VERSION );
+                          //@todo debug
+			wp_enqueue_script( 'pos-host-main', $main_js , array() , '0.0.3' );
 		}
 	}
 
@@ -199,7 +201,7 @@ class POS_HOST_Sell {
                 $json                         = json_encode( $contentsDecoded );
 
 		//if ( is_writable( $new_file ) ) 
-                {
+                 {
 			file_put_contents( $new_file, $json );
 		}
 
@@ -210,10 +212,10 @@ class POS_HOST_Sell {
 
 	public function is_pos_referer() {
 		$referer = wp_get_referer();
-		$pos_url = get_home_url() . '/pos-host/';
+		$pos_url = get_home_url() . '/pos';
 
 		if ( ! $referer ) {
-			if ( isset( $_SERVER['HTTP_REFERER'] ) && strpos( wc_clean( wp_unslash( $_SERVER['HTTP_REFERER'] ) ), 'pos-host' ) !== false ) {
+			if ( isset( $_SERVER['HTTP_REFERER'] ) && strpos( wc_clean( wp_unslash( $_SERVER['HTTP_REFERER'] ) ), 'pos' ) !== false ) {
 				return true;
 			};
 
@@ -223,7 +225,7 @@ class POS_HOST_Sell {
 			// We mainly check referer when doing API requests, so we can check the endpoint
 			// namespae. However, this might not always be the case so the TODO is to find a better
 			// solution.
-			if ( isset( $_SERVER['REQUEST_URI'] ) && strpos( wc_clean( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'wp-json/pos-host' ) ) {
+			if ( isset( $_SERVER['REQUEST_URI'] ) && strpos( wc_clean( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'wp-json/pos' ) ) {
 				return true;
 			}
 		}

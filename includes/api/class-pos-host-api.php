@@ -22,8 +22,7 @@ class POS_HOST_API {
 
 	public function init_hooks() {
 		remove_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ), 10, 1 );
-//@todo debug?
-		// add_filter( 'woocommerce_rest_check_permissions', array( $this, 'rest_check_permissions' ), 999, 4 );
+		add_filter( 'woocommerce_rest_check_permissions', array( $this, 'rest_check_permissions' ), 999, 4 );
 		add_action( 'woocommerce_api_coupon_response', array( $this, 'api_coupon_response' ), 99, 4 );
 		add_filter( 'woocommerce_rest_shop_order_object_query', array( $this, 'filter_order_query' ), 999, 2 );
 		
@@ -649,7 +648,7 @@ class POS_HOST_API {
 	 */
 	public function filter_user_api_query_args( $args, $request ) {
 		$referer = $request->get_header( 'referer' );
-		if ( strpos( $referer, 'pos-host' ) === false ) {
+		if ( strpos( $referer, 'pos' ) === false ) {
 			return $args;
 		}
 
@@ -715,7 +714,7 @@ class POS_HOST_API {
 	 */
 	public function filter_users_where_query( $null, $wp_query ) {
 		$referer = isset( $_SERVER['HTTP_REFERER'] ) ? filter_var( $_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL ) : '';
-		if ( strpos( $referer, 'pos-host' ) !== false && ! empty( $_GET['search'] ) ) {
+		if ( strpos( $referer, 'pos' ) !== false && ! empty( $_GET['search'] ) ) {
 			$wp_query->query_where = str_replace( ') AND (', ') OR (', $wp_query->query_where );
 		}
 
@@ -732,7 +731,7 @@ class POS_HOST_API {
 	 */
 	public function filter_order_query( $args, $request ) {
 		$referer = isset( $_SERVER['HTTP_REFERER'] ) ? filter_var( $_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL ) : '';
-		if ( strpos( $referer, 'pos-host' ) === false ) {
+		if ( strpos( $referer, 'pos' ) === false ) {
 			return $args;
 		}
 

@@ -394,7 +394,7 @@ function pos_host_tax_enabled() {
 
 function is_pos_referer() {
 	$referer = wp_get_referer();
-	$pos_url = get_home_url() . '/pos-host/';
+	$pos_url = get_home_url() . '/pos/';
 
 	if ( strpos( $referer, $pos_url ) !== false ) {
 		return true;

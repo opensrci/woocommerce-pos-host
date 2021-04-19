@@ -28,8 +28,6 @@ class POS_HOST_AJAX {
 			'generate_order_id',
 			'auth_user',
 			'check_db_changes',
-//@todo debug need move to ajax_events                    
-			'replace_grid_tile',
 		);
 
 		foreach ( $ajax_events_nopriv as $ajax_event ) {
@@ -60,12 +58,11 @@ class POS_HOST_AJAX {
 			'paymentsense_eod_report',
 			'receipt_print_url',
 			'update_option',
+			'replace_grid_tile',
 		);
 
 		foreach ( $ajax_events as $ajax_event ) {
 			add_action( 'wp_ajax_pos_host_' . $ajax_event, array( __CLASS__, $ajax_event ) );
-//@todo debug                        
-			add_action( 'wp_ajax_nopriv_pos_host_' . $ajax_event, array( __CLASS__, $ajax_event ) );
 		}
 	}
 
