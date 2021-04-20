@@ -29,7 +29,7 @@ class POS_HOST_REST_Users_Controller extends WP_REST_Users_Controller {
 
 	public function filter_user_api_query_args( $args, $request ) {
 		$referer = $request->get_header( 'referer' );
-		if ( strpos( $referer, 'pos-host' ) === false ) {
+		if ( strpos( $referer, 'pos' ) === false ) {
 			return $args;
 		}
 
