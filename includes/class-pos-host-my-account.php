@@ -25,6 +25,9 @@ class POS_HOST_My_Account {
 			add_filter( 'woocommerce_account_menu_items', array( $this, 'pos_host_myaccount_tab' ) );
 			add_action( 'woocommerce_account_pos_host_endpoint', array( $this, 'pos_host_myaccount_content' ) );
 		}
+
+                add_shortcode('pos_host_myaccount', array( $this, 'pos_host_myaccount_content' ));
+
 	}
 
 	public function pos_host_endpoint() {
@@ -56,7 +59,7 @@ class POS_HOST_My_Account {
 		return $new_items;
 	}
 
-	public function pos_host_myaccount_content() {
+	public static function pos_host_myaccount_content() {
 		include_once 'views/html-my-account-tab.php';
 	}
 }

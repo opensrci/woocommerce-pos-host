@@ -103,7 +103,7 @@ class POS_HOST_Stripe {
 		$params['stripe_terminal_debug_mode']   = ! empty( $stripe_data['debug_mode'] ) && 'yes' === $stripe_data['debug_mode'];
 		$params['stripe_payment_intent_nonce']  = wp_create_nonce( 'stripe-payment-intent' );
 		$params['stripe_capture_payment_nonce'] = wp_create_nonce( 'stripe-capture-payment' );
-		$params['stripe_connection_token'] = wp_create_nonce( 'stripe-connection-token' );
+		$params['stripe_connection_token_nonce'] = wp_create_nonce( 'stripe-connection-token' );
 
 		return $params;
 	}
@@ -165,6 +165,7 @@ class POS_HOST_Stripe {
 	 * Ajax: create token.
 	 */
 	public static function ajax_stripe_connection_token() {
+		check_ajax_referer( 'stripe-connection-token', 'security' );
 		$api = new POS_HOST_Stripe_API();
 		wp_send_json_success( $api->create_token() );
 	}

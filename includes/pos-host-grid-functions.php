@@ -25,6 +25,46 @@ function pos_host_get_grid( $id ) {
 }
 
 /**
+ * Get the grid Data.
+ *
+ * @param int    $id     grid ID
+ * 
+ * @return array
+ */
+function pos_host_get_grid_data( $id ) {
+        
+        $grid = pos_host_get_grid( $id );
+        if( !$grid ) return null;
+        
+        $tiles             = $grid->get_tiles();
+        $product_tiles     = array();
+        $product_cat_tiles = array();
+
+        foreach ( $tiles as $tile_id => $tile ) {
+                if ( 'product' === $tile['type'] ) {
+                        $product_tiles[] = (int) $tile['item_id'];
+                } elseif ( 'product_cat' === $tile['type'] ) {
+                        $product_cat_tiles[] = (int) $tile['item_id'];
+                }
+                $fav_tiles = $tile;
+                $fav_tiles[id] = (int) $tile['item_id'];
+                
+        }
+
+        $grid_data = array(
+                'tiles'             => $fav_tiles,
+                'product_tiles'     => $product_tiles,
+                'product_cat_tiles' => $product_cat_tiles,
+                'grid_name'         => $grid->get_name(),
+                'grid_id'           => $id,
+                'tile_sorting'      => get_option( 'pos_host_default_tile_orderby', 'menu_order' ),
+        );
+
+        return $grid_data;
+
+}
+
+/**
  * Get the grids that a product/category is added to.
  *
  * @param int    $item_id     Product ID or category ID.

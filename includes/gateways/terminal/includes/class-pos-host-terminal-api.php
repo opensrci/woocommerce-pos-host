@@ -138,13 +138,15 @@ class POS_HOST_Gateway_Terminal_API {
                 ],
                 'sslverify'   => false,
             ];
-//@todo debug
-//            wp_die(var_dump($options));
 
             $result = wp_remote_post( $url, $options );
             if ( is_wp_error($result)){
                 //remote post error
-                return $ret;
+               $error_code = array_key_first( $result->errors );
+               $error_message = $result->errors[$error_code][0];
+               $ret['result_code'] = (int)$error_code;
+               $ret['result_msg'] = (string)$error_message;
+               $ret['ref_id'] = "";
             }else{
                $xml = simplexml_load_string($result['body']);
                
@@ -189,9 +191,11 @@ class POS_HOST_Gateway_Terminal_API {
 
             if ( is_wp_error($result)){
                 //remote post error
-//@todo debug
-//wp_die(var_dump($result));                
-                $ret = false;
+               $error_code = array_key_first( $result->errors );
+               $error_message = $result->errors[$error_code][0];
+               $ret['result_code'] = (int)$error_code;
+               $ret['result_msg'] = (string)$error_message;
+               $ret['ref_id'] = "";
             }else{
                $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><request></request>");
                $xml = simplexml_load_string($result['body']);

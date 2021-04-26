@@ -33,6 +33,123 @@ function pos_host_get_register( $register ) {
 	return 0 !== $register_object->get_id() ? $register_object : null;
 }
 
+/**
+ * Get register.
+ *
+ * @since 0.0.1
+ *
+ * @param int|string|POS_HOST_Register $register Register ID, slug or object.
+ *
+ * @throws Exception If register cannot be read/found and $data parameter of POS_HOST_Register class constructor is set.
+ * @return Array|null
+ */
+function pos_host_get_register_data( $register) {
+        global $wpdb;
+
+         /* get register object */
+	$register_object = pos_host_get_register( $register );
+         if ( !$register_object ) return null;
+         
+         $register_data = array(
+                    'id'              => $register_object->get_id(),
+                    'name'            => $register_object->get_name(),
+                    'slug'            => $register_object->get_slug(),
+                    'date_opened'     => $register_object->get_date_opened() ? gmdate( 'Y-m-d H:i:s', $register_object->get_date_opened()->getTimestamp() ) : null,
+                    'date_closed'     => $register_object->get_date_closed() ? gmdate( 'Y-m-d H:i:s', $register_object->get_date_closed()->getTimestamp() ) : null,
+                    'open_first'      => $register_object->get_open_first(),
+                    'open_last'       => $register_object->get_open_last(),
+                    'current_session' => $register_object->get_current_session(),
+                    'grid'            => $register_object->get_grid(),
+                    'receipt'         => $register_object->get_receipt(),
+                    'grid_layout'     => $register_object->get_grid_layout(),
+                    'prefix'          => $register_object->get_prefix(),
+                    'suffix'          => $register_object->get_suffix(),
+                    'outlet'          => $register_object->get_outlet(),
+                    'customer'        => $register_object->get_customer(),
+                    'cash_management' => $register_object->get_cash_management(),
+                    'dining_option'   => $register_object->get_dining_option(),
+                    'default_mode'    => $register_object->get_default_mode(),
+                    'change_user'     => $register_object->get_change_user(),
+                    'email_receipt'   => $register_object->get_email_receipt(),
+                    'print_receipt'   => $register_object->get_print_receipt(),
+                    'gift_receipt'    => $register_object->get_gift_receipt(),
+                    'note_request'    => $register_object->get_note_request(),
+                    'order_id'        => $register_object->get_temp_order(),
+                    'terminalid'      => $register_object->get_terminalid(),
+            );
+
+            // Create a temp_order for the register if not created yet.
+            if ( ! $register_object->get_temp_order() ) {
+                    $register_data['order_id'] = pos_host_create_temp_order( $register_object->get_id() );
+            }
+            
+            $register_data['primary_color'] = empty( get_option( 'pos_host_theme_primary_color' ) ) ? '#7f54b3' : get_option( 'pos_host_theme_primary_color', '#7f54b3' );
+
+            // Set is_open field.
+            if ( is_null( $register_object->get_date_opened() ) ) {
+                    $register_data['is_open'] = false;
+            } elseif ( is_null( $register_object->get_date_closed() ) ) {
+                    $register_data['is_open'] = true;
+            } else {
+                    $register_data['is_open'] = $register_object->get_date_opened()->getTimestamp() > $register_object->get_date_closed()->getTimestamp();
+            }
+
+            // Session data.
+            $register_data['session'] = array(
+                    'opening_note'       => '',
+                    'opening_cash_total' => 0,
+                    'orders_count'       => 0,
+                    'orders_total'       => 0,
+                    'gateways'           => array(
+                            'pos_host_cash'               => array(
+                                    'orders_count' => 0,
+                                    'orders_total' => 0,
+                            ),
+                    ),
+            );
+
+            // Get session.
+            $session = pos_host_get_session( $register_data['current_session'] );
+            if ( $register_data['current_session'] && is_a( $session, 'POS_HOST_Session' ) ) {
+                    $register_data['session']['opening_note']       = $session->get_opening_note();
+                    $register_data['session']['opening_cash_total'] = $session->get_opening_cash_total();
+            }
+
+            // Skip if this is the first open.
+            if ( ! is_null( $register_data['date_opened'] ) ) {
+                    $results = $wpdb->get_results(
+                            $wpdb->prepare(
+                                    "SELECT ID FROM {$wpdb->posts} p
+                                     INNER JOIN {$wpdb->postmeta} pm
+                                     ON ( pm.post_id = p.ID AND pm.meta_key = 'pos_host_register_id' AND pm.meta_value = %d )
+                                     WHERE ( p.post_type = 'shop_order' OR p.post_type = 'shop_order_refund' )
+                                     AND p.post_date_gmt >= %s
+                                    ",
+                                    $register_object->get_id(),
+                                    gmdate( 'Y-m-d H:i:s', $register_object->get_date_opened()->getTimestamp() )
+                            )
+                    );
+
+                    if ( $results ) {
+                            foreach ( $results as $result ) {
+                                    $order = wc_get_order( $result->ID );
+
+                                    if ( array_key_exists( $order->get_payment_method(), $register_data['session']['gateways'] ) ) {
+                                            $register_data['session']['gateways'][ $order->get_payment_method() ]['orders_count'] += 1;
+                                            $register_data['session']['gateways'][ $order->get_payment_method() ]['orders_total'] += $order->get_total();
+
+                                            $register_data['session']['orders_count'] += 1;
+                                            $register_data['session']['orders_total'] += $order->get_total();
+                                    }
+                            }
+                    }
+            }
+            
+            return $register_data;
+}
+
+
+
 
 /**
  * Get register grid options.

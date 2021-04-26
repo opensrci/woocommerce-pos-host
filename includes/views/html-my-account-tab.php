@@ -11,9 +11,8 @@ defined( 'ABSPATH' ) || exit;
 <table class="shop_table shop_table_responsive">
 	<thead>
 	<tr>
-		<th class=""><?php esc_html_e( 'Register', 'woocommerce-pos-host' ); ?></th>
 		<th class=""><?php esc_html_e( 'Outlet', 'woocommerce-pos-host' ); ?></th>
-		<th class=""><?php esc_html_e( 'Actions', 'woocommerce-pos-host' ); ?></th>
+		<th class=""><?php esc_html_e( 'Register', 'woocommerce-pos-host' ); ?></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -25,26 +24,16 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 	$count     = 0;
+        
 
 	foreach ( $registers as $register ) {
 		$register = pos_host_get_register( $register->ID );
 		if ( pos_host_current_user_can_open_register( $register->get_id() ) ) {
 			$count++;
 			$outlet        = pos_host_get_outlet( $register->get_outlet() );
-			$register_link = get_home_url( null, '/pos-host/' . $outlet->get_slug() . '/' . $register->get_slug() );
+			$register_link = get_home_url( null, '/pos/' . $outlet->get_slug() . '/' . $register->get_slug() );
 			?>
 			<tr class="">
-				<td data-title="<?php esc_attr_e( 'Register', 'woocommerce-pos-host' ); ?>">
-					<?php
-					echo wp_kses_post(
-						sprintf(
-							'<a href="%1$s" target="_blank">%2$s</a>',
-							$register_link,
-							ucfirst( $register->get_name() )
-						)
-					);
-					?>
-				</td>
 				<td>
 					<?php echo esc_html( ucfirst( $outlet->get_name() ) ); ?>
 				</td>
@@ -63,15 +52,20 @@ defined( 'ABSPATH' ) || exit;
 						$tip = sprintf( __( '%s is currently logged on this register.', 'woocommerce-pos-host' ), $logged_in_user );
 
 						if ( $can_force_logout ) {
-							echo '<a class="woocommerce-button button" href="' . esc_attr( $register_link ) . '" title="' . esc_attr( $tip ) . '" target="_blank">' . esc_html__( 'Open', 'woocommerce-pos-host' ) . '</a>';
+							echo '<a class="woocommerce-button button" href="' . esc_attr( $register_link ) . '"</a>';
 						} else {
 							echo '<a class="woocommerce-button button disabled" title="' . esc_attr( $tip ) . '" target="_blank">' . esc_html__( 'Open', 'woocommerce-pos-host' ) . '</a>';
 						}
 					} else {
-						$button = $is_register_open ? __( 'Enter', 'woocommerce-pos-host' ) : __( 'Open', 'woocommerce-pos-host' );
-						$tip    = $is_register_open ? __( 'Enter Register', 'woocommerce-pos-host' ) : __( 'Open Register', 'woocommerce-pos-host' );
-
-						echo '<a class="woocommerce-button button" href="' . esc_attr( $register_link ) . '" title="' . esc_attr( $tip ) . '" target="_blank">' . esc_html( $button ) . '</a>';
+                                                $html = 
+                                                   '<figure class="wp-block-image size-large">
+                                                           <a href="' . esc_attr( $register_link ) . '">'.
+                                                                ucfirst( $register->get_name() ).
+                                                               '<img width="200" src="https://demo.pos.host/wp-content/uploads/sites/4/2020/12/50-Ecommerce-Linecolour-Icons_12.png" alt="R" class=""/>
+                                                                
+                                                           </a>
+                                                    </figure>';
+                                               echo $html; 
 					}
 					?>
 				</td>

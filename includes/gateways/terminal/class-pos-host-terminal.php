@@ -50,9 +50,7 @@ class POS_HOST_Terminal {
 	 * Ajax: connect terminal payment.
 	 */
 	public static function ajax_connect_terminal() {
-                //
-                //@todo debug
-                //check_ajax_referer( 'pos-host-terminal', 'security' );
+                check_ajax_referer( 'pos-host-connect-terminal', 'security' );
 
             $api = new POS_HOST_Gateway_Terminal_API();
                 if ( $ret = $api->connect_terminal() ){
@@ -69,9 +67,7 @@ class POS_HOST_Terminal {
           *  @param post[$order_id] - the woocommerce order id
 	 */
 	public static  function ajax_terminal_process_payment() {
-                //
-                //@todo debug
-                //check_ajax_referer( 'pos-host-terminal', 'security' );
+                check_ajax_referer( 'pos-host-terminal-process-payment', 'security' );
 
                 $id  = isset( $_POST['id'] ) ? wc_clean( wp_unslash( $_POST['id'] ) ) : '';
                 if ( !$id ){
@@ -91,9 +87,7 @@ class POS_HOST_Terminal {
           *  @param post[refId] - 
 	 */
 	public static  function ajax_terminal_capture_payment() {
-                //
-                //@todo debug
-                //check_ajax_referer( 'pos-host-terminal', 'security' );
+                check_ajax_referer( 'pos-host-terminal-capture-payment', 'security' );
 
                 $id  = isset( $_POST['refId'] ) ? wc_clean( wp_unslash( $_POST['refId'] ) ) : '';
                 if ( !$id ){
@@ -104,7 +98,6 @@ class POS_HOST_Terminal {
                 if ( $ret = $api->capture_payment( $id ) ){
                     wp_send_json_success($ret);
                 }else{
-//@todo debug
                      $err = var_dump($ret);
                     wp_send_json_error( 'Terminal process payment error.'.$err );
                 }

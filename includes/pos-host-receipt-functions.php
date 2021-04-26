@@ -34,6 +34,30 @@ function pos_host_get_receipt( $receipt ) {
 }
 
 /**
+ * Get receipt data.
+ *
+ * @since 0.0.1
+ *
+ * @param int|POS_HOST_Receipt $receipt Receipt ID or object.
+ *
+ * @throws Exception If receipt cannot be read/found and $data parameter of POS_HOST_Receipt class constructor is set.
+ * @return array|null
+ */
+function pos_host_get_receipt_data( $receipt ) {
+        $receipt_object = pos_host_get_receipt( $receipt );
+        $receipt_data   = array();
+
+        if ( $receipt_object ) {
+                $receipt_data = $receipt_object->get_data();
+                $logo     = wp_get_attachment_image_src( (int) $receipt_object->get_logo(), 'full' );
+                $logo_src = $logo ? $logo[0] : '';
+                $receipt_data['logo_url'] = $logo_src;
+        }
+
+        return apply_filters( 'pos_host_receipt_params', $receipt_data );
+}
+
+/**
  * Check if a specific receipt is the default one.
  *
  * @since 0.0.1

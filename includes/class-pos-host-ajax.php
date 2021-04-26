@@ -12,11 +12,13 @@ defined( 'ABSPATH' ) || exit;
  */
 class POS_HOST_AJAX {
 
+        
 	/**
 	 * Hook in AJAX handlers.
 	 */
 	public static function init() {
 		self::add_ajax_events();
+
 	}
 
 	/**
@@ -24,10 +26,11 @@ class POS_HOST_AJAX {
 	 */
 	public static function add_ajax_events() {
 		$ajax_events_nopriv = array(
-			'set_register_cash_management_data',
-			'generate_order_id',
+                          //@todo future
+			//'set_register_cash_management_data',
+			//'generate_order_id',
 			'auth_user',
-			'check_db_changes',
+			//'check_db_changes',
 		);
 
 		foreach ( $ajax_events_nopriv as $ajax_event ) {
@@ -36,28 +39,29 @@ class POS_HOST_AJAX {
 		}
 
 		$ajax_events = array(
-			'json_search_registers',
-			'json_search_outlet',
-			'json_search_cashier',
-			'filter_product_barcode',
-			'change_stock',
-			'add_product_for_barcode',
-			'get_product_variations_for_barcode',
-			'json_search_categories',
-			'get_products_by_categories',
-			'check_user_card_uniqueness',
-			'get_user_by_card_number',
+                          //@todo future
+			//'json_search_registers',
+			//'json_search_outlet',
+			//'json_search_cashier',
+			//'filter_product_barcode',
+			//'change_stock',
+			//'add_product_for_barcode',
+			//'get_product_variations_for_barcode',
+			//'json_search_categories',
+			//'get_products_by_categories',
+			//'check_user_card_uniqueness',
+			//'get_user_by_card_number',
 			'logout',
-			'load_grid_tiles',
-			'add_grid_tile',
-			'delete_grid_tile',
-			'delete_all_grid_tiles',
-			'reorder_grid_tile',
-			'update_receipt',
-			'date_i18n',
-			'paymentsense_eod_report',
-			'receipt_print_url',
-			'update_option',
+			//'load_grid_tiles',
+			//'add_grid_tile',
+			//'delete_grid_tile',
+			//'delete_all_grid_tiles',
+			//'reorder_grid_tile',
+			//'update_receipt',
+			//'date_i18n',
+			//'paymentsense_eod_report',
+			//'receipt_print_url',
+			//'update_option',
 			'replace_grid_tile',
 		);
 
@@ -527,9 +531,11 @@ class POS_HOST_AJAX {
 		if ( $register_id ) {
 			if ( $close_register ) {
 				$data                   = array();
+				$data['closing_note']   = ! empty( $_POST['closing_note'] ) ? wc_clean( wp_unslash( $_POST['closing_note'] ) ) : '';
+                                   /*@todo future
 				$data['open_last']      = ! empty( $_POST['open_last'] ) ? wc_clean( wp_unslash( $_POST['open_last'] ) ) : 0;
 				$data['counted_totals'] = ! empty( $_POST['counted_totals'] ) ? (array) json_decode( stripslashes( wc_clean( $_POST['counted_totals'] ) ) ) : array();
-				$data['closing_note']   = ! empty( $_POST['closing_note'] ) ? wc_clean( wp_unslash( $_POST['closing_note'] ) ) : '';
+                                    */
 
 				$logout = pos_host_close_register( $register_id, $data );
 			} else {
@@ -542,7 +548,7 @@ class POS_HOST_AJAX {
 			}
 		}
 
-		wp_send_json_error( __( 'An error occurred', 'woocommerce-pos-host' ), 500 );
+		wp_send_json_error( __( 'An error occurred during POS logout.', 'woocommerce-pos-host' ), 500 );
 	}
 
 	/**
@@ -567,14 +573,28 @@ class POS_HOST_AJAX {
 
 	/**
 	 * Ajax - log in to the POS.
+         * @param username   
+         * @param password   
+         * @param remember   
+         * @param register_id   
+         * @param outlet_id   
+         *      
+         * @return register_data
+         * @return outlet_data
+         * @return grid_data
+         *      
 	 */
 	public static function auth_user() {
 		check_ajax_referer( 'auth-user', 'security' );
+                 
+                 $data = array();
+                 
 		// @todo The password field should not be sanitized. Sanitization is done here to pass PHPCS checks.
-		$remember = isset( $_POST['remember'] ) ? wc_clean( $_POST['remember'] ) : '';
 		$username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
 		$password = isset( $_POST['password'] ) ? wc_clean( $_POST['password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-
+		$remember = isset( $_POST['remember'] ) ? wc_clean( $_POST['remember'] ) : '';
+                 
+                 
 		//$user = wp_authenticate_username_password( null, $username, $password );
                  $user_info = Array ('user_login'=>$username,'user_password'=>$password,'remember'=>$remember );
                  $user = wp_signon($user_info,false);
@@ -585,53 +605,35 @@ class POS_HOST_AJAX {
                 
                  wp_set_current_user($user->ID);
                  
-		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
-		$register    = pos_host_get_register( $register_id );
-
-		if ( ! $register ) {
-			wp_send_json_error( __( 'Register not found', 'woocommerce-pos-host' ), 400 );
+                 /* get regiser */
+		$register_id     = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
+		$register_data   = pos_host_get_register_data( $register_id );
+		if ( ! $register_data ) {
+			wp_send_json_error( __( 'Register not found when login', 'woocommerce-pos-host' ), 400 );
 		}
-
-		$date_opened = is_null( $register->get_date_opened() ) ? null : $register->get_date_opened()->getTimestamp();
-		$date_closed = is_null( $register->get_date_closed() ) ? null : $register->get_date_closed()->getTimestamp();
-
-		// Is first opened?
-		if ( is_null( $date_opened ) || $date_opened < $date_closed ) {
-			$date_opened = time(); // GMT;
-			$register->set_date_opened( $date_opened );
-			$register->set_open_last( $user->ID );
-
-			// Create a new session.
-			$session = new POS_HOST_Session();
-			$session->set_props(
-				array(
-					'date_opened' => $date_opened,
-					'open_first'  => $user->ID,
-					'open_last'   => $user->ID,
-					'register_id' => $register_id,
-					'outlet_id'   => $register->get_outlet(),
-				)
-			);
-
-			$session_id = $session->save();
-
-			$register->set_current_session( $session_id );
-			$register->set_open_first( $user->ID );
-			$register->set_open_last( $user->ID );
-			$register->save();
-
-			$register_data               = POS_HOST_Sell::instance()->get_register( $register_id );
-			$register_data['first_open'] = true;
-
-			wp_send_json_success( $register_data );
+                 $data['register_data'] = $register_data;
+                 
+                 /* get outlet */
+		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
+		$outlet_data    = pos_host_get_outlet_data( $outlet_id );
+		if ( ! $outlet_data ) {
+			wp_send_json_error( __( 'Outlet not found when login', 'woocommerce-pos-host' ), 400 );
 		}
-
-		$register->set_open_last( $user->ID );
-		$register->save();
-
-		$register_data = POS_HOST_Sell::instance()->get_register( $register_id );
-
-		wp_send_json_success( $register_data );
+                 $data['outlet_data'] = $outlet_data;
+                 
+                 /* get grid */
+		$grid_data    = pos_host_get_grid_data( $register_data['grid']);
+                 $data['grid_data'] = $grid_data;
+                 
+                 /* get receipt */
+		$receipt_data    = pos_host_get_receipt_data( $register_data['receipt']);
+                 $data['receipt_data'] = $receipt_data;
+                 
+                 /* get wc params */
+		$wc_data    = POS_HOST_Sell::get_wc_params($outlet_data);
+                 $data['wc_data'] = $wc_data;
+                 
+		wp_send_json_success( $data );
 	}
 
 	/**
@@ -752,7 +754,7 @@ class POS_HOST_AJAX {
 	public static function replace_grid_tile() {
 		global $wpdb;
 
-		check_ajax_referer( 'grid-tile', 'security' );
+		check_ajax_referer( 'replace-grid-tile', 'security' );
 		if ( ! current_user_can( 'manage_woocommerce_pos_host' ) || ! isset( $_POST["data"] ) ) {
 			wp_die( "replace_grid_tile wrong data" , -1 );
 		};

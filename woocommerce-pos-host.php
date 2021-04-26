@@ -28,6 +28,10 @@ if ( ! defined( 'POS_HOST_PLUGIN_FILE' ) ) {
 	define( 'POS_HOST_PLUGIN_FILE', __FILE__ );
 }
 
+if ( ! defined( 'POS_HOST_VERSION' ) ) {
+	define( 'POS_HOST_VERSION', "0.0.3");
+}
+
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 

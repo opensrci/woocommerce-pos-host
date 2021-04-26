@@ -14,11 +14,15 @@ defined( 'ABSPATH' ) || exit;
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo esc_html( $register_data['name'] ) . ' &lsaquo; ' . esc_html( $outlet_data['name'] ) . ' &lsaquo; ' . esc_html__( 'POS HOST', 'woocommerce-pos-host' ); ?></title>
+		<title><?php 
+                            if($register_data) {
+                                echo esc_html( $register_data['name'] ); 
+                            }else{
+                                echo esc_html__( 'POS', 'woocommerce-pos-host' ); 
+                            }    
+                        ?>
+                 </title>
 		<link rel="manifest" href="<?php
-                        $home_url                     = home_url( $wp->request );
-                        $parsed                       = wp_parse_url($home_url);
-                        $home_host                    = $parsed['host'];
                         echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/manifest.'.$home_host.'.json'; 
                         
                         ?>">
@@ -35,9 +39,6 @@ defined( 'ABSPATH' ) || exit;
 		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/favicon-32x32.png'; ?>">
 		<link rel="icon" type="image/png" sizes="96x96" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/favicon-96x96.png'; ?>">
 		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/favicon-16x16.png'; ?>">
-		<link rel="mask-icon" href="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/safari-pinned-tab.svg'; ?>" color="#7f54b3">
-		<meta name="msapplication-TileColor" content="<?php echo esc_attr( $primary_color ); ?>">
-		<meta name="msapplication-TileImage" content="<?php echo esc_url( POS_HOST()->plugin_url() ) . '/assets/dist/images/ms-icon-144x144.png'; ?>">
 		<meta name="theme-color" content="<?php echo esc_attr( $primary_color ); ?>">
 		<meta http-equiv="Content-Type" name="viewport" charset="<?php echo esc_attr( get_option( 'blog_charset' ) ); ?>" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,24 +48,15 @@ defined( 'ABSPATH' ) || exit;
 		<div id="q-app">
 			<app></app>
 		</div>
-
 		<script data-cfasync="false" type="text/javascript" class="pos_host_params" >
-			window.pos_host_registers = <?php echo wp_kses_post( json_encode( pos_host_get_registers() ) ); ?>;
-			window.pos_host_outlets = <?php echo wp_kses_post( json_encode( pos_host_get_outlets() ) ); ?>;
-			window.pos_host_params = <?php echo wp_kses_post( POS_HOST_Sell::get_js_params() ); ?>;
-			window.pos_host_register_data = <?php echo wp_kses_post( json_encode( $register_data ) ); ?>;
-			window.pos_host_outlet_data = <?php echo wp_kses_post( json_encode( $outlet_data ) ); ?>;
-			window.pos_host_receipt = <?php echo wp_kses_post( json_encode( POS_HOST_Sell::instance()->get_receipt( $register_data['receipt'] ) ) ); ?>;
-			window.pos_host_grid = <?php echo wp_kses_post( $this->get_grid() ); ?>;
-			window.pos_host_wc = <?php echo wp_kses_post( POS_HOST_Sell::get_js_wc_params($outlet_data) ); ?>;
-			window.pos_host_cart = <?php echo wp_kses_post( POS_HOST_Sell::get_js_cart_params() ); ?>;
-			window.pos_host_i18n = <?php echo wp_kses_post( json_encode( require_once POS_HOST()->plugin_path() . '/i18n/app.php' ) ); ?>;
-			window.pos_host_coupon_i18n = <?php echo wp_kses_post( json_encode( require_once POS_HOST()->plugin_path() . '/i18n/coupon.php' ) ); ?>;
-			window.pos_host_custom_product = <?php echo wp_kses_post( POS_HOST_Sell::instance()->get_custom_product_params() ); ?>;
+			window.pos_host_params = <?php echo wp_kses_post( json_encode(POS_HOST_Sell::get_params())); ?>;
+			window.pos_host_cart_params  = <?php echo wp_kses_post(json_encode(POS_HOST_Sell::get_cart_params())); ?>;
+			window.pos_host_categories = <?php echo wp_kses_post( json_encode( pos_host_get_categories() ) ); ?>;
+			window.pos_host_custom_product = <?php echo wp_kses_post( json_encode( POS_HOST_Sell::instance()->get_custom_product_params())); ?>;
                           window.pos_host_options = {"db_current_step":"done","db_loaded":false}
-
+			window.pos_host_outlets = <?php echo wp_kses_post( json_encode( pos_host_get_outlets() ) ); ?>;
+			window.pos_host_registers = <?php echo wp_kses_post( json_encode( pos_host_get_registers() ) ); ?>;
 		</script>
-
 		<?php
 			/*
 			 * The following functions allow the POS enqueued scripts and styles to

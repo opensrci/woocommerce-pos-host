@@ -20,7 +20,7 @@ class POS_HOST_Install {
 		add_action( 'admin_init', array( __CLASS__, 'install' ), 6 );
                 
 		if ( ! defined( 'IFRAME_REQUEST' ) && POS_HOST_VERSION !== get_option( 'pos_host_db_version' ) ) {
-                /*@todo DB need update */
+                /*@todo ph Future DB need update */
                 }
 	}
         

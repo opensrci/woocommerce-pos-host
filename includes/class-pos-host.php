@@ -320,6 +320,7 @@ class POS_HOST {
                 include_once 'class-pos-host-emails.php';
                 include_once 'class-pos-host-autoloader.php';
                 include_once 'class-pos-host-stocks.php';
+                include_once 'class-pos-host-my-account.php';
                 include_once 'admin/class-pos-host-admin-post-types.php';
                 include_once 'admin/class-pos-host-admin.php';
                 include_once 'admin/class-pos-host-admin-assets.php';
@@ -327,7 +328,6 @@ class POS_HOST {
 		// On the front-end.
 		if ( ! is_admin() ) {
 			include_once 'class-pos-host-sell.php';
-			include_once 'class-pos-host-assets.php';
 
 			if ( 'yes' === get_option( 'pos_host_enable_frontend_access', 'no' ) ) {
 				include_once 'class-pos-host-my-account.php';

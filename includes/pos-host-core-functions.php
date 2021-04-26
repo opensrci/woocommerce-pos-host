@@ -525,3 +525,47 @@ function pos_host_getallheaders() {
 
 	return $headers;
 }
+
+/**
+ * Returns all the categories.
+ *
+ * @since 0.0.1
+ * @return array.
+ */
+function pos_host_get_categories() {
+        /*
+         * Get product categories.
+         */
+        $categories = array();
+        $terms      = get_terms(
+                'product_cat',
+                array(
+                        'orderby' => 'name',
+                        'order'   => 'ASC',
+                        'fields'  => 'all',
+                )
+        );
+        if ( $terms ) {
+                foreach ( $terms as $term ) {
+                        $thumbnail_id = absint( get_term_meta( $term->term_id, 'thumbnail_id', true ) );
+
+                        if ( $thumbnail_id ) {
+                                $image = pos_host_grid_thumbnail( $thumbnail_id, array( 250, 250 ) );
+                        } else {
+                                $image = wc_placeholder_img_src();
+                        }
+
+                        if ( ! $image || null === $image ) {
+                                $image = wc_placeholder_img_src();
+                        }
+
+                        $term->id           = $term->term_taxonomy_id;
+                        $term->image        = $image;
+                        $term->display_type = get_term_meta( $term->term_id, 'display_type', true );
+                        $term->description  = wp_slash( $term->description );
+
+                        $categories[  ] = $term;
+                }
+        }
+        return $categories;
+}

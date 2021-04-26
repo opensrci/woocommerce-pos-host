@@ -60,54 +60,12 @@ class POS_HOST_Sell {
 	 */
 	public function assets() {
 		if ( is_pos() ) {
-			global $wp_scripts, $wp_styles;
-
-			// Filter enqueued scripts to include only the scripts that have 'pos-host-main' in deps.
-			$wp_scripts->queue = array_filter(
-				$wp_scripts->queue,
-				function( $handle ) use ( $wp_scripts ) {
-					$script = $wp_scripts->registered[ $handle ];
-
-					return $script->deps && count( array_intersect( $script->deps, array( 'pos-host-main', 'pos-host-before-main' ) ) );
-				}
-			);
-
-			// Filter enqueued styles to include only the styles that have 'pos-host-main' in deps.
-			$wp_styles->queue = array_filter(
-				$wp_styles->queue,
-				function( $handle ) use ( $wp_styles ) {
-					$style = $wp_styles->registered[ $handle ];
-
-					return $style->deps && in_array( 'pos-host-main', $style->deps );
-				}
-			);
-
-			// Dynamic style data.
-			$primary_color = empty( get_option( 'pos_host_theme_primary_color' ) ) ? '#7f54b3' : get_option( 'pos_host_theme_primary_color', '#7f54b3' );
-
-			wp_enqueue_style( 'open-sans-font', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap', array(), POS_HOST_VERSION );
+	
 			wp_enqueue_style( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/css/register/pos_host_ui.css', array(), POS_HOST_VERSION );
-			wp_add_inline_style(
-				'pos-host-main',
-				"
-				.product_grids .product-card.q-card:active,
-				.pos-order-card:active,
-				.category-card:active,
-				.variation-card:active,
-				.product-card:active,
-				.product-card-rectangle:active{
-					box-shadow: 0 0 0px 1px {$primary_color} !important;
-					border-color: {$primary_color} !important;
-				}
-				"
-			);
-			wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
-			wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
-			//wp_enqueue_script( 'pos-host-before-main', POS_HOST()->plugin_url() . '/assets/dist/js/register/before-main.min.js', array(), POS_HOST_VERSION );
-                          // $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/main.' . ( pos_host_is_dev() ? '' : 'min.' ) . 'js';
+
+                          //wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
+			//wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
                           $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/pos_host_ui.js';
-			//wp_enqueue_script( 'pos-host-main', $main_js , array() , POS_HOST_VERSION );
-                          //@todo debug
 			wp_enqueue_script( 'pos-host-main', $main_js , array() , '0.0.3' );
 		}
 	}
@@ -166,7 +124,7 @@ class POS_HOST_Sell {
 	 * Display the POS front-end.
 	 */
 	public function template_redirect() {
-             
+                 global $wp;
 		// Bail if not POS.
 		if ( ! is_pos() ) {
 			return;
@@ -181,15 +139,13 @@ class POS_HOST_Sell {
 		if ( ! current_user_can( 'view_register' ) ) {
 			wp_die( esc_html__( 'You are not allowed to view this page.', 'woocommerce-pos-host' ) );
 		}
-
-		global $wp;
-                 
-                //
-		$register_data = $this->get_register( $wp->query_vars['register'] );
-		$outlet_data   = $this->get_outlet( $wp->query_vars['outlet'] );
-		$primary_color = get_option( 'pos_host_theme_primary_color', '#7f54b3' );
-
-		// Update manifest.json.
+                
+                //get register, if set
+                $register_data = pos_host_get_register_data($wp->query_vars['register']);
+                //get outlet, if set
+                $outlet_data = pos_host_get_outlet_data($wp->query_vars['outlet']);
+                
+                // Update manifest.json.
                 $home_url                     = home_url( $wp->request );
                 $parsed                       = wp_parse_url($home_url);
                 $home_host                    = $parsed['host'];
@@ -200,13 +156,13 @@ class POS_HOST_Sell {
                 $contentsDecoded['start_url'] = esc_url( $home_url );
                 $json                         = json_encode( $contentsDecoded );
 
-		//if ( is_writable( $new_file ) ) 
+                //if ( is_writable( $new_file ) ) 
                  {
-			file_put_contents( $new_file, $json );
-		}
+                        file_put_contents( $new_file, $json );
+                }
 
-		include_once POS_HOST()->plugin_path() . '/includes/views/html-admin-pos.php';
-		exit;
+                include_once POS_HOST()->plugin_path() . '/includes/views/html-admin-pos.php';
+                exit;
 	}
 
 
@@ -265,14 +221,17 @@ class POS_HOST_Sell {
 		include_once 'api/class-pos-host-rest-product-variations-controller.php';
 		include_once 'api/class-pos-host-rest-product-categories-controller.php';
 		include_once 'api/class-pos-host-rest-users-controller.php';
-		include_once 'api/class-pos-host-rest-data-countries-controller.php';
 		include_once 'api/class-pos-host-rest-customers-controller.php';
 		include_once 'api/class-pos-host-rest-options-controller.php';
-		include_once 'api/class-pos-host-rest-taxes-controller.php';
+                 /*@todo future 
+                 include_once 'api/class-pos-host-rest-taxes-controller.php';
 		include_once 'api/class-pos-host-rest-coupons-controller.php';
+		include_once 'api/class-pos-host-rest-data-countries-controller.php';
 		include_once 'api/class-pos-host-rest-shipping-zones-controller.php';
 		include_once 'api/class-pos-host-rest-shipping-zone-locations-controller.php';
 		include_once 'api/class-pos-host-rest-shipping-zone-methods-controller.php';
+                  * 
+                  */
 	}
 
 	/**
@@ -289,14 +248,17 @@ class POS_HOST_Sell {
 			'POS_HOST_REST_Product_Variations_Controller',
 			'POS_HOST_REST_Product_Categories_Controller',
 			'POS_HOST_REST_Users_Controller',
-			'POS_HOST_REST_Data_Countries_Controller',
 			'POS_HOST_REST_Customers_Controller',
 			'POS_HOST_REST_Options_Controller',
-			'POS_HOST_REST_Taxes_Controller',
+                           /*@todo future 
 			'POS_HOST_REST_Coupons_Controller',
+			'POS_HOST_REST_Taxes_Controller',
+			'POS_HOST_REST_Data_Countries_Controller',
 			'POS_HOST_REST_Shipping_Zones_Controller',
 			'POS_HOST_REST_Shipping_Zone_Locations_Controller',
 			'POS_HOST_REST_Shipping_Zone_Methods_Controller',
+                            * 
+                            */
 		);
 
 		foreach ( $api_classes as $api_class ) {
@@ -395,106 +357,9 @@ class POS_HOST_Sell {
 	 * @return array
 	 */
 	public function get_register( $register ) {
-		global $wpdb;
 
 		// Get register data.
-		$register_object = pos_host_get_register( $register );
-		$register_data   = array();
-
-		if ( $register_object ) {
-			$register_data = array(
-				'id'              => $register_object->get_id(),
-				'name'            => $register_object->get_name(),
-				'slug'            => $register_object->get_slug(),
-				'date_opened'     => $register_object->get_date_opened() ? gmdate( 'Y-m-d H:i:s', $register_object->get_date_opened()->getTimestamp() ) : null,
-				'date_closed'     => $register_object->get_date_closed() ? gmdate( 'Y-m-d H:i:s', $register_object->get_date_closed()->getTimestamp() ) : null,
-				'open_first'      => $register_object->get_open_first(),
-				'open_last'       => $register_object->get_open_last(),
-				'current_session' => $register_object->get_current_session(),
-				'grid'            => $register_object->get_grid(),
-				'receipt'         => $register_object->get_receipt(),
-				'grid_layout'     => $register_object->get_grid_layout(),
-				'prefix'          => $register_object->get_prefix(),
-				'suffix'          => $register_object->get_suffix(),
-				'outlet'          => $register_object->get_outlet(),
-				'customer'        => $register_object->get_customer(),
-				'cash_management' => $register_object->get_cash_management(),
-				'dining_option'   => $register_object->get_dining_option(),
-				'default_mode'    => $register_object->get_default_mode(),
-				'change_user'     => $register_object->get_change_user(),
-				'email_receipt'   => $register_object->get_email_receipt(),
-				'print_receipt'   => $register_object->get_print_receipt(),
-				'gift_receipt'    => $register_object->get_gift_receipt(),
-				'note_request'    => $register_object->get_note_request(),
-				'order_id'        => $register_object->get_temp_order(),
-				'terminalid'        => $register_object->get_terminalid(),
-			);
-
-			// Create a temp_order for the register if not created yet.
-			if ( ! $register_object->get_temp_order() ) {
-				$register_data['order_id'] = pos_host_create_temp_order( $register_object->get_id() );
-			}
-
-			// Set is_open field.
-			if ( is_null( $register_object->get_date_opened() ) ) {
-				$register_data['is_open'] = false;
-			} elseif ( is_null( $register_object->get_date_closed() ) ) {
-				$register_data['is_open'] = true;
-			} else {
-				$register_data['is_open'] = $register_object->get_date_opened()->getTimestamp() > $register_object->get_date_closed()->getTimestamp();
-			}
-		}
-
-		// Session data.
-		$register_data['session'] = array(
-			'opening_note'       => '',
-			'opening_cash_total' => 0,
-			'orders_count'       => 0,
-			'orders_total'       => 0,
-			'gateways'           => array(
-				'pos_host_cash'               => array(
-					'orders_count' => 0,
-					'orders_total' => 0,
-				),
-			),
-		);
-                   
-		// Get session.
-		$session = pos_host_get_session( $register_data['current_session'] );
-		if ( $register_data['current_session'] && is_a( $session, 'POS_HOST_Session' ) ) {
-			$register_data['session']['opening_note']       = $session->get_opening_note();
-			$register_data['session']['opening_cash_total'] = $session->get_opening_cash_total();
-		}
-
-		// Skip if this is the first open.
-		if ( ! is_null( $register_data['date_opened'] ) ) {
-			$results = $wpdb->get_results(
-				$wpdb->prepare(
-					"SELECT ID FROM {$wpdb->posts} p
-					 INNER JOIN {$wpdb->postmeta} pm
-					 ON ( pm.post_id = p.ID AND pm.meta_key = 'pos_host_register_id' AND pm.meta_value = %d )
-					 WHERE ( p.post_type = 'shop_order' OR p.post_type = 'shop_order_refund' )
-					 AND p.post_date_gmt >= %s
-					",
-					$register_object->get_id(),
-					gmdate( 'Y-m-d H:i:s', $register_object->get_date_opened()->getTimestamp() )
-				)
-			);
-
-			if ( $results ) {
-				foreach ( $results as $result ) {
-					$order = wc_get_order( $result->ID );
-
-					if ( array_key_exists( $order->get_payment_method(), $register_data['session']['gateways'] ) ) {
-						$register_data['session']['gateways'][ $order->get_payment_method() ]['orders_count'] += 1;
-						$register_data['session']['gateways'][ $order->get_payment_method() ]['orders_total'] += $order->get_total();
-
-						$register_data['session']['orders_count'] += 1;
-						$register_data['session']['orders_total'] += $order->get_total();
-					}
-				}
-			}
-		}
+		$register_data = pos_host_get_register_data( $register );
 
 		$this->data = $register_data;
 		$this->id   = $register_data['id'];
@@ -502,65 +367,8 @@ class POS_HOST_Sell {
 		return apply_filters( 'pos_host_register_data', $register_data );
 	}
 
-	/**
-	 * Returns outlet data.
-	 *
-	 * @param int|string $outlet Outlet ID or slug.
-	 * @return array
-	 */
-	public function get_outlet( $outlet ) {
-		// Get outlet data.
-		$outlet_object = pos_host_get_outlet( $outlet );
-		$outlet_data   = array();
 
-		if ( $outlet_object ) {
-			$outlet_data = array(
-				'id'                => $outlet_object->get_id(),
-				'name'              => $outlet_object->get_name(),
-				'address_1'         => $outlet_object->get_address_1(),
-				'address_2'         => $outlet_object->get_address_2(),
-				'city'              => $outlet_object->get_city(),
-				'postcode'          => $outlet_object->get_postcode(),
-				'country'           => $outlet_object->get_country(),
-				'state'             => $outlet_object->get_state(),
-				'email'             => $outlet_object->get_email(),
-				'phone'             => $outlet_object->get_phone(),
-				'fax'               => $outlet_object->get_fax(),
-				'website'           => $outlet_object->get_website(),
-				'wifi_network'      => $outlet_object->get_wifi_network(),
-				'wifi_password'     => $outlet_object->get_wifi_password(),
-				'social_accounts'   => $outlet_object->get_social_accounts(),
-				'formatted_address' => explode(
-					'<br/>',
-					WC()->countries->get_formatted_address(
-						array(
-							'address_1' => $outlet_object->get_address_1(),
-							'address_2' => $outlet_object->get_address_2(),
-							'city'      => $outlet_object->get_city(),
-							'state'     => empty( $outlet_object->get_state() ) ? $outlet_object->get_state() : '',
-							'postcode'  => $outlet_object->get_postcode(),
-							'country'   => $outlet_object->get_country(),
-						)
-					)
-				),
-			);
-		}
-
-		return $outlet_data;
-	}
-
-	public function get_receipt( $receipt ) {
-		$receipt_object = pos_host_get_receipt( $receipt );
-		$receipt_data   = array();
-
-		if ( $receipt_object ) {
-			$receipt_data = $receipt_object->get_data();
-		}
-
-		return apply_filters( 'pos_host_receipt_params', $receipt_data );
-	}
-
-	public static function get_js_params() {
+	public static function get_params() {
 		$pos_icon = wp_get_attachment_image_src( get_option( 'pos_host_theme_logo' ), 0 );
 		$pos_icon = $pos_icon ? $pos_icon[0] : POS_HOST()->plugin_url() . '/assets/dist/images/pos-host-logo-icon.png';
 
@@ -692,6 +500,7 @@ class POS_HOST_Sell {
 				'receipt_print_url_nonce'        => wp_create_nonce( 'receipt-print-url' ),
 				'check_db_changes_nonce'         => wp_create_nonce( 'check-db-changes' ),
 				'update_option_nonce'            => wp_create_nonce( 'update-option' ),
+				'replace_grid_tile_nonce'        => wp_create_nonce( 'replace-grid-tile' ),
 				'locale'                         => get_locale(),
 				'gmt_offset'                     => get_option( 'gmt_offset' ),
 				'thousand_separator'             => wc_get_price_thousand_separator(),
@@ -711,10 +520,10 @@ class POS_HOST_Sell {
 			)
 		);
 
-		return json_encode( $params );
+		return $params;
 	}
 
-	public static function get_js_wc_params($outlet_data) {
+	public static function get_wc_params($outlet_data) {
 		$pos_tax_based_on = get_option( 'pos_host_calculate_tax_based_on', 'outlet' );
 		if ( 'default' === $pos_tax_based_on ) {
 			$pos_tax_based_on = get_option( 'woocommerce_tax_based_on' );
@@ -749,10 +558,10 @@ class POS_HOST_Sell {
 			) 
 		);
 
-		return json_encode( $params );
+		return $params;
 	}
 
-	public static function get_js_cart_params() {
+	public static function get_cart_params() {
 		$tax_classes = array();
 		foreach ( WC_Tax::get_tax_classes() as $class ) {
 			$tax_classes[ sanitize_title( $class ) ] = $class;
@@ -780,7 +589,7 @@ class POS_HOST_Sell {
 				'tax_round_half_up'     => self::tax_round_half_up(),
 			)
 		);
-		return json_encode( $params );
+		return $params;
 	}
 
 	/**
@@ -870,7 +679,7 @@ class POS_HOST_Sell {
 			'images'             => array(),
 		);
 
-		return json_encode( $product_data );
+		return $product_data;
 	}
 
 	public static function get_coupons_labels() {
@@ -881,74 +690,6 @@ class POS_HOST_Sell {
 		}
 
 		return $l;
-	}
-
-	/**
-	 * Returns grid data.
-	 *
-	 * @return array|null
-	 */
-	public function get_grid() {
-		$register_data = $this->data;
-		$grid_id       = $register_data['grid'];
-		$grid          = pos_host_get_grid( $grid_id );
-
-		/*
-		 * Get product categories.
-		 */
-		$categories = array();
-		$terms      = get_terms(
-			'product_cat',
-			array(
-				'orderby' => 'name',
-				'order'   => 'ASC',
-				'fields'  => 'all',
-			)
-		);
-		if ( $terms ) {
-			foreach ( $terms as $term ) {
-				$thumbnail_id = absint( get_term_meta( $term->term_id, 'thumbnail_id', true ) );
-
-				if ( $thumbnail_id ) {
-					$image = pos_host_grid_thumbnail( $thumbnail_id, array( 250, 250 ) );
-				} else {
-					$image = wc_placeholder_img_src();
-				}
-
-				if ( ! $image || null === $image ) {
-					$image = wc_placeholder_img_src();
-				}
-
-				$term->image        = $image;
-				$term->display_type = get_term_meta( $term->term_id, 'display_type', true );
-				$term->description  = wp_slash( $term->description );
-
-				$categories[ '_' . $term->term_id ] = $term;
-			}
-		}
-
-		$tiles             = $grid_id && $grid ? $grid->get_tiles() : array();
-		$product_tiles     = array();
-		$product_cat_tiles = array();
-
-		foreach ( $tiles as $tile_id => $tile ) {
-			if ( 'product' === $tile['type'] ) {
-				$product_tiles[] = (int) $tile['item_id'];
-			} elseif ( 'product_cat' === $tile['type'] ) {
-				$product_cat_tiles[] = (int) $tile['item_id'];
-			}
-		}
-
-		$grid_data = array(
-			'product_tiles'     => $product_tiles,
-			'product_cat_tiles' => $product_cat_tiles,
-			'grid_name'         => $grid_id && $grid ? $grid->get_name() : '',
-			'grid_id'           => $grid_id,
-			'categories'        => $categories, // TODO: what the heck is this?
-			'tile_sorting'      => get_option( 'pos_host_default_tile_orderby', 'menu_order' ),
-		);
-
-		return json_encode( $grid_data );
 	}
 
 	/**
