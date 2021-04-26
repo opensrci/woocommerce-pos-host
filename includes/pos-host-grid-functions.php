@@ -46,8 +46,8 @@ function pos_host_get_grid_data( $id ) {
                 } elseif ( 'product_cat' === $tile['type'] ) {
                         $product_cat_tiles[] = (int) $tile['item_id'];
                 }
-                $fav_tiles = $tile;
-                $fav_tiles[id] = (int) $tile['item_id'];
+                $tile[id] = (int) $tile['item_id'];
+                $fav_tiles[] = $tile;
                 
         }
 
