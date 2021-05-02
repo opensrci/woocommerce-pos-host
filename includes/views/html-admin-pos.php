@@ -3,9 +3,9 @@
  * POS HOST
  *
  * Renders the POS HOST UI.
- *
- * @var $register_data
- * @var $outlet_data
+ * @params $loggedin
+ * @params $outlet_id, $register_id
+ * @var $loggedin true|false
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -49,11 +49,29 @@ defined( 'ABSPATH' ) || exit;
 			<app></app>
 		</div>
 		<script data-cfasync="false" type="text/javascript" class="pos_host_params" >
-			window.pos_host_params = <?php echo wp_kses_post( json_encode(POS_HOST_Sell::get_params())); ?>;
-			window.pos_host_cart_params  = <?php echo wp_kses_post(json_encode(POS_HOST_Sell::get_cart_params())); ?>;
-			window.pos_host_categories = <?php echo wp_kses_post( json_encode( pos_host_get_categories() ) ); ?>;
-			window.pos_host_custom_product = <?php echo wp_kses_post( json_encode( POS_HOST_Sell::instance()->get_custom_product_params())); ?>;
-                          window.pos_host_options = {"db_current_step":"done","db_loaded":false}
+			window.pos_host_params = <?php
+                                                    if($loggedin){
+                                                        echo wp_kses_post( json_encode(POS_HOST_Sell::get_params())); 
+                                                    }else{
+                                                        echo wp_kses_post( json_encode(POS_HOST_Sell::get_params("light"))); 
+                                                    }
+                                            ?>;
+			window.pos_host_params_ext = <?php
+                                                    if($loggedin){
+                                                        $params = POS_HOST_Sell::get_post_login_data($outlet_id, $register_id);
+                                                        echo wp_kses_post( json_encode($params)); 
+                                                    }else{
+                                                        echo wp_kses_post('{}'); 
+                                                    }
+                                            ?>;
+			window.pos_host_options = <?php
+                                                    if($loggedin){
+                                                        echo wp_kses_post('{"db_loaded":true}'); 
+                                                    }else{
+                                                        echo wp_kses_post('{"db_loaded":false}'); 
+                                                    }
+                                            ?>;
+			window.pos_host_loggedin_user = <?php echo wp_kses_post( json_encode(POS_HOST_Sell::get_loggedin_user()));?>;
 			window.pos_host_outlets = <?php echo wp_kses_post( json_encode( pos_host_get_outlets() ) ); ?>;
 			window.pos_host_registers = <?php echo wp_kses_post( json_encode( pos_host_get_registers() ) ); ?>;
 		</script>

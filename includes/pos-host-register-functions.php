@@ -194,9 +194,13 @@ function pos_host_get_registers() {
 		)
 	);
 	$registers  = array();
+        
         for ($i=0;$i<count($get_posts);$i++){
 		$registers[$i]['id'] =  $get_posts[$i]->ID;
-		$registers[$i]['name'] =  $get_posts[$i]->post_title;            
+                 $registers[$i]['outlet'] = pos_host_get_register( $get_posts[$i]->ID )->get_outlet(); 
+		$registers[$i]['name'] =  $get_posts[$i]->post_title;
+		$registers[$i]['slug'] =  $get_posts[$i]->post_name;
+		$registers[$i]['default'] = pos_host_is_default_register($get_posts[$i]->ID);
         }
 
 	return $registers;

@@ -51,6 +51,7 @@ class POS_HOST_AJAX {
 			//'get_products_by_categories',
 			//'check_user_card_uniqueness',
 			//'get_user_by_card_number',
+			'select_register',
 			'logout',
 			//'load_grid_tiles',
 			//'add_grid_tile',
@@ -522,13 +523,15 @@ class POS_HOST_AJAX {
 	/**
 	 * Logout from POS via Ajax.
 	 */
-	public static function logout() {
+	public static function logout()
+        {
 		check_ajax_referer( 'logout', 'security' );
 
 		$register_id    = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
 		$close_register = isset( $_POST['close_register'] ) ? true : false;
-
-		if ( $register_id ) {
+//@todo debug
+		//if ( $register_id ) 
+                {
 			if ( $close_register ) {
 				$data                   = array();
 				$data['closing_note']   = ! empty( $_POST['closing_note'] ) ? wc_clean( wp_unslash( $_POST['closing_note'] ) ) : '';
@@ -572,6 +575,36 @@ class POS_HOST_AJAX {
 	}
 
 	/**
+	 * Ajax - select POS register.
+         * @param register_id   
+         * @param outlet_id   
+         *      
+         * @return register_data
+         * @return outlet_data
+         * @return grid_data
+         *      
+	 */
+	public static function select_register() {
+		check_ajax_referer( 'select-register', 'security' );
+                 
+                 $data = array();
+                 
+		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
+		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
+                
+                 /* get regiser */
+		$register_id     = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
+                 /* get outlet */
+                 
+                 $data = POS_HOST_Sell::get_post_login_data( $outlet_id, $register_id );
+                 if($data){
+            		wp_send_json_success( $data );
+                 }else{
+ 			wp_send_json_error( "Get post login data error.", 400 );
+                 }
+	}
+
+	/**
 	 * Ajax - log in to the POS.
          * @param username   
          * @param password   
@@ -607,33 +640,15 @@ class POS_HOST_AJAX {
                  
                  /* get regiser */
 		$register_id     = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
-		$register_data   = pos_host_get_register_data( $register_id );
-		if ( ! $register_data ) {
-			wp_send_json_error( __( 'Register not found when login', 'woocommerce-pos-host' ), 400 );
-		}
-                 $data['register_data'] = $register_data;
-                 
                  /* get outlet */
 		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
-		$outlet_data    = pos_host_get_outlet_data( $outlet_id );
-		if ( ! $outlet_data ) {
-			wp_send_json_error( __( 'Outlet not found when login', 'woocommerce-pos-host' ), 400 );
-		}
-                 $data['outlet_data'] = $outlet_data;
                  
-                 /* get grid */
-		$grid_data    = pos_host_get_grid_data( $register_data['grid']);
-                 $data['grid_data'] = $grid_data;
-                 
-                 /* get receipt */
-		$receipt_data    = pos_host_get_receipt_data( $register_data['receipt']);
-                 $data['receipt_data'] = $receipt_data;
-                 
-                 /* get wc params */
-		$wc_data    = POS_HOST_Sell::get_wc_params($outlet_data);
-                 $data['wc_data'] = $wc_data;
-                 
-		wp_send_json_success( $data );
+                 $data = POS_HOST_Sell::get_post_login_data( $outlet_id, $register_id );
+                 if($data){
+            		wp_send_json_success( $data );
+                 }else{
+ 			wp_send_json_error( "Get post login data error.", 400 );
+                 }
 	}
 
 	/**

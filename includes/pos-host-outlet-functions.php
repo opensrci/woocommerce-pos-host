@@ -118,6 +118,7 @@ function pos_host_get_outlets() {
         for ($i=0;$i<count($get_posts);$i++){
 		$outlets[$i]['id'] =  $get_posts[$i]->ID;
 		$outlets[$i]['name'] =  $get_posts[$i]->post_title;            
+		$outlets[$i]['slug'] =  $get_posts[$i]->post_name;            
         }
 
 	return $outlets;

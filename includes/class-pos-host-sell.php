@@ -30,6 +30,13 @@ class POS_HOST_Sell {
 	 */
 	public $data = null;
 
+        /**
+	 * Current loggedin register&outlet data.
+	 *
+	 * @var array
+	 */
+	public $loggedin = null;
+
 	/**
 	 * Current register ID.
 	 *
@@ -62,7 +69,6 @@ class POS_HOST_Sell {
 		if ( is_pos() ) {
 	
 			wp_enqueue_style( 'pos-host-main', POS_HOST()->plugin_url() . '/assets/dist/css/register/pos_host_ui.css', array(), POS_HOST_VERSION );
-
                           //wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), POS_HOST_VERSION );
 			//wp_enqueue_script( 'stripe-sdk', 'https://js.stripe.com/terminal/v1/', array(), POS_HOST_VERSION );
                           $main_js = POS_HOST()->plugin_url() . '/assets/dist/js/register/pos_host_ui.js';
@@ -134,17 +140,17 @@ class POS_HOST_Sell {
 		if ( ! is_user_logged_in() ) {
 			auth_redirect();
 		}
-
+                
 		// Not authorized?
 		if ( ! current_user_can( 'view_register' ) ) {
 			wp_die( esc_html__( 'You are not allowed to view this page.', 'woocommerce-pos-host' ) );
 		}
+                $register_id = isset($wp->query_vars['register']) ? $wp->query_vars['register']:'';
+                $outlet_id = isset($wp->query_vars['outlet']) ? $wp->query_vars['outlet']:'';
                 
-                //get register, if set
-                $register_data = pos_host_get_register_data($wp->query_vars['register']);
-                //get outlet, if set
-                $outlet_data = pos_host_get_outlet_data($wp->query_vars['outlet']);
-                
+                $loggedin = isset($wp->query_vars['register']) && $wp->query_vars['register'] &&
+                            isset($wp->query_vars['outlet']) && $wp->query_vars['outlet'];
+                        
                 // Update manifest.json.
                 $home_url                     = home_url( $wp->request );
                 $parsed                       = wp_parse_url($home_url);
@@ -157,15 +163,22 @@ class POS_HOST_Sell {
                 $json                         = json_encode( $contentsDecoded );
 
                 //if ( is_writable( $new_file ) ) 
-                 {
+                {
                         file_put_contents( $new_file, $json );
                 }
-
+                
                 include_once POS_HOST()->plugin_path() . '/includes/views/html-admin-pos.php';
                 exit;
 	}
 
 
+	public function get_loggedin_user() {
+		$loggedin_data['username'] = wp_get_current_user()->user_nicename;
+		$loggedin_data['register_id'] = self::instance()->loggedin['register_id'];
+		$loggedin_data['outlet_id'] = self::instance()->loggedin['outlet_id'];
+                return $loggedin_data;
+         }
+        
 	public function is_pos_referer() {
 		$referer = wp_get_referer();
 		$pos_url = get_home_url() . '/pos';
@@ -368,159 +381,57 @@ class POS_HOST_Sell {
 	}
 
 
-	public static function get_params() {
+        /*
+         * @params is_light
+         *          true - light mode for login only
+         *          false - full mode
+         */
+	public static function get_params( $is_light = '') {
 		$pos_icon = wp_get_attachment_image_src( get_option( 'pos_host_theme_logo' ), 0 );
 		$pos_icon = $pos_icon ? $pos_icon[0] : POS_HOST()->plugin_url() . '/assets/dist/images/pos-host-logo-icon.png';
-
-		$fetch_order_statuses = get_option( 'pos_host_fetch_order_statuses', array( 'pending' ) );
-		$fetch_order_statuses = empty( $fetch_order_statuses ) ? array( 'pending' ) : $fetch_order_statuses;
-		$fetch_order_statuses = implode( ',', $fetch_order_statuses );
-
-		$custom_order_fields = pos_host_get_custom_order_fields();
-		$a_billing_fields    = array();
-		$a_shipping_fields   = array();
-
-		$wc_fields_additional = get_option( 'wc_fields_billing' );
-
-		if ( $wc_fields_additional ) {
-			foreach ( $wc_fields_additional as $id => $opt ) {
-				if ( true === $opt['custom'] ) {
-					$a_billing_fields[] = $id;
-				}
-			}
-		}
-
-		$wc_fields_additional = get_option( 'wc_fields_shipping' );
-
-		if ( $wc_fields_additional ) {
-			foreach ( $wc_fields_additional as $id => $opt ) {
-				if ( true === $opt['custom'] ) {
-					$a_shipping_fields[] = $id;
-				}
-			}
-		}
-
-		$customer_required_fields = array_merge(
-			get_option(
-				'pos_host_customer_create_required_fields',
-				array(
-					'billing_address_1',
-					'billing_city',
-					'billing_state',
-					'billing_postcode',
-					'billing_country',
-					'billing_phone',
-				)
-			),
-			array(
-				'billing_first_name',
-				'billing_last_name',
-				'billing_email',
-			)
-		);
-
-		$hidden_order_itemmeta = apply_filters(
-			'woocommerce_hidden_order_itemmeta',
-			array(
-				'_qty',
-				'_tax_class',
-				'_product_id',
-				'_variation_id',
-				'_line_subtotal',
-				'_line_subtotal_tax',
-				'_line_total',
-				'_line_tax',
-				'method_id',
-				'cost',
-				'_reduced_stock',
-				// WooCommerce Cost of Goods by SkyVerge.
-				'_wc_cog_item_cost',
-				'_wc_cog_item_total_cost',
-				// Cost of Goods for WooCommerce by The Rite Sites.
-				'_cog_wc_order_item_cost',
-				'_cog_wc_order_item_cost_total',
-			)
-		);
 
 		$params = apply_filters(
 			'pos_host_params',
 			array(
+				'version'                        => POS_HOST_VERSION."-".current_time("Ymdhis"),
+				'site_url'                       => home_url(),
 				'date_format'                    => get_option( 'date_format' ),
 				'pos_icon'                       => $pos_icon,
 				'avatar'                         => function_exists( 'get_avatar_url' ) ? get_avatar_url( 0, array( 'size' => 64 ) ) : '',
 				'ajax_url'                       => admin_url( 'admin-ajax.php' ),
-				'edit_link'                      => get_admin_url( get_current_blog_id(), '/post.php?post={{post_id}}&action=edit' ),
 				'admin_url'                      => admin_url(),
-				'site_url'                       => home_url(),
 				'ajax_loader_url'                => apply_filters( 'woocommerce_ajax_loader_url', WC()->plugin_url() . '/assets/images/ajax-loader@2x.gif' ),
-				'def_img'                        => wc_placeholder_img_src(),
 				'offline_url'                    => POS_HOST()->plugin_url() . '/assets/vendor/offline/blank.png',
-				'load_website_orders'            => 'yes' === get_option( 'pos_host_load_website_orders', 'no' ),
-				'enable_user_card'               => 'yes' === get_option( 'pos_host_enable_user_card', 'no' ),
-				'tabs_count'                     => get_option( 'pos_host_tabs_count', 1 ),
-				'default_country'                => get_option( 'pos_host_default_country' ),
-				'currency'                       => get_woocommerce_currency(),
-				'currency_format_symbol'         => html_entity_decode( get_woocommerce_currency_symbol() ),
-				'guest_checkout'                 => 'yes' === get_option( 'pos_host_guest_checkout', 'yes' ),
-				'enable_currency_rounding'       => 'yes' === get_option( 'pos_host_enable_currency_rounding', 'no' ),
-				'currency_rounding_value'        => get_option( 'pos_host_currency_rounding_value' ),
-				'spinner'                        => POS_HOST()->plugin_url() . '/assets/dist/images/spinner.gif',
-				'pos_calc_taxes'                 => pos_host_tax_enabled(),
-				'currency_format'                => esc_attr( str_replace( array( '%1$s', '%2$s' ), array( '%s', '%v' ), get_woocommerce_price_format() ) ), // For accounting JS
-				'fulfilled_order_status'         => get_option( 'pos_host_fulfilled_order_status', 'processing' ),
-				'parked_order_status'            => get_option( 'pos_host_parked_order_status', 'pending' ),
-				'fetch_order_statuses'           => $fetch_order_statuses,
 				'wc_api_url'                     => POS_HOST()->wc_api_url(),
 				'pos_host_api_url'               => POS_HOST()->pos_host_api_url(),
-				'discount_presets'               => (array) get_option( 'pos_host_discount_presets', array( '5', '10', '15', '20' ) ),
-				'signature_panel'                => 'yes' === get_option( 'pos_host_signature', 'no' ),
-				'signature_required'             => 'yes' === get_option( 'pos_host_signature_required', 'no' ),
-				'signature_required_on'          => get_option( 'pos_host_signature_required_on', array( 'pay' ) ),
-				'custom_order_fields'            => $custom_order_fields,
-				'a_billing_fields'               => $a_billing_fields,
-				'a_shipping_fields'              => $a_shipping_fields,
 				'rest_nonce'                     => wp_create_nonce( 'wp_rest' ),
 				'auto_logout_session'            => (int) get_option( 'pos_host_auto_logout', 0 ),
-				'disable_transitions_effects'    => 'yes' === get_option( 'pos_host_disable_transitions_effects', 'no' ),
-				'enable_dining'                  => 'yes' === get_option( 'pos_host_enable_dining', 'no' ),
-				'version'                        => POS_HOST_VERSION,
-				'cash_denominations'             => (array) get_option( 'pos_host_cash_denominations', array() ),
-				'show_out_of_stock'              => 'yes' === get_option( 'pos_host_show_out_of_stock_products', 'no' ),
-				'enable_pos_visibility'          => 'yes' === get_option( 'pos_host_visibility', 'no' ),
-				'show_product_preview'           => 'yes' === get_option( 'pos_host_show_product_preview', 'no' ),
-				'keyboard_shortcuts'             => get_option( 'pos_host_keyboard_shortcuts', 'no' ),
-				'customer_required_fields'       => $customer_required_fields,
-				'hide_optional_fields'           => get_option( 'pos_host_hide_not_required_fields', 'no' ),
-				'save_customer_default'          => 'yes' === get_option( 'pos_host_save_customer_default', 'no' ),
-				'payment_gateways'               => pos_host_get_available_payment_gateways(),
-				'cash_management_nonce'          => wp_create_nonce( 'cash-management' ),
-				'logout_nonce'                   => wp_create_nonce( 'logout' ),
-				'generate_order_id_nonce'        => wp_create_nonce( 'generate-order-id' ),
 				'auth_user_nonce'                => wp_create_nonce( 'auth-user' ),
-				'receipt_print_url_nonce'        => wp_create_nonce( 'receipt-print-url' ),
-				'check_db_changes_nonce'         => wp_create_nonce( 'check-db-changes' ),
-				'update_option_nonce'            => wp_create_nonce( 'update-option' ),
-				'replace_grid_tile_nonce'        => wp_create_nonce( 'replace-grid-tile' ),
+				'select_register_nonce'          => wp_create_nonce( 'select-register' ),
 				'locale'                         => get_locale(),
 				'gmt_offset'                     => get_option( 'gmt_offset' ),
-				'thousand_separator'             => wc_get_price_thousand_separator(),
-				'decimal_separator'              => wc_get_price_decimal_separator(),
-				'after_add_to_cart_behavior'     => get_option( 'pos_host_after_add_to_cart_behavior', 'category' ),
-				'tax_number'                     => get_option( 'pos_host_tax_number' ),
-				'hidden_order_itemmeta'          => $hidden_order_itemmeta,
-				'hide_tender_suggestions'        => 'yes' === get_option( 'pos_host_hide_tender_suggestions', 'no' ),
-				'theme_show_icon'                => 'yes' === get_option( 'pos_host_show_theme_icon', 'yes' ),
 				'theme_primary_color'            => empty( get_option( 'pos_host_theme_primary_color' ) ) ? '#7f54b3' : get_option( 'pos_host_theme_primary_color', '#7f54b3' ),
-				'refresh_data_on_load'           => 'yes' === get_option( 'pos_host_refresh_on_load', 'yes' ),
-				'force_refresh_db'               => 'yes' === get_option( 'pos_host_force_refresh_db', 'no' ),
-				'search_includes'                => (array) get_option( 'pos_host_search_includes', array() ),
-				'scanning_fields'                => (array) get_option( 'pos_host_scanning_fields', array( '_sku' ) ),
-				'custom_product_required_fields' => (array) get_option( 'pos_host_custom_product_required_fields', array() ),
-				'publish_product_default'        => 'yes' === get_option( 'pos_host_publish_product_default', 'yes' ),
+                          ));
+                 if ( "light" == $is_light ) {
+                     return $params;
+                 }
+
+		$params_ext = apply_filters(
+			'pos_host_params',
+			array(
+				'default_country'                => get_option( 'pos_host_default_country' ),
+				'show_out_of_stock'              => 'yes' === get_option( 'pos_host_show_out_of_stock_products', 'no' ),
+				'enable_pos_visibility'          => 'yes' === get_option( 'pos_host_visibility', 'no' ),
+				'hide_optional_fields'           => get_option( 'pos_host_hide_not_required_fields', 'no' ),
+				'payment_gateways'               => pos_host_get_available_payment_gateways(),
+				'cash_management_nonce'          => wp_create_nonce( 'cash-management' ),
+				'replace_grid_tile_nonce'        => wp_create_nonce( 'replace-grid-tile' ),
+				'tax_number'                     => get_option( 'pos_host_tax_number' ),
+				'hide_tender_suggestions'        => 'yes' === get_option( 'pos_host_hide_tender_suggestions', 'no' ),
 			)
 		);
 
-		return $params;
+		return array_merge($params, $params_ext);
 	}
 
 	public static function get_wc_params($outlet_data) {
@@ -719,6 +630,60 @@ class POS_HOST_Sell {
 
 		return false;
 	}
+        /*
+         *  return all the post-login data for a register
+         *  @return array
+         */
+        public static function get_post_login_data( $outlet_id, $register_id ) {
+
+                 /* get cart params */
+		$cart_parms    = self::get_cart_params();
+                 $login_data['cart_params'] = $cart_parms;
+                 
+                 /* get categories */
+		$categories    = pos_host_get_categories();
+                 $login_data['categories'] = $categories;
+                 
+                 /* get custom_product */
+		$custom_product    = self::get_custom_product_params();
+                 $login_data['custom_product'] = $custom_product;
+                 
+                 /* return if no register or outlet */
+                 if( !$outlet_id ||!$register_id ){
+                    return $login_data;
+                 }
+                     
+                 /* get regiser */
+		$register_data   = pos_host_get_register_data( $register_id );
+		if ( ! $register_data ) {
+                    return false;
+		}
+                 $login_data['register_data'] = $register_data;
+                 self::instance()->loggedin['register_id'] = $register_data['id'];
+                 
+                 /* get outlet */
+		$outlet_data    = pos_host_get_outlet_data( $outlet_id );
+		if ( ! $outlet_data ) {
+                    return false;
+		}
+                 $login_data['outlet_data'] = $outlet_data;
+                 self::instance()->loggedin['outlet_id'] = $outlet_data['id'];
+                 
+                 /* get grid */
+		$grid_data    = pos_host_get_grid_data( $register_data['grid']);
+                 $login_data['grid_data'] = $grid_data;
+                 
+                 /* get receipt */
+		$receipt_data    = pos_host_get_receipt_data( $register_data['receipt']);
+                 $login_data['receipt_data'] = $receipt_data;
+                 
+                 /* get wc params */
+		$wc_data    = self::get_wc_params($outlet_data);
+                 $login_data['wc_data'] = $wc_data;
+                 
+                 return $login_data;
+        }
+        
 }
 
 
