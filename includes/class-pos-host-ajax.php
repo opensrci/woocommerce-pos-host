@@ -529,8 +529,7 @@ class POS_HOST_AJAX {
 
 		$register_id    = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
 		$close_register = isset( $_POST['close_register'] ) ? true : false;
-//@todo debug
-		//if ( $register_id ) 
+                if ( $register_id ) 
                 {
 			if ( $close_register ) {
 				$data                   = array();
@@ -589,12 +588,11 @@ class POS_HOST_AJAX {
                  
                  $data = array();
                  
+                 /* get regiser id*/
 		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
+                 /* get outlet id*/
 		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
                 
-                 /* get regiser */
-		$register_id     = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
-                 /* get outlet */
                  
                  $data = POS_HOST_Sell::get_post_login_data( $outlet_id, $register_id );
                  if($data){

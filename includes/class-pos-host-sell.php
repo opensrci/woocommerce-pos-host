@@ -405,6 +405,7 @@ class POS_HOST_Sell {
 				'wc_api_url'                     => POS_HOST()->wc_api_url(),
 				'pos_host_api_url'               => POS_HOST()->pos_host_api_url(),
 				'rest_nonce'                     => wp_create_nonce( 'wp_rest' ),
+				'logout_nonce'                     => wp_create_nonce( 'logout' ),
 				'auto_logout_session'            => (int) get_option( 'pos_host_auto_logout', 0 ),
 				'auth_user_nonce'                => wp_create_nonce( 'auth-user' ),
 				'select_register_nonce'          => wp_create_nonce( 'select-register' ),

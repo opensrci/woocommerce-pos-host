@@ -83,7 +83,7 @@ function pos_host_get_register_data( $register) {
                     $register_data['order_id'] = pos_host_create_temp_order( $register_object->get_id() );
             }
             
-            $register_data['primary_color'] = empty( get_option( 'pos_host_theme_primary_color' ) ) ? '#7f54b3' : get_option( 'pos_host_theme_primary_color', '#7f54b3' );
+            $register_data['primary_color'] =  get_option( 'pos_host_theme_primary_color', '#473080' );
 
             // Set is_open field.
             if ( is_null( $register_object->get_date_opened() ) ) {
