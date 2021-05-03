@@ -49,13 +49,7 @@ defined( 'ABSPATH' ) || exit;
 			<app></app>
 		</div>
 		<script data-cfasync="false" type="text/javascript" class="pos_host_params" >
-			window.pos_host_params = <?php
-                                                    if($loggedin){
-                                                        echo wp_kses_post( json_encode(POS_HOST_Sell::get_params())); 
-                                                    }else{
-                                                        echo wp_kses_post( json_encode(POS_HOST_Sell::get_params("light"))); 
-                                                    }
-                                            ?>;
+			window.pos_host_params = <?php echo wp_kses_post( json_encode(POS_HOST_Sell::get_params()));  ?>;
 			window.pos_host_params_ext = <?php
                                                     if($loggedin){
                                                         $params = POS_HOST_Sell::get_post_login_data($outlet_id, $register_id);

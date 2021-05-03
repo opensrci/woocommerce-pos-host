@@ -10,6 +10,60 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Start a session, if needed.
+ *
+ * @since 0.0.1
+ *
+ * @param int $user_id user id.
+ * @param int|string|POS_HOST_Register $register_id register ID, slug or object.
+ * @param int $user_id current user(owner) id of the new session.
+ *
+ * @return register data |null
+ */
+function pos_host_start_session( $user_id, $register_id ) {
+    
+        $register = pos_host_get_register( $register_id );
+        $date_opened = is_null( $register->get_date_opened() ) ? null : $register->get_date_opened()->getTimestamp();
+        $date_closed = is_null( $register->get_date_closed() ) ? null : $register->get_date_closed()->getTimestamp();
+
+        // first opened or has closed
+        if ( is_null( $date_opened ) || $date_opened < $date_closed ) {
+                $date_opened = time(); // GMT;
+                $register->set_date_opened( $date_opened );
+                $register->set_open_last( $user_id );
+
+                // Create a new session.
+                $session = new POS_HOST_Session();
+                $session->set_props(
+                        array(
+                                'date_opened' => $date_opened,
+                                'open_first'  => $user_id,
+                                'open_last'   => $user_id,
+                                'register_id' => $register_id,
+                                'outlet_id'   => $register->get_outlet(),
+                        )
+                );
+
+                $session_id = $session->save();
+
+                $register->set_current_session( $session_id );
+                $register->set_open_first( $user_id );
+                $register->set_open_last( $user_id );
+                $register->save();
+
+                $register_data = POS_HOST_Sell::instance()->get_register( $register_id );
+                $register_data['first_open'] = true;
+
+                return $register_data;
+        }else{
+            $register_data = POS_HOST_Sell::instance()->get_register( $register_id );
+            $register->set_open_last( $user_id );
+            $register->save();
+            return $register_data;
+        }
+}
+
+/**
  * Get session.
  *
  * @since 0.0.1

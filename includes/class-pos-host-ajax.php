@@ -29,7 +29,8 @@ class POS_HOST_AJAX {
                           //@todo future
 			//'set_register_cash_management_data',
 			//'generate_order_id',
-			'auth_user',
+                        
+                          'auth_user',
 			//'check_db_changes',
 		);
 
@@ -51,8 +52,9 @@ class POS_HOST_AJAX {
 			//'get_products_by_categories',
 			//'check_user_card_uniqueness',
 			//'get_user_by_card_number',
-			'select_register',
-			'logout',
+			
+                          'select_register',
+                          'logout',
 			//'load_grid_tiles',
 			//'add_grid_tile',
 			//'delete_grid_tile',
@@ -573,8 +575,10 @@ class POS_HOST_AJAX {
 		);
 	}
 
+               
 	/**
 	 * Ajax - select POS register.
+         * @todo future
          * @param register_id   
          * @param outlet_id   
          *      
@@ -585,16 +589,23 @@ class POS_HOST_AJAX {
 	 */
 	public static function select_register() {
 		check_ajax_referer( 'select-register', 'security' );
-                 
-                 $data = array();
-                 
+
+                 $username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
                  /* get regiser id*/
 		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
                  /* get outlet id*/
 		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
-                
+                 /*get user name */
+                 $current_user = get_current_user_id();
                  
-                 $data = POS_HOST_Sell::get_post_login_data( $outlet_id, $register_id );
+                 $user_id = get_user_by("login", $username)->ID;
+                 if ( $user_id != $current_user ){
+ 			wp_send_json_error( "User is not current WP user.", 403 );
+                 } 
+                 
+                 $data = array();
+                 
+                 $data = POS_HOST_Sell::get_post_login_data( $user_id, $outlet_id, $register_id );
                  if($data){
             		wp_send_json_success( $data );
                  }else{
@@ -618,8 +629,6 @@ class POS_HOST_AJAX {
 	public static function auth_user() {
 		check_ajax_referer( 'auth-user', 'security' );
                  
-                 $data = array();
-                 
 		// @todo The password field should not be sanitized. Sanitization is done here to pass PHPCS checks.
 		$username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
 		$password = isset( $_POST['password'] ) ? wc_clean( $_POST['password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -636,12 +645,14 @@ class POS_HOST_AJAX {
                 
                  wp_set_current_user($user->ID);
                  
-                 /* get regiser */
-		$register_id     = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
-                 /* get outlet */
+                 //get regiser
+		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
+                 /* get outlet id*/
 		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
                  
-                 $data = POS_HOST_Sell::get_post_login_data( $outlet_id, $register_id );
+                 $data = array();
+                 
+                 $data = POS_HOST_Sell::get_post_login_data( $user->ID, $outlet_id, $register_id );
                  if($data){
             		wp_send_json_success( $data );
                  }else{

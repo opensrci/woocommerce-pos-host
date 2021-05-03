@@ -386,7 +386,7 @@ class POS_HOST_Sell {
          *          true - light mode for login only
          *          false - full mode
          */
-	public static function get_params( $is_light = '') {
+	public static function get_params() {
 		$pos_icon = wp_get_attachment_image_src( get_option( 'pos_host_theme_logo' ), 0 );
 		$pos_icon = $pos_icon ? $pos_icon[0] : POS_HOST()->plugin_url() . '/assets/dist/images/pos-host-logo-icon.png';
 
@@ -405,34 +405,25 @@ class POS_HOST_Sell {
 				'wc_api_url'                     => POS_HOST()->wc_api_url(),
 				'pos_host_api_url'               => POS_HOST()->pos_host_api_url(),
 				'rest_nonce'                     => wp_create_nonce( 'wp_rest' ),
-				'logout_nonce'                     => wp_create_nonce( 'logout' ),
-				'auto_logout_session'            => (int) get_option( 'pos_host_auto_logout', 0 ),
+				'logout_nonce'                   => wp_create_nonce( 'logout' ),
 				'auth_user_nonce'                => wp_create_nonce( 'auth-user' ),
 				'select_register_nonce'          => wp_create_nonce( 'select-register' ),
+				'replace_grid_tile_nonce'        => wp_create_nonce( 'replace-grid-tile' ),
 				'locale'                         => get_locale(),
+				'auto_logout_session'            => (int) get_option( 'pos_host_auto_logout', 0 ),
 				'gmt_offset'                     => get_option( 'gmt_offset' ),
 				'theme_primary_color'            => empty( get_option( 'pos_host_theme_primary_color' ) ) ? '#7f54b3' : get_option( 'pos_host_theme_primary_color', '#7f54b3' ),
-                          ));
-                 if ( "light" == $is_light ) {
-                     return $params;
-                 }
-
-		$params_ext = apply_filters(
-			'pos_host_params',
-			array(
 				'default_country'                => get_option( 'pos_host_default_country' ),
 				'show_out_of_stock'              => 'yes' === get_option( 'pos_host_show_out_of_stock_products', 'no' ),
 				'enable_pos_visibility'          => 'yes' === get_option( 'pos_host_visibility', 'no' ),
 				'hide_optional_fields'           => get_option( 'pos_host_hide_not_required_fields', 'no' ),
 				'payment_gateways'               => pos_host_get_available_payment_gateways(),
 				'cash_management_nonce'          => wp_create_nonce( 'cash-management' ),
-				'replace_grid_tile_nonce'        => wp_create_nonce( 'replace-grid-tile' ),
 				'tax_number'                     => get_option( 'pos_host_tax_number' ),
 				'hide_tender_suggestions'        => 'yes' === get_option( 'pos_host_hide_tender_suggestions', 'no' ),
-			)
-		);
+                          ));
+                return $params;
 
-		return array_merge($params, $params_ext);
 	}
 
 	public static function get_wc_params($outlet_data) {
@@ -635,11 +626,15 @@ class POS_HOST_Sell {
          *  return all the post-login data for a register
          *  @return array
          */
-        public static function get_post_login_data( $outlet_id, $register_id ) {
+        public static function get_post_login_data( $user_id, $outlet_id, $register_id ) {
+
+                 /* get params */
+		//$params    = self::get_params();
+                 //$login_data['params'] = $params;
 
                  /* get cart params */
-		$cart_parms    = self::get_cart_params();
-                 $login_data['cart_params'] = $cart_parms;
+		$cart_params    = self::get_cart_params();
+                 $login_data['cart_params'] = $cart_params;
                  
                  /* get categories */
 		$categories    = pos_host_get_categories();
@@ -653,12 +648,14 @@ class POS_HOST_Sell {
                  if( !$outlet_id ||!$register_id ){
                     return $login_data;
                  }
-                     
+
                  /* get regiser */
-		$register_data   = pos_host_get_register_data( $register_id );
+		//$register_data   = pos_host_get_register_data( $register_id );
+		$register_data   = pos_host_start_session ($user_id, $register_id );
 		if ( ! $register_data ) {
                     return false;
 		}
+                
                  $login_data['register_data'] = $register_data;
                  self::instance()->loggedin['register_id'] = $register_data['id'];
                  
