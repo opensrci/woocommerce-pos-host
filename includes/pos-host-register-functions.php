@@ -51,6 +51,7 @@ function pos_host_get_register_data( $register) {
          if ( !$register_object ) return null;
          
          $register_data = array(
+                    'version'         => date( 'YmdHis' ),
                     'id'              => $register_object->get_id(),
                     'name'            => $register_object->get_name(),
                     'slug'            => $register_object->get_slug(),

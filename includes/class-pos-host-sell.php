@@ -382,9 +382,6 @@ class POS_HOST_Sell {
 
 
         /*
-         * @params is_light
-         *          true - light mode for login only
-         *          false - full mode
          */
 	public static function get_params() {
 		$pos_icon = wp_get_attachment_image_src( get_option( 'pos_host_theme_logo' ), 0 );
@@ -421,6 +418,7 @@ class POS_HOST_Sell {
 				'cash_management_nonce'          => wp_create_nonce( 'cash-management' ),
 				'tax_number'                     => get_option( 'pos_host_tax_number' ),
 				'hide_tender_suggestions'        => 'yes' === get_option( 'pos_host_hide_tender_suggestions', 'no' ),
+                                   'pos_calc_taxes'                 => pos_host_tax_enabled(),
                           ));
                 return $params;
 
