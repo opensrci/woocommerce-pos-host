@@ -271,11 +271,11 @@ class POS_HOST_Install {
 		);
 
 		$outlet_manager_caps = array(
-			'manage_WooCommerce_pos_host' => true,
-			'force_logout_register'            => true,
-			'refund_orders'                    => true,
+			'manage_woocommerce_pos_host'       => true,
+			'force_logout_register'             => true,
+			'refund_orders'                     => true,
 		);
-
+                 
 		$shop_manager_caps = get_role( 'shop_manager' )->capabilities;
 
 		$outlet_manager_caps = array_merge( $shop_manager_caps, $register_clerk_caps, $outlet_manager_caps );
@@ -381,7 +381,7 @@ class POS_HOST_Install {
 
 		$capabilities = array(
 			'view_register',
-			'manage_WooCommerce_pos_host',
+			'manage_woocommerce_pos_host',
 			'refund_orders',
 		);
 

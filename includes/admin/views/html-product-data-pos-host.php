@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Point of Sale Data Panel
+ * pos host Data Panel
  *
  * @var int $thepostid
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<div id="point_of_sale_product_data" class="panel woocommerce_options_panel">
+<div id="pos_host_product_data" class="panel woocommerce_options_panel">
 	<div class="options_group">
 		<?php
 			woocommerce_wp_checkbox(
@@ -117,5 +117,5 @@ defined( 'ABSPATH' ) || exit;
 			</p>
 	</div>
 
-	<?php do_action( 'woocommerce_product_options_point_of_sale_product_data' ); ?>
+	<?php do_action( 'woocommerce_product_options_pos_host_product_data' ); ?>
 </div>

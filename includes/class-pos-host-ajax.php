@@ -26,12 +26,10 @@ class POS_HOST_AJAX {
 	 */
 	public static function add_ajax_events() {
 		$ajax_events_nopriv = array(
-                          //@todo future
-			//'set_register_cash_management_data',
-			//'generate_order_id',
-                        
+			'set_register_cash_management_data',
+			'generate_order_id',
                           'auth_user',
-			//'check_db_changes',
+			'check_db_changes',
 		);
 
 		foreach ( $ajax_events_nopriv as $ajax_event ) {
@@ -40,31 +38,29 @@ class POS_HOST_AJAX {
 		}
 
 		$ajax_events = array(
-                          //@todo future
-			//'json_search_registers',
-			//'json_search_outlet',
-			//'json_search_cashier',
-			//'filter_product_barcode',
-			//'change_stock',
-			//'add_product_for_barcode',
-			//'get_product_variations_for_barcode',
-			//'json_search_categories',
-			//'get_products_by_categories',
-			//'check_user_card_uniqueness',
-			//'get_user_by_card_number',
-			
+			'json_search_registers',
+			'json_search_outlet',
+			'json_search_cashier',
+			'filter_product_barcode',
+			'change_stock',
+			'add_product_for_barcode',
+			'get_product_variations_for_barcode',
+			'json_search_categories',
+			'get_products_by_categories',
+			'check_user_card_uniqueness',
+			'get_user_by_card_number',
                           'select_register',
                           'logout',
-			//'load_grid_tiles',
-			//'add_grid_tile',
-			//'delete_grid_tile',
-			//'delete_all_grid_tiles',
-			//'reorder_grid_tile',
-			//'update_receipt',
-			//'date_i18n',
-			//'paymentsense_eod_report',
-			//'receipt_print_url',
-			//'update_option',
+			'load_grid_tiles',
+			'add_grid_tile',
+			'delete_grid_tile',
+			'delete_all_grid_tiles',
+			'reorder_grid_tile',
+			'update_receipt',
+			'date_i18n',
+			'paymentsense_eod_report',
+			'receipt_print_url',
+			'update_option',
 			'replace_grid_tile',
 		);
 

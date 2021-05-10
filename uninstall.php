@@ -28,12 +28,12 @@ $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}pos_host_reports" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}pos_host_grid_tiles" );
 
 // Delete options.
-$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'pos\_host\_%';" );
+//$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'pos\_host\_%';" );
 
 // Delete usermeta.
-$wpdb->query( "DELETE FROM $wpdb->usermeta WHERE meta_key LIKE 'pos\_host\_%';" );
+//$wpdb->query( "DELETE FROM $wpdb->usermeta WHERE meta_key LIKE 'pos\_host\_%';" );
 
-// Delete posts + data.
+// Delete site posts + data.
 $wpdb->query( "DELETE FROM {$wpdb->posts} WHERE post_type IN ( 'pos_host_register', 'pos_host_outlet', 'pos_host_receipt' );" );
 $wpdb->query( "DELETE meta FROM {$wpdb->postmeta} meta LEFT JOIN {$wpdb->posts} posts ON posts.ID = meta.post_id WHERE posts.ID IS NULL;" );
 

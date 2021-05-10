@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <fieldset class="inline-edit-col-left clear">
 	<div id="visibility-fields" class="inline-edit-col">
-		<h4><?php esc_html_e( 'Point of Sale', 'woocommerce-pos-host' ); ?></h4>
+		<h4><?php esc_html_e( 'POS HOST', 'woocommerce-pos-host' ); ?></h4>
 		<div class="inline-edit-group">
 			<label class="alignleft">
 				<span class="title"><?php esc_html_e( 'Visibility', 'woocommerce-pos-host' ); ?></span>

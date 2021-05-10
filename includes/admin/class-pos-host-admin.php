@@ -193,7 +193,7 @@ class POS_HOST_Admin {
 	 */
 	public function add_customer_meta_fields( $user ) {
 
-		if ( ! current_user_can( 'manage_WooCommerce_pos_host' ) ) {
+		if ( ! current_user_can( 'manage_woocommerce_pos_host' ) ) {
 			return;
 		}
 
