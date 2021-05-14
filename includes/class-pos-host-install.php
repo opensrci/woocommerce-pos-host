@@ -284,7 +284,7 @@ class POS_HOST_Install {
 		add_role( 'register_clerk', 'Register clerk', $register_clerk_caps );
 
 		// Outlet manager role.
-		add_role( 'outlet_manager', 'Location manager', $outlet_manager_caps );
+		add_role( 'location_manager', 'Location manager', $outlet_manager_caps );
 
 		// Add outlet_manager caps to administrator and shop_manager.
 		foreach ( $outlet_manager_caps as $cap => $status ) {
