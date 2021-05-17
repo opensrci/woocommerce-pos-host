@@ -92,7 +92,7 @@ class POS_HOST_Admin_List_Table_Outlets extends WC_Admin_List_Table {
 
 		$show_columns              = array();
 		$show_columns['cb']        = '<input type="checkbox" />';
-		$show_columns['outlet']    = esc_html__( 'Outlet', 'woocommerce-pos-host' );
+		$show_columns['outlet']    = esc_html__( 'Location', 'woocommerce-pos-host' );
 		$show_columns['contact']   = esc_html__( 'Contact Details', 'woocommerce-pos-host' );
 		$show_columns['registers'] = esc_html__( 'Registers', 'woocommerce-pos-host' );
 

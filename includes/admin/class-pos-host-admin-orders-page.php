@@ -153,7 +153,7 @@ class POS_HOST_Admin_Orders_Page {
 			if ( $outlets ) {
 				?>
 		<select name='shop_order_pos_host_filter_outlet' id='shop_order_pos_host_filter_outlet'>
-		<option value=""><?php esc_html_e( 'All outlets', 'woocommerce-pos-host' ); ?></option>
+		<option value=""><?php esc_html_e( 'All locations', 'woocommerce-pos-host' ); ?></option>
 				<?php
 				foreach ( $outlets as $outlet ) {
 					echo '<option value="' . esc_attr( $outlet->ID ) . '" ' . selected( $req_out, $outlet->ID, false ) . ' >' . esc_html( $outlet->post_title ) . '</option>';

@@ -162,8 +162,8 @@ class POS_HOST_Admin_Post_Types {
 		// Outlets.
 		$messages['pos_host_outlet'] = array(
 			0 => '', // Unused. Messages start at index 1.
-			4 => __( 'Outlet Updated.', 'woocommerce-pos-host' ),
-			6 => __( 'Outlet Created.', 'woocommerce-pos-host' ),
+			4 => __( 'Location Updated.', 'woocommerce-pos-host' ),
+			6 => __( 'LOcation Created.', 'woocommerce-pos-host' ),
 		);
 
 		// Grids.
@@ -201,7 +201,7 @@ class POS_HOST_Admin_Post_Types {
 				$text = esc_html__( 'Register name', 'woocommerce-pos-host' );
 				break;
 			case 'pos_host_outlet':
-				$text = esc_html__( 'Outlet name', 'woocommerce-pos-host' );
+				$text = esc_html__( 'Location name', 'woocommerce-pos-host' );
 				break;
 			case 'pos_host_grid':
 				$text = esc_html__( 'Grid name', 'woocommerce-pos-host' );

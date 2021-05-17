@@ -625,10 +625,9 @@ class POS_HOST_Sell {
          *  @return array
          */
         public static function get_post_login_data( $user_id, $outlet_id, $register_id ) {
-
                  /* get params */
-		//$params    = self::get_params();
-                 //$login_data['params'] = $params;
+		$params    = self::get_params();
+                 $login_data['params'] = $params;
 
                  /* get cart params */
 		$cart_params    = self::get_cart_params();

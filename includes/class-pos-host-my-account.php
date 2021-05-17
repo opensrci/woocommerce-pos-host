@@ -60,7 +60,9 @@ class POS_HOST_My_Account {
 	}
 
 	public static function pos_host_myaccount_content() {
+                 ob_start();
 		include_once 'views/html-my-account-tab.php';
+                 return ob_get_clean();
 	}
 }
 

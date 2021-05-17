@@ -289,7 +289,7 @@ class POS_HOST_Admin {
 					'title'  => __( 'POS HOST', 'woocommerce-pos-host' ),
 					'fields' => array(
 						'pos_host_assigned_outlets' => array(
-							'label'       => __( 'Assigned Outlets', 'woocommerce-pos-host' ),
+							'label'       => __( 'Assigned locations', 'woocommerce-pos-host' ),
 							'class'       => 'wc-enhanced-select enhanced',
 							'type'        => 'select',
 							'name'        => 'pos_host_assigned_outlets[]',

@@ -108,9 +108,9 @@ class POS_HOST_Admin_Meta_Boxes {
 		add_meta_box( 'submitdiv', __( 'Register actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_register', 'side', 'high' );
 		add_filter( 'postbox_classes_pos_host_register_pos-host-register-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
-		// Outlet.
-		add_meta_box( 'pos-host-outlet-options', __( 'Outlet data', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Outlet_Options::output', 'pos_host_outlet', 'normal', 'high' );
-		add_meta_box( 'submitdiv', __( 'Outlet actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_outlet', 'side', 'high' );
+		// Location.
+		add_meta_box( 'pos-host-outlet-options', __( 'Location data', 'woocommerce-pos-host' ), 'POS_HOST_Meta_Box_Outlet_Options::output', 'pos_host_outlet', 'normal', 'high' );
+		add_meta_box( 'submitdiv', __( 'Location actions', 'woocommerce-pos-host' ), array( $this, 'actions_panel' ), 'pos_host_outlet', 'side', 'high' );
 		add_filter( 'postbox_classes_pos_host_outlet_pos-host-outlet-options', array( $this, 'add_meta_box_classes' ), 10, 1 );
 
 		// Grid.

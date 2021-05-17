@@ -573,7 +573,7 @@ class POS_HOST_AJAX {
 
                
 	/**
-	 * Ajax - select POS register.
+	* Ajax - select POS register.
          * @todo future
          * @param register_id   
          * @param outlet_id   
@@ -582,7 +582,7 @@ class POS_HOST_AJAX {
          * @return outlet_data
          * @return grid_data
          *      
-	 */
+	*/
 	public static function select_register() {
 		check_ajax_referer( 'select-register', 'security' );
 
@@ -631,10 +631,8 @@ class POS_HOST_AJAX {
 		$remember = isset( $_POST['remember'] ) ? wc_clean( $_POST['remember'] ) : '';
                  
                  
-		//$user = wp_authenticate_username_password( null, $username, $password );
-                 $user_info = Array ('user_login'=>$username,'user_password'=>$password,'remember'=>$remember );
-                 $user = wp_signon($user_info,false);
-                 
+		$user = wp_authenticate_username_password( null, $username, $password );
+    
 		if ( is_wp_error( $user ) ) {
 			wp_send_json_error( $user->get_error_data() );
 		}

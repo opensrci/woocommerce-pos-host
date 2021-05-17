@@ -75,7 +75,7 @@ class POS_HOST_Admin_Menus {
 			array( $this, 'settings_page' )
 		);
 
-		// Hide screen options on Point of Sale screens.
+		// Hide screen options on POS screens.
 		if ( isset( $_GET['page'] ) ) {
 			$curent_screen = substr( sanitize_key( $_GET['page'] ), 0, 7 );
 
