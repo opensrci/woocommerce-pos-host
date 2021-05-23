@@ -75,9 +75,10 @@ class POS_HOST_Admin_Menus {
 			array( $this, 'settings_page' )
 		);
 
+
 		// Hide screen options on POS screens.
 		if ( isset( $_GET['page'] ) ) {
-			$curent_screen = substr( sanitize_key( $_GET['page'] ), 0, 7 );
+			$curent_screen = substr( sanitize_key( $_GET['page'] ), 0, 9 );
 
 			if ( 'pos_host_' === $curent_screen ) {
 				add_filter( 'screen_options_show_screen', '__return_false' );
@@ -124,7 +125,6 @@ class POS_HOST_Admin_Menus {
 	public function stock_controller_page() {
 		POS_HOST()->stock()->display_single_stocks_page();
 	}
-
 	/**
 	 * Init the settings page.
 	 */

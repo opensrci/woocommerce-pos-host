@@ -65,6 +65,8 @@ class POS_HOST_Admin {
 		add_action( 'woocommerce_admin_field_range_slider', array( $this, 'wc_settings_range_slider' ) );
 		add_action( 'woocommerce_admin_field_media_upload', array( $this, 'wc_settings_media_upload' ) );
 
+		// Add user manage page to all users' menu.
+                 add_filter( 'user_row_actions',  array( $this, 'add_user_manage' ),  10, 2 );   
 		$this->init_users_hooks();
 	}
 
@@ -128,7 +130,11 @@ class POS_HOST_Admin {
 		include_once 'class-pos-host-admin-menus.php';
 		include_once 'class-pos-host-admin-orders-page.php';
 	}
-
+        
+        /*
+         * these meta fields hooks work for super admin only, 
+         * as shop manage has no access to edit page
+         */
 	public function init_users_hooks() {
 		add_action( 'show_user_profile', array( $this, 'add_customer_meta_fields' ) );
 		add_action( 'edit_user_profile', array( $this, 'add_customer_meta_fields' ) );
@@ -136,6 +142,16 @@ class POS_HOST_Admin {
 		add_action( 'personal_options_update', array( $this, 'save_customer_meta_fields' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'save_customer_meta_fields' ) );
 	}
+
+        /**
+	 * Init the user manage page.
+         *  user manage page is available to shop manager 
+	 */
+	public function add_user_manage( $actions, $user) {
+                $actions['user_manage'] = "<a class='user_manage' href='" . admin_url( "admin.php?action=pos-host-user-show&amp;user_id=$user->ID") . "'>" . esc_html__( 'manage', 'woocommerce-pos-host' ) . "</a>";
+                return $actions;
+	}
+
 
 	public function pos_reports_charts( $reports ) {
 		$reports['pos'] = array(

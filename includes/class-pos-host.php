@@ -18,7 +18,7 @@ class POS_HOST {
 	 * @var string
 	 * @since 0.0.1
 	 */
-	public $version = '0.0.1';
+	public $version = '0.1.0';
 
 	/**
 	 * The single instance of POS_HOST.
@@ -62,6 +62,14 @@ class POS_HOST {
 	 * @var string
 	 */
 	public $settings_page_slug = 'pos-host-settings';
+
+
+	/**
+	 * Users manage page slug.
+	 *
+	 * @var string
+	 */
+	public $users_page_slug = 'pos-host-users';
 
 	/**
 	 * The main POS_HOST instance.
@@ -350,6 +358,7 @@ class POS_HOST {
                 add_action( 'init', array( $this, 'visibility' ) );
                 add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
                 add_action( 'admin_init', array( $this, 'force_country_display' ) );
+                add_action( 'admin_init', array( $this, 'user_manage' ), 2 );
                 add_action( 'admin_init', array( $this, 'print_report' ), 100 );
                 add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
 
@@ -1023,6 +1032,25 @@ class POS_HOST {
 	public function stock() {
 		return POS_HOST_Stocks::instance();
 	}
+
+        /*
+         * Manage user roles, locations
+         * accept actions: 
+         *  pos-host-user-show, pos-host-user-update
+         * 
+         */
+        public function user_manage(){
+            if ( 
+                !isset( $_GET['action'] ) ||
+                ( "pos-host-user-show" !== $_GET['action'] &&
+                "pos-host-user-update" !== $_GET['action'] ) ||
+                !isset( $_GET['user_id'] ) || !$_GET['user_id'] ) {
+                return;
+            }
+            $user_id = (int) ($_GET['user_id']);
+            POS_HOST_Users::instance()->display_single_user_page($user_id);
+            
+        }
 
 	public function manage_floatval_quantity() {
 		remove_filter( 'woocommerce_stock_amount', 'intval' );
