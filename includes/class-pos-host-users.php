@@ -49,11 +49,15 @@ class POS_HOST_Users {
          */
         /** WordPress Administration Bootstrap */
         $user_id      = (int) $user_id;
-        if ( !is_user_member_of_blog($user_id) ){
-            wp_die( __( 'Sorry, you are not allowed to edit this user.' ));
-        } else if ( ! $user_id ) {
+        $profileuser = get_user_to_edit( $user_id );
+        
+        if ( ! $user_id ) {
             wp_die( __( 'Invalid user ID.' ));
-        }        
+        }else if ( !is_user_member_of_blog($user_id) ||
+                    in_array( 'administrator', (array) $profileuser->roles ) ){
+            wp_die( __( 'Sorry, you are not allowed to edit this user.' ));
+        } 
+
         require_once( ABSPATH . 'wp-admin/admin.php' );
         
         wp_reset_vars( array( 'action', 'user_id' ) );
@@ -119,9 +123,7 @@ class POS_HOST_Users {
                                 exit;
                         }
 
-                        // Intentional fall-through to display $errors.
         }
-        $profileuser = get_user_to_edit( $user_id );
         $wp_http_referer = add_query_arg( 'action', 'pos-host-user-update', $wp_http_referer );
 
         /* checked role = shop_manager, user_is is a member of the blog already
@@ -448,11 +450,9 @@ class POS_HOST_Users {
         </form>
         </div>
         <script type="text/javascript">
-        <?php    
-                if (window.location.hash == '#password') {
-                        document.getElementById('pass1').focus();
+                if ( window.location.hash == '#password') {
+                       document.getElementById('pass1').focus();
                 };
-        ?>
         </script>
         <?php
         include( ABSPATH . 'wp-admin/admin-footer.php' );

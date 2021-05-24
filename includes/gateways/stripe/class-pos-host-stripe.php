@@ -19,10 +19,9 @@ class POS_HOST_Stripe {
 		self::includes();
 		self::add_ajax_events();
 
-		add_filter( 'pos_host_params', array( __CLASS__, 'params' ) );
+                add_filter( 'pos_host_params', array( __CLASS__, 'params' ) );
      
 	}
-
 	/**
 	 * Includes.
 	 */
@@ -40,7 +39,11 @@ class POS_HOST_Stripe {
 
 		include dirname( __FILE__ ) . '/includes/class-pos-host-stripe-api.php';
 		include dirname( __FILE__ ) . '/includes/class-pos-host-gateway-stripe-terminal.php';
+                 /*@todo Future 
 		include dirname( __FILE__ ) . '/includes/class-pos-host-gateway-stripe-credit-card.php';
+                 * 
+                 */
+                
 	}
 
 	/**
