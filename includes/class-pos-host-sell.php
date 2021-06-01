@@ -282,7 +282,7 @@ class POS_HOST_Sell {
 	}
 
 	public function pos_host_available_payment_gateways( $_available_gateways ) {
-		if ( is_pos() || $this->is_pos_api() ) {
+		if ( is_pos() || $this->is_pos_api() || $this->is_pos_host_ajax() ) {
 			$_available_gateways = array();
 			$payment_gateways    = WC()->payment_gateways->payment_gateways;
 			$enabled_gateways    = pos_host_get_payment_gateways_ids( true );
@@ -295,6 +295,18 @@ class POS_HOST_Sell {
 		}
 
 		return $_available_gateways;
+	}
+        
+        /* return true for AJAX pos refer */
+	private function is_pos_host_ajax() {
+		global $wp;
+                
+                 if ( ! ( defined('DOING_AJAX') && DOING_AJAX) ) { 
+                     /* not Ajax call */ 
+                     return false;
+                 }
+
+		return is_pos_referer();
 	}
 
 	private function is_pos_api() {
