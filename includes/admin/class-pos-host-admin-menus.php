@@ -34,10 +34,21 @@ class POS_HOST_Admin_Menus {
 	 * Add the menu.
 	 */
 	public function add_menu() {
-		// Add the POS HOST Menu.
+		// Add the Store Menu on top of 'WooCommerce'.
 		add_menu_page(
-			__( 'POS HOST', 'woocommerce-pos-host' ), // Page title.
-			__( 'POS HOST', 'woocommerce-pos-host' ), // Menu title.
+			__( 'Store', 'woocommerce-pos-host' ), // Page title.
+			__( 'Store', 'woocommerce-pos-host' ), // Menu title.
+			'manage_woocommerce_pos_host',
+			POS_HOST()->store_menu_slug,
+			array( $this, 'store_page' ),
+			null,
+			'59.9'
+		);
+
+                 // Add the POS HOST Menu.
+		add_menu_page(
+			__( 'POS', 'woocommerce-pos-host' ), // Page title.
+			__( 'POS', 'woocommerce-pos-host' ), // Menu title.
 			'manage_woocommerce_pos_host',
 			POS_HOST()->menu_slug,
 			array( $this, 'registers_page' ),
@@ -110,6 +121,13 @@ class POS_HOST_Admin_Menus {
 		}
 
 		return $submenu_file;
+	}
+
+	/**
+	 * Init the store page.
+	 */
+	public function store_page() {
+                POS_HOST_Store::instance()->display_store_page();
 	}
 
 	/**

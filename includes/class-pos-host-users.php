@@ -81,6 +81,7 @@ class POS_HOST_Users {
 
         $page_title = __( 'Assign User To Locations' );
 
+
         if ( 'pos-host-user-update' == $action ) {
                         check_admin_referer( 'update-user_' . $user_id );
 
@@ -142,7 +143,8 @@ class POS_HOST_Users {
             <div id="message" class="updated notice is-dismissible">
                 <p><strong><?php _e( 'User updated.' ); ?></strong></p>
             </div>
-        <?php endif; ?>
+        <?php
+        endif; ?>
 
         <?php if ( isset( $errors ) && is_wp_error( $errors ) ) : ?>
             <div class="error"><p><?php echo implode( "</p>\n<p>", $errors->get_error_messages() ); ?></p></div>

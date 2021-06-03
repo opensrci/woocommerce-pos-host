@@ -43,6 +43,13 @@ class POS_HOST {
 	public $menu_slug = 'pos-host';
 
 	/**
+	 * Store manu slug.
+	 *
+	 * @var string
+	 */
+	public $store_menu_slug = 'pos-host-store';
+
+        /**
 	 * Barcode page slug.
 	 *
 	 * @var string
@@ -359,6 +366,9 @@ class POS_HOST {
                 add_action( 'woocommerce_loaded', array( $this, 'includes' ) );
                 add_action( 'admin_init', array( $this, 'force_country_display' ) );
                 add_action( 'admin_init', array( $this, 'user_manage' ), 2 );
+                /*
+                 * add_action( 'admin_init', array( $this, 'store_manage' ), 2 );
+                 */
                 add_action( 'admin_init', array( $this, 'print_report' ), 100 );
                 add_action( 'admin_notices', array( $this, 'check_wc_rest_api' ) );
 
@@ -1014,6 +1024,16 @@ class POS_HOST {
 	}
 
 	/**
+	 * Returns an instance of POS_HOST_store.
+	 *
+	 * @since 1.9.0
+	 * @return POS_HOST_store
+	 */
+	public function store() {
+		return POS_HOST_Store::instance();
+	}
+
+	/**
 	 * Returns an instance of POS_HOST_Barcodes.
 	 *
 	 * @since 1.9.0
@@ -1034,6 +1054,23 @@ class POS_HOST {
 	}
 
         /*
+         * Manage Store 
+         * accept actions: 
+         *  pos-host-store-show, pos-host-store-update
+        public function store_manage(){
+            if ( 
+                !isset( $_GET['action'] ) ||
+                ( "pos-host-store-show" !== $_GET['action'] &&
+                "pos-host-store-update" !== $_GET['action'] )  ) {
+                return;
+            }
+            POS_HOST_Store::instance()->display_store_page();
+            
+        }
+         * 
+         */
+
+        /*
          * Manage user roles, locations
          * accept actions: 
          *  pos-host-user-show, pos-host-user-update
@@ -1049,7 +1086,7 @@ class POS_HOST {
             }
             $user_id = (int) ($_GET['user_id']);
             POS_HOST_Users::instance()->display_single_user_page($user_id);
-            
+            exit;
         }
 
 	public function manage_floatval_quantity() {
