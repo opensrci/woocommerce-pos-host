@@ -50,11 +50,13 @@ class POS_HOST_Users {
         /** WordPress Administration Bootstrap */
         $user_id      = (int) $user_id;
         $profileuser = get_user_to_edit( $user_id );
+        $current_user = wp_get_current_user();
         
         if ( ! $user_id ) {
             wp_die( __( 'Invalid user ID.' ));
-        }else if ( !is_user_member_of_blog($user_id) ||
-                    in_array( 'administrator', (array) $profileuser->roles ) ){
+        }else if ( ( 1 != $current_user->ID ) && (!is_user_member_of_blog($user_id) || in_array( 'administrator', (array) $profileuser->roles ) ) ){
+            /* current user is not network admin, 
+             * or not current blog user, or user is admin */
             wp_die( __( 'Sorry, you are not allowed to edit this user.' ));
         } 
 
@@ -64,13 +66,11 @@ class POS_HOST_Users {
         $wp_http_referer = add_query_arg( 'user_id', $user_id, get_admin_url('','admin.php'));
         
         $action = $GLOBALS['action'];
-        
-        $current_user = wp_get_current_user();
 
         /* get the current_user's primary site,
          * must match its primary blog
          */
-        if ( get_current_blog_id() != get_user_meta( $current_user->ID, 'primary_blog', true )){
+        if ( ( 1 != $current_user->ID ) &&  get_current_blog_id() != get_user_meta( $current_user->ID, 'primary_blog', true )){
             wp_die( __( 'Sorry, you are not allowed to edit this user.' ));
         };
 

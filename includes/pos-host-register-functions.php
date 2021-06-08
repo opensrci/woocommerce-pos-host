@@ -135,7 +135,8 @@ function pos_host_get_register_data( $register) {
                             foreach ( $results as $result ) {
                                     $order = wc_get_order( $result->ID );
 
-                                    if ( array_key_exists( $order->get_payment_method(), $register_data['session']['gateways'] ) ) {
+                                    //if ( array_key_exists( $order->get_payment_method(), $register_data['session']['gateways'] ) ) 
+                                    {
                                             $register_data['session']['gateways'][ $order->get_payment_method() ]['orders_count'] += 1;
                                             $register_data['session']['gateways'][ $order->get_payment_method() ]['orders_total'] += $order->get_total();
 
