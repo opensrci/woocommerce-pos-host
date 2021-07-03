@@ -396,7 +396,14 @@ function is_pos_referer() {
 	$referer = wp_get_referer();
 	$pos_url = get_home_url() . '/pos/';
 
-	if ( strpos( $referer, $pos_url ) !== false ) {
+//debug ready
+        if(defined('POS_HOST_DEBUG')) {
+                if ( strpos( $referer, "poshost.io" ) !== false ) {
+                        return true;
+                    }
+        }
+
+        if ( strpos( $referer, $pos_url ) !== false ) {
 		return true;
 	}
 	return false;

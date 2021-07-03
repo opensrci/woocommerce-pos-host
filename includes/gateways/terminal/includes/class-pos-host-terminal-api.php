@@ -99,7 +99,7 @@ class POS_HOST_Gateway_Terminal_API {
             return $ret;
         }
         /**
-	 * Process a sale payment by data.
+	 * Process a sale payment by order id.
 	 *
 	 * @param array $payload data
 	 * @return array|WP_Error
@@ -157,8 +157,61 @@ class POS_HOST_Gateway_Terminal_API {
             } 
             return $ret;
         }
+
         /**
-	 * Retrieve a payment by RefId.
+	* Process a refund.
+	*
+	* @param array $payload data
+         *  - orderId - original order id
+         *  - refId - original trx id
+         * 
+	* @return array|WP_Error
+	*/
+        public function process_refund( $payload ) {
+            $ret = false;
+            $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><request></request>");
+            
+            $payload['TPN'] = $this->params['tpn'] ;
+            $payload['AuthKey'] = $this->params['auth_key'] ;
+            $payload['TransType'] =  'Return';
+            $payload['PaymentType'] =  'Card'; 
+     
+            foreach ( $payload as $k => $v ) {
+                if ($v)
+                    $xml->addChild("$k",esc_html("$v"));
+            }
+            
+            $url = $this->get_base_url()."spin/Transaction";
+            $options = [
+                'method'     => 'POST',
+                'body'       => $xml->asXML(),
+                'timeout'    => $this->params['timeout'],
+                'headers'    => [
+                    'Content-Type' => 'application/xml',
+                ],
+                'sslverify'   => false,
+            ];
+
+            $result = wp_remote_post( $url, $options );
+            if ( is_wp_error($result)){
+                //remote post error
+               $error_code = array_key_first( $result->errors );
+               $error_message = $result->errors[$error_code][0];
+               $ret['result_code'] = (int)$error_code;
+               $ret['result_msg'] = (string)$error_message;
+               $ret['ref_id'] = "";
+            }else{
+               $xml = simplexml_load_string($result['body']);
+               
+               $ret['result_code'] = (int)$xml->response->ResultCode;
+               $ret['result_msg'] = (string)$xml->response->Message;
+               $ret['ref_id'] = (string)$xml->response->PNRef;
+                
+            } 
+            return $ret;
+        }
+        /**
+	 * Retrieve a payment/refund by RefId.
 	 *
 	 * @param array $payload data
 	 * @return array|WP_Error

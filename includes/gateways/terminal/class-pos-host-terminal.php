@@ -38,6 +38,7 @@ class POS_HOST_Terminal {
 			'connect_terminal',
 			'terminal_capture_payment',
 			'terminal_process_payment',
+			'terminal_process_refund',
 		);
 
 		foreach ( $ajax_events_nopriv as $ajax_event ) {
@@ -56,7 +57,7 @@ class POS_HOST_Terminal {
                 if ( $ret = $api->connect_terminal() ){
                     wp_send_json_success($ret);
                 }else{
-                    wp_send_json_error( 'Terminal process payment error.' );
+                    wp_send_json_error( 'Terminal connection error.' );
                 }
          
                 return( $ret );
@@ -79,6 +80,29 @@ class POS_HOST_Terminal {
                     wp_send_json_success( $ret);
                 }else{
                     wp_send_json_error( 'Terminal process payment error.' );
+                }
+	}
+
+	/**
+	 * Ajax: process payment.
+          *  @param post[order_id] - the woocommerce order id
+	 */
+	public static  function ajax_terminal_process_refund() {
+                check_ajax_referer( 'pos-host-terminal-process-refund', 'security' );
+                $refund_order = array();
+                //InvNum as orderId
+                $refund_order['InvNum']   = isset( $_POST['id'] ) ? wc_clean( wp_unslash( $_POST['id'] ) ) : '';
+                $refund_order['RefId']   = isset( $_POST['transaction_id'] ) ? wc_clean( wp_unslash( $_POST['transaction_id'] ) ) : '';
+                $refund_order['Amount']   = isset( $_POST['amount'] ) ? wc_clean( wp_unslash( $_POST['amount'] ) ) : '';
+                if ( !$refund_order['InvNum'] ){
+                    wp_send_json_error( 'empty id.' );
+                }
+                
+                $api = new POS_HOST_Gateway_Terminal_API();
+                if ( $ret = $api->process_refund($refund_order) ){
+                    wp_send_json_success( $ret);
+                }else{
+                    wp_send_json_error( 'Terminal process refund error.' );
                 }
 	}
 
@@ -129,6 +153,7 @@ class POS_HOST_Terminal {
 	 */
 	public static function params( $params ) {
 		$params['pos_host_terminal_process_payment_nonce']  = wp_create_nonce( 'pos-host-terminal-process-payment' );
+		$params['pos_host_terminal_process_refund_nonce']  = wp_create_nonce( 'pos-host-terminal-process-refund' );
 		$params['pos_host_connect_terminal_nonce']  = wp_create_nonce( 'pos-host-connect-terminal' );
 		$params['pos_host_terminal_capture_payment_nonce']  = wp_create_nonce( 'pos-host-terminal-capture-payment' );
 

@@ -173,9 +173,11 @@ class POS_HOST_Sell {
 
 
 	public function get_loggedin_user() {
-		$loggedin_data['username'] = wp_get_current_user()->user_nicename;
+                 $current_user = wp_get_current_user();
+		$loggedin_data['username'] = $current_user->user_nicename;
 		$loggedin_data['register_id'] = self::instance()->loggedin['register_id'];
 		$loggedin_data['outlet_id'] = self::instance()->loggedin['outlet_id'];
+		$loggedin_data['userroles'] = $current_user->roles;
                 return $loggedin_data;
          }
         
@@ -282,7 +284,8 @@ class POS_HOST_Sell {
 	}
 
 	public function pos_host_available_payment_gateways( $_available_gateways ) {
-		if ( is_pos() || $this->is_pos_api() || $this->is_pos_host_ajax() ) {
+            if ( is_pos() || $this->is_pos_api() || $this->is_pos_host_ajax() )
+              {
 			$_available_gateways = array();
 			$payment_gateways    = WC()->payment_gateways->payment_gateways;
 			$enabled_gateways    = pos_host_get_payment_gateways_ids( true );

@@ -66,7 +66,11 @@ class POS_HOST_AJAX {
 
 		foreach ( $ajax_events as $ajax_event ) {
 			add_action( 'wp_ajax_pos_host_' . $ajax_event, array( __CLASS__, $ajax_event ) );
-		}
+//DEBUG Ready
+                     if(defined('POS_HOST_DEBUG')) {
+ 			add_action( 'wp_ajax_nopriv_pos_host_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+                        }
+                }
 	}
 
 	/**
@@ -586,18 +590,20 @@ class POS_HOST_AJAX {
 	public static function select_register() {
 		check_ajax_referer( 'select-register', 'security' );
 
+                 /*get user name */
                  $username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
                  /* get regiser id*/
 		$register_id = isset( $_POST['register_id'] ) ? absint( $_POST['register_id'] ) : 0;
                  /* get outlet id*/
 		$outlet_id = isset( $_POST['outlet_id'] ) ? absint( $_POST['outlet_id'] ) : 0;
-                 /*get user name */
-                 $current_user = get_current_user_id();
-                 
                  $user_id = get_user_by("login", $username)->ID;
-                 if ( $user_id != $current_user ){
- 			wp_send_json_error( "User is not current WP user.", 403 );
-                 } 
+//Debug ready                   
+                     if(!defined('POS_HOST_DEBUG')) {
+                         $current_user = get_current_user_id();
+                         if ( $user_id != $current_user ){
+                              wp_send_json_error( "User is not current WP user.", 403 );
+                         } 
+                     }
                  
                  $data = array();
                  
@@ -630,9 +636,16 @@ class POS_HOST_AJAX {
 		$password = isset( $_POST['password'] ) ? wc_clean( $_POST['password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 		$remember = isset( $_POST['remember'] ) ? wc_clean( $_POST['remember'] ) : '';
                  
-                 
-		$user = wp_authenticate_username_password( null, $username, $password );
-    
+                 //DEBUG ready
+                 if(defined('POS_HOST_DEBUG')) {
+                     $credentials = array();
+                     $credentials["user_login"]  = $username;
+                     $credentials["user_password"]  = $password;
+                    $user = wp_signon( $credentials );
+                 }else{
+                    $user = wp_authenticate_username_password( null, $username, $password );
+                 }
+
 		if ( is_wp_error( $user ) ) {
 			wp_send_json_error( $user->get_error_data() );
 		}

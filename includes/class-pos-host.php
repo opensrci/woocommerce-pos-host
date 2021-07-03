@@ -18,7 +18,7 @@ class POS_HOST {
 	 * @var string
 	 * @since 0.0.1
 	 */
-	public $version = '0.1.1';
+	public $version = '0.1.2';
 
 	/**
 	 * The single instance of POS_HOST.
